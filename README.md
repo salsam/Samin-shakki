@@ -1,2 +1,2 @@
 # Samin-shakki
-AAAaaaaaa
+A
