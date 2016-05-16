@@ -1,7 +1,7 @@
 #Aihemäärittely
 
 ###Aihe: 
-Shakki, jossa kaikki shakin yleiset säännöt voimassa. Vain kahden ihmispelaajan välinen peli mahdollista.
+Shakki, jossa kaikki shakin yleiset säännöt voimassa. Vain kahden ihmispelaajan välinen peli mahdollista. Jos aikaa jää, mahdollisesti jonkinlainen tekoäly.
 
 ###Käyttäjät:
 Pelaajat
