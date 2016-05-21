@@ -9,19 +9,12 @@ public abstract class Piece {
     protected Square location;
     protected Player owner;
 
-    public Piece(int x, int y, Player owner) {
-        this.location = new Square(x, y);
+    public Piece(int file, int rank, Player owner) {
+        this.location = new Square(file, rank);
         this.owner = owner;
     }
 
     abstract public List<Square> possibleMoves(Square[][] board);
-
-    public void move(Square target) {
-        location.setPiece(null);
-        target.setPiece(this);
-
-        location = target;
-    }
 
     public Player getOwner() {
         return this.owner;
@@ -33,11 +26,11 @@ public abstract class Piece {
 
     public boolean legalToMoveTo(Square target) {
 
-        if (target.getColumn() < 0 || target.getColumn() > 7) {
+        if (target.getFile() < 0 || target.getFile() > 7) {
             return false;
         }
 
-        if (target.getRow() < 0 || target.getColumn() > 7) {
+        if (target.getRank() < 0 || target.getFile() > 7) {
             return false;
         }
 
@@ -46,5 +39,12 @@ public abstract class Piece {
         }
 
         return owner != target.getPiece().owner;
+    }
+
+    public void move(Square target) {
+        location.setPiece(null);
+        target.setPiece(this);
+
+        location = target;
     }
 }

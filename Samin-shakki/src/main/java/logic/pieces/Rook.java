@@ -15,8 +15,8 @@ import logic.assistance.Square;
  */
 public class Rook extends Piece {
 
-    public Rook(int x, int y, Player owner) {
-        super(x, y, owner);
+    public Rook(int file, int rank, Player owner) {
+        super(file, rank, owner);
     }
 
     @Override

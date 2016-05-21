@@ -15,8 +15,8 @@ import logic.assistance.Square;
  */
 public class Queen extends Piece {
 
-    public Queen(int x, int y, Player owner) {
-        super(x, y, owner);
+    public Queen(int file, int rank, Player owner) {
+        super(file, rank, owner);
     }
 
     @Override

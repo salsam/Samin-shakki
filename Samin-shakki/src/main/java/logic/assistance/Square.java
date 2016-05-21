@@ -4,21 +4,21 @@ import logic.pieces.Piece;
 
 public class Square {
 
-    private int column;
-    private int row;
+    private int file;
+    private int rank;
     private Piece piece;
 
-    public Square(int column, int row) {
-        this.column = column;
-        this.row = row;
+    public Square(int file, int rank) {
+        this.file = file;
+        this.rank = rank;
     }
 
-    public int getColumn() {
-        return column;
+    public int getFile() {
+        return file;
     }
 
-    public int getRow() {
-        return row;
+    public int getRank() {
+        return rank;
     }
 
     public Piece getPiece() {
@@ -37,11 +37,11 @@ public class Square {
 
         Square square = (Square) obj;
 
-        if (this.getColumn() != square.getColumn()) {
+        if (this.getFile() != square.getFile()) {
             return false;
         }
 
-        if (this.getRow() != square.getRow()) {
+        if (this.getRank() != square.getRank()) {
             return false;
         }
 

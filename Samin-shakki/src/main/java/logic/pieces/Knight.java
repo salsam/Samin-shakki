@@ -5,6 +5,7 @@
  */
 package logic.pieces;
 
+import java.util.ArrayList;
 import java.util.List;
 import logic.assistance.Player;
 import logic.assistance.Square;
@@ -15,12 +16,39 @@ import logic.assistance.Square;
  */
 public class Knight extends Piece {
 
-    public Knight(int column, int row, Player owner) {
-        super(column, row, owner);
+    public Knight(int file, int rank, Player owner) {
+        super(file, rank, owner);
     }
 
     @Override
     public List<Square> possibleMoves(Square[][] board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Square> possibilities = new ArrayList<>();
+        int targetFile;
+        int targetRank;
+        int changeOfFile = 2;
+        int changeOfRank = 1;
+        int signOfFileChange = 1;
+        int signOfRankChange = 1;
+        Square target;
+
+        for (int i = 0; i < 8; i++) {
+            targetFile = location.getFile() + signOfFileChange * changeOfFile;
+            targetRank = location.getRank() + signOfRankChange * changeOfRank;
+            target = board[targetFile][targetRank];
+            if (legalToMoveTo(target)) {
+                possibilities.add(target);
+            }
+            if (i % 4 == 0) {
+                changeOfRank = 3 - changeOfRank;
+                changeOfFile = 3 - changeOfFile;
+            }
+
+            if (i % 2 == 0) {
+                signOfRankChange *= -1;
+            }
+            signOfFileChange *= -1;
+        }
+
+        return possibilities;
     }
 }

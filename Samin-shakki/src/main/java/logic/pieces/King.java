@@ -16,29 +16,29 @@ import logic.assistance.Square;
  */
 public class King extends Piece {
 
-    public King(int x, int y, Player owner) {
-        super(x, y, owner);
+    public King(int file, int rank, Player owner) {
+        super(file, rank, owner);
     }
 
     @Override
     public List<Square> possibleMoves(Square[][] board) {
         List<Square> moves = new ArrayList<>();
-        int changeOfColumn = 1;
-        int changeOfRow = 1;
+        int changeOfFile = -1;
+        int changeOfRank = 1;
         Square target;
 
-        for (int i = 0; i < 8; i++) {
-            target = board[location.getColumn() + changeOfColumn][location.getRow() + changeOfRow];
-            if (legalToMoveTo(target)) {
-                moves.add(target);
+        for (int i = 1; i < 10; i++) {
+            target = board[location.getFile() + changeOfFile][location.getRank() + changeOfRank];
+            if (changeOfFile != 0 || changeOfRank != 0) {
+                if (legalToMoveTo(target)) {
+                    moves.add(target);
+                }
             }
-            if (i % 4 == 0) {
-                changeOfRow *= -1;
+            if (i % 3 == 0) {
+                changeOfRank -= 1;
             }
 
-            if (i % 2 == 0) {
-                changeOfColumn *= -1;
-            }
+            changeOfFile = (i % 3) - 1;
         }
 
         return moves;

@@ -38,12 +38,12 @@ public class SquareTest {
 
     @Test
     public void returnCorrectColumn() {
-        assertEquals(2, square.getColumn());
+        assertEquals(2, square.getFile());
     }
 
     @Test
     public void returnCorrectRow() {
-        assertEquals(3, square.getRow());
+        assertEquals(3, square.getRank());
     }
 
     @Test
