@@ -5,4 +5,5 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 
 ###Dokumentaatio
 -[aiheen kuvaus](dokumentaatio/Aihemäärittely.md)
+
 -[tuntikirjanpito](dokumentaatio/Tuntikirjanpito.md)
