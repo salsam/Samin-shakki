@@ -1,3 +1,3 @@
 #Luokkakaavio
 
-![Alt text](dokumentaatio/Luokkakaavio.png)
+![Alt text](Luokkakaavio.png)
