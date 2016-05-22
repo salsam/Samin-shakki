@@ -9,11 +9,11 @@ import logic.pieces.Piece;
  *
  * @author sami
  */
-public class logic {
+public class Logic {
     
     ChessBoard board;
     
-    public logic() {
+    public Logic() {
         board = new ChessBoard();
     }
     
