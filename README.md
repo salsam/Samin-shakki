@@ -7,3 +7,5 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 - [aiheen kuvaus](dokumentaatio/Aihemäärittely.md)
 
 - [tuntikirjanpito](dokumentaatio/Tuntikirjanpito.md)
+
+ - [luokkakaavio](dokumentaatio/aiheenKuvausJaRakenne.md)
