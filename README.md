@@ -8,4 +8,4 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 
 - [tuntikirjanpito](dokumentaatio/Tuntikirjanpito.md)
 
- - [luokkakaavio](dokumentaatio/aiheenKuvausJaRakenne.md)
+- [luokkakaavio](dokumentaatio/aiheenKuvausJaRakenne.md)
