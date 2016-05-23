@@ -37,4 +37,9 @@ public class King extends Piece {
 
         return possibilities;
     }
+
+    @Override
+    public char getMark() {
+        return 'K';
+    }
 }

@@ -28,4 +28,9 @@ public class Bishop extends Piece {
 
         return possibilities;
     }
+
+    @Override
+    public char getMark() {
+        return 'B';
+    }
 }

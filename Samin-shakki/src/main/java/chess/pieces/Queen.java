@@ -30,4 +30,9 @@ public class Queen extends Piece {
 
         return possibilities;
     }
+
+    @Override
+    public char getMark() {
+        return 'Q';
+    }
 }

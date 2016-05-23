@@ -29,4 +29,9 @@ public class Rook extends Piece {
 
         return possibilities;
     }
+
+    @Override
+    public char getMark() {
+        return 'R';
+    }
 }

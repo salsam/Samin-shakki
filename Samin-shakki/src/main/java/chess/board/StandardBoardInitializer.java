@@ -6,7 +6,7 @@ import chess.pieces.*;
  *
  * @author samisalo
  */
-public class StandardInitializer extends ChessBoardInitializer {
+public class StandardBoardInitializer extends ChessBoardInitializer {
 
     @Override
     public void initialize(ChessBoard board) {

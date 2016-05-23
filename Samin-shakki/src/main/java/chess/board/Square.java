@@ -52,4 +52,9 @@ public class Square {
         return piece != null;
     }
 
+    @Override
+    public String toString() {
+        return "(" + file + ", " + rank + ")";
+    }
+
 }
