@@ -44,8 +44,8 @@ public class RookTest {
 
     @Before
     public void setUp() {
-        rook = new Rook(3, 5, Player.WHITE);
         init.initialize(board);
+        rook = new Rook(board.getSquare(3, 5), Player.WHITE);
         init.putPieceOnBoard(board, rook);
         possibleMoves = rook.possibleMoves(board);
     }
@@ -79,7 +79,7 @@ public class RookTest {
 
     @Test
     public void rookCannotOnTopOfOwnPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 1)));
@@ -87,7 +87,7 @@ public class RookTest {
 
     @Test
     public void rookCanMoveOnTopOfEnemyPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertTrue(possibleMoves.contains(new Square(3, 1)));
@@ -95,7 +95,7 @@ public class RookTest {
 
     @Test
     public void rookCannotMovePastAPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 0)));
@@ -103,7 +103,7 @@ public class RookTest {
 
     @Test
     public void rookCannotMovePastOpposingPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 0)));

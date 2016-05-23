@@ -31,4 +31,8 @@ public class ChessBoard {
     public List<Piece> getPieces() {
         return pieces;
     }
+
+    public Square getSquare(int file, int rank) {
+        return board[file][rank];
+    }
 }

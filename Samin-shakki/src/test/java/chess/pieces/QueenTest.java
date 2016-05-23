@@ -40,8 +40,8 @@ public class QueenTest {
 
     @Before
     public void setUp() {
-        queen = new Queen(3, 5, Player.WHITE);
         init.initialize(board);
+        queen = new Queen(board.getSquare(3, 5), Player.WHITE);
         init.putPieceOnBoard(board, queen);
         possibleMoves = queen.possibleMoves(board);
     }
@@ -109,7 +109,7 @@ public class QueenTest {
 
     @Test
     public void queenCannotOnTopOfOwnPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = queen.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 1)));
@@ -117,7 +117,7 @@ public class QueenTest {
 
     @Test
     public void queenCanMoveOnTopOfEnemyPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = queen.possibleMoves(board);
         assertTrue(possibleMoves.contains(new Square(3, 1)));
@@ -125,7 +125,7 @@ public class QueenTest {
 
     @Test
     public void queenCannotMovePastAPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = queen.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 0)));
@@ -133,7 +133,7 @@ public class QueenTest {
 
     @Test
     public void queenCannotMovePastOpposingPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = queen.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 0)));

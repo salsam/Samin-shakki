@@ -17,8 +17,8 @@ import chess.board.Square;
  */
 public class Knight extends Piece {
 
-    public Knight(int file, int rank, Player owner) {
-        super(file, rank, owner);
+    public Knight(Square square, Player owner) {
+        super(square, owner);
     }
 
     @Override
@@ -27,19 +27,22 @@ public class Knight extends Piece {
         int[] fileChange = new int[]{1, -1, 2, -2, 2, -2, 1, -1};
         List<Square> possibilities = new ArrayList<>();
         Square target;
+        int newFile;
+        int newRank;
 
         for (int i = 0; i < 8; i++) {
-            target = board.getBoard()[location.getFile() + fileChange[i]][location.getRank() + rankChange[i]];
+            newFile = location.getFile() + fileChange[i];
+            newRank = location.getRank() + rankChange[i];
+
+            if (!withinTable(newFile, newRank)) {
+                continue;
+            }
+            target = board.getBoard()[newFile][newRank];
             if (legalToMoveTo(target)) {
                 possibilities.add(target);
             }
         }
 
         return possibilities;
-    }
-
-    @Override
-    public char getMark() {
-        return 'N';
     }
 }

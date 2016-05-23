@@ -17,8 +17,8 @@ import java.util.ArrayList;
  */
 public class Queen extends Piece {
 
-    public Queen(int file, int rank, Player owner) {
-        super(file, rank, owner);
+    public Queen(Square square, Player owner) {
+        super(square, owner);
     }
 
     @Override
@@ -29,10 +29,5 @@ public class Queen extends Piece {
         verticalPossibilities(location, board, possibilities);
 
         return possibilities;
-    }
-
-    @Override
-    public char getMark() {
-        return 'Q';
     }
 }

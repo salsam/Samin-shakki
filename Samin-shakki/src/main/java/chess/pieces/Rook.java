@@ -17,8 +17,8 @@ import java.util.ArrayList;
  */
 public class Rook extends Piece {
 
-    public Rook(int file, int rank, Player owner) {
-        super(file, rank, owner);
+    public Rook(Square square, Player owner) {
+        super(square, owner);
     }
 
     @Override
@@ -28,10 +28,5 @@ public class Rook extends Piece {
         verticalPossibilities(location, board, possibilities);
 
         return possibilities;
-    }
-
-    @Override
-    public char getMark() {
-        return 'R';
     }
 }

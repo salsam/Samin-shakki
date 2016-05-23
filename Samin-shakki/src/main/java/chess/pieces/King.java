@@ -17,8 +17,8 @@ import chess.board.Square;
  */
 public class King extends Piece {
 
-    public King(int file, int rank, Player owner) {
-        super(file, rank, owner);
+    public King(Square square, Player owner) {
+        super(square, owner);
     }
 
     @Override
@@ -27,19 +27,22 @@ public class King extends Piece {
         Square target;
         int[] fileChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
         int[] rankChange = new int[]{1, 1, 1, 0, 0, -1, -1, -1};
+        int newFile;
+        int newRank;
 
         for (int i = 0; i < 8; i++) {
-            target = board.getBoard()[location.getFile() + fileChange[i]][location.getRank() + rankChange[i]];
+            newFile = location.getFile() + fileChange[i];
+            newRank = location.getRank() + rankChange[i];
+
+            if (!withinTable(newFile, newRank)) {
+                continue;
+            }
+            target = board.getBoard()[newFile][newRank];
             if (legalToMoveTo(target)) {
                 possibilities.add(target);
             }
         }
 
         return possibilities;
-    }
-
-    @Override
-    public char getMark() {
-        return 'K';
     }
 }

@@ -19,7 +19,7 @@ public class Game {
     private ChessBoardInitializer initializer;
     private int turn;
     private boolean continues;
-    private Scanner lukija;
+    private Scanner reader;
     private ChessNotationTableDrawer graphics;
     private boolean cancelled;
 
@@ -29,9 +29,8 @@ public class Game {
         init.initialize(board);
         turn = 1;
         continues = true;
-        lukija = new Scanner(System.in);
+        reader = new Scanner(System.in);
         graphics = new ChessNotationTableDrawer();
-        cancelled = true;
     }
 
     public void start() {
@@ -45,6 +44,7 @@ public class Game {
             if (turn == 50) {
                 continues = false;
             }
+            turn++;
         }
     }
 
@@ -57,6 +57,7 @@ public class Game {
         Square target = null;
         List<Square> possibleMoves;
         graphics.draw(board);
+        cancelled = true;
 
         System.out.println(player + "'s turn");
 
@@ -67,16 +68,18 @@ public class Game {
             possibleMoves = possibleMoves(chosen);
             target = chooseATargetSquareForMovement(possibleMoves);
         }
+
         chosen.move(target);
     }
 
     private Piece chooseAPieceToMove(Player player) {
         String input = "";
-        int file = 0;
-        int rank = 0;
+        int file = -1;
+        int rank = -1;
+
         while (input.equals("")) {
             System.out.println("Please write coordinates in the form fileRank of a piece to move");
-            input = lukija.nextLine();
+            input = reader.nextLine();
 
             if (!inputIsInAllowedForm(input, false)) {
                 input = "";
@@ -99,11 +102,12 @@ public class Game {
 
     private Square chooseATargetSquareForMovement(List<Square> possibilities) {
         String input = "";
-        int file = 0;
-        int rank = 0;
+        int file = -1;
+        int rank = -1;
+
         while (input.equals("")) {
             System.out.println("Please write coordinates in form FileRank of a square to move to or x to cancel");
-            input = lukija.nextLine();
+            input = reader.nextLine();
 
             if (input.equals("x")) {
                 cancelled = true;
@@ -114,6 +118,10 @@ public class Game {
                 input = "";
                 continue;
             }
+
+            file = Character.getNumericValue(input.charAt(0));
+            rank = Character.getNumericValue(input.charAt(1));
+
             if (!possibilities.contains(board.getBoard()[file][rank])) {
                 System.out.println("Please, choose one of the legal movements: ");
                 for (Square possibility : possibilities) {
@@ -124,6 +132,7 @@ public class Game {
             }
 
         }
+
         return board.getBoard()[file][rank];
     }
 

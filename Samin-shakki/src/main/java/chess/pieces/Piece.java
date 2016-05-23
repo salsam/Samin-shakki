@@ -10,12 +10,10 @@ public abstract class Piece {
     protected Square location;
     protected Player owner;
 
-    public Piece(int file, int rank, Player owner) {
-        this.location = new Square(file, rank);
+    public Piece(Square square, Player owner) {
+        this.location = square;
         this.owner = owner;
     }
-
-    abstract public char getMark();
 
     abstract public List<Square> possibleMoves(ChessBoard board);
 
@@ -53,10 +51,10 @@ public abstract class Piece {
     }
 
     public void move(Square target) {
-        location.setPiece(null);
+        this.location.setPiece(null);
         target.setPiece(this);
 
-        location = target;
+        this.location = target;
     }
 
     protected void possibilitiesToDirection(Square current, ChessBoard board, List<Square> possibilities, int fileChange, int rankChange) {
@@ -86,7 +84,7 @@ public abstract class Piece {
         possibilitiesToDirection(current, board, possibilities, -1, 0);
     }
 
-    private boolean withinTable(int file, int rank) {
+    protected boolean withinTable(int file, int rank) {
         if (file < 0 || file > 7) {
             return false;
         }

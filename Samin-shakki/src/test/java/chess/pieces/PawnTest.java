@@ -35,10 +35,10 @@ public class PawnTest {
 
     @Before
     public void setUp() {
-        pawn = new Pawn(2, 1, Player.WHITE);
         init = new EmptyBoardInitializer();
         board = new ChessBoard();
         init.initialize(board);
+        pawn = new Pawn(board.getSquare(2, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
     }
 
@@ -78,7 +78,7 @@ public class PawnTest {
 
     @Test
     public void pawnCannotMoveTwoStepsUpFromOtherLocations() {
-        pawn = new Pawn(2, 2, Player.WHITE);
+        pawn = new Pawn(board.getSquare(2, 2), Player.WHITE);
         assertFalse(pawn.possibleMoves(board).contains(new Square(2, 4)));
     }
 
@@ -89,14 +89,14 @@ public class PawnTest {
 
     @Test
     public void pawnCanTakeAPieceDiagonallyForward() {
-        Pawn enemyPawn = new Pawn(3, 2, Player.BLACK);
+        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.BLACK);
         init.putPieceOnBoard(board, enemyPawn);
         assertTrue(pawn.canTakeAnOpposingPiece(1, board));
     }
 
     @Test
     public void pawnCannotTakeOwnPieceDiagonallyForward() {
-        Pawn enemyPawn = new Pawn(3, 2, Player.WHITE);
+        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.WHITE);
         init.putPieceOnBoard(board, enemyPawn);
         assertFalse(pawn.canTakeAnOpposingPiece(1, board));
     }

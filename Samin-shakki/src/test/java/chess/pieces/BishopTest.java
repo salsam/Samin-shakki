@@ -41,8 +41,8 @@ public class BishopTest {
 
     @Before
     public void setUp() {
-        bishop = new Bishop(3, 4, Player.WHITE);
         init.initialize(board);
+        bishop = new Bishop(board.getSquare(3, 4), Player.WHITE);
         init.putPieceOnBoard(board, bishop);
         possibleMoves = bishop.possibleMoves(board);
     }
@@ -90,7 +90,7 @@ public class BishopTest {
 
     @Test
     public void bishopCannotMoveOnTopOfOwnPiece() {
-        Pawn pawn = new Pawn(4, 5, Player.WHITE);
+        Pawn pawn = new Pawn(board.getSquare(4, 5), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = bishop.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(4, 5)));
@@ -98,7 +98,7 @@ public class BishopTest {
 
     @Test
     public void bishopCanMoveOnTopOfEnemyPiece() {
-        Pawn pawn = new Pawn(4, 5, Player.BLACK);
+        Pawn pawn = new Pawn(board.getSquare(4, 5), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = bishop.possibleMoves(board);
         assertTrue(possibleMoves.contains(new Square(4, 5)));
@@ -106,7 +106,7 @@ public class BishopTest {
 
     @Test
     public void bishopCannotMovePastAPiece() {
-        Pawn pawn = new Pawn(4, 5, Player.WHITE);
+        Pawn pawn = new Pawn(board.getSquare(4, 5), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = bishop.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(5, 6)));
@@ -114,7 +114,7 @@ public class BishopTest {
 
     @Test
     public void bishopCannotMovePastOpposingPiece() {
-        Pawn pawn = new Pawn(4, 5, Player.BLACK);
+        Pawn pawn = new Pawn(board.getSquare(4, 5), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
         possibleMoves = bishop.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(5, 6)));

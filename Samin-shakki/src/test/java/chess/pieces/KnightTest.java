@@ -39,9 +39,9 @@ public class KnightTest {
     @Before
     public void setUp() {
         board = new ChessBoard();
-        knight = new Knight(4, 4, Player.WHITE);
         init = new EmptyBoardInitializer();
         init.initialize(board);
+        knight = new Knight(board.getSquare(4, 4), Player.WHITE);
         init.putPieceOnBoard(board, knight);
         possibleMoves = knight.possibleMoves(board);
     }

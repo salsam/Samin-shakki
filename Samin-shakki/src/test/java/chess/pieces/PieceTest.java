@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
  */
 public class PieceTest {
 
-
     public PieceTest() {
     }
 

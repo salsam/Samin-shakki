@@ -8,8 +8,8 @@ import chess.board.Square;
 
 public class Pawn extends Piece {
 
-    public Pawn(int file, int rank, Player owner) {
-        super(file, rank, owner);
+    public Pawn(Square square, Player owner) {
+        super(square, owner);
     }
 
     @Override
@@ -39,7 +39,12 @@ public class Pawn extends Piece {
     }
 
     public boolean canTakeAnOpposingPiece(int direction, ChessBoard board) {
-        Square target = board.getBoard()[location.getFile() + direction][location.getRank() + owner.getDirection()];
+        int newFile = location.getFile() + direction;
+        int newRank = location.getRank() + owner.getDirection();
+        if (!withinTable(newFile, newRank)) {
+            return false;
+        }
+        Square target = board.getBoard()[newFile][newRank];
 
         if (legalToMoveTo(target)) {
             if (target.getPiece() != null) {
@@ -55,10 +60,5 @@ public class Pawn extends Piece {
             return location.getRank() == 1;
         }
         return location.getRank() == 6;
-    }
-
-    @Override
-    public char getMark() {
-        return 'P';
     }
 }
