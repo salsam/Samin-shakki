@@ -1,7 +1,7 @@
-package chess.assistance;
+package chess.board;
 
-import chess.assistance.Square;
-import chess.assistance.Player;
+import chess.board.Square;
+import chess.board.Player;
 import chess.pieces.Pawn;
 import org.junit.After;
 import org.junit.AfterClass;

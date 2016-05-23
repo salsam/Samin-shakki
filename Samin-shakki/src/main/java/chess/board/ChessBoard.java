@@ -1,4 +1,4 @@
-package chess.assistance;
+package chess.board;
 
 import chess.pieces.Pawn;
 import chess.pieces.Knight;

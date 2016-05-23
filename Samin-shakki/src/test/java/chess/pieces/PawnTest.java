@@ -1,8 +1,8 @@
 package chess.pieces;
 
 import chess.pieces.Pawn;
-import chess.assistance.Player;
-import chess.assistance.Square;
+import chess.board.Player;
+import chess.board.Square;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

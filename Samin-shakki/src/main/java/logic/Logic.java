@@ -1,8 +1,8 @@
 package logic;
 
 import java.util.List;
-import chess.assistance.ChessBoard;
-import chess.assistance.Square;
+import chess.board.ChessBoard;
+import chess.board.Square;
 import chess.pieces.Piece;
 
 /**

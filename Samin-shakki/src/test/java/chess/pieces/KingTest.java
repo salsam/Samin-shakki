@@ -2,8 +2,8 @@ package chess.pieces;
 
 import chess.pieces.King;
 import java.util.List;
-import chess.assistance.Player;
-import chess.assistance.Square;
+import chess.board.Player;
+import chess.board.Square;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;

@@ -6,8 +6,8 @@
 package chess.pieces;
 
 import java.util.List;
-import chess.assistance.Player;
-import chess.assistance.Square;
+import chess.board.Player;
+import chess.board.Square;
 
 /**
  *
