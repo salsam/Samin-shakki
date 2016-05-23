@@ -34,7 +34,7 @@ public abstract class Piece {
             return false;
         }
 
-        if (target.getPiece() == null) {
+        if (!target.includesAPiece()) {
             return true;
         }
 

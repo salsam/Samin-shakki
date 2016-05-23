@@ -48,4 +48,8 @@ public class Square {
         return true;
     }
 
+    public boolean includesAPiece() {
+        return piece != null;
+    }
+
 }
