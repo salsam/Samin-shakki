@@ -23,23 +23,8 @@ public class Bishop extends Piece {
     @Override
     public List<Square> possibleMoves(Square[][] board) {
         List<Square> possibilities = new ArrayList<>();
-        possibilitiesToDirection(location, board, possibilities, 1, 1);
-        possibilitiesToDirection(location, board, possibilities, 1, -1);
-        possibilitiesToDirection(location, board, possibilities, -1, 1);
-        possibilitiesToDirection(location, board, possibilities, -1, -1);
+        diagonalPossibilities(location, board, possibilities);
 
         return possibilities;
-    }
-
-    private void possibilitiesToDirection(Square current, Square[][] board, List<Square> possibilities, int fileChange, int rankChange) {
-        Square target = current;
-
-        while (legalToMoveTo(target)) {
-//            if (target.includesAPiece() && target.getPiece()) {
-//                break;
-//            }
-            target = board[target.getFile() + fileChange][target.getRank() + rankChange];
-            possibilities.add(target);
-        }
     }
 }

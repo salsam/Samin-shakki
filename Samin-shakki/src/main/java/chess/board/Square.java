@@ -48,7 +48,7 @@ public class Square {
         return true;
     }
 
-    public boolean includesAPiece() {
+    public boolean containsAPiece() {
         return piece != null;
     }
 

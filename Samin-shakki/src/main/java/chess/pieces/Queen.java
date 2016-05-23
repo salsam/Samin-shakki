@@ -8,6 +8,7 @@ package chess.pieces;
 import java.util.List;
 import chess.board.Player;
 import chess.board.Square;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +22,11 @@ public class Queen extends Piece {
 
     @Override
     public List<Square> possibleMoves(Square[][] board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Square> possibilities = new ArrayList<>();
+        diagonalPossibilities(location, board, possibilities);
+        horizontalPossibilities(location, board, possibilities);
+        verticalPossibilities(location, board, possibilities);
+
+        return possibilities;
     }
 }

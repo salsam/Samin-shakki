@@ -34,7 +34,7 @@ public abstract class Piece {
             return false;
         }
 
-        if (!target.includesAPiece()) {
+        if (!target.containsAPiece()) {
             return true;
         }
 
@@ -47,4 +47,37 @@ public abstract class Piece {
 
         location = target;
     }
+
+    protected void possibilitiesToDirection(Square current, Square[][] board, List<Square> possibilities, int fileChange, int rankChange) {
+        Square target = current;
+
+        while (legalToMoveTo(target)) {
+            if (target.containsAPiece()) {
+                break;
+            }
+            target = board[target.getFile() + fileChange][target.getRank() + rankChange];
+            possibilities.add(target);
+            if (target.containsAPiece()) {
+                break;
+            }
+        }
+    }
+
+    protected void diagonalPossibilities(Square current, Square[][] board, List<Square> possibilities) {
+        possibilitiesToDirection(current, board, possibilities, 1, 1);
+        possibilitiesToDirection(current, board, possibilities, 1, -1);
+        possibilitiesToDirection(current, board, possibilities, -1, 1);
+        possibilitiesToDirection(current, board, possibilities, -1, -1);
+    }
+
+    protected void horizontalPossibilities(Square current, Square[][] board, List<Square> possibilities) {
+        possibilitiesToDirection(current, board, possibilities, 0, 1);
+        possibilitiesToDirection(current, board, possibilities, 0, -1);
+    }
+
+    protected void verticalPossibilities(Square current, Square[][] board, List<Square> possibilities) {
+        possibilitiesToDirection(current, board, possibilities, 1, 0);
+        possibilitiesToDirection(current, board, possibilities, -1, 0);
+    }
+
 }
