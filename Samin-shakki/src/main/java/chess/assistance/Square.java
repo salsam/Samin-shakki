@@ -1,6 +1,6 @@
-package logic.assistance;
+package chess.assistance;
 
-import logic.pieces.Piece;
+import chess.pieces.Piece;
 
 public class Square {
 

@@ -1,8 +1,8 @@
-package logic.pieces;
+package chess.pieces;
 
 import java.util.List;
-import logic.assistance.Player;
-import logic.assistance.Square;
+import chess.assistance.Player;
+import chess.assistance.Square;
 
 public abstract class Piece {
 

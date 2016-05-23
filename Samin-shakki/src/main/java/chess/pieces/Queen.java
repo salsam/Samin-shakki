@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logic.pieces;
+package chess.pieces;
 
 import java.util.List;
-import logic.assistance.Player;
-import logic.assistance.Square;
+import chess.assistance.Player;
+import chess.assistance.Square;
 
 /**
  *

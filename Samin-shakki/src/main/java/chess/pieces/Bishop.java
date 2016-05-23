@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logic.pieces;
+package chess.pieces;
 
 import java.util.List;
-import logic.assistance.Player;
-import logic.assistance.Square;
+import chess.assistance.Player;
+import chess.assistance.Square;
 
 /**
  *
  * @author sami
  */
-public class Rook extends Piece {
+public class Bishop extends Piece {
 
-    public Rook(int file, int rank, Player owner) {
+    public Bishop(int file, int rank, Player owner) {
         super(file, rank, owner);
     }
 
@@ -23,4 +23,5 @@ public class Rook extends Piece {
     public List<Square> possibleMoves(Square[][] board) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

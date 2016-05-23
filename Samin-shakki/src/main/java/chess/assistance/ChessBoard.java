@@ -1,8 +1,14 @@
-package logic.assistance;
+package chess.assistance;
 
+import chess.pieces.Pawn;
+import chess.pieces.Knight;
+import chess.pieces.Bishop;
+import chess.pieces.Piece;
+import chess.pieces.Rook;
+import chess.pieces.Queen;
+import chess.pieces.King;
 import java.util.ArrayList;
 import java.util.List;
-import logic.pieces.*;
 
 /**
  *

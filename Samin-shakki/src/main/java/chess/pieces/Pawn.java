@@ -1,9 +1,9 @@
-package logic.pieces;
+package chess.pieces;
 
 import java.util.ArrayList;
 import java.util.List;
-import logic.assistance.Player;
-import logic.assistance.Square;
+import chess.assistance.Player;
+import chess.assistance.Square;
 
 public class Pawn extends Piece {
 

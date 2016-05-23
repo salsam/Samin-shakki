@@ -1,4 +1,4 @@
-package logic.pieces;
+package chess.pieces;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  *
  * @author sami
  */
-public class BishopTest {
+public class PieceTest {
 
-    public BishopTest() {
+    public PieceTest() {
     }
 
     @BeforeClass

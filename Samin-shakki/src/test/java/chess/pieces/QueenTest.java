@@ -1,4 +1,4 @@
-package logic.pieces;
+package chess.pieces;
 
 import org.junit.After;
 import org.junit.AfterClass;

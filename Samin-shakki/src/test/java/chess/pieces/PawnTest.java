@@ -1,7 +1,8 @@
-package logic.pieces;
+package chess.pieces;
 
-import logic.assistance.Player;
-import logic.assistance.Square;
+import chess.pieces.Pawn;
+import chess.assistance.Player;
+import chess.assistance.Square;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

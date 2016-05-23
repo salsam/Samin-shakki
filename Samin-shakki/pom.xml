@@ -36,10 +36,10 @@
                 <version>1.1.8</version>
                 <configuration>
                     <targetClasses>
-                        <param>saminShakki.logic.*</param>
+                        <param>chess.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>saminShakki.logic.*</param>
+                        <param>chess.*</param>
                     </targetTests>
                 </configuration>
             </plugin>

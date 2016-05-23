@@ -1,8 +1,9 @@
-package logic.pieces;
+package chess.pieces;
 
+import chess.pieces.King;
 import java.util.List;
-import logic.assistance.Player;
-import logic.assistance.Square;
+import chess.assistance.Player;
+import chess.assistance.Square;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
