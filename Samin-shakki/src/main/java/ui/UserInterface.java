@@ -4,6 +4,6 @@ package ui;
  *
  * @author samisalo
  */
-public class ui {
+public class UserInterface {
     
 }

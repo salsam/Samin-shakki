@@ -4,8 +4,8 @@ import chess.board.ChessBoard;
 import java.util.List;
 import chess.board.Player;
 import chess.board.Square;
-import chess.board.chessBoardInitializer;
-import chess.board.emptyBoardInitializer;
+import chess.board.ChessBoardInitializer;
+import chess.board.EmptyBoardInitializer;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertFalse;
@@ -22,7 +22,7 @@ public class KnightTest {
 
     private Knight knight;
     private ChessBoard board;
-    private chessBoardInitializer init;
+    private ChessBoardInitializer init;
     private List<Square> possibleMoves;
 
     public KnightTest() {
@@ -40,9 +40,9 @@ public class KnightTest {
     public void setUp() {
         board = new ChessBoard();
         knight = new Knight(4, 4, Player.WHITE);
-        init = new emptyBoardInitializer();
+        init = new EmptyBoardInitializer();
         init.initialize(board);
-        init.putPiece(board, knight);
+        init.putPieceOnBoard(board, knight);
         possibleMoves = knight.possibleMoves(board);
     }
 

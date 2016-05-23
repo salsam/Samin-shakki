@@ -4,8 +4,8 @@ import chess.board.ChessBoard;
 import java.util.List;
 import chess.board.Player;
 import chess.board.Square;
-import chess.board.chessBoardInitializer;
-import chess.board.emptyBoardInitializer;
+import chess.board.ChessBoardInitializer;
+import chess.board.EmptyBoardInitializer;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +23,7 @@ public class KingTest {
     
     private King king;
     private ChessBoard board;
-    private chessBoardInitializer init;
+    private ChessBoardInitializer init;
     private List<Square> possibleMoves;
     
     public KingTest() {
@@ -40,10 +40,10 @@ public class KingTest {
     @Before
     public void setUp() {
         board = new ChessBoard();
-        init = new emptyBoardInitializer();
+        init = new EmptyBoardInitializer();
         king = new King(2, 3, Player.WHITE);
         init.initialize(board);
-        init.putPiece(board, king);
+        init.putPieceOnBoard(board, king);
         possibleMoves = king.possibleMoves(board);
     }
     

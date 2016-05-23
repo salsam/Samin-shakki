@@ -27,11 +27,7 @@ public abstract class Piece {
 
     public boolean legalToMoveTo(Square target) {
 
-        if (target.getFile() < 0 || target.getFile() > 7) {
-            return false;
-        }
-
-        if (target.getRank() < 0 || target.getFile() > 7) {
+        if (!withinTable(target.getFile(), target.getRank())) {
             return false;
         }
 
@@ -50,15 +46,20 @@ public abstract class Piece {
     }
 
     protected void possibilitiesToDirection(Square current, ChessBoard board, List<Square> possibilities, int fileChange, int rankChange) {
-        Square target = current;
+        int newFile = current.getFile() + fileChange;
+        int newRank = current.getRank() + rankChange;
+        Square target = board.getBoard()[newFile][newRank];
 
         while (legalToMoveTo(target)) {
+            possibilities.add(target);
             if (target.containsAPiece()) {
                 break;
             }
-            target = board.getBoard()[target.getFile() + fileChange][target.getRank() + rankChange];
-            possibilities.add(target);
-            if (target.containsAPiece()) {
+            newFile = target.getFile() + fileChange;
+            newRank = target.getRank() + rankChange;
+            if (withinTable(newFile, newRank)) {
+                target = board.getBoard()[newFile][newRank];
+            } else {
                 break;
             }
         }
@@ -79,6 +80,16 @@ public abstract class Piece {
     protected void verticalPossibilities(Square current, ChessBoard board, List<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 1, 0);
         possibilitiesToDirection(current, board, possibilities, -1, 0);
+    }
+
+    private boolean withinTable(int file, int rank) {
+        if (file < 0 || file > 7) {
+            return false;
+        }
+        if (rank < 0 || rank > 7) {
+            return false;
+        }
+        return true;
     }
 
 }

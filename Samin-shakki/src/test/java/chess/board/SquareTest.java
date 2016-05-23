@@ -3,6 +3,8 @@ package chess.board;
 import chess.board.Square;
 import chess.board.Player;
 import chess.pieces.Pawn;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,6 +17,16 @@ import static org.junit.Assert.*;
  * @author sami
  */
 public class SquareTest {
+
+    public static void testMultipleSquares(int[] files, int[] ranks, List<Square> possibleMoves) {
+        List<Square> realPossibilities = new ArrayList<>();
+        for (int i = 0; i < files.length; i++) {
+            realPossibilities.add(new Square(files[i], ranks[i]));
+        }
+        for (Square sq : realPossibilities) {
+            assertTrue(possibleMoves.contains(sq));
+        }
+    }
 
     private Square square;
 

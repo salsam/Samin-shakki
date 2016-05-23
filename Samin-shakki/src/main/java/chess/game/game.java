@@ -3,7 +3,7 @@ package chess.game;
 import java.util.List;
 import chess.board.ChessBoard;
 import chess.board.Square;
-import chess.board.chessBoardInitializer;
+import chess.board.ChessBoardInitializer;
 import chess.pieces.Piece;
 
 /**
@@ -13,9 +13,9 @@ import chess.pieces.Piece;
 public class game {
 
     ChessBoard board;
-    chessBoardInitializer initializer;
+    ChessBoardInitializer initializer;
 
-    public game(chessBoardInitializer init) {
+    public game(ChessBoardInitializer init) {
         this.board = new ChessBoard();
         this.initializer = init;
         init.initialize(board);

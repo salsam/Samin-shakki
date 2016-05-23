@@ -1,5 +1,8 @@
 package chess.pieces;
 
+import chess.board.Square;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,6 +15,7 @@ import static org.junit.Assert.*;
  * @author sami
  */
 public class PieceTest {
+
 
     public PieceTest() {
     }

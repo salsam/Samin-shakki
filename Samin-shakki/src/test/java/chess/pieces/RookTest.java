@@ -5,6 +5,12 @@ package chess.pieces;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import chess.board.ChessBoard;
+import chess.board.Player;
+import chess.board.Square;
+import chess.board.ChessBoardInitializer;
+import chess.board.EmptyBoardInitializer;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,11 +24,18 @@ import static org.junit.Assert.*;
  */
 public class RookTest {
 
+    private Rook rook;
+    private static ChessBoard board;
+    private static ChessBoardInitializer init;
+    private List<Square> possibleMoves;
+
     public RookTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
+        board = new ChessBoard();
+        init = new EmptyBoardInitializer();
     }
 
     @AfterClass
@@ -31,15 +44,68 @@ public class RookTest {
 
     @Before
     public void setUp() {
+        rook = new Rook(3, 5, Player.WHITE);
+        init.initialize(board);
+        init.putPieceOnBoard(board, rook);
+        possibleMoves = rook.possibleMoves(board);
     }
 
     @After
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void rookCannotStayStill() {
+        assertFalse(possibleMoves.contains(new Square(3, 5)));
+    }
+
+    @Test
+    public void rookCanMoveHorizontallyToEveryNonBlockedSquare() {
+        int[] files = new int[]{0, 1, 2, 4, 5, 6, 7};
+
+        for (int i = 0; i < files.length; i++) {
+            assertTrue(possibleMoves.contains(new Square(files[i], 5)));
+        }
+    }
+
+    @Test
+    public void rookCanMoveVerticallyToEveryNonBlockedSquare() {
+        int[] ranks = new int[]{0, 1, 2, 3, 4, 6, 7};
+
+        for (int i = 0; i < ranks.length; i++) {
+            assertTrue(possibleMoves.contains(new Square(3, ranks[i])));
+        }
+    }
+
+    @Test
+    public void rookCannotOnTopOfOwnPiece() {
+        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        init.putPieceOnBoard(board, pawn);
+        possibleMoves = rook.possibleMoves(board);
+        assertFalse(possibleMoves.contains(new Square(3, 1)));
+    }
+
+    @Test
+    public void rookCanMoveOnTopOfEnemyPiece() {
+        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        init.putPieceOnBoard(board, pawn);
+        possibleMoves = rook.possibleMoves(board);
+        assertTrue(possibleMoves.contains(new Square(3, 1)));
+    }
+
+    @Test
+    public void rookCannotMovePastAPiece() {
+        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        init.putPieceOnBoard(board, pawn);
+        possibleMoves = rook.possibleMoves(board);
+        assertFalse(possibleMoves.contains(new Square(3, 0)));
+    }
+
+    @Test
+    public void rookCannotMovePastOpposingPiece() {
+        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        init.putPieceOnBoard(board, pawn);
+        possibleMoves = rook.possibleMoves(board);
+        assertFalse(possibleMoves.contains(new Square(3, 0)));
+    }
 }

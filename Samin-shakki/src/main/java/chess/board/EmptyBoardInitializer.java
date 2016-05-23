@@ -4,7 +4,7 @@ package chess.board;
  *
  * @author samisalo
  */
-public class emptyBoardInitializer extends chessBoardInitializer {
+public class EmptyBoardInitializer extends ChessBoardInitializer {
 
     @Override
     public void initialize(ChessBoard board) {

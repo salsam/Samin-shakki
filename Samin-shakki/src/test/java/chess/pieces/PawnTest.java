@@ -3,8 +3,8 @@ package chess.pieces;
 import chess.board.ChessBoard;
 import chess.board.Player;
 import chess.board.Square;
-import chess.board.chessBoardInitializer;
-import chess.board.emptyBoardInitializer;
+import chess.board.ChessBoardInitializer;
+import chess.board.EmptyBoardInitializer;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,7 +20,7 @@ public class PawnTest {
 
     private Pawn pawn;
     private ChessBoard board;
-    private chessBoardInitializer init;
+    private ChessBoardInitializer init;
 
     public PawnTest() {
     }
@@ -36,10 +36,10 @@ public class PawnTest {
     @Before
     public void setUp() {
         pawn = new Pawn(2, 1, Player.WHITE);
-        init = new emptyBoardInitializer();
+        init = new EmptyBoardInitializer();
         board = new ChessBoard();
         init.initialize(board);
-        init.putPiece(board, pawn);
+        init.putPieceOnBoard(board, pawn);
     }
 
     @After
@@ -90,14 +90,14 @@ public class PawnTest {
     @Test
     public void pawnCanTakeAPieceDiagonallyForward() {
         Pawn enemyPawn = new Pawn(3, 2, Player.BLACK);
-        init.putPiece(board, enemyPawn);
+        init.putPieceOnBoard(board, enemyPawn);
         assertTrue(pawn.canTakeAnOpposingPiece(1, board));
     }
 
     @Test
     public void pawnCannotTakeOwnPieceDiagonallyForward() {
         Pawn enemyPawn = new Pawn(3, 2, Player.WHITE);
-        init.putPiece(board, enemyPawn);
+        init.putPieceOnBoard(board, enemyPawn);
         assertFalse(pawn.canTakeAnOpposingPiece(1, board));
     }
 }

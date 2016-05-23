@@ -6,7 +6,7 @@ import chess.pieces.Piece;
  *
  * @author samisalo
  */
-public abstract class chessBoardInitializer {
+public abstract class ChessBoardInitializer {
 
     public abstract void initialize(ChessBoard board);
 
@@ -18,7 +18,7 @@ public abstract class chessBoardInitializer {
         }
     }
 
-    public void putPiece(ChessBoard board, Piece piece) {
+    public void putPieceOnBoard(ChessBoard board, Piece piece) {
         board.getBoard()[piece.getLocation().getFile()][piece.getLocation().getRank()].setPiece(piece);
         board.getPieces().add(piece);
     }
