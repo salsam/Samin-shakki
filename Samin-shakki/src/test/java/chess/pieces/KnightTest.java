@@ -1,9 +1,11 @@
 package chess.pieces;
 
-import chess.pieces.Knight;
+import chess.board.ChessBoard;
 import java.util.List;
 import chess.board.Player;
 import chess.board.Square;
+import chess.board.chessBoardInitializer;
+import chess.board.emptyBoardInitializer;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertFalse;
@@ -19,7 +21,8 @@ import org.junit.Test;
 public class KnightTest {
 
     private Knight knight;
-    private Square[][] board;
+    private ChessBoard board;
+    private chessBoardInitializer init;
     private List<Square> possibleMoves;
 
     public KnightTest() {
@@ -35,9 +38,11 @@ public class KnightTest {
 
     @Before
     public void setUp() {
+        board = new ChessBoard();
         knight = new Knight(4, 4, Player.WHITE);
-        board = PawnTest.emptyBoard();
-        board[4][4].setPiece(knight);
+        init = new emptyBoardInitializer();
+        init.initialize(board);
+        init.putPiece(board, knight);
         possibleMoves = knight.possibleMoves(board);
     }
 

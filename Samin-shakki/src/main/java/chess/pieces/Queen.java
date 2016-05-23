@@ -5,6 +5,7 @@
  */
 package chess.pieces;
 
+import chess.board.ChessBoard;
 import java.util.List;
 import chess.board.Player;
 import chess.board.Square;
@@ -21,7 +22,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public List<Square> possibleMoves(Square[][] board) {
+    public List<Square> possibleMoves(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();
         diagonalPossibilities(location, board, possibilities);
         horizontalPossibilities(location, board, possibilities);

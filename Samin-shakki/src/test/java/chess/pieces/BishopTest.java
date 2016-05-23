@@ -1,17 +1,22 @@
 package chess.pieces;
 
+import chess.board.ChessBoard;
+import chess.board.Player;
+import chess.board.chessBoardInitializer;
+import chess.board.emptyBoardInitializer;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author sami
  */
 public class BishopTest {
+    Bishop bishop;
+    ChessBoard board;
+    chessBoardInitializer init;
 
     public BishopTest() {
     }
@@ -26,15 +31,13 @@ public class BishopTest {
 
     @Before
     public void setUp() {
+        board=new ChessBoard();
+        init= new emptyBoardInitializer();
+        bishop = new Bishop(3,4, Player.WHITE);
+        
     }
 
     @After
     public void tearDown() {
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

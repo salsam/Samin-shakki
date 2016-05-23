@@ -5,6 +5,7 @@
  */
 package chess.pieces;
 
+import chess.board.ChessBoard;
 import java.util.ArrayList;
 import java.util.List;
 import chess.board.Player;
@@ -21,14 +22,14 @@ public class Knight extends Piece {
     }
 
     @Override
-    public List<Square> possibleMoves(Square[][] board) {
+    public List<Square> possibleMoves(ChessBoard board) {
         int[] rankChange = new int[]{-2, -2, -1, -1, 1, 1, 2, 2};
         int[] fileChange = new int[]{1, -1, 2, -2, 2, -2, 1, -1};
         List<Square> possibilities = new ArrayList<>();
         Square target;
 
         for (int i = 0; i < 8; i++) {
-            target = board[location.getFile() + fileChange[i]][location.getRank() + rankChange[i]];
+            target = board.getBoard()[location.getFile() + fileChange[i]][location.getRank() + rankChange[i]];
             if (legalToMoveTo(target)) {
                 possibilities.add(target);
             }

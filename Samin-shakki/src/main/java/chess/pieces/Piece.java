@@ -1,5 +1,6 @@
 package chess.pieces;
 
+import chess.board.ChessBoard;
 import java.util.List;
 import chess.board.Player;
 import chess.board.Square;
@@ -14,7 +15,7 @@ public abstract class Piece {
         this.owner = owner;
     }
 
-    abstract public List<Square> possibleMoves(Square[][] board);
+    abstract public List<Square> possibleMoves(ChessBoard board);
 
     public Player getOwner() {
         return this.owner;
@@ -48,14 +49,14 @@ public abstract class Piece {
         location = target;
     }
 
-    protected void possibilitiesToDirection(Square current, Square[][] board, List<Square> possibilities, int fileChange, int rankChange) {
+    protected void possibilitiesToDirection(Square current, ChessBoard board, List<Square> possibilities, int fileChange, int rankChange) {
         Square target = current;
 
         while (legalToMoveTo(target)) {
             if (target.containsAPiece()) {
                 break;
             }
-            target = board[target.getFile() + fileChange][target.getRank() + rankChange];
+            target = board.getBoard()[target.getFile() + fileChange][target.getRank() + rankChange];
             possibilities.add(target);
             if (target.containsAPiece()) {
                 break;
@@ -63,19 +64,19 @@ public abstract class Piece {
         }
     }
 
-    protected void diagonalPossibilities(Square current, Square[][] board, List<Square> possibilities) {
+    protected void diagonalPossibilities(Square current, ChessBoard board, List<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 1, 1);
         possibilitiesToDirection(current, board, possibilities, 1, -1);
         possibilitiesToDirection(current, board, possibilities, -1, 1);
         possibilitiesToDirection(current, board, possibilities, -1, -1);
     }
 
-    protected void horizontalPossibilities(Square current, Square[][] board, List<Square> possibilities) {
+    protected void horizontalPossibilities(Square current, ChessBoard board, List<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 0, 1);
         possibilitiesToDirection(current, board, possibilities, 0, -1);
     }
 
-    protected void verticalPossibilities(Square current, Square[][] board, List<Square> possibilities) {
+    protected void verticalPossibilities(Square current, ChessBoard board, List<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 1, 0);
         possibilitiesToDirection(current, board, possibilities, -1, 0);
     }

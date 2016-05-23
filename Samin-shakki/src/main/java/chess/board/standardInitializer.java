@@ -53,10 +53,4 @@ public class standardInitializer extends chessBoardInitializer {
 
         }
     }
-
-    public void putPiece(ChessBoard board, Piece piece) {
-        board.getBoard()[piece.getLocation().getFile()][piece.getLocation().getRank()].setPiece(piece);
-        board.getPieces().add(piece);
-    }
-
 }
