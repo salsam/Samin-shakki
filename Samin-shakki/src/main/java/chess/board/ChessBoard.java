@@ -10,8 +10,10 @@ import java.util.List;
  */
 public class ChessBoard {
 
-    Square[][] board;
-    List<Piece> pieces;
+    private Square[][] board;
+    private List<Piece> pieces;
+    private List<Piece> whitePieces;
+    private List<Piece> blackPieces;
 
     public ChessBoard() {
         this.board = new Square[8][8];
@@ -22,6 +24,8 @@ public class ChessBoard {
             }
         }
         this.pieces = new ArrayList<>();
+        this.blackPieces = new ArrayList<>();
+        this.whitePieces = new ArrayList<>();
     }
 
     public Square[][] getBoard() {
@@ -32,7 +36,25 @@ public class ChessBoard {
         return pieces;
     }
 
+    public List<Piece> getWhitePieces() {
+        return whitePieces;
+    }
+
+    public List<Piece> getBlackPieces() {
+        return blackPieces;
+    }
+
     public Square getSquare(int file, int rank) {
         return board[file][rank];
+    }
+
+    public boolean withinTable(int file, int rank) {
+        if (file < 0 || file >= board.length) {
+            return false;
+        }
+        if (rank < 0 || rank >= board[0].length) {
+            return false;
+        }
+        return true;
     }
 }

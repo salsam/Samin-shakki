@@ -6,6 +6,7 @@ import chess.board.Player;
 import chess.board.Square;
 import chess.board.ChessBoardInitializer;
 import chess.board.EmptyBoardInitializer;
+import chess.board.SquareTest;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -67,42 +68,21 @@ public class KingTest {
     }
 
     @Test
-    public void kingCanMoveNorthEast() {
-        assertTrue(possibleMoves.contains(new Square(3, 4)));
+    public void kingCanMoveToEveryNeighboringSquare() {
+        int[] files = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
+        int[] ranks = new int[]{4, 4, 4, 3, 3, 2, 2, 2};
+
+        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
     }
 
     @Test
-    public void kingCanMoveStraightUp() {
-        assertTrue(possibleMoves.contains(new Square(3, 3)));
-    }
+    public void kingCannotMoveOutOfBoard() {
+        init.initialize(board);
+        king = new King(board.getSquare(0, 0), Player.WHITE);
+        init.putPieceOnBoard(board, king);
+        possibleMoves = king.possibleMoves(board);
 
-    @Test
-    public void kingCanMoveNorthWest() {
-        assertTrue(possibleMoves.contains(new Square(3, 2)));
-    }
-
-    @Test
-    public void kingCanMoveEast() {
-        assertTrue(possibleMoves.contains(new Square(2, 4)));
-    }
-
-    @Test
-    public void kingCanMoveWest() {
-        assertTrue(possibleMoves.contains(new Square(2, 2)));
-    }
-
-    @Test
-    public void kingCanMoveSouthEast() {
-        assertTrue(possibleMoves.contains(new Square(1, 4)));
-    }
-
-    @Test
-    public void kingCanMoveSouth() {
-        assertTrue(possibleMoves.contains(new Square(1, 3)));
-    }
-
-    @Test
-    public void kingCanMoveSouthWest() {
-        assertTrue(possibleMoves.contains(new Square(1, 2)));
+        assertFalse(possibleMoves.contains(new Square(-1, 0)));
+        assertFalse(possibleMoves.contains(new Square(0, -1)));
     }
 }

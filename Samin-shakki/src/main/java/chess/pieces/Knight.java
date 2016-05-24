@@ -34,11 +34,11 @@ public class Knight extends Piece {
             newFile = location.getFile() + fileChange[i];
             newRank = location.getRank() + rankChange[i];
 
-            if (!withinTable(newFile, newRank)) {
+            if (!board.withinTable(newFile, newRank)) {
                 continue;
             }
             target = board.getBoard()[newFile][newRank];
-            if (legalToMoveTo(target)) {
+            if (legalToMoveTo(target, board)) {
                 possibilities.add(target);
             }
         }

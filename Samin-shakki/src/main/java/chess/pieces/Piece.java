@@ -17,6 +17,22 @@ public abstract class Piece {
 
     abstract public List<Square> possibleMoves(ChessBoard board);
 
+    @Override
+    public boolean equals(Object obj) {
+
+        Piece piece = (Piece) obj;
+
+        if (this.location != piece.getLocation()) {
+            return false;
+        }
+
+        if (this.owner != piece.getOwner()) {
+            return false;
+        }
+
+        return true;
+    }
+
     public Player getOwner() {
         return this.owner;
     }
@@ -37,9 +53,9 @@ public abstract class Piece {
         possibilitiesToDirection(current, board, possibilities, 0, -1);
     }
 
-    public boolean legalToMoveTo(Square target) {
+    public boolean legalToMoveTo(Square target, ChessBoard board) {
 
-        if (!withinTable(target.getFile(), target.getRank())) {
+        if (!board.withinTable(target.getFile(), target.getRank())) {
             return false;
         }
 
@@ -60,17 +76,17 @@ public abstract class Piece {
     protected void possibilitiesToDirection(Square current, ChessBoard board, List<Square> possibilities, int fileChange, int rankChange) {
         int newFile = current.getFile() + fileChange;
         int newRank = current.getRank() + rankChange;
-        if (withinTable(newFile, newRank)) {
+        if (board.withinTable(newFile, newRank)) {
             Square target = board.getBoard()[newFile][newRank];
 
-            while (legalToMoveTo(target)) {
+            while (legalToMoveTo(target, board)) {
                 possibilities.add(target);
                 if (target.containsAPiece()) {
                     break;
                 }
                 newFile = target.getFile() + fileChange;
                 newRank = target.getRank() + rankChange;
-                if (withinTable(newFile, newRank)) {
+                if (board.withinTable(newFile, newRank)) {
                     target = board.getBoard()[newFile][newRank];
                 } else {
                     break;
@@ -83,15 +99,4 @@ public abstract class Piece {
         possibilitiesToDirection(current, board, possibilities, 1, 0);
         possibilitiesToDirection(current, board, possibilities, -1, 0);
     }
-
-    protected boolean withinTable(int file, int rank) {
-        if (file < 0 || file > 7) {
-            return false;
-        }
-        if (rank < 0 || rank > 7) {
-            return false;
-        }
-        return true;
-    }
-
 }

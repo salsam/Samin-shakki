@@ -21,5 +21,10 @@ public abstract class ChessBoardInitializer {
     public void putPieceOnBoard(ChessBoard board, Piece piece) {
         board.getBoard()[piece.getLocation().getFile()][piece.getLocation().getRank()].setPiece(piece);
         board.getPieces().add(piece);
+        if (piece.getOwner() == Player.WHITE) {
+            board.getWhitePieces().add(piece);
+        } else {
+            board.getBlackPieces().add(piece);
+        }
     }
 }

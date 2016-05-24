@@ -41,18 +41,22 @@ public class Game {
                 turn(Player.BLACK);
             }
 
-            if (turn == 50) {
+            if (turn == 100) {
+                continues = false;
+            }
+
+            if (board.getBlackPieces().isEmpty() || board.getWhitePieces().isEmpty()) {
                 continues = false;
             }
             turn++;
         }
     }
 
-    public List<Square> possibleMoves(Piece piece) {
+    private List<Square> possibleMoves(Piece piece) {
         return piece.possibleMoves(board);
     }
 
-    public void turn(Player player) {
+    private void turn(Player player) {
         Piece chosen = null;
         Square target = null;
         List<Square> possibleMoves;
@@ -89,15 +93,18 @@ public class Game {
             file = Character.getNumericValue(input.charAt(0));
             rank = Character.getNumericValue(input.charAt(1));
 
-            if (board.getBoard()[file][rank].getPiece().getOwner() != player) {
-                System.out.println("Please, choose one of your own pieces.");
-                input = "";
-                continue;
-            }
-            System.out.println("c");
+            input = checkThatPlayerOwnsTargetedPiece(file, rank, player, input);
 
         }
         return board.getBoard()[file][rank].getPiece();
+    }
+
+    private String checkThatPlayerOwnsTargetedPiece(int file, int rank, Player player, String input) {
+        if (board.getSquare(file, rank).getPiece().getOwner() != player) {
+            System.out.println("Please, choose one of your own pieces.");
+            input = "";
+        }
+        return input;
     }
 
     private Square chooseATargetSquareForMovement(List<Square> possibilities) {
@@ -122,35 +129,30 @@ public class Game {
             file = Character.getNumericValue(input.charAt(0));
             rank = Character.getNumericValue(input.charAt(1));
 
-            if (!possibilities.contains(board.getBoard()[file][rank])) {
-                System.out.println("Please, choose one of the legal movements: ");
-                for (Square possibility : possibilities) {
-                    System.out.print(possibility + " ");
-                }
-                input = "";
-                continue;
+            input = checkThatMovementIsLegal(possibilities, file, rank, input);
+
+        }
+
+        return board.getSquare(file, rank);
+    }
+
+    private String checkThatMovementIsLegal(List<Square> possibilities, int file, int rank, String input) {
+        if (!possibilities.contains(board.getSquare(file, rank))) {
+            System.out.println("Please, choose one of the legal movements: ");
+            for (Square possibility : possibilities) {
+                System.out.print(possibility + " ");
             }
-
+            input = "";
         }
-
-        return board.getBoard()[file][rank];
+        return input;
     }
 
-    public boolean isBetween(int number, int start, int end) {
-        if (number < start || number > end) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean inputIsInAllowedForm(String input, boolean canBeEmpty) {
+    private boolean inputIsInAllowedForm(String input, boolean squareCanBeEmpty) {
         int file;
         int rank;
         if (input.length() != 2) {
             return false;
         }
-        System.out.println("d");
 
         try {
             file = Character.getNumericValue(input.charAt(0));
@@ -159,19 +161,14 @@ public class Game {
             return false;
         }
 
-        System.out.println("e");
-
-        if (!isBetween(file, 0, 7) || !isBetween(rank, 0, 7)) {
+        if (!board.withinTable(file, rank)) {
             return false;
         }
 
-        System.out.println("f");
-
-        if (!canBeEmpty && !board.getBoard()[file][rank].containsAPiece()) {
+        if (!squareCanBeEmpty && !board.getSquare(file, rank).containsAPiece()) {
             return false;
         }
 
-        System.out.println("g");
         return true;
     }
 }

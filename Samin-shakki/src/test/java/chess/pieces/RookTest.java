@@ -50,7 +50,6 @@ public class RookTest {
         possibleMoves = rook.possibleMoves(board);
     }
 
-    @After
     public void tearDown() {
     }
 

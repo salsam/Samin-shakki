@@ -82,22 +82,22 @@ public class PawnTest {
         assertFalse(pawn.possibleMoves(board).contains(new Square(2, 4)));
     }
 
-    @Test
-    public void pawnCannotTakeNonExistingPieces() {
-        assertFalse(pawn.canTakeAnOpposingPiece(1, board));
-    }
-
-    @Test
-    public void pawnCanTakeAPieceDiagonallyForward() {
-        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.BLACK);
-        init.putPieceOnBoard(board, enemyPawn);
-        assertTrue(pawn.canTakeAnOpposingPiece(1, board));
-    }
-
-    @Test
-    public void pawnCannotTakeOwnPieceDiagonallyForward() {
-        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.WHITE);
-        init.putPieceOnBoard(board, enemyPawn);
-        assertFalse(pawn.canTakeAnOpposingPiece(1, board));
-    }
+//    @Test
+//    public void pawnCannotTakeNonExistingPieces() {
+//        assertFalse(pawn.canTakeAnOpposingPiece(1, board));
+//    }
+//
+//    @Test
+//    public void pawnCanTakeAPieceDiagonallyForward() {
+//        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.BLACK);
+//        init.putPieceOnBoard(board, enemyPawn);
+//        assertTrue(pawn.canTakeAnOpposingPiece(1, board));
+//    }
+//
+//    @Test
+//    public void pawnCannotTakeOwnPieceDiagonallyForward() {
+//        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.WHITE);
+//        init.putPieceOnBoard(board, enemyPawn);
+//        assertFalse(pawn.canTakeAnOpposingPiece(1, board));
+//    }
 }

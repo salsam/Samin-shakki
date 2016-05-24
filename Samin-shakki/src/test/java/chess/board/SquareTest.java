@@ -1,7 +1,5 @@
 package chess.board;
 
-import chess.board.Square;
-import chess.board.Player;
 import chess.pieces.Pawn;
 import java.util.ArrayList;
 import java.util.List;
