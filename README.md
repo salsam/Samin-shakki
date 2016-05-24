@@ -9,3 +9,9 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 - [tuntikirjanpito](dokumentaatio/Tuntikirjanpito.md)
 
 - [luokkakaavio](dokumentaatio/aiheenKuvausJaRakenne.md)
+
+- [pit-testit](dokumentaatio/pit/)
+
+- [checkstyle-dokumentti](dokumentaatio/site/index.html)
+
+
