@@ -7,4 +7,4 @@ Päivät | Tunnit | Kuvaus
 21.05.2016 | 4h | Pawn, Knight ja King luokan perustoiminnalisuus ja testit
 22.05.2016 | 2h | Pakkausrakenteen korjausyritys
 23.05.2016 | 3h | Nappuloiden liikkuminen refaktoroitu
-23.05.2016 | 4h | Korjattu nappuloiden luonti virhe, yksinkertainen versio valmis (puuttuu shakkaus, matittaminen ja grafiikka)
+23.05.2016 | 4h | Korjattu nappuloiden luontivirhe, yksinkertainen versio valmis (puuttuu shakkaus, matittaminen ja grafiikka)
