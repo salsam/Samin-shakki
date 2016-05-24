@@ -1,3 +1,3 @@
 #Luokkakaavio
 
-![Alt text](Luokkakaavio.png(1))
+![Luokkakaavio](Luokkakaavio(1).png)
