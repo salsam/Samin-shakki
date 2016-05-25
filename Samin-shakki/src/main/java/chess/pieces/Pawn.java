@@ -27,13 +27,30 @@ public class Pawn extends Piece {
             moves.add(target);
 
             if (firstMovement(board)) {
-                target = board.getSquare(location.getFile(), target.getRank() + owner.getDirection());
-                if (legalToMoveTo(target, board)) {
-                    moves.add(target);
+                newRank += owner.getDirection();
+
+                if (!board.withinTable(location.getFile(), newRank)) {
+                    return moves;
                 }
+
+                addIfEmpty(board, newRank, moves);
             }
         }
 
+        addPossibilitiesToTakeOpposingPieces(board, moves);
+
+        return moves;
+    }
+
+    private void addIfEmpty(ChessBoard board, int newRank, List<Square> moves) {
+        Square target;
+        target = board.getSquare(location.getFile(), newRank);
+        if (!target.containsAPiece()) {
+            moves.add(target);
+        }
+    }
+
+    private void addPossibilitiesToTakeOpposingPieces(ChessBoard board, List<Square> moves) {
         if (canTakeAnOpposingPiece(1, board)) {
             moves.add(board.getSquare(location.getFile() + 1, location.getRank() + owner.getDirection()));
         }
@@ -41,7 +58,6 @@ public class Pawn extends Piece {
         if (canTakeAnOpposingPiece(-1, board)) {
             moves.add(board.getSquare(location.getFile() - 1, location.getRank() + owner.getDirection()));
         }
-        return moves;
     }
 
     private boolean canTakeAnOpposingPiece(int direction, ChessBoard board) {
