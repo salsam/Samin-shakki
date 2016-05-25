@@ -15,13 +15,19 @@ public class Pawn extends Piece {
     @Override
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList<>();
-        Square target = board.getBoard()[location.getFile()][location.getRank() + owner.getDirection()];
+        int newRank = location.getRank() + owner.getDirection();
 
-        if (legalToMoveTo(target, board)) {
+        if (!board.withinTable(location.getFile(), newRank)) {
+            return moves;
+        }
+
+        Square target = board.getSquare(location.getFile(), newRank);
+
+        if (!target.containsAPiece()) {
             moves.add(target);
 
             if (firstMovement(board)) {
-                target = board.getBoard()[location.getFile()][target.getRank() + owner.getDirection()];
+                target = board.getSquare(location.getFile(), target.getRank() + owner.getDirection());
                 if (legalToMoveTo(target, board)) {
                     moves.add(target);
                 }
@@ -29,11 +35,11 @@ public class Pawn extends Piece {
         }
 
         if (canTakeAnOpposingPiece(1, board)) {
-            moves.add(board.getBoard()[location.getFile() + 1][location.getRank() + owner.getDirection()]);
+            moves.add(board.getSquare(location.getFile() + 1, location.getRank() + owner.getDirection()));
         }
 
         if (canTakeAnOpposingPiece(-1, board)) {
-            moves.add(board.getBoard()[location.getFile() - 1][location.getRank() + owner.getDirection()]);
+            moves.add(board.getSquare(location.getFile() - 1, location.getRank() + owner.getDirection()));
         }
         return moves;
     }
@@ -44,7 +50,7 @@ public class Pawn extends Piece {
         if (!board.withinTable(newFile, newRank)) {
             return false;
         }
-        Square target = board.getBoard()[newFile][newRank];
+        Square target = board.getSquare(newFile, newRank);
 
         if (legalToMoveTo(target, board)) {
             if (target.getPiece() != null) {

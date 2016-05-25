@@ -5,6 +5,7 @@ import chess.board.Player;
 import chess.board.Square;
 import chess.board.ChessBoardInitializer;
 import chess.board.EmptyBoardInitializer;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -82,22 +83,31 @@ public class PawnTest {
         assertFalse(pawn.possibleMoves(board).contains(new Square(2, 4)));
     }
 
-//    @Test
-//    public void pawnCannotTakeNonExistingPieces() {
-//        assertFalse(pawn.canTakeAnOpposingPiece(1, board));
-//    }
-//
-//    @Test
-//    public void pawnCanTakeAPieceDiagonallyForward() {
-//        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.BLACK);
-//        init.putPieceOnBoard(board, enemyPawn);
-//        assertTrue(pawn.canTakeAnOpposingPiece(1, board));
-//    }
-//
-//    @Test
-//    public void pawnCannotTakeOwnPieceDiagonallyForward() {
-//        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.WHITE);
-//        init.putPieceOnBoard(board, enemyPawn);
-//        assertFalse(pawn.canTakeAnOpposingPiece(1, board));
-//    }
+    @Test
+    public void pawnCanTakeAPieceDiagonallyForwardToRight() {
+        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.BLACK);
+        init.putPieceOnBoard(board, enemyPawn);
+        assertTrue(pawn.possibleMoves(board).contains(new Square(3, 2)));
+    }
+
+    @Test
+    public void pawnCanTakeAPieceDiagonallyForwardToLeft() {
+        Pawn enemyPawn = new Pawn(board.getSquare(1, 2), Player.BLACK);
+        init.putPieceOnBoard(board, enemyPawn);
+        assertTrue(pawn.possibleMoves(board).contains(new Square(1, 2)));
+    }
+
+    @Test
+    public void pawnCannotTakeOwnPieceDiagonallyForward() {
+        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.WHITE);
+        init.putPieceOnBoard(board, enemyPawn);
+        assertFalse(pawn.possibleMoves(board).contains(new Square(3, 2)));
+    }
+
+    @Test
+    public void pawnCannotMoveOverTheEdge() {
+        pawn = new Pawn(board.getSquare(0, 7), Player.WHITE);
+        init.putPieceOnBoard(board, pawn);
+        assertFalse(pawn.possibleMoves(board).contains(new Square(0, 8)));
+    }
 }

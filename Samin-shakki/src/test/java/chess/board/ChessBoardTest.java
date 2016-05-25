@@ -2,6 +2,7 @@ package chess.board;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,6 +34,18 @@ public class ChessBoardTest {
 
     @After
     public void tearDown() {
+    }
+
+    @Test
+    public void getBoardReturnsBoard() {
+        Square[][] emptyBoard = new Square[board.getBoard()[0].length][board.getBoard().length];
+
+        for (int i = 0; i < emptyBoard.length; i++) {
+            for (int j = 0; j < emptyBoard[0].length; j++) {
+                emptyBoard[i][j] = new Square(i, j);
+            }
+        }
+        Assert.assertArrayEquals(emptyBoard, board.getBoard());
     }
 
     @Test

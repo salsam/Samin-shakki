@@ -24,7 +24,7 @@ public class Bishop extends Piece {
     @Override
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();
-        diagonalPossibilities(location, board, possibilities);
+        addDiagonalPossibilities(location, board, possibilities);
 
         return possibilities;
     }

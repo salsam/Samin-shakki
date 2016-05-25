@@ -6,6 +6,7 @@ import chess.board.Player;
 import chess.board.Square;
 import chess.board.ChessBoardInitializer;
 import chess.board.EmptyBoardInitializer;
+import chess.board.SquareTest;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertFalse;
@@ -56,43 +57,20 @@ public class KnightTest {
     }
 
     @Test
-    public void knightCanMoveTwoUpOneRight() {
-        assertTrue(possibleMoves.contains(new Square(5, 6)));
+    public void knightCanMoveToEveryPossibleSquare() {
+        int[] files = new int[]{2, 2, 3, 3, 5, 5, 6, 6};
+        int[] ranks = new int[]{3, 5, 2, 6, 2, 6, 3, 5};
+
+        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
     }
 
     @Test
-    public void knightCanMoveTwoUpOneLeft() {
-        assertTrue(possibleMoves.contains(new Square(3, 6)));
-    }
-
-    @Test
-    public void knightCanMoveTwoDownOneRight() {
-        assertTrue(possibleMoves.contains(new Square(5, 2)));
-    }
-
-    @Test
-    public void knightCanMoveTwoDownOneLeft() {
-        assertTrue(possibleMoves.contains(new Square(3, 2)));
-    }
-
-    @Test
-    public void knightCanMoveOneUpTwoRight() {
-        assertTrue(possibleMoves.contains(new Square(6, 5)));
-    }
-
-    @Test
-    public void knightCanMoveOneUpTwoLeft() {
-        assertTrue(possibleMoves.contains(new Square(2, 5)));
-    }
-
-    @Test
-    public void knightCanMoveOneDownTwoRight() {
-        assertTrue(possibleMoves.contains(new Square(6, 3)));
-    }
-
-    @Test
-    public void knightCanMoveOneDownTwoLeft() {
-        assertTrue(possibleMoves.contains(new Square(2, 3)));
+    public void knightCannotMoveOverTheEdge() {
+        knight = new Knight(board.getSquare(0, 0), Player.WHITE);
+        init.putPieceOnBoard(board, knight);
+        assertFalse(knight.possibleMoves(board).contains(new Square(-1, -2)));
+        assertFalse(knight.possibleMoves(board).contains(new Square(1, -2)));
+        assertFalse(knight.possibleMoves(board).contains(new Square(-1, 2)));
     }
 
 }

@@ -84,4 +84,14 @@ public class SquareTest {
     public void twoSquaresAreNotEqualIfDifferentRow() {
         assertFalse(square.equals(new Square(2, 2)));
     }
+
+    @Test
+    public void intIsNotASquare() {
+        assertFalse(square.equals(1));
+    }
+
+    @Test
+    public void toStringIsInCorrectFormat() {
+        assertEquals("(2,3)", square.toString());
+    }
 }

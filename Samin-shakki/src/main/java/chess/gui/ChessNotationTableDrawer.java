@@ -17,10 +17,10 @@ public class ChessNotationTableDrawer {
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (!board.getBoard()[i][j].containsAPiece()) {
+                if (!board.getSquare(i, j).containsAPiece()) {
                     graphicalBoard[i][j] = " ";
                 } else {
-                    piece = board.getBoard()[i][j].getPiece();
+                    piece = board.getSquare(i, j).getPiece();
                     graphicalBoard[i][j] = chessNotation(piece);
                 }
             }
@@ -39,10 +39,10 @@ public class ChessNotationTableDrawer {
         for (int i = 0; i < 8; i++) {
             System.out.print(i + " ");
             for (int j = 0; j < 8; j++) {
-                if (!board.getBoard()[i][j].containsAPiece()) {
+                if (!board.getSquare(i, j).containsAPiece()) {
                     System.out.print("  ");
                 } else {
-                    piece = board.getBoard()[i][j].getPiece();
+                    piece = board.getSquare(i, j).getPiece();
                     System.out.print(chessNotation(piece));
                 }
             }

@@ -24,24 +24,10 @@ public class King extends Piece {
     @Override
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();
-        Square target;
         int[] fileChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
         int[] rankChange = new int[]{1, 1, 1, 0, 0, -1, -1, -1};
-        int newFile;
-        int newRank;
 
-        for (int i = 0; i < 8; i++) {
-            newFile = location.getFile() + fileChange[i];
-            newRank = location.getRank() + rankChange[i];
-
-            if (!board.withinTable(newFile, newRank)) {
-                continue;
-            }
-            target = board.getBoard()[newFile][newRank];
-            if (legalToMoveTo(target, board)) {
-                possibilities.add(target);
-            }
-        }
+        addPossibilities(fileChange, rankChange, board, possibilities);
 
         return possibilities;
     }

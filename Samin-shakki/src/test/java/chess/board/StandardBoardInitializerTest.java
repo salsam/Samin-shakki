@@ -101,7 +101,7 @@ public class StandardBoardInitializerTest {
         }
     }
 
-    private void testThatSquaresHavePieceOfCorrectOwner() {
+    public void testThatSquaresHavePieceOfCorrectOwner() {
         Player owner = Player.WHITE;
         for (int i = 0; i < board.getBoard().length; i++) {
             if (i == 2) {
@@ -116,11 +116,19 @@ public class StandardBoardInitializerTest {
         }
     }
 
-    private void testThatThereIsNoPiecesBetweenRanksTwoAndFive() {
+    public void testThatThereIsNoPiecesBetweenRanksTwoAndFive() {
         for (int i = 2; i < 6; i++) {
             for (int j = 0; j < 8; j++) {
                 assertFalse(board.getSquare(j, i).containsAPiece());
             }
         }
+    }
+
+    public void putPieceOnBoardPutsCorrectPieceInCorrectSpot() {
+        Pawn pawn = new Pawn(board.getSquare(5, 4), Player.WHITE);
+        init.putPieceOnBoard(board, pawn);
+        assertTrue(board.getSquare(5, 4).containsAPiece());
+        assertEquals(Pawn.class, board.getSquare(5, 4).getPiece().getClass());
+        assertEquals(Player.WHITE, board.getSquare(5, 4).getPiece().getOwner());
     }
 }
