@@ -12,6 +12,6 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 
 - [pit-testit](dokumentaatio/pit/)
 
-- [checkstyle-dokumentti](dokumentaatio/site/checkstyle.html)
+- [checkstyle-dokumentaatio](dokumentaatio/site/)
 
 
