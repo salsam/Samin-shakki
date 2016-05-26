@@ -25,10 +25,10 @@
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; 8; i++) {
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>              <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> j = 0; j &lt; 8; j++) {
-<a class="jxr_linenumber" name="L20" href="#L20">20</a>                  <strong class="jxr_keyword">if</strong> (!board.getBoard()[i][j].containsAPiece()) {
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>                  <strong class="jxr_keyword">if</strong> (!board.getSquare(i, j).containsAPiece()) {
 <a class="jxr_linenumber" name="L21" href="#L21">21</a>                      graphicalBoard[i][j] = <span class="jxr_string">" "</span>;
 <a class="jxr_linenumber" name="L22" href="#L22">22</a>                  } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>                      piece = board.getBoard()[i][j].getPiece();
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>                      piece = board.getSquare(i, j).getPiece();
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>                      graphicalBoard[i][j] = chessNotation(piece);
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>                  }
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>              }
@@ -47,10 +47,10 @@
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; 8; i++) {
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>              System.out.print(i + <span class="jxr_string">" "</span>);
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>              <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> j = 0; j &lt; 8; j++) {
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>                  <strong class="jxr_keyword">if</strong> (!board.getBoard()[i][j].containsAPiece()) {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>                  <strong class="jxr_keyword">if</strong> (!board.getSquare(i, j).containsAPiece()) {
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>                      System.out.print(<span class="jxr_string">"  "</span>);
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>                  } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>                      piece = board.getBoard()[i][j].getPiece();
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>                      piece = board.getSquare(i, j).getPiece();
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>                      System.out.print(chessNotation(piece));
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>                  }
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>              }

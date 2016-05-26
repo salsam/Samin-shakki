@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class Game {
 
     private ChessBoard board;
-    private ChessBoardInitializer initializer;
     private int turn;
     private boolean continues;
     private Scanner reader;
@@ -25,7 +24,6 @@ public class Game {
 
     public Game(ChessBoardInitializer init) {
         this.board = new ChessBoard();
-        this.initializer = init;
         init.initialize(board);
         turn = 1;
         continues = true;
