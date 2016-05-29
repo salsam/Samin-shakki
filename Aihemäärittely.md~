@@ -1,0 +1,17 @@
+#Aihemäärittely
+
+###Aihe: 
+Shakki, jossa kaikki shakin säännöt voimassa. Vain kahden ihmispelaajan välinen peli mahdollista.
+
+###Käyttäjät:
+Pelaajat
+
+###Pelaajan toiminnot:
+- Pelin aloitus
+- Pelitilanteen näkeminen
+- Nappuloiden siirtäminen
+  1. Nappulan valitseminen
+  2. Ruudun valitseminen
+  3. Siirtokehotuksen lähettäminen
+- Pelin lopetus
+
