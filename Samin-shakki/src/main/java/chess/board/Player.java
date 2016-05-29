@@ -22,4 +22,12 @@ public enum Player {
         return direction;
     }
 
+    public static Player getOpponent(Player player) {
+        if (player == Player.WHITE) {
+            return Player.BLACK;
+        } else {
+            return Player.BLACK;
+        }
+    }
+
 }

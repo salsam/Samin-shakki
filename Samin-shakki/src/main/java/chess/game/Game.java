@@ -5,8 +5,12 @@ import chess.board.ChessBoard;
 import chess.board.Square;
 import chess.board.ChessBoardInitializer;
 import chess.board.Player;
+import static chess.board.Player.getOpponent;
 import chess.gui.ChessNotationTableDrawer;
+import chess.pieces.King;
 import chess.pieces.Piece;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -21,6 +25,7 @@ public class Game {
     private Scanner reader;
     private ChessNotationTableDrawer graphics;
     private boolean cancelled;
+    private Map<Player, King> kings;
 
     public Game(ChessBoardInitializer init) {
         this.board = new ChessBoard();
@@ -29,6 +34,8 @@ public class Game {
         continues = true;
         reader = new Scanner(System.in);
         graphics = new ChessNotationTableDrawer();
+        kings = new HashMap<>();
+        updateKingsLocations();
     }
 
     public void start() {
@@ -43,9 +50,6 @@ public class Game {
                 continues = false;
             }
 
-            if (board.getBlackPieces().isEmpty() || board.getWhitePieces().isEmpty()) {
-                continues = false;
-            }
             turn++;
         }
     }
@@ -60,18 +64,51 @@ public class Game {
         List<Square> possibleMoves;
         graphics.draw(board);
         cancelled = true;
+        ChessBoard copy = board.copy();
+
+        System.out.println(kings.get(player.BLACK).getLocation());
+        System.out.println(kings.get(player.WHITE).getLocation());
 
         System.out.println(player + "'s turn");
 
-        while (cancelled) {
-            cancelled = false;
-            chosen = chooseAPieceToMove(player);
-            System.out.println(chosen.getClass().toString());
-            possibleMoves = possibleMoves(chosen);
-            target = chooseATargetSquareForMovement(possibleMoves);
-        }
+        while (true) {
+            board = copy;
+            while (cancelled) {
+                cancelled = false;
+                chosen = chooseAPieceToMove(player);
+                System.out.println(chosen.getClass().toString());
+                possibleMoves = possibleMoves(chosen);
+                target = chooseATargetSquareForMovement(possibleMoves);
 
-        chosen.move(target);
+            }
+
+            chosen.move(target, board);
+
+            if (!checkIfChecked(player)) {
+                break;
+            }
+        }
+    }
+
+    private void updateKingsLocations() {
+        Square sq;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                sq = board.getSquare(i, j);
+                if (sq.containsAPiece() && sq.getPiece().getClass() == King.class) {
+                    kings.put(sq.getPiece().getOwner(), (King) sq.getPiece());
+                }
+            }
+        }
+    }
+
+    private boolean checkIfChecked(Player player) {
+        for (Square sq : board.possibleMoves(player)) {
+            if (sq.getFile() == 3) {
+                System.out.println(sq);
+            }
+        }
+        return board.possibleMoves(getOpponent(player)).contains(kings.get(player).getLocation());
     }
 
     private Piece chooseAPieceToMove(Player player) {
@@ -107,8 +144,8 @@ public class Game {
 
     private Square chooseATargetSquareForMovement(List<Square> possibilities) {
         String input = "";
-        int file = -1;
-        int rank = -1;
+        int file = 0;
+        int rank = 0;
 
         while (input.equals("")) {
             System.out.println("Please write coordinates in form FileRank of a square to move to or x to cancel");

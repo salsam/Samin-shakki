@@ -48,6 +48,14 @@ public class Square {
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.file;
+        hash = 47 * hash + this.rank;
+        return hash;
+    }
+
     public boolean containsAPiece() {
         return piece != null;
     }

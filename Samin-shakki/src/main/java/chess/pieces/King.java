@@ -6,7 +6,6 @@
 package chess.pieces;
 
 import chess.board.ChessBoard;
-import java.util.ArrayList;
 import java.util.List;
 import chess.board.Player;
 import chess.board.Square;
@@ -23,12 +22,9 @@ public class King extends Piece {
 
     @Override
     public List<Square> possibleMoves(ChessBoard board) {
-        List<Square> possibilities = new ArrayList<>();
         int[] fileChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
         int[] rankChange = new int[]{1, 1, 1, 0, 0, -1, -1, -1};
 
-        addPossibilities(fileChange, rankChange, board, possibilities);
-
-        return possibilities;
+        return possibilities(fileChange, rankChange, board);
     }
 }

@@ -61,19 +61,19 @@ public class PieceTest {
 
     @Test
     public void movingChangesLocationCorrectly() {
-        piece.move(board.getSquare(3, 5));
+        piece.move(board.getSquare(3, 5), board);
         assertEquals(board.getSquare(3, 5), piece.getLocation());
     }
 
     @Test
     public void movingRemovesPieceFromPreviousSquare() {
-        piece.move(board.getSquare(3, 5));
+        piece.move(board.getSquare(3, 5), board);
         assertEquals(null, board.getSquare(3, 4).getPiece());
     }
 
     @Test
     public void movingAddsPieceToTargetSquare() {
-        piece.move(board.getSquare(3, 5));
+        piece.move(board.getSquare(3, 5), board);
         assertEquals(piece, board.getSquare(3, 5).getPiece());
     }
 
