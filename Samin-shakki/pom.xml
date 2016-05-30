@@ -36,16 +36,6 @@
                 <version>1.1.8</version>
                 <configuration>
                     <targetClasses>
-<<<<<<< HEAD
-                        <param>ristinolla.logiikka.*</param>
-                        <param>ristinolla.tekoaly.*</param>
-                    </targetClasses>
-                    <targetTests>
-                        <param>ristinolla.logiikka.*</param>
-                        <param>ristinolla.tekoaly.*</param>
-                    </targetTests>
-                </configuration>
-=======
                         <param>chess.*</param>
                     </targetClasses>
                     <targetTests>
@@ -65,7 +55,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>2.5</version>
->>>>>>> 8ca97b2d1f49f1b0b5c0faaa53cd0f3c6a5aa235
             </plugin>
         </plugins>
     </build>
