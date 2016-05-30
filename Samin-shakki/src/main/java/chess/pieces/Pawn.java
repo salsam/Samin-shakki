@@ -45,6 +45,12 @@ public class Pawn extends Piece {
         return moves;
     }
 
+    private void addPossibilitiesToTakeOpposingPieces(ChessBoard board, List<Square> moves) {
+        threatenedSquares(board).stream().filter(i -> legalToMoveTo(i, board))
+                .filter(i -> i.containsAPiece())
+                .forEach(i -> moves.add(i));
+    }
+
     private void addSquareIfWithinTableAndEmpty(ChessBoard board, int newRank, List<Square> moves) {
         Square target;
         if (board.withinTable(location.getFile(), newRank)) {
@@ -54,33 +60,6 @@ public class Pawn extends Piece {
                 moves.add(target);
             }
         }
-    }
-
-    private void addPossibilitiesToTakeOpposingPieces(ChessBoard board, List<Square> moves) {
-        if (canTakeAnOpposingPiece(1, board)) {
-            moves.add(board.getSquare(location.getFile() + 1, location.getRank() + owner.getDirection()));
-        }
-
-        if (canTakeAnOpposingPiece(-1, board)) {
-            moves.add(board.getSquare(location.getFile() - 1, location.getRank() + owner.getDirection()));
-        }
-    }
-
-    private boolean canTakeAnOpposingPiece(int direction, ChessBoard board) {
-        int newFile = location.getFile() + direction;
-        int newRank = location.getRank() + owner.getDirection();
-        if (!board.withinTable(newFile, newRank)) {
-            return false;
-        }
-        Square target = board.getSquare(newFile, newRank);
-
-        if (legalToMoveTo(target, board)) {
-            if (target.getPiece() != null) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private boolean firstMovement() {
