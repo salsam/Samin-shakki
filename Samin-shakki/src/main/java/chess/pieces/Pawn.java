@@ -13,7 +13,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public List<Square> possibleMoves(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> moves = new ArrayList<>();
         int newRank = location.getRank() + owner.getDirection();
 

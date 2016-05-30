@@ -22,7 +22,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public List<Square> possibleMoves(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();
         addDiagonalPossibilities(location, board, possibilities);
         addHorizontalPossibilities(location, board, possibilities);

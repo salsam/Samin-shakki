@@ -41,8 +41,10 @@ public class Game {
     public void start() {
         while (continues) {
             if (turn % 2 == 1) {
+                board.updateBlackThreatenedSquares();
                 turn(Player.WHITE);
             } else {
+                board.updateWhiteThreatenedSquares();
                 turn(Player.BLACK);
             }
 
@@ -54,10 +56,6 @@ public class Game {
         }
     }
 
-    private List<Square> possibleMoves(Piece piece) {
-        return piece.possibleMoves(board);
-    }
-
     private void turn(Player player) {
         Piece chosen = null;
         Square target = null;
@@ -65,9 +63,6 @@ public class Game {
         graphics.draw(board);
         cancelled = true;
         ChessBoard copy = board.copy();
-
-        System.out.println(kings.get(player.BLACK).getLocation());
-        System.out.println(kings.get(player.WHITE).getLocation());
 
         System.out.println(player + "'s turn");
 
@@ -77,12 +72,14 @@ public class Game {
                 cancelled = false;
                 chosen = chooseAPieceToMove(player);
                 System.out.println(chosen.getClass().toString());
-                possibleMoves = possibleMoves(chosen);
+                possibleMoves = chosen.possibleMoves(board);
                 target = chooseATargetSquareForMovement(possibleMoves);
 
             }
 
             chosen.move(target, board);
+
+            System.out.println(checkIfChecked(player));
 
             if (!checkIfChecked(player)) {
                 break;
@@ -103,12 +100,7 @@ public class Game {
     }
 
     private boolean checkIfChecked(Player player) {
-        for (Square sq : board.possibleMoves(player)) {
-            if (sq.getFile() == 3) {
-                System.out.println(sq);
-            }
-        }
-        return board.possibleMoves(getOpponent(player)).contains(kings.get(player).getLocation());
+        return board.threatenedSquares(getOpponent(player)).contains(kings.get(player).getLocation());
     }
 
     private Piece chooseAPieceToMove(Player player) {

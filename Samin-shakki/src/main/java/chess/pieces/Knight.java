@@ -21,7 +21,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public List<Square> possibleMoves(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoard board) {
         int[] rankChange = new int[]{-2, -2, -1, -1, 1, 1, 2, 2};
         int[] fileChange = new int[]{1, -1, 2, -2, 2, -2, 1, -1};
 

@@ -80,7 +80,7 @@ public class ChessBoardTest {
         }
 
         for (Square possible : correct) {
-            assertTrue(board.whitePossibleMoves().contains(possible));
+            assertTrue(board.whiteThreatenedSquares().contains(possible));
         }
     }
 
@@ -99,7 +99,7 @@ public class ChessBoardTest {
         }
 
         for (Square possible : wrong) {
-            assertFalse(board.whitePossibleMoves().contains(possible));
+            assertFalse(board.whiteThreatenedSquares().contains(possible));
         }
     }
 
@@ -115,7 +115,7 @@ public class ChessBoardTest {
         }
 
         for (Square possible : correct) {
-            assertTrue(board.blackPossibleMoves().contains(possible));
+            assertTrue(board.blackThreatenedSquares().contains(possible));
         }
     }
 
@@ -134,7 +134,7 @@ public class ChessBoardTest {
         }
 
         for (Square possible : wrong) {
-            assertFalse(board.blackPossibleMoves().contains(possible));
+            assertFalse(board.blackThreatenedSquares().contains(possible));
         }
     }
 
@@ -144,7 +144,7 @@ public class ChessBoardTest {
         init.putPieceOnBoard(board, new Queen(board.getSquare(4, 4), Player.WHITE));
         Queen q = (Queen) board.getSquare(4, 4).getPiece();
         for (Square sq : q.possibleMoves(board)) {
-            assertTrue(board.whitePossibleMoves().contains(sq));
+            assertTrue(board.whiteThreatenedSquares().contains(sq));
         }
     }
 }

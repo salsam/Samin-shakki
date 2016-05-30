@@ -22,7 +22,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public List<Square> possibleMoves(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();
         addHorizontalPossibilities(location, board, possibilities);
         addVerticalPossibilities(location, board, possibilities);

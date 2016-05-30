@@ -15,8 +15,8 @@ public class ChessBoard {
     private Square[][] board;
     private List<Piece> whitePieces;
     private List<Piece> blackPieces;
-    private Set<Square> blackPossibleMoves;
-    private Set<Square> whitePossibleMoves;
+    private Set<Square> blackThreatenedSquares;
+    private Set<Square> whiteThreatenedSquares;
 
     public ChessBoard() {
         this.board = new Square[8][8];
@@ -28,12 +28,16 @@ public class ChessBoard {
         }
         this.blackPieces = new ArrayList<>();
         this.whitePieces = new ArrayList<>();
-        this.blackPossibleMoves = new HashSet();
-        this.whitePossibleMoves = new HashSet();
+        this.blackThreatenedSquares = new HashSet();
+        this.whiteThreatenedSquares = new HashSet();
     }
 
-    public Set<Square> getBlackPossibleMoves() {
-        return blackPossibleMoves;
+    public Set<Square> getBlackThreatenedSquares() {
+        return blackThreatenedSquares;
+    }
+
+    public void updateBlackThreatenedSquares() {
+        blackThreatenedSquares = blackThreatenedSquares();
     }
 
     public Square[][] getBoard() {
@@ -48,8 +52,12 @@ public class ChessBoard {
         return whitePieces;
     }
 
-    public Set<Square> getWhitePossibleMoves() {
-        return whitePossibleMoves;
+    public Set<Square> getWhiteThreatenedSquares() {
+        return whiteThreatenedSquares;
+    }
+
+    public void updateWhiteThreatenedSquares() {
+        whiteThreatenedSquares = whiteThreatenedSquares();
     }
 
     public void setWhitePieces(List<Piece> whitePieces) {
@@ -78,7 +86,7 @@ public class ChessBoard {
         return true;
     }
 
-    public Set<Square> blackPossibleMoves() {
+    public Set<Square> blackThreatenedSquares() {
         Set<Square> set = new HashSet();
 
         blackPieces.stream().forEach((blackPiece) -> {
@@ -88,7 +96,7 @@ public class ChessBoard {
         return set;
     }
 
-    public Set<Square> whitePossibleMoves() {
+    public Set<Square> whiteThreatenedSquares() {
         Set<Square> set = new HashSet();
 
         whitePieces.stream().forEach((whitePiece) -> {
@@ -98,11 +106,11 @@ public class ChessBoard {
         return set;
     }
 
-    public Set<Square> possibleMoves(Player player) {
+    public Set<Square> threatenedSquares(Player player) {
         if (player == Player.WHITE) {
-            return whitePossibleMoves();
+            return whiteThreatenedSquares;
         } else {
-            return blackPossibleMoves();
+            return blackThreatenedSquares;
         }
     }
 

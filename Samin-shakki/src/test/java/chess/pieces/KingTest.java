@@ -84,4 +84,18 @@ public class KingTest {
         assertFalse(possibleMoves.contains(new Square(-1, 0)));
         assertFalse(possibleMoves.contains(new Square(0, -1)));
     }
+
+    @Test
+    public void kingCannotMoveToThreatenedSquare() {
+        init.initialize(board);
+        init.putPieceOnBoard(board, king);
+        Queen q = new Queen(board.getSquare(3, 5), Player.BLACK);
+        init.putPieceOnBoard(board, q);
+        board.updateBlackThreatenedSquares();
+        possibleMoves = king.possibleMoves(board);
+
+        q.threatenedSquares(board).stream().forEach(i -> {
+            assertFalse(possibleMoves.contains(i));
+        });
+    }
 }

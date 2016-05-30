@@ -26,7 +26,7 @@ public enum Player {
         if (player == Player.WHITE) {
             return Player.BLACK;
         } else {
-            return Player.BLACK;
+            return Player.WHITE;
         }
     }
 
