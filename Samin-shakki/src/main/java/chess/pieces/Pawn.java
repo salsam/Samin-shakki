@@ -14,6 +14,22 @@ public class Pawn extends Piece {
 
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {
+        List<Square> squares = new ArrayList();
+        int[] fileChange = new int[]{1, -1};
+        int file = this.location.getFile();
+        int rank = this.location.getRank() + this.owner.getDirection();
+
+        for (int i = 0; i < 2; i++) {
+            if (board.withinTable(file + fileChange[i], rank)) {
+                squares.add(board.getSquare(file + fileChange[i], rank));
+            }
+        }
+
+        return squares;
+    }
+
+    @Override
+    public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList<>();
         int newRank = location.getRank() + owner.getDirection();
 
