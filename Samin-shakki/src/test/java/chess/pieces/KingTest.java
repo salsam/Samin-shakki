@@ -91,7 +91,7 @@ public class KingTest {
         init.putPieceOnBoard(board, king);
         Queen q = new Queen(board.getSquare(3, 5), Player.BLACK);
         init.putPieceOnBoard(board, q);
-        board.updateBlackThreatenedSquares();
+        board.updateThreatenedSquares(Player.BLACK);
         possibleMoves = king.possibleMoves(board);
 
         q.threatenedSquares(board).stream().forEach(i -> {

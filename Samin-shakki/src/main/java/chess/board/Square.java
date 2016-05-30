@@ -37,11 +37,11 @@ public class Square {
 
         Square square = (Square) obj;
 
-        if (this.getFile() != square.getFile()) {
+        if (this.file != square.getFile()) {
             return false;
         }
 
-        if (this.getRank() != square.getRank()) {
+        if (this.rank != square.getRank()) {
             return false;
         }
 

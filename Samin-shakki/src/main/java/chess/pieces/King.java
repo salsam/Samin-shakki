@@ -21,6 +21,13 @@ public class King extends Piece {
     public King(Square square, Player owner) {
         super(square, owner);
     }
+    
+    @Override
+    public Piece clone(ChessBoard board) throws CloneNotSupportedException {
+        int file = this.location.getFile();
+        int rank = this.location.getRank();
+        return new King(board.getSquare(file, rank), this.owner);
+    }
 
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {
@@ -34,11 +41,11 @@ public class King extends Piece {
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList<>();
 
-        for (Square target : threatenedSquares(board)) {
-            if (legalToMoveTo(target, board) && !isThreatenedByOpponent(target, board)) {
-                moves.add(target);
-            }
-        }
+        threatenedSquares(board).stream()
+                .filter((target) -> (legalToMoveTo(target, board) && !isThreatenedByOpponent(target, board)))
+                .forEach((target) -> {
+                    moves.add(target);
+                });
 
         return moves;
     }

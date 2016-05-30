@@ -20,6 +20,13 @@ public class Queen extends Piece {
     public Queen(Square square, Player owner) {
         super(square, owner);
     }
+    
+    @Override
+    public Piece clone(ChessBoard board) throws CloneNotSupportedException {
+        int file = this.location.getFile();
+        int rank = this.location.getRank();
+        return new Queen(board.getSquare(file, rank), this.owner);
+    }
 
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {

@@ -18,6 +18,8 @@ public abstract class Piece {
 
     abstract public List<Square> threatenedSquares(ChessBoard board);
 
+    abstract public Piece clone(ChessBoard board) throws CloneNotSupportedException;
+
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList();
 

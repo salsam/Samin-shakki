@@ -12,6 +12,7 @@ import chess.pieces.Piece;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
@@ -38,13 +39,11 @@ public class Game {
         updateKingsLocations();
     }
 
-    public void start() {
+    public void start() throws Exception{
         while (continues) {
             if (turn % 2 == 1) {
-                board.updateBlackThreatenedSquares();
                 turn(Player.WHITE);
             } else {
-                board.updateWhiteThreatenedSquares();
                 turn(Player.BLACK);
             }
 
@@ -56,18 +55,18 @@ public class Game {
         }
     }
 
-    private void turn(Player player) {
+    private void turn(Player player) throws Exception{
         Piece chosen = null;
         Square target = null;
         List<Square> possibleMoves;
         graphics.draw(board);
         cancelled = true;
+        board.updateThreatenedSquares(getOpponent(player));
         ChessBoard copy = board.copy();
 
         System.out.println(player + "'s turn");
 
         while (true) {
-            board = copy;
             while (cancelled) {
                 cancelled = false;
                 chosen = chooseAPieceToMove(player);
@@ -78,11 +77,15 @@ public class Game {
             }
 
             chosen.move(target, board);
-
-            System.out.println(checkIfChecked(player));
+            board.updateThreatenedSquares(getOpponent(player));
 
             if (!checkIfChecked(player)) {
                 break;
+            } else {
+                cancelled = true;
+                board = copy.copy();
+                board.updateThreatenedSquares(getOpponent(player));
+                System.out.println("-your king is checked, you have to prevent that!");
             }
         }
     }

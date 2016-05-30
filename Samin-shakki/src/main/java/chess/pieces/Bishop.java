@@ -22,6 +22,13 @@ public class Bishop extends Piece {
     }
 
     @Override
+    public Piece clone(ChessBoard board) throws CloneNotSupportedException {
+        int file = this.location.getFile();
+        int rank = this.location.getRank();
+        return new Bishop(board.getSquare(file, rank), this.owner);
+    }
+
+    @Override
     public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();
         addDiagonalPossibilities(location, board, possibilities);

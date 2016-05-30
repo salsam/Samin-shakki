@@ -13,6 +13,13 @@ public class Pawn extends Piece {
     }
 
     @Override
+    public Piece clone(ChessBoard board) throws CloneNotSupportedException {
+        int file = this.location.getFile();
+        int rank = this.location.getRank();
+        return new Pawn(board.getSquare(file, rank), this.owner);
+    }
+
+    @Override
     public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> squares = new ArrayList();
         int[] fileChange = new int[]{1, -1};

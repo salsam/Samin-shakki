@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,10 +38,6 @@ public class ChessBoard {
         return blackThreatenedSquares;
     }
 
-    public void updateBlackThreatenedSquares() {
-        blackThreatenedSquares = blackThreatenedSquares();
-    }
-
     public Square[][] getBoard() {
         return board;
     }
@@ -56,8 +54,12 @@ public class ChessBoard {
         return whiteThreatenedSquares;
     }
 
-    public void updateWhiteThreatenedSquares() {
-        whiteThreatenedSquares = whiteThreatenedSquares();
+    public void updateThreatenedSquares(Player player) {
+        if (player == Player.WHITE) {
+            whiteThreatenedSquares = whiteThreatenedSquares();
+        } else {
+            blackThreatenedSquares = blackThreatenedSquares();
+        }
     }
 
     public void setWhitePieces(List<Piece> whitePieces) {
@@ -114,12 +116,38 @@ public class ChessBoard {
         }
     }
 
-    public ChessBoard copy() {
+    public ChessBoard copy() throws CloneNotSupportedException {
         ChessBoard copy = new ChessBoard();
-        copy.setBoard(board);
-        copy.setBlackPieces(blackPieces);
-        copy.setWhitePieces(whitePieces);
+        Square[][] copyBoard = new Square[board.length][board[0].length];
+        System.arraycopy(board, 0, copyBoard, 0, board.length);
+        copy.setBoard(copyBoard);
+        copy.setBlackPieces(blackPiecesCopy(copy));
+        copy.setWhitePieces(whitePiecesCopy(copy));
         return copy;
+    }
+
+    private List<Piece> whitePiecesCopy(ChessBoard board) {
+        List<Piece> copyWhitePieces = new ArrayList();
+        whitePieces.stream().forEach(i -> {
+            try {
+                copyWhitePieces.add(i.clone(board));
+            } catch (CloneNotSupportedException ex) {
+            }
+        });
+        return copyWhitePieces;
+    }
+
+    private List<Piece> blackPiecesCopy(ChessBoard board) {
+        List<Piece> bpc = new ArrayList();
+
+        blackPieces.stream().forEach(i -> {
+            try {
+                bpc.add(i.clone(board));
+            } catch (CloneNotSupportedException ex) {
+            }
+        });
+
+        return bpc;
     }
 
     public void removePiece(Piece piece) {
