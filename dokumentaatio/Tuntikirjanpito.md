@@ -8,3 +8,9 @@ Päivät | Tunnit | Kuvaus
 22.05.2016 | 2h | Pakkausrakenteen korjausyritys
 23.05.2016 | 3h | Nappuloiden liikkuminen refaktoroitu
 23.05.2016 | 4h | Korjattu nappuloiden luontivirhe, yksinkertainen versio valmis (puuttuu shakkaus, matittaminen ja grafiikka)
+26.05.2016 | 0.5h | Checkstyle- ja pit-raporttien sekä luokkakaavion päivitys, lisätty linkit READMEen
+29.05.2016 | 3h | Aloitettu shakkauksen lisääminen luomalla metodit selvittämään jokaisen nappulan uhkaamat ruudut
+30.05.2016 | 3h | Git-sekoilee täysin, sain lopulta resetattua aiempaan versioon ja mergettyä
+30.05.2016 | 2h | Korjattu uhattujen ruutujen selvitystä ja laitettu liikkuminen hyödyntämään tätä tietoa
+31.05.2016 | 4h | Luotu looppi, joka palauttaa tilanteen siirtoa edeltäneeseen tilanteeseen, jossa shakattua kuningasta ei pelasteta
+01.06.2016 | 2h | Nyt tilanne oikeasti palautuu siirtoa edeltäneeseen, eikä siirto jää voimaan. Shakkaus toimii!
