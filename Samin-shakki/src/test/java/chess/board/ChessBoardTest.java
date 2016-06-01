@@ -1,6 +1,7 @@
 package chess.board;
 
 import chess.pieces.Queen;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.After;
@@ -146,5 +147,36 @@ public class ChessBoardTest {
         for (Square sq : q.possibleMoves(board)) {
             assertTrue(board.squaresThreatenedByWhite().contains(sq));
         }
+    }
+
+    @Test
+    public void getKingsReturnsMapThatContainsKingLocations() {
+        init.initialize(board);
+        assertEquals(board.getSquare(4, 0), board.getKings().get(Player.WHITE).getLocation());
+        assertEquals(board.getSquare(3, 7), board.getKings().get(Player.BLACK).getLocation());
+    }
+
+    @Test
+    public void copyCreatesAnIdenticalChessBoard() {
+        init.initialize(board);
+        ChessBoard copy = board.copy();
+
+        assertTrue(Arrays.deepEquals(board.getBoard(), copy.getBoard()));
+    }
+
+    @Test
+    public void copyCreatesANewChessBoard() {
+        init.initialize(board);
+        ChessBoard copy = board.copy();
+
+        Queen queen = new Queen(board.getSquare(4, 4), Player.BLACK);
+        init.putPieceOnBoard(board, queen);
+
+        assertTrue(board.getSquare(4, 4).containsAPiece());
+        assertFalse(copy.getSquare(4, 4).containsAPiece());
+
+        queen.move(board.getSquare(4, 1), board);
+        assertEquals(Player.BLACK, board.getSquare(4, 1).getPiece().getOwner());
+        assertEquals(Player.WHITE, copy.getSquare(4, 1).getPiece().getOwner());
     }
 }

@@ -137,14 +137,14 @@ public class ChessBoard {
 
         for (int i = 0; i < this.board.length; i++) {
             for (int j = 0; j < this.board[0].length; j++) {
-                addPieceToOwner(i, j);
+                addPieceToOwner(board[i][j]);
             }
         }
     }
 
-    private void addPieceToOwner(int file, int rank) {
-        if (board[file][rank].containsAPiece()) {
-            Piece piece = board[file][rank].getPiece();
+    public void addPieceToOwner(Square target) {
+        if (target.containsAPiece()) {
+            Piece piece = target.getPiece();
 
             if (piece.getClass() == King.class) {
                 kings.put(piece.getOwner(), (King) piece);
@@ -154,7 +154,7 @@ public class ChessBoard {
         }
     }
 
-    public void removePiece(Piece piece) {
+    public void removePieceFromOwner(Piece piece) {
         if (piece.getOwner() == Player.WHITE) {
             whitePieces.remove(piece);
         } else {

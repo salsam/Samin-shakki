@@ -23,11 +23,9 @@ public abstract class Piece {
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList();
 
-        for (Square move : threatenedSquares(board)) {
-            if (legalToMoveTo(move, board)) {
-                moves.add(move);
-            }
-        }
+        threatenedSquares(board).stream()
+                .filter((move) -> (legalToMoveTo(move, board)))
+                .forEach((move) -> moves.add(move));
 
         return moves;
     }
@@ -38,6 +36,21 @@ public abstract class Piece {
 
     public Square getLocation() {
         return this.location;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Piece piece = (Piece) obj;
+
+        if (piece.getLocation() != this.location) {
+            return false;
+        }
+
+        return this.owner == piece.getOwner();
     }
 
     protected void addDiagonalPossibilities(Square current, ChessBoard board, List<Square> possibilities) {
@@ -52,22 +65,23 @@ public abstract class Piece {
         possibilitiesToDirection(current, board, possibilities, 0, -1);
     }
 
+    protected void addVerticalPossibilities(Square current, ChessBoard board, List<Square> possibilities) {
+        possibilitiesToDirection(current, board, possibilities, 1, 0);
+        possibilitiesToDirection(current, board, possibilities, -1, 0);
+    }
+
     protected List<Square> possibilities(int[] fileChange, int[] rankChange, ChessBoard board) {
-        int newFile;
-        int newRank;
-        Square target;
         List<Square> possibilities = new ArrayList();
 
         for (int i = 0; i < 8; i++) {
-            newFile = location.getFile() + fileChange[i];
-            newRank = location.getRank() + rankChange[i];
+            int newFile = location.getFile() + fileChange[i];
+            int newRank = location.getRank() + rankChange[i];
 
             if (!board.withinTable(newFile, newRank)) {
                 continue;
             }
 
-            target = board.getSquare(newFile, newRank);
-
+            Square target = board.getSquare(newFile, newRank);
             possibilities.add(target);
         }
 
@@ -87,7 +101,7 @@ public abstract class Piece {
         this.location.setPiece(null);
 
         if (target.containsAPiece()) {
-            board.removePiece(target.getPiece());
+            board.removePieceFromOwner(target.getPiece());
         }
         target.setPiece(this);
 
@@ -97,10 +111,9 @@ public abstract class Piece {
     protected void possibilitiesToDirection(Square current, ChessBoard board, List<Square> possibilities, int fileChange, int rankChange) {
         int newFile = current.getFile() + fileChange;
         int newRank = current.getRank() + rankChange;
-        Square target;
 
         while (board.withinTable(newFile, newRank)) {
-            target = board.getSquare(newFile, newRank);
+            Square target = board.getSquare(newFile, newRank);
             possibilities.add(target);
             if (target.containsAPiece()) {
                 break;
@@ -108,10 +121,5 @@ public abstract class Piece {
             newFile = target.getFile() + fileChange;
             newRank = target.getRank() + rankChange;
         }
-    }
-
-    protected void addVerticalPossibilities(Square current, ChessBoard board, List<Square> possibilities) {
-        possibilitiesToDirection(current, board, possibilities, 1, 0);
-        possibilitiesToDirection(current, board, possibilities, -1, 0);
     }
 }

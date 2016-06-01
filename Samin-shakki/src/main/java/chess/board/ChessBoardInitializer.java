@@ -22,8 +22,7 @@ public abstract class ChessBoardInitializer {
         if (board.withinTable(piece.getLocation().getFile(), piece.getLocation().getRank())) {
             
             board.getSquare(piece.getLocation().getFile(), piece.getLocation().getRank()).setPiece(piece);
-            
-            board.getPieces(piece.getOwner()).add(piece);
+            board.addPieceToOwner(piece.getLocation());
         }
     }
 }

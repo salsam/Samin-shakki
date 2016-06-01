@@ -9,7 +9,6 @@ import static chess.board.Player.getOpponent;
 import chess.gui.ChessNotationTableDrawer;
 import chess.pieces.King;
 import chess.pieces.Piece;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -58,7 +57,7 @@ public class Game {
         graphics.draw(board);
         cancelled = true;
         board.updateThreatenedSquares(getOpponent(player));
-        ChessBoard copy = board.copy();
+        ChessBoard backUp = board.copy();
 
         System.out.println(player + "'s turn");
 
@@ -79,7 +78,7 @@ public class Game {
                 break;
             } else {
                 cancelled = true;
-                board = copy.copy();
+                board = backUp.copy();
                 board.updateThreatenedSquares(getOpponent(player));
                 System.out.println("Your king is checked, you have to prevent that this turn!");
             }
@@ -165,6 +164,7 @@ public class Game {
     private boolean inputIsInAllowedForm(String input, boolean squareCanBeEmpty) {
         int file;
         int rank;
+
         if (input.length() != 2) {
             return false;
         }
