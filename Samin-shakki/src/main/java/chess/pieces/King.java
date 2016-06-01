@@ -21,12 +21,10 @@ public class King extends Piece {
     public King(Square square, Player owner) {
         super(square, owner);
     }
-    
+
     @Override
-    public Piece clone(ChessBoard board) throws CloneNotSupportedException {
-        int file = this.location.getFile();
-        int rank = this.location.getRank();
-        return new King(board.getSquare(file, rank), this.owner);
+    public Piece clone(Square location) {
+        return new King(location, this.owner);
     }
 
     @Override

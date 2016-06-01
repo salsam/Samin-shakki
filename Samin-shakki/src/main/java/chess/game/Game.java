@@ -12,7 +12,6 @@ import chess.pieces.Piece;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  *
@@ -26,7 +25,6 @@ public class Game {
     private Scanner reader;
     private ChessNotationTableDrawer graphics;
     private boolean cancelled;
-    private Map<Player, King> kings;
 
     public Game(ChessBoardInitializer init) {
         this.board = new ChessBoard();
@@ -35,11 +33,9 @@ public class Game {
         continues = true;
         reader = new Scanner(System.in);
         graphics = new ChessNotationTableDrawer();
-        kings = new HashMap<>();
-        updateKingsLocations();
     }
 
-    public void start() throws Exception{
+    public void start() {
         while (continues) {
             if (turn % 2 == 1) {
                 turn(Player.WHITE);
@@ -55,7 +51,7 @@ public class Game {
         }
     }
 
-    private void turn(Player player) throws Exception{
+    private void turn(Player player) {
         Piece chosen = null;
         Square target = null;
         List<Square> possibleMoves;
@@ -85,24 +81,13 @@ public class Game {
                 cancelled = true;
                 board = copy.copy();
                 board.updateThreatenedSquares(getOpponent(player));
-                System.out.println("-your king is checked, you have to prevent that!");
-            }
-        }
-    }
-
-    private void updateKingsLocations() {
-        Square sq;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                sq = board.getSquare(i, j);
-                if (sq.containsAPiece() && sq.getPiece().getClass() == King.class) {
-                    kings.put(sq.getPiece().getOwner(), (King) sq.getPiece());
-                }
+                System.out.println("Your king is checked, you have to prevent that this turn!");
             }
         }
     }
 
     private boolean checkIfChecked(Player player) {
+        Map<Player, King> kings = board.getKings();
         return board.threatenedSquares(getOpponent(player)).contains(kings.get(player).getLocation());
     }
 

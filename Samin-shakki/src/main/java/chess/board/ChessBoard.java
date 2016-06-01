@@ -1,12 +1,13 @@
 package chess.board;
 
+import chess.pieces.King;
 import chess.pieces.Piece;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,25 +18,27 @@ public class ChessBoard {
     private Square[][] board;
     private List<Piece> whitePieces;
     private List<Piece> blackPieces;
-    private Set<Square> blackThreatenedSquares;
-    private Set<Square> whiteThreatenedSquares;
+    private Set<Square> squaresThreatenedByBlack;
+    private Set<Square> squaresThreatenedByWhite;
+    private Map<Player, King> kings;
 
     public ChessBoard() {
-        this.board = new Square[8][8];
+        initializeBoard();
+        this.blackPieces = new ArrayList<>();
+        this.whitePieces = new ArrayList<>();
+        this.squaresThreatenedByBlack = new HashSet();
+        this.squaresThreatenedByWhite = new HashSet();
+        this.kings = new HashMap();
+    }
+
+    private void initializeBoard() {
+        board = new Square[8][8];
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 this.board[i][j] = new Square(i, j);
             }
         }
-        this.blackPieces = new ArrayList<>();
-        this.whitePieces = new ArrayList<>();
-        this.blackThreatenedSquares = new HashSet();
-        this.whiteThreatenedSquares = new HashSet();
-    }
-
-    public Set<Square> getBlackThreatenedSquares() {
-        return blackThreatenedSquares;
     }
 
     public Square[][] getBoard() {
@@ -46,32 +49,24 @@ public class ChessBoard {
         this.board = newBoard;
     }
 
-    public List<Piece> getWhitePieces() {
-        return whitePieces;
-    }
-
-    public Set<Square> getWhiteThreatenedSquares() {
-        return whiteThreatenedSquares;
+    public Map<Player, King> getKings() {
+        return this.kings;
     }
 
     public void updateThreatenedSquares(Player player) {
         if (player == Player.WHITE) {
-            whiteThreatenedSquares = whiteThreatenedSquares();
+            squaresThreatenedByWhite = squaresThreatenedByWhite();
         } else {
-            blackThreatenedSquares = blackThreatenedSquares();
+            squaresThreatenedByBlack = squaresThreatenedByBlack();
         }
     }
 
-    public void setWhitePieces(List<Piece> whitePieces) {
-        this.whitePieces = whitePieces;
-    }
-
-    public List<Piece> getBlackPieces() {
-        return blackPieces;
-    }
-
-    public void setBlackPieces(List<Piece> blackPieces) {
-        this.blackPieces = blackPieces;
+    public List<Piece> getPieces(Player player) {
+        if (player == Player.WHITE) {
+            return whitePieces;
+        } else {
+            return blackPieces;
+        }
     }
 
     public Square getSquare(int file, int rank) {
@@ -88,7 +83,7 @@ public class ChessBoard {
         return true;
     }
 
-    public Set<Square> blackThreatenedSquares() {
+    public Set<Square> squaresThreatenedByBlack() {
         Set<Square> set = new HashSet();
 
         blackPieces.stream().forEach((blackPiece) -> {
@@ -98,7 +93,7 @@ public class ChessBoard {
         return set;
     }
 
-    public Set<Square> whiteThreatenedSquares() {
+    public Set<Square> squaresThreatenedByWhite() {
         Set<Square> set = new HashSet();
 
         whitePieces.stream().forEach((whitePiece) -> {
@@ -110,44 +105,53 @@ public class ChessBoard {
 
     public Set<Square> threatenedSquares(Player player) {
         if (player == Player.WHITE) {
-            return whiteThreatenedSquares;
+            return squaresThreatenedByWhite;
         } else {
-            return blackThreatenedSquares;
+            return squaresThreatenedByBlack;
         }
     }
 
-    public ChessBoard copy() throws CloneNotSupportedException {
+    public ChessBoard copy() {
         ChessBoard copy = new ChessBoard();
-        Square[][] copyBoard = new Square[board.length][board[0].length];
-        System.arraycopy(board, 0, copyBoard, 0, board.length);
+        Square[][] copyBoard = copyBoard();
+
         copy.setBoard(copyBoard);
-        copy.setBlackPieces(blackPiecesCopy(copy));
-        copy.setWhitePieces(whitePiecesCopy(copy));
+        copy.findPieces();
+
         return copy;
     }
 
-    private List<Piece> whitePiecesCopy(ChessBoard board) {
-        List<Piece> copyWhitePieces = new ArrayList();
-        whitePieces.stream().forEach(i -> {
-            try {
-                copyWhitePieces.add(i.clone(board));
-            } catch (CloneNotSupportedException ex) {
+    private Square[][] copyBoard() {
+        Square[][] copyBoard = new Square[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                copyBoard[i][j] = board[i][j].clone();
             }
-        });
-        return copyWhitePieces;
+        }
+        return copyBoard;
     }
 
-    private List<Piece> blackPiecesCopy(ChessBoard board) {
-        List<Piece> bpc = new ArrayList();
+    private void findPieces() {
+        this.blackPieces = new ArrayList();
+        this.whitePieces = new ArrayList();
 
-        blackPieces.stream().forEach(i -> {
-            try {
-                bpc.add(i.clone(board));
-            } catch (CloneNotSupportedException ex) {
+        for (int i = 0; i < this.board.length; i++) {
+            for (int j = 0; j < this.board[0].length; j++) {
+                addPieceToOwner(i, j);
             }
-        });
+        }
+    }
 
-        return bpc;
+    private void addPieceToOwner(int file, int rank) {
+        if (board[file][rank].containsAPiece()) {
+            Piece piece = board[file][rank].getPiece();
+
+            if (piece.getClass() == King.class) {
+                kings.put(piece.getOwner(), (King) piece);
+            }
+
+            getPieces(piece.getOwner()).add(piece);
+        }
     }
 
     public void removePiece(Piece piece) {

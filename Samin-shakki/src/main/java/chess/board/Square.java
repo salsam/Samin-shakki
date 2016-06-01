@@ -65,4 +65,15 @@ public class Square {
         return "(" + file + "," + rank + ")";
     }
 
+    @Override
+    public Square clone() {
+        Square clone = new Square(this.file, this.rank);
+
+        if (containsAPiece()) {
+            clone.setPiece(this.piece.clone(clone));
+        }
+
+        return clone;
+    }
+
 }

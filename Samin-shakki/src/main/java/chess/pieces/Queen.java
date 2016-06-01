@@ -22,10 +22,8 @@ public class Queen extends Piece {
     }
     
     @Override
-    public Piece clone(ChessBoard board) throws CloneNotSupportedException {
-        int file = this.location.getFile();
-        int rank = this.location.getRank();
-        return new Queen(board.getSquare(file, rank), this.owner);
+    public Piece clone(Square location) {
+        return new Queen(location, this.owner);
     }
 
     @Override
