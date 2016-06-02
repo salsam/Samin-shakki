@@ -12,6 +12,6 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 
 - [pit-testit](dokumentaatio/pit/)
 
-- [checkstyle-dokumentaatio](dokumentaatio/site/)
+- [checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/salsam/Samin-shakki/blob/master/dokumentaatio/site/checkstyle.html)
 
 
