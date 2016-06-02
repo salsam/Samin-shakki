@@ -1,9 +1,9 @@
 package chess.gui;
 
-import chess.board.ChessBoard;
-import chess.board.Player;
-import chess.pieces.Knight;
-import chess.pieces.Piece;
+import chess.logic.board.ChessBoard;
+import chess.logic.board.Player;
+import chess.logic.pieces.Knight;
+import chess.logic.pieces.Piece;
 
 /**
  *

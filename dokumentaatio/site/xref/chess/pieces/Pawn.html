@@ -21,58 +21,58 @@
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>      }
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>  
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>      @Override
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>      <strong class="jxr_keyword">public</strong> List&lt;Square&gt; possibleMoves(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
-<a class="jxr_linenumber" name="L17" href="#L17">17</a>          List&lt;Square&gt; moves = <strong class="jxr_keyword">new</strong> ArrayList&lt;&gt;();
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>          <strong class="jxr_keyword">int</strong> newRank = location.getRank() + owner.getDirection();
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>      <strong class="jxr_keyword">public</strong> <a href="../../chess/pieces/Piece.html">Piece</a> clone(<a href="../../chess/board/Square.html">Square</a> location) {
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../chess/pieces/Pawn.html">Pawn</a>(location, <strong class="jxr_keyword">this</strong>.owner);
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>      }
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>  
-<a class="jxr_linenumber" name="L20" href="#L20">20</a>          addSquareIfWithinTableAndEmpty(board, newRank, moves);
-<a class="jxr_linenumber" name="L21" href="#L21">21</a>  
-<a class="jxr_linenumber" name="L22" href="#L22">22</a>          <strong class="jxr_keyword">if</strong> (firstMovement()) {
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>              newRank += owner.getDirection();
-<a class="jxr_linenumber" name="L24" href="#L24">24</a>              addSquareIfWithinTableAndEmpty(board, newRank, moves);
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>          }
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>      @Override
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>      <strong class="jxr_keyword">public</strong> List&lt;Square&gt; threatenedSquares(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>          List&lt;Square&gt; squares = <strong class="jxr_keyword">new</strong> ArrayList();
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>          <strong class="jxr_keyword">int</strong>[] fileChange = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">int</strong>[]{1, -1};
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>          <strong class="jxr_keyword">int</strong> file = <strong class="jxr_keyword">this</strong>.location.getFile();
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>          <strong class="jxr_keyword">int</strong> rank = <strong class="jxr_keyword">this</strong>.location.getRank() + <strong class="jxr_keyword">this</strong>.owner.getDirection();
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>          addPossibilitiesToTakeOpposingPieces(board, moves);
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>          <strong class="jxr_keyword">return</strong> moves;
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>      }
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addSquareIfWithinTableAndEmpty(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board, <strong class="jxr_keyword">int</strong> newRank, List&lt;Square&gt; moves) {
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>          <a href="../../chess/board/Square.html">Square</a> target;
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>          <strong class="jxr_keyword">if</strong> (board.withinTable(location.getFile(), newRank)) {
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>              target = board.getSquare(location.getFile(), newRank);
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>              <strong class="jxr_keyword">if</strong> (!target.containsAPiece()) {
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>                  moves.add(target);
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>              }
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>          }
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>      }
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; 2; i++) {
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>              <strong class="jxr_keyword">if</strong> (board.withinTable(file + fileChange[i], rank)) {
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>                  squares.add(board.getSquare(file + fileChange[i], rank));
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>              }
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>          }
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>          <strong class="jxr_keyword">return</strong> squares;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>      }
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>      @Override
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">public</strong> List&lt;Square&gt; possibleMoves(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>          List&lt;Square&gt; moves = <strong class="jxr_keyword">new</strong> ArrayList&lt;&gt;();
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>          <strong class="jxr_keyword">int</strong> newRank = location.getRank() + owner.getDirection();
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>          addSquareIfWithinTableAndEmpty(board, newRank, moves);
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addPossibilitiesToTakeOpposingPieces(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board, List&lt;Square&gt; moves) {
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>          <strong class="jxr_keyword">if</strong> (canTakeAnOpposingPiece(1, board)) {
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>              moves.add(board.getSquare(location.getFile() + 1, location.getRank() + owner.getDirection()));
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>          <strong class="jxr_keyword">if</strong> (firstMovement()) {
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>              newRank += owner.getDirection();
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>              addSquareIfWithinTableAndEmpty(board, newRank, moves);
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          }
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>          <strong class="jxr_keyword">if</strong> (canTakeAnOpposingPiece(-1, board)) {
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>              moves.add(board.getSquare(location.getFile() - 1, location.getRank() + owner.getDirection()));
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>          }
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>          addPossibilitiesToTakeOpposingPieces(board, moves);
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>  
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>          <strong class="jxr_keyword">return</strong> moves;
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      }
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> canTakeAnOpposingPiece(<strong class="jxr_keyword">int</strong> direction, <a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">int</strong> newFile = location.getFile() + direction;
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>          <strong class="jxr_keyword">int</strong> newRank = location.getRank() + owner.getDirection();
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>          <strong class="jxr_keyword">if</strong> (!board.withinTable(newFile, newRank)) {
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>              <strong class="jxr_keyword">return</strong> false;
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>          }
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>          <a href="../../chess/board/Square.html">Square</a> target = board.getSquare(newFile, newRank);
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>  
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>          <strong class="jxr_keyword">if</strong> (legalToMoveTo(target, board)) {
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>              <strong class="jxr_keyword">if</strong> (target.getPiece() != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>              }
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>          }
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>  
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">return</strong> false;
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addPossibilitiesToTakeOpposingPieces(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board, List&lt;Square&gt; moves) {
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>          threatenedSquares(board).stream().filter(i -&gt; legalToMoveTo(i, board))
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>                  .filter(i -&gt; i.containsAPiece())
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>                  .forEach(i -&gt; moves.add(i));
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      }
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>  
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addSquareIfWithinTableAndEmpty(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board, <strong class="jxr_keyword">int</strong> newRank, List&lt;Square&gt; moves) {
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>          <a href="../../chess/board/Square.html">Square</a> target;
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>          <strong class="jxr_keyword">if</strong> (board.withinTable(location.getFile(), newRank)) {
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>              target = board.getSquare(location.getFile(), newRank);
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>  
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>              <strong class="jxr_keyword">if</strong> (!target.containsAPiece()) {
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>                  moves.add(target);
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>              }
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>          }
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      }
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> firstMovement() {

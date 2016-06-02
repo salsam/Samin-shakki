@@ -8,10 +8,10 @@
 <div id="overview"><a href="../../../apidocs/chess/gui/ChessNotationTableDrawer.html">View Javadoc</a></div><pre>
 <a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> chess.gui;
 <a class="jxr_linenumber" name="L2" href="#L2">2</a>   
-<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> chess.board.ChessBoard;
-<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> chess.board.Player;
-<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">import</strong> chess.pieces.Knight;
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">import</strong> chess.pieces.Piece;
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> chess.logic.board.ChessBoard;
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> chess.logic.board.Player;
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">import</strong> chess.logic.pieces.Knight;
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">import</strong> chess.logic.pieces.Piece;
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_javadoccomment"> *</em>
@@ -19,9 +19,9 @@
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../chess/gui/ChessNotationTableDrawer.html">ChessNotationTableDrawer</a> {
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>      <strong class="jxr_keyword">public</strong> String[][] graphicalBoard(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>      <strong class="jxr_keyword">public</strong> String[][] graphicalBoard(<a href="../../chess/logic/board/ChessBoard.html">ChessBoard</a> board) {
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>          String[][] graphicalBoard = <strong class="jxr_keyword">new</strong> String[8][8];
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>          <a href="../../chess/pieces/Piece.html">Piece</a> piece;
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>          <a href="../../chess/logic/pieces/Piece.html">Piece</a> piece;
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; 8; i++) {
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>              <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> j = 0; j &lt; 8; j++) {
@@ -36,8 +36,8 @@
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>          <strong class="jxr_keyword">return</strong> graphicalBoard;
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>      }
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> draw(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>          <a href="../../chess/pieces/Piece.html">Piece</a> piece;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> draw(<a href="../../chess/logic/board/ChessBoard.html">ChessBoard</a> board) {
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>          <a href="../../chess/logic/pieces/Piece.html">Piece</a> piece;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>          System.out.print(<span class="jxr_string">"  "</span>);
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; 8; i++) {
@@ -58,7 +58,7 @@
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>          }
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      }
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">public</strong> String chessNotation(<a href="../../chess/pieces/Piece.html">Piece</a> piece) {
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">public</strong> String chessNotation(<a href="../../chess/logic/pieces/Piece.html">Piece</a> piece) {
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">char</strong> suffix;
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>          <strong class="jxr_keyword">char</strong> prefix;
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>          <strong class="jxr_keyword">if</strong> (piece.getClass() == Knight.<strong class="jxr_keyword">class</strong>) {

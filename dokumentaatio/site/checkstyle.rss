@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.board.StandardBoardInitializer.java">chess/board/StandardBoardInitializer.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Knight.java">chess/logic/pieces/Knight.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.board.ChessBoard.java">chess/board/ChessBoard.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.board.ChessBoard.java">chess/logic/board/ChessBoard.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.pieces.Pawn.java">chess/pieces/Pawn.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.board.StandardBoardInitializer.java">chess/logic/board/StandardBoardInitializer.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.board.Square.java">chess/board/Square.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.board.EmptyBoardInitializer.java">chess/logic/board/EmptyBoardInitializer.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.board.ChessBoardInitializer.java">chess/board/ChessBoardInitializer.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.board.ChessBoardInitializer.java">chess/logic/board/ChessBoardInitializer.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.pieces.Knight.java">chess/pieces/Knight.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Queen.java">chess/logic/pieces/Queen.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.game.Game.java">chess/game/Game.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Bishop.java">chess/logic/pieces/Bishop.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +158,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.pieces.King.java">chess/pieces/King.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.board.Square.java">chess/logic/board/Square.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.pieces.Rook.java">chess/pieces/Rook.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.board.Player.java">chess/logic/board/Player.java</a>
                 </td>
                 <td>
                   0
@@ -186,21 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.board.EmptyBoardInitializer.java">chess/board/EmptyBoardInitializer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.pieces.Piece.java">chess/pieces/Piece.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.game.Game.java">chess/logic/game/Game.java</a>
                 </td>
                 <td>
                   0
@@ -228,6 +214,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Pawn.java">chess/logic/pieces/Pawn.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#Main.java">Main.java</a>
                 </td>
                 <td>
@@ -242,35 +242,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.pieces.Queen.java">chess/pieces/Queen.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.board.Player.java">chess/board/Player.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.pieces.Bishop.java">chess/pieces/Bishop.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.King.java">chess/logic/pieces/King.java</a>
                 </td>
                 <td>
                   0
@@ -285,6 +257,34 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#chess.ui.UserInterface.java">chess/ui/UserInterface.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Rook.java">chess/logic/pieces/Rook.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Piece.java">chess/logic/pieces/Piece.java</a>
                 </td>
                 <td>
                   0

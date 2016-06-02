@@ -28,16 +28,21 @@
 <a class="jxr_linenumber" name="L20" href="#L20">20</a>      <strong class="jxr_keyword">public</strong> <a href="../../chess/pieces/Rook.html">Rook</a>(<a href="../../chess/board/Square.html">Square</a> square, <a href="../../chess/board/Player.html">Player</a> owner) {
 <a class="jxr_linenumber" name="L21" href="#L21">21</a>          <strong class="jxr_keyword">super</strong>(square, owner);
 <a class="jxr_linenumber" name="L22" href="#L22">22</a>      }
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>  
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>      
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>      @Override
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>      <strong class="jxr_keyword">public</strong> List&lt;Square&gt; possibleMoves(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>          List&lt;Square&gt; possibilities = <strong class="jxr_keyword">new</strong> ArrayList&lt;&gt;();
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>          addHorizontalPossibilities(location, board, possibilities);
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>          addVerticalPossibilities(location, board, possibilities);
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>          <strong class="jxr_keyword">return</strong> possibilities;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>      }
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  }
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>      <strong class="jxr_keyword">public</strong> <a href="../../chess/pieces/Piece.html">Piece</a> clone(<a href="../../chess/board/Square.html">Square</a> location) {
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../chess/pieces/Rook.html">Rook</a>(location, <strong class="jxr_keyword">this</strong>.owner);
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>      }
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>      @Override
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>      <strong class="jxr_keyword">public</strong> List&lt;Square&gt; threatenedSquares(<a href="../../chess/board/ChessBoard.html">ChessBoard</a> board) {
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>          List&lt;Square&gt; possibilities = <strong class="jxr_keyword">new</strong> ArrayList&lt;&gt;();
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>          addHorizontalPossibilities(location, board, possibilities);
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>          addVerticalPossibilities(location, board, possibilities);
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>          <strong class="jxr_keyword">return</strong> possibilities;
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>      }
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016. All rights reserved.</div>

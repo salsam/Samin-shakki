@@ -1,6 +1,6 @@
 
-import chess.board.StandardBoardInitializer;
-import chess.game.Game;
+import chess.logic.board.StandardBoardInitializer;
+import chess.logic.game.Game;
 
 /**
  *
