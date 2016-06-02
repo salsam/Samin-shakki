@@ -10,7 +10,7 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 
 - [luokkakaavio](dokumentaatio/aiheenKuvausJaRakenne.md)
 
-- [pit-testit](dokumentaatio/pit/)
+- [pit-raportti](https://htmlpreview.github.io/?https://github.com/salsam/Samin-shakki/blob/master/dokumentaatio/pit/201606021718/index.html)
 
 - [checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/salsam/Samin-shakki/blob/master/dokumentaatio/site/checkstyle.html)
 
