@@ -12,6 +12,7 @@ import chess.logic.board.Square;
 import java.util.ArrayList;
 
 /**
+ * This class is responsible of movement calculation of bishops.
  *
  * @author sami
  */
@@ -21,11 +22,23 @@ public class Bishop extends Piece {
         super(square, owner);
     }
 
+    /**
+     * Returns a field to field copy of this piece.
+     *
+     * @param location location where the clone will be placed
+     * @return deep copy of this bishop
+     */
     @Override
     public Piece clone(Square location) {
         return new Bishop(location, this.owner);
     }
 
+    /**
+     * Return a list containing all squares that this bishop threatens.
+     *
+     * @param board board where this bishop moves
+     * @return list containing all squares this bishop threatens
+     */
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();

@@ -43,7 +43,7 @@ public class BishopTest {
 
     @Before
     public void setUp() {
-        init.initialize(board);
+        init.initialise(board);
         bishop = new Bishop(board.getSquare(3, 4), Player.WHITE);
         init.putPieceOnBoard(board, bishop);
         possibleMoves = bishop.possibleMoves(board);

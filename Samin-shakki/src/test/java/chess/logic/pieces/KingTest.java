@@ -43,7 +43,7 @@ public class KingTest {
     public void setUp() {
         board = new ChessBoard();
         init = new EmptyBoardInitializer();
-        init.initialize(board);
+        init.initialise(board);
         king = new King(board.getSquare(2, 3), Player.WHITE);
         init.putPieceOnBoard(board, king);
         possibleMoves = king.possibleMoves(board);
@@ -78,7 +78,7 @@ public class KingTest {
 
     @Test
     public void kingCannotMoveOutOfBoard() {
-        init.initialize(board);
+        init.initialise(board);
         king = new King(board.getSquare(0, 0), Player.WHITE);
         init.putPieceOnBoard(board, king);
         possibleMoves = king.possibleMoves(board);
@@ -89,7 +89,7 @@ public class KingTest {
 
     @Test
     public void kingCannotMoveToThreatenedSquare() {
-        init.initialize(board);
+        init.initialise(board);
         init.putPieceOnBoard(board, king);
         Queen q = new Queen(board.getSquare(3, 5), Player.BLACK);
         init.putPieceOnBoard(board, q);

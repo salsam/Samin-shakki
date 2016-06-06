@@ -42,7 +42,7 @@ public class QueenTest {
 
     @Before
     public void setUp() {
-        init.initialize(board);
+        init.initialise(board);
         queen = new Queen(board.getSquare(3, 5), Player.WHITE);
         init.putPieceOnBoard(board, queen);
         possibleMoves = queen.possibleMoves(board);

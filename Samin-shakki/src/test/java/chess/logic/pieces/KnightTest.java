@@ -42,7 +42,7 @@ public class KnightTest {
     public void setUp() {
         board = new ChessBoard();
         init = new EmptyBoardInitializer();
-        init.initialize(board);
+        init.initialise(board);
         knight = new Knight(board.getSquare(4, 4), Player.WHITE);
         init.putPieceOnBoard(board, knight);
         possibleMoves = knight.possibleMoves(board);

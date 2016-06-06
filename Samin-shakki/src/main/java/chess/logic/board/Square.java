@@ -2,6 +2,12 @@ package chess.logic.board;
 
 import chess.logic.pieces.Piece;
 
+/**
+ * Square class is responsible for keeping track of its location and possible
+ * piece situated on it.
+ *
+ * @author samisalo
+ */
 public class Square {
 
     private int file;
@@ -56,6 +62,12 @@ public class Square {
         return hash;
     }
 
+    /**
+     * Returns true if Square contains a piece that is field piece doesn't refer
+     * to null.
+     *
+     * @return true if Square contains a piece
+     */
     public boolean containsAPiece() {
         return piece != null;
     }
@@ -65,6 +77,11 @@ public class Square {
         return "(" + file + "," + rank + ")";
     }
 
+    /**
+     * Returns a field to field copy of this square.
+     *
+     * @return a deep copy of this square
+     */
     @Override
     public Square clone() {
         Square clone = new Square(this.file, this.rank);

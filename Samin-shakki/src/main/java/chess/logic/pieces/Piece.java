@@ -20,6 +20,12 @@ public abstract class Piece {
 
     abstract public Piece clone(Square location);
 
+    /**
+     * Returns a list of squares this piece can legally move to.
+     *
+     * @param board ChessBoard this piece moves on
+     * @return list containing all squares this piece can legally move to
+     */
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList();
 
@@ -97,6 +103,13 @@ public abstract class Piece {
         return owner != target.getPiece().owner;
     }
 
+    /**
+     * Moves this piece to target location on the given board. If this piece
+     * takes an opposing piece, that will be removed from its owner on board.
+     *
+     * @param target Square where this piece will be moved.
+     * @param board Board on which this piece will be moved.
+     */
     public void move(Square target, ChessBoard board) {
         this.location.setPiece(null);
 

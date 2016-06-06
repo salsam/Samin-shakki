@@ -39,7 +39,7 @@ public class PawnTest {
     public void setUp() {
         init = new EmptyBoardInitializer();
         board = new ChessBoard();
-        init.initialize(board);
+        init.initialise(board);
         pawn = new Pawn(board.getSquare(2, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
     }

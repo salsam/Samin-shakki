@@ -22,11 +22,23 @@ public class King extends Piece {
         super(square, owner);
     }
 
+    /**
+     * Returns a field to field copy of this piece.
+     *
+     * @param location location where the clone will be placed
+     * @return deep copy of this king
+     */
     @Override
     public Piece clone(Square location) {
         return new King(location, this.owner);
     }
 
+    /**
+     * Return a list containing all squares that this king threatens.
+     *
+     * @param board board where this king moves
+     * @return list containing all squares this king threatens
+     */
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {
         int[] fileChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};

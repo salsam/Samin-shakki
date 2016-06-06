@@ -8,7 +8,7 @@ import chess.logic.pieces.Piece;
  */
 public abstract class ChessBoardInitializer {
     
-    public abstract void initialize(ChessBoard board);
+    public abstract void initialise(ChessBoard board);
     
     protected void clearBoard(ChessBoard board) {
         for (int i = 0; i < 8; i++) {

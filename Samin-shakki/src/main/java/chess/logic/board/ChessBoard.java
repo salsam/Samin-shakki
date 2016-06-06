@@ -10,8 +10,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * This class is responsible for keeping track of the current situation on
+ * board. This class also offers methods to access every piece on board and
+ * Squares they threaten or can move to.
  *
- * @author sami
+ * @author samisalo
  */
 public class ChessBoard {
 
@@ -31,6 +34,9 @@ public class ChessBoard {
         this.kings = new HashMap();
     }
 
+    /**
+     * Initialises a new 8x8 board.
+     */
     private void initializeBoard() {
         board = new Square[8][8];
 
@@ -41,18 +47,38 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Returns the Square[][] saved to field board.
+     *
+     * @return Reference to Square[][] that is saved to field board.
+     */
     public Square[][] getBoard() {
         return board;
     }
 
+    /**
+     * Sets the board given as parameter to field board.
+     *
+     * @param newBoard Square[][] to be saved to field board.
+     */
     public void setBoard(Square[][] newBoard) {
         this.board = newBoard;
     }
 
+    /**
+     * Returns a Map with references from each Player to their King.
+     *
+     * @return Map<Player, King> with references from each Player to their King.
+     */
     public Map<Player, King> getKings() {
         return this.kings;
     }
 
+    /**
+     * Updates the Squares that player's pieces threaten to corresponding field.
+     *
+     * @param player Player whose corresponding field you want to update.
+     */
     public void updateThreatenedSquares(Player player) {
         if (player == Player.WHITE) {
             squaresThreatenedByWhite = squaresThreatenedByWhite();
@@ -61,6 +87,13 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Returns a list containing all pieces currently on board and owned by the
+     * player.
+     *
+     * @param player Player whose Pieces you want.
+     * @return List<Piece> containing all pieces owned by the player.
+     */
     public List<Piece> getPieces(Player player) {
         if (player == Player.WHITE) {
             return whitePieces;
@@ -69,10 +102,24 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Returns the Square at given location on board.
+     *
+     * @param file Column of the Square you want.
+     * @param rank Row of the Square you want.
+     * @return Square at given location.
+     */
     public Square getSquare(int file, int rank) {
         return board[file][rank];
     }
 
+    /**
+     * Checks if the given location is on the chessboard.
+     *
+     * @param file Column of the Square you want.
+     * @param rank Row of the Square you want.
+     * @return true if given coordinates are within the table.
+     */
     public boolean withinTable(int file, int rank) {
         if (file < 0 || file >= board.length) {
             return false;
@@ -83,7 +130,7 @@ public class ChessBoard {
         return true;
     }
 
-    public Set<Square> squaresThreatenedByBlack() {
+    private Set<Square> squaresThreatenedByBlack() {
         Set<Square> set = new HashSet();
 
         blackPieces.stream().forEach((blackPiece) -> {
@@ -93,7 +140,7 @@ public class ChessBoard {
         return set;
     }
 
-    public Set<Square> squaresThreatenedByWhite() {
+    private Set<Square> squaresThreatenedByWhite() {
         Set<Square> set = new HashSet();
 
         whitePieces.stream().forEach((whitePiece) -> {
@@ -103,6 +150,12 @@ public class ChessBoard {
         return set;
     }
 
+    /**
+     * Returns a set containing all Squares that player threatens.
+     *
+     * @param player Player
+     * @return Set<Square>
+     */
     public Set<Square> threatenedSquares(Player player) {
         if (player == Player.WHITE) {
             return squaresThreatenedByWhite;
@@ -111,6 +164,11 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Returns a new ChessBoard that deeply equals this one.
+     *
+     * @return a deep copy of this board.
+     */
     public ChessBoard copy() {
         ChessBoard copy = new ChessBoard();
         Square[][] copyBoard = copyBoard();
@@ -142,6 +200,12 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Adds the piece on target square to list of pieces its owner owns. Also
+     * adds a reference to Map Kings if the piece is of King class.
+     *
+     * @param target Square
+     */
     public void addPieceToOwner(Square target) {
         if (target.containsAPiece()) {
             Piece piece = target.getPiece();
@@ -154,6 +218,11 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Removes target piece from its owner's owned pieces list.
+     *
+     * @param piece The piece you want to remove.
+     */
     public void removePieceFromOwner(Piece piece) {
         if (piece.getOwner() == Player.WHITE) {
             whitePieces.remove(piece);

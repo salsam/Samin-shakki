@@ -42,7 +42,7 @@ public class StandardBoardInitializerTest {
 
     @Before
     public void setUp() {
-        init.initialize(board);
+        init.initialise(board);
     }
 
     @After

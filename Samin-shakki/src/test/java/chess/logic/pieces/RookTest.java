@@ -46,7 +46,7 @@ public class RookTest {
 
     @Before
     public void setUp() {
-        init.initialize(board);
+        init.initialise(board);
         rook = new Rook(board.getSquare(3, 5), Player.WHITE);
         init.putPieceOnBoard(board, rook);
         possibleMoves = rook.possibleMoves(board);

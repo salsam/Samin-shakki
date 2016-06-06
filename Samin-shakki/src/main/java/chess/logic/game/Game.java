@@ -27,7 +27,7 @@ public class Game {
 
     public Game(ChessBoardInitializer init) {
         this.board = new ChessBoard();
-        init.initialize(board);
+        init.initialise(board);
         turn = 1;
         continues = true;
         reader = new Scanner(System.in);

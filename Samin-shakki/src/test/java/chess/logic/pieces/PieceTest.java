@@ -40,7 +40,7 @@ public class PieceTest {
 
     @Before
     public void setUp() {
-        init.initialize(board);
+        init.initialise(board);
         piece = new Queen(board.getSquare(3, 4), Player.WHITE);
         pawn = new Pawn(board.getSquare(3, 6), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
