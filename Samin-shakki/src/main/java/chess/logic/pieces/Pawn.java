@@ -8,8 +8,11 @@ import chess.logic.board.Square;
 
 public class Pawn extends Piece {
 
+    private boolean movedTwoSquaresLastTurn;
+
     public Pawn(Square square, Player owner) {
         super(square, owner);
+        movedTwoSquaresLastTurn = false;
     }
 
     /**
@@ -23,8 +26,27 @@ public class Pawn extends Piece {
         return new Pawn(location, this.owner);
     }
 
+    @Override
+    public void move(Square target, ChessBoard board) {
+        if (Math.abs(this.location.getrow() - target.getrow()) == 2) {
+            movedTwoSquaresLastTurn = true;
+        }
+        super.move(target, board);
+    }
+
+    public boolean getMovedTwoSquaresLastTurn() {
+        return movedTwoSquaresLastTurn;
+    }
+
+    public void setMovedTwoSquaresLastTurn(boolean movedTwoSquaresLastTurn) {
+        this.movedTwoSquaresLastTurn = movedTwoSquaresLastTurn;
+    }
+
     /**
-     * Return a list containing all squares that this pawn threatens.
+     * Return a list containing all squares that this pawn threatens. En passant
+     * is a special move in chess which only pawns can perform. It means that if
+     * opposing pawn moves two squares to be next to your own pawn, on your next
+     * turn your pawn can take it as if it had only moved one square.
      *
      * @param board board on which this pawn moves
      * @return list containing all squares this pawn threatens
@@ -35,14 +57,33 @@ public class Pawn extends Piece {
         int[] columnChange = new int[]{1, -1};
         int column = this.location.getcolumn();
         int row = this.location.getrow() + this.owner.getDirection();
+        Square target;
 
         for (int i = 0; i < 2; i++) {
             if (board.withinTable(column + columnChange[i], row)) {
-                squares.add(board.getSquare(column + columnChange[i], row));
+                target = board.getSquare(column + columnChange[i], row);
+                squares.add(target);
             }
+            enPassant(board, column, columnChange, i, squares);
         }
 
         return squares;
+    }
+
+    private void enPassant(ChessBoard board, int column, int[] columnChange, int i, List<Square> squares) {
+        Square target;
+        if (board.withinTable(column + columnChange[i], this.location.getrow())) {
+            target = board.getSquare(column + columnChange[i], this.location.getrow());
+
+            if (target.containsAPiece() && this.owner != target.getPiece().getOwner()) {
+                if (target.getPiece().getClass() == Pawn.class) {
+                    Pawn opposingPawn = (Pawn) target.getPiece();
+                    if (opposingPawn.getMovedTwoSquaresLastTurn()) {
+                        squares.add(target);
+                    }
+                }
+            }
+        }
     }
 
     /**
