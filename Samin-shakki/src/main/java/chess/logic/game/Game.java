@@ -6,7 +6,7 @@ import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
-import chess.gui.ChessNotationTableDrawer;
+import chess.gui.ChessBoardDrawer;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class Game {
     private int turn;
     private boolean continues;
     private Scanner reader;
-    private ChessNotationTableDrawer graphics;
+    private ChessBoardDrawer graphics;
     private boolean cancelled;
     private legalityChecker checker;
 
@@ -34,8 +34,11 @@ public class Game {
         turn = 1;
         continues = true;
         reader = new Scanner(System.in);
-        graphics = new ChessNotationTableDrawer();
         checker = new legalityChecker(board);
+    }
+
+    public void setChessBoardDrawer(ChessBoardDrawer drawer) {
+        graphics = drawer;
     }
 
     /**
@@ -53,11 +56,15 @@ public class Game {
         }
     }
 
+    public ChessBoard getChessBoard() {
+        return this.board;
+    }
+
     private void turn(Player player) {
         Piece chosen = null;
         Square target = null;
         List<Square> possibleMoves;
-        graphics.draw(board);
+        graphics.repaint();
         cancelled = true;
         board.updateThreatenedSquares(getOpponent(player));
         ChessBoard backUp = board.copy();

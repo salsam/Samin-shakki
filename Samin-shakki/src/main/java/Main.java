@@ -1,6 +1,5 @@
 
-import chess.logic.board.StandardBoardInitializer;
-import chess.logic.game.Game;
+import chess.gui.GraphicalUserInterface;
 
 /**
  *
@@ -9,7 +8,7 @@ import chess.logic.game.Game;
 public class Main {
 
     public static void main(String[] args) {
-        Game g = new Game(new StandardBoardInitializer());
-        g.start();
+        GraphicalUserInterface gui = new GraphicalUserInterface();
+        gui.run();
     }
 }
