@@ -19,12 +19,24 @@ public class Knight extends Piece {
     public Knight(Square square, Player owner) {
         super(square, owner);
     }
-    
+
+    /**
+     * Returns a field to field copy of this piece.
+     *
+     * @param location location where the clone will be placed
+     * @return deep copy of this knight
+     */
     @Override
     public Piece clone(Square location) {
         return new Knight(location, this.owner);
     }
 
+    /**
+     * Return a list containing all squares that this knight threatens.
+     *
+     * @param board board where this knight moves
+     * @return list containing all squares this knight threatens
+     */
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {
         int[] rankChange = new int[]{-2, -2, -1, -1, 1, 1, 2, 2};

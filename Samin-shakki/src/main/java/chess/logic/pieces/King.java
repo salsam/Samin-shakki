@@ -47,6 +47,14 @@ public class King extends Piece {
         return possibilities(fileChange, rankChange, board);
     }
 
+    /**
+     * Returns a list containing all squares this king can legally move to. That
+     * means all neighbouring squares of king's location that aren't threatened
+     * by opponent or contain player's own piece.
+     *
+     * @param board chessboard on which movement happens
+     * @return a list containing all squares this king can legally move to.
+     */
     @Override
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList<>();

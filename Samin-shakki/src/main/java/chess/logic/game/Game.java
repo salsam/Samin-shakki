@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
+ * This class is responsible for one game of chess with given starting
+ * positions.
  *
  * @author sami
  */

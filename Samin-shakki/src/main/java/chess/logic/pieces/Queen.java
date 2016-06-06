@@ -20,12 +20,24 @@ public class Queen extends Piece {
     public Queen(Square square, Player owner) {
         super(square, owner);
     }
-    
+
+    /**
+     * Returns a field to field copy of this piece.
+     *
+     * @param location location where the clone will be placed
+     * @return deep copy of this queen
+     */
     @Override
     public Piece clone(Square location) {
         return new Queen(location, this.owner);
     }
 
+    /**
+     * Return a list containing all squares that this queen threatens.
+     *
+     * @param board board on which this queen moves
+     * @return list containing all squares this queen threatens
+     */
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> possibilities = new ArrayList<>();
