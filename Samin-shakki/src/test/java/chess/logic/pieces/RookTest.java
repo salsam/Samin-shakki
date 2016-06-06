@@ -2,7 +2,7 @@ package chess.logic.pieces;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
 import chess.logic.pieces.Pawn;
@@ -62,19 +62,19 @@ public class RookTest {
 
     @Test
     public void rookCanMoveHorizontallyToEveryNonBlockedSquare() {
-        int[] files = new int[]{0, 1, 2, 4, 5, 6, 7};
+        int[] columns = new int[]{0, 1, 2, 4, 5, 6, 7};
 
-        for (int i = 0; i < files.length; i++) {
-            assertTrue(possibleMoves.contains(new Square(files[i], 5)));
+        for (int i = 0; i < columns.length; i++) {
+            assertTrue(possibleMoves.contains(new Square(columns[i], 5)));
         }
     }
 
     @Test
     public void rookCanMoveVerticallyToEveryNonBlockedSquare() {
-        int[] ranks = new int[]{0, 1, 2, 3, 4, 6, 7};
+        int[] rows = new int[]{0, 1, 2, 3, 4, 6, 7};
 
-        for (int i = 0; i < ranks.length; i++) {
-            assertTrue(possibleMoves.contains(new Square(3, ranks[i])));
+        for (int i = 0; i < rows.length; i++) {
+            assertTrue(possibleMoves.contains(new Square(3, rows[i])));
         }
     }
 

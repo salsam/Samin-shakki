@@ -11,7 +11,7 @@ public class EmptyBoardInitializer extends ChessBoardInitializer {
      * Initialises the ChessBoard given as parameter to be empty. Thus board
      * will be cleaned of all pieces.
      *
-     * @param board
+     * @param board board to be initialised
      */
     @Override
     public void initialise(ChessBoard board) {

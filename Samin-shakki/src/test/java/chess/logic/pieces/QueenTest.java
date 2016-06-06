@@ -59,54 +59,54 @@ public class QueenTest {
 
     @Test
     public void queenCanMoveHorizontallyToEveryNonBlockedSquare() {
-        int[] files = new int[]{0, 1, 2, 4, 5, 6, 7};
+        int[] columns = new int[]{0, 1, 2, 4, 5, 6, 7};
 
-        for (int i = 0; i < files.length; i++) {
-            assertTrue(possibleMoves.contains(new Square(files[i], 5)));
+        for (int i = 0; i < columns.length; i++) {
+            assertTrue(possibleMoves.contains(new Square(columns[i], 5)));
         }
     }
 
     @Test
     public void queenCanMoveVerticallyToEveryNonBlockedSquare() {
-        int[] ranks = new int[]{0, 1, 2, 3, 4, 6, 7};
+        int[] rows = new int[]{0, 1, 2, 3, 4, 6, 7};
 
-        for (int i = 0; i < ranks.length; i++) {
-            assertTrue(possibleMoves.contains(new Square(3, ranks[i])));
+        for (int i = 0; i < rows.length; i++) {
+            assertTrue(possibleMoves.contains(new Square(3, rows[i])));
         }
     }
 
     @Test
     public void queenCanMoveNorthEastToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{4, 5};
-        int[] ranks = new int[]{6, 7};
+        int[] columns = new int[]{4, 5};
+        int[] rows = new int[]{6, 7};
 
-        for (int i = 0; i < files.length; i++) {
-            assertTrue(possibleMoves.contains(new Square(files[i], ranks[i])));
+        for (int i = 0; i < columns.length; i++) {
+            assertTrue(possibleMoves.contains(new Square(columns[i], rows[i])));
         }
     }
 
     @Test
     public void queenCanMoveNorthWestToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{2, 1};
-        int[] ranks = new int[]{6, 7};
+        int[] columns = new int[]{2, 1};
+        int[] rows = new int[]{6, 7};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test
     public void queenCanMoveSouthEastToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{4, 5, 6, 7};
-        int[] ranks = new int[]{4, 3, 2, 1};
+        int[] columns = new int[]{4, 5, 6, 7};
+        int[] rows = new int[]{4, 3, 2, 1};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test
     public void queenCanMoveSouthWestToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{2, 1, 0};
-        int[] ranks = new int[]{4, 3, 2};
+        int[] columns = new int[]{2, 1, 0};
+        int[] rows = new int[]{4, 3, 2};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test

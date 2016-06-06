@@ -49,13 +49,13 @@ public class PawnTest {
     }
 
     @Test
-    public void startingFileCorrect() {
-        assertEquals(2, pawn.getLocation().getFile());
+    public void startingcolumnCorrect() {
+        assertEquals(2, pawn.getLocation().getcolumn());
     }
 
     @Test
-    public void startingRankCorrect() {
-        assertEquals(1, pawn.getLocation().getRank());
+    public void startingrowCorrect() {
+        assertEquals(1, pawn.getLocation().getrow());
     }
 
     @Test

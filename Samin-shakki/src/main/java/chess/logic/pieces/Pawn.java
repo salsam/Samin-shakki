@@ -32,13 +32,13 @@ public class Pawn extends Piece {
     @Override
     public List<Square> threatenedSquares(ChessBoard board) {
         List<Square> squares = new ArrayList();
-        int[] fileChange = new int[]{1, -1};
-        int file = this.location.getFile();
-        int rank = this.location.getRank() + this.owner.getDirection();
+        int[] columnChange = new int[]{1, -1};
+        int column = this.location.getcolumn();
+        int row = this.location.getrow() + this.owner.getDirection();
 
         for (int i = 0; i < 2; i++) {
-            if (board.withinTable(file + fileChange[i], rank)) {
-                squares.add(board.getSquare(file + fileChange[i], rank));
+            if (board.withinTable(column + columnChange[i], row)) {
+                squares.add(board.getSquare(column + columnChange[i], row));
             }
         }
 
@@ -59,13 +59,13 @@ public class Pawn extends Piece {
     @Override
     public List<Square> possibleMoves(ChessBoard board) {
         List<Square> moves = new ArrayList<>();
-        int newRank = location.getRank() + owner.getDirection();
+        int newrow = location.getrow() + owner.getDirection();
 
-        addSquareIfWithinTableAndEmpty(board, newRank, moves);
+        addSquareIfWithinTableAndEmpty(board, newrow, moves);
 
         if (firstMovement()) {
-            newRank += owner.getDirection();
-            addSquareIfWithinTableAndEmpty(board, newRank, moves);
+            newrow += owner.getDirection();
+            addSquareIfWithinTableAndEmpty(board, newrow, moves);
         }
 
         addPossibilitiesToTakeOpposingPieces(board, moves);
@@ -79,10 +79,10 @@ public class Pawn extends Piece {
                 .forEach(i -> moves.add(i));
     }
 
-    private void addSquareIfWithinTableAndEmpty(ChessBoard board, int newRank, List<Square> moves) {
+    private void addSquareIfWithinTableAndEmpty(ChessBoard board, int newrow, List<Square> moves) {
         Square target;
-        if (board.withinTable(location.getFile(), newRank)) {
-            target = board.getSquare(location.getFile(), newRank);
+        if (board.withinTable(location.getcolumn(), newrow)) {
+            target = board.getSquare(location.getcolumn(), newrow);
 
             if (!target.containsAPiece()) {
                 moves.add(target);
@@ -92,8 +92,8 @@ public class Pawn extends Piece {
 
     private boolean firstMovement() {
         if (owner == Player.WHITE) {
-            return location.getRank() == 1;
+            return location.getrow() == 1;
         }
-        return location.getRank() == 6;
+        return location.getrow() == 6;
     }
 }

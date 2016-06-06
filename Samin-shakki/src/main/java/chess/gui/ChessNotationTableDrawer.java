@@ -56,7 +56,7 @@ public class ChessNotationTableDrawer {
         if (piece.getClass() == Knight.class) {
             suffix = 'N';
         } else {
-            suffix = piece.getClass().toString().charAt(19);
+            suffix = piece.getClass().toString().charAt(25);
         }
 
         if (piece.getOwner() == Player.WHITE) {

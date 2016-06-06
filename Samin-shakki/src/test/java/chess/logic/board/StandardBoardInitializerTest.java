@@ -51,56 +51,56 @@ public class StandardBoardInitializerTest {
 
     @Test
     public void pawnsOnCorrectSquares() {
-        int[] files = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
-        int[] ranks = new int[]{1, 6};
+        int[] columns = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
+        int[] rows = new int[]{1, 6};
 
-        testThatSquaresHavePieceOfCorrectClass(ranks, files, new Pawn(board.getSquare(0, 1), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Pawn(board.getSquare(0, 1), Player.WHITE));
     }
 
     @Test
     public void rooksOnCorrectSquares() {
-        int[] files = new int[]{0, 7, 0, 7};
-        int[] ranks = new int[]{0, 0, 7, 7};
+        int[] columns = new int[]{0, 7, 0, 7};
+        int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(ranks, files, new Rook(board.getSquare(0, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Rook(board.getSquare(0, 0), Player.WHITE));
     }
 
     @Test
     public void knightsOnCorrectSquares() {
-        int[] files = new int[]{1, 6, 1, 6};
-        int[] ranks = new int[]{0, 0, 7, 7};
+        int[] columns = new int[]{1, 6, 1, 6};
+        int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(ranks, files, new Knight(board.getSquare(1, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Knight(board.getSquare(1, 0), Player.WHITE));
     }
 
     @Test
     public void bishopsOnCorrectSquares() {
-        int[] files = new int[]{2, 5, 2, 5};
-        int[] ranks = new int[]{0, 0, 7, 7};
+        int[] columns = new int[]{2, 5, 2, 5};
+        int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(ranks, files, new Bishop(board.getSquare(2, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Bishop(board.getSquare(2, 0), Player.WHITE));
     }
 
     @Test
     public void kingsOnCorrectSquares() {
-        int[] files = new int[]{4, 3};
-        int[] ranks = new int[]{0, 7};
+        int[] columns = new int[]{4, 3};
+        int[] rows = new int[]{0, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(ranks, files, new King(board.getSquare(4, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new King(board.getSquare(4, 0), Player.WHITE));
     }
 
     @Test
     public void queensOnCorrectSquares() {
-        int[] files = new int[]{3, 4};
-        int[] ranks = new int[]{0, 7};
+        int[] columns = new int[]{3, 4};
+        int[] rows = new int[]{0, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(ranks, files, new Queen(board.getSquare(3, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Queen(board.getSquare(3, 0), Player.WHITE));
     }
 
-    private void testThatSquaresHavePieceOfCorrectClass(int[] ranks, int[] files, Piece piece) {
-        for (int i = 0; i < ranks.length; i++) {
-            for (int j = 0; j < files.length; j++) {
-                assertEquals(piece.getClass(), board.getSquare(files[i], ranks[i]).getPiece().getClass());
+    private void testThatSquaresHavePieceOfCorrectClass(int[] rows, int[] columns, Piece piece) {
+        for (int i = 0; i < rows.length; i++) {
+            for (int j = 0; j < columns.length; j++) {
+                assertEquals(piece.getClass(), board.getSquare(columns[i], rows[i]).getPiece().getClass());
             }
         }
     }
@@ -120,7 +120,7 @@ public class StandardBoardInitializerTest {
         }
     }
 
-    public void testThatThereIsNoPiecesBetweenRanksTwoAndFive() {
+    public void testThatThereIsNoPiecesBetweenrowsTwoAndFive() {
         for (int i = 2; i < 6; i++) {
             for (int j = 0; j < 8; j++) {
                 assertFalse(board.getSquare(j, i).containsAPiece());

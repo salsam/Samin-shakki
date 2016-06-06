@@ -18,10 +18,10 @@ import static org.junit.Assert.*;
  */
 public class SquareTest {
     
-    public static void testMultipleSquares(int[] files, int[] ranks, List<Square> possibleMoves) {
+    public static void testMultipleSquares(int[] columns, int[] rows, List<Square> possibleMoves) {
         List<Square> realPossibilities = new ArrayList<>();
-        for (int i = 0; i < files.length; i++) {
-            realPossibilities.add(new Square(files[i], ranks[i]));
+        for (int i = 0; i < columns.length; i++) {
+            realPossibilities.add(new Square(columns[i], rows[i]));
         }
         for (Square sq : realPossibilities) {
             assertTrue(possibleMoves.contains(sq));
@@ -52,12 +52,12 @@ public class SquareTest {
     
     @Test
     public void returnCorrectColumn() {
-        assertEquals(2, square.getFile());
+        assertEquals(2, square.getcolumn());
     }
     
     @Test
     public void returnCorrectRow() {
-        assertEquals(3, square.getRank());
+        assertEquals(3, square.getrow());
     }
     
     @Test

@@ -66,9 +66,9 @@ public class ChessBoard {
     }
 
     /**
-     * Returns a Map with references from each Player to their King.
+     * Returns a map with references from each player to their king.
      *
-     * @return Map<Player, King> with references from each Player to their King.
+     * @return map with references from each player to their king.
      */
     public Map<Player, King> getKings() {
         return this.kings;
@@ -91,8 +91,8 @@ public class ChessBoard {
      * Returns a list containing all pieces currently on board and owned by the
      * player.
      *
-     * @param player Player whose Pieces you want.
-     * @return List<Piece> containing all pieces owned by the player.
+     * @param player player whose pieces you want.
+     * @return list containing all pieces owned by the player.
      */
     public List<Piece> getPieces(Player player) {
         if (player == Player.WHITE) {
@@ -105,26 +105,26 @@ public class ChessBoard {
     /**
      * Returns the Square at given location on board.
      *
-     * @param file Column of the Square you want.
-     * @param rank Row of the Square you want.
+     * @param column Column of the Square you want.
+     * @param row Row of the Square you want.
      * @return Square at given location.
      */
-    public Square getSquare(int file, int rank) {
-        return board[file][rank];
+    public Square getSquare(int column, int row) {
+        return board[column][row];
     }
 
     /**
      * Checks if the given location is on the chessboard.
      *
-     * @param file Column of the Square you want.
-     * @param rank Row of the Square you want.
+     * @param column Column of the Square you want.
+     * @param row Row of the Square you want.
      * @return true if given coordinates are within the table.
      */
-    public boolean withinTable(int file, int rank) {
-        if (file < 0 || file >= board.length) {
+    public boolean withinTable(int column, int row) {
+        if (column < 0 || column >= board.length) {
             return false;
         }
-        if (rank < 0 || rank >= board[0].length) {
+        if (row < 0 || row >= board[0].length) {
             return false;
         }
         return true;
@@ -154,7 +154,7 @@ public class ChessBoard {
      * Returns a set containing all Squares that player threatens.
      *
      * @param player Player
-     * @return Set<Square>
+     * @return set containing all squares player threatens
      */
     public Set<Square> threatenedSquares(Player player) {
         if (player == Player.WHITE) {

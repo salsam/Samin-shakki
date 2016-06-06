@@ -54,13 +54,13 @@ public class KingTest {
     }
 
     @Test
-    public void startingFileCorrect() {
-        assertEquals(2, king.location.getFile());
+    public void startingcolumnCorrect() {
+        assertEquals(2, king.location.getcolumn());
     }
 
     @Test
-    public void startingRankCorrect() {
-        assertEquals(3, king.location.getRank());
+    public void startingrowCorrect() {
+        assertEquals(3, king.location.getrow());
     }
 
     @Test
@@ -70,10 +70,10 @@ public class KingTest {
 
     @Test
     public void kingCanMoveToEveryNeighboringSquare() {
-        int[] files = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
-        int[] ranks = new int[]{4, 4, 4, 3, 3, 2, 2, 2};
+        int[] columns = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
+        int[] rows = new int[]{4, 4, 4, 3, 3, 2, 2, 2};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test

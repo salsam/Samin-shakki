@@ -10,21 +10,21 @@ import chess.logic.pieces.Piece;
  */
 public class Square {
 
-    private int file;
-    private int rank;
+    private int column;
+    private int row;
     private Piece piece;
 
-    public Square(int file, int rank) {
-        this.file = file;
-        this.rank = rank;
+    public Square(int column, int row) {
+        this.column = column;
+        this.row = row;
     }
 
-    public int getFile() {
-        return file;
+    public int getcolumn() {
+        return column;
     }
 
-    public int getRank() {
-        return rank;
+    public int getrow() {
+        return row;
     }
 
     public Piece getPiece() {
@@ -43,11 +43,11 @@ public class Square {
 
         Square square = (Square) obj;
 
-        if (this.file != square.getFile()) {
+        if (this.column != square.getcolumn()) {
             return false;
         }
 
-        if (this.rank != square.getRank()) {
+        if (this.row != square.getrow()) {
             return false;
         }
 
@@ -57,8 +57,8 @@ public class Square {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + this.file;
-        hash = 47 * hash + this.rank;
+        hash = 47 * hash + this.column;
+        hash = 47 * hash + this.row;
         return hash;
     }
 
@@ -74,7 +74,7 @@ public class Square {
 
     @Override
     public String toString() {
-        return "(" + file + "," + rank + ")";
+        return "(" + column + "," + row + ")";
     }
 
     /**
@@ -84,7 +84,7 @@ public class Square {
      */
     @Override
     public Square clone() {
-        Square clone = new Square(this.file, this.rank);
+        Square clone = new Square(this.column, this.row);
 
         if (containsAPiece()) {
             clone.setPiece(this.piece.clone(clone));

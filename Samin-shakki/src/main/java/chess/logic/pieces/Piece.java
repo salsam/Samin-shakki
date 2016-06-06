@@ -76,18 +76,18 @@ public abstract class Piece {
         possibilitiesToDirection(current, board, possibilities, -1, 0);
     }
 
-    protected List<Square> possibilities(int[] fileChange, int[] rankChange, ChessBoard board) {
+    protected List<Square> possibilities(int[] columnChange, int[] rowChange, ChessBoard board) {
         List<Square> possibilities = new ArrayList();
 
         for (int i = 0; i < 8; i++) {
-            int newFile = location.getFile() + fileChange[i];
-            int newRank = location.getRank() + rankChange[i];
+            int newcolumn = location.getcolumn() + columnChange[i];
+            int newrow = location.getrow() + rowChange[i];
 
-            if (!board.withinTable(newFile, newRank)) {
+            if (!board.withinTable(newcolumn, newrow)) {
                 continue;
             }
 
-            Square target = board.getSquare(newFile, newRank);
+            Square target = board.getSquare(newcolumn, newrow);
             possibilities.add(target);
         }
 
@@ -121,18 +121,18 @@ public abstract class Piece {
         this.location = target;
     }
 
-    protected void possibilitiesToDirection(Square current, ChessBoard board, List<Square> possibilities, int fileChange, int rankChange) {
-        int newFile = current.getFile() + fileChange;
-        int newRank = current.getRank() + rankChange;
+    protected void possibilitiesToDirection(Square current, ChessBoard board, List<Square> possibilities, int columnChange, int rowChange) {
+        int newcolumn = current.getcolumn() + columnChange;
+        int newrow = current.getrow() + rowChange;
 
-        while (board.withinTable(newFile, newRank)) {
-            Square target = board.getSquare(newFile, newRank);
+        while (board.withinTable(newcolumn, newrow)) {
+            Square target = board.getSquare(newcolumn, newrow);
             possibilities.add(target);
             if (target.containsAPiece()) {
                 break;
             }
-            newFile = target.getFile() + fileChange;
-            newRank = target.getRank() + rankChange;
+            newcolumn = target.getcolumn() + columnChange;
+            newrow = target.getrow() + rowChange;
         }
     }
 }

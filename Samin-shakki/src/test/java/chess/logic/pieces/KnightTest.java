@@ -59,10 +59,10 @@ public class KnightTest {
 
     @Test
     public void knightCanMoveToEveryPossibleSquare() {
-        int[] files = new int[]{2, 2, 3, 3, 5, 5, 6, 6};
-        int[] ranks = new int[]{3, 5, 2, 6, 2, 6, 3, 5};
+        int[] columns = new int[]{2, 2, 3, 3, 5, 5, 6, 6};
+        int[] rows = new int[]{3, 5, 2, 6, 2, 6, 3, 5};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test

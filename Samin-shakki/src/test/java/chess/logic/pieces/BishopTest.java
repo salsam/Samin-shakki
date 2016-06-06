@@ -60,34 +60,34 @@ public class BishopTest {
 
     @Test
     public void bishopCanMoveNorthEastToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{4, 5, 6};
-        int[] ranks = new int[]{5, 6, 7};
+        int[] columns = new int[]{4, 5, 6};
+        int[] rows = new int[]{5, 6, 7};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test
     public void bishopCanMoveNorthWestToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{2, 1, 0};
-        int[] ranks = new int[]{5, 6, 7};
+        int[] columns = new int[]{2, 1, 0};
+        int[] rows = new int[]{5, 6, 7};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test
     public void bishopCanMoveSouthEastToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{4, 5, 6, 7};
-        int[] ranks = new int[]{3, 2, 1, 0};
+        int[] columns = new int[]{4, 5, 6, 7};
+        int[] rows = new int[]{3, 2, 1, 0};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test
     public void bishopCanMoveSouthWestToEveryPossibleSquareOnBoard() {
-        int[] files = new int[]{2, 1, 0};
-        int[] ranks = new int[]{3, 2, 1};
+        int[] columns = new int[]{2, 1, 0};
+        int[] rows = new int[]{3, 2, 1};
 
-        SquareTest.testMultipleSquares(files, ranks, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
     }
 
     @Test

@@ -26,6 +26,7 @@ public class Game {
     private Scanner reader;
     private ChessNotationTableDrawer graphics;
     private boolean cancelled;
+    private legalityChecker checker;
 
     public Game(ChessBoardInitializer init) {
         this.board = new ChessBoard();
@@ -34,18 +35,18 @@ public class Game {
         continues = true;
         reader = new Scanner(System.in);
         graphics = new ChessNotationTableDrawer();
+        checker = new legalityChecker(board);
     }
 
+    /**
+     * Starts the game.
+     */
     public void start() {
         while (continues) {
             if (turn % 2 == 1) {
                 turn(Player.WHITE);
             } else {
                 turn(Player.BLACK);
-            }
-
-            if (turn == 100) {
-                continues = false;
             }
 
             turn++;
@@ -61,13 +62,23 @@ public class Game {
         board.updateThreatenedSquares(getOpponent(player));
         ChessBoard backUp = board.copy();
 
+        if (checkIfChecked(player)) {
+            if (checkMate(player)) {
+                System.out.println(getOpponent(player) + "won!");
+                continues = false;
+                return;
+            }
+        }
+
+        board.updateThreatenedSquares(getOpponent(player));
+
         System.out.println(player + "'s turn");
 
         while (true) {
             while (cancelled) {
                 cancelled = false;
+                checker.setBoard(board);
                 chosen = chooseAPieceToMove(player);
-                System.out.println(chosen.getClass().toString());
                 possibleMoves = chosen.possibleMoves(board);
                 target = chooseATargetSquareForMovement(possibleMoves);
 
@@ -94,42 +105,31 @@ public class Game {
 
     private Piece chooseAPieceToMove(Player player) {
         String input = "";
-        int file = -1;
-        int rank = -1;
+        int column = -1;
+        int row = -1;
 
         while (input.equals("")) {
-            System.out.println("Please write coordinates in the form fileRank of a piece to move");
+            System.out.println("Please write coordinates in the form columnrow of a piece to move");
             input = reader.nextLine();
 
-            if (!inputIsInAllowedForm(input, false)) {
+            if (!checker.inputIsInAllowedForm(input, false)) {
                 input = "";
                 continue;
             }
 
-            file = Character.getNumericValue(input.charAt(0));
-            rank = Character.getNumericValue(input.charAt(1));
-
-            input = checkThatPlayerOwnsTargetedPiece(file, rank, player, input);
+            input = checker.checkThatPlayerOwnsAPieceOnTheTargetSquare(player, input);
 
         }
-        return board.getBoard()[file][rank].getPiece();
-    }
-
-    private String checkThatPlayerOwnsTargetedPiece(int file, int rank, Player player, String input) {
-        if (board.getSquare(file, rank).getPiece().getOwner() != player) {
-            System.out.println("Please, choose one of your own pieces.");
-            input = "";
-        }
-        return input;
+        return board.getBoard()[column][row].getPiece();
     }
 
     private Square chooseATargetSquareForMovement(List<Square> possibilities) {
         String input = "";
-        int file = 0;
-        int rank = 0;
+        int column = 0;
+        int row = 0;
 
         while (input.equals("")) {
-            System.out.println("Please write coordinates in form FileRank of a square to move to or x to cancel");
+            System.out.println("Please write coordinates in form columnrow of a square to move to or x to cancel");
             input = reader.nextLine();
 
             if (input.equals("x")) {
@@ -137,53 +137,33 @@ public class Game {
                 break;
             }
 
-            if (!inputIsInAllowedForm(input, true)) {
+            if (!checker.inputIsInAllowedForm(input, true)) {
                 input = "";
                 continue;
             }
 
-            file = Character.getNumericValue(input.charAt(0));
-            rank = Character.getNumericValue(input.charAt(1));
-
-            input = checkThatMovementIsLegal(possibilities, file, rank, input);
-
-        }
-
-        return board.getSquare(file, rank);
-    }
-
-    private String checkThatMovementIsLegal(List<Square> possibilities, int file, int rank, String input) {
-        if (!possibilities.contains(board.getSquare(file, rank))) {
-            System.out.println("Please, choose one of the legal movements: ");
-            for (Square possibility : possibilities) {
-                System.out.print(possibility + " ");
+            input = checker.checkThatMovementIsLegal(possibilities, input);
+            if (input.equals("")) {
+                System.out.println("Please, choose one of the legal movements: ");
             }
-            input = "";
+
         }
-        return input;
+
+        return board.getSquare(column, row);
     }
 
-    private boolean inputIsInAllowedForm(String input, boolean squareCanBeEmpty) {
-        int file;
-        int rank;
-
-        if (input.length() != 2) {
-            return false;
-        }
-
-        try {
-            file = Character.getNumericValue(input.charAt(0));
-            rank = Character.getNumericValue(input.charAt(1));
-        } catch (Exception e) {
-            return false;
-        }
-
-        if (!board.withinTable(file, rank)) {
-            return false;
-        }
-
-        if (!squareCanBeEmpty && !board.getSquare(file, rank).containsAPiece()) {
-            return false;
+    private boolean checkMate(Player player) {
+        ChessBoard backUp = board.copy();
+        for (Piece piece : board.getPieces(player)) {
+            for (Square possibility : piece.possibleMoves(board)) {
+                piece.move(possibility, board);
+                board.updateThreatenedSquares(getOpponent(player));
+                if (!checkIfChecked(player)) {
+                    board = backUp.copy();
+                    return false;
+                }
+                board = backUp.copy();
+            }
         }
 
         return true;
