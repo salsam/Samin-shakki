@@ -7,7 +7,7 @@ package chess.logic.pieces;
  */
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Rook;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
 public class RookTest {
 
     private Rook rook;
-    private static ChessBoard board;
+    private static ChessBoardLogic board;
     private static ChessBoardInitializer init;
     private List<Square> possibleMoves;
 
@@ -36,7 +36,7 @@ public class RookTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
     }
 

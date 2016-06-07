@@ -1,6 +1,6 @@
 package chess.logic.game;
 
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import java.util.List;
@@ -11,11 +11,11 @@ import java.util.List;
  *
  * @author samisalo
  */
-public class legalityChecker {
+public class LegalityChecker {
 
-    private ChessBoard board;
+    private ChessBoardLogic board;
 
-    public legalityChecker(ChessBoard board) {
+    public LegalityChecker(ChessBoardLogic board) {
         this.board = board;
     }
 
@@ -24,7 +24,7 @@ public class legalityChecker {
      *
      * @param board board to be referenced from field board
      */
-    public void setBoard(ChessBoard board) {
+    public void setBoard(ChessBoardLogic board) {
         this.board = board;
     }
 
@@ -88,7 +88,7 @@ public class legalityChecker {
     }
 
     /**
-     * Checks whether player owns a piece on the square whose location which is
+     * Checks whether player owns a piece on the square of which location is
      * given as input. If player owns a piece on target square, returns input.
      * If not, then returns empty string "".
      *

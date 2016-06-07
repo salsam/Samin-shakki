@@ -5,12 +5,17 @@
  */
 package chess.logic.pieces;
 
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.board.Square;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -18,8 +23,18 @@ import java.util.ArrayList;
  */
 public class King extends Piece {
 
+    private BufferedImage picture;
+
     public King(Square square, Player owner) {
         super(square, owner);
+        try {
+            if (owner == Player.BLACK) {
+                picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackKing1.png"));
+            } else {
+                picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whiteKing1.png"));
+            }
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -40,7 +55,7 @@ public class King extends Piece {
      * @return list containing all squares this king threatens
      */
     @Override
-    public List<Square> threatenedSquares(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoardLogic board) {
         int[] columnChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
         int[] rowChange = new int[]{1, 1, 1, 0, 0, -1, -1, -1};
 
@@ -49,14 +64,14 @@ public class King extends Piece {
 
     /**
      * Returns a list containing all squares this king can legally move to. That
-     * means all neighbouring squares of king's location that aren't threatened
+     * means all neighboring squares of king's location that aren't threatened
      * by opponent or contain player's own piece.
      *
      * @param board chessboard on which movement happens
      * @return a list containing all squares this king can legally move to.
      */
     @Override
-    public List<Square> possibleMoves(ChessBoard board) {
+    public List<Square> possibleMoves(ChessBoardLogic board) {
         List<Square> moves = new ArrayList<>();
 
         threatenedSquares(board).stream()
@@ -68,7 +83,7 @@ public class King extends Piece {
         return moves;
     }
 
-    private boolean isThreatenedByOpponent(Square target, ChessBoard board) {
+    private boolean isThreatenedByOpponent(Square target, ChessBoardLogic board) {
         return board.threatenedSquares(getOpponent(owner)).contains(target);
     }
 

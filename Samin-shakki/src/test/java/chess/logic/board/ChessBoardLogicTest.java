@@ -13,18 +13,18 @@ import static org.junit.Assert.*;
  *
  * @author sami
  */
-public class ChessBoardTest {
+public class ChessBoardLogicTest {
 
-    private ChessBoard board;
+    private ChessBoardLogic board;
     private static ChessBoardInitializer init;
 
-    public ChessBoardTest() {
+    public ChessBoardLogicTest() {
         init = new StandardBoardInitializer();
     }
 
     @Before
     public void setUp() {
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
     }
 
     @Test
@@ -149,7 +149,7 @@ public class ChessBoardTest {
     @Test
     public void copyCreatesAnIdenticalChessBoard() {
         init.initialise(board);
-        ChessBoard copy = board.copy();
+        ChessBoardLogic copy = board.copy();
 
         assertTrue(Arrays.deepEquals(board.getBoard(), copy.getBoard()));
     }
@@ -157,7 +157,7 @@ public class ChessBoardTest {
     @Test
     public void copyCreatesANewChessBoard() {
         init.initialise(board);
-        ChessBoard copy = board.copy();
+        ChessBoardLogic copy = board.copy();
 
         Queen queen = new Queen(board.getSquare(4, 4), Player.BLACK);
         init.putPieceOnBoard(board, queen);

@@ -11,9 +11,9 @@ import chess.logic.pieces.Piece;
  */
 public abstract class ChessBoardInitializer {
 
-    public abstract void initialise(ChessBoard board);
+    public abstract void initialise(ChessBoardLogic board);
 
-    protected void clearBoard(ChessBoard board) {
+    protected void clearBoard(ChessBoardLogic board) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 board.getSquare(i, j).setPiece(null);
@@ -28,7 +28,7 @@ public abstract class ChessBoardInitializer {
      * @param board board Piece will be placed on.
      * @param piece piece Piece to be placed.
      */
-    public void putPieceOnBoard(ChessBoard board, Piece piece) {
+    public void putPieceOnBoard(ChessBoardLogic board, Piece piece) {
         if (board.withinTable(piece.getLocation().getcolumn(), piece.getLocation().getrow())) {
 
             board.getSquare(piece.getLocation().getcolumn(), piece.getLocation().getrow()).setPiece(piece);

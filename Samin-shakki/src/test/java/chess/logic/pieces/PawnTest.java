@@ -1,7 +1,7 @@
 package chess.logic.pieces;
 
 import chess.logic.pieces.Pawn;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class PawnTest {
 
     private Pawn pawn;
-    private ChessBoard board;
+    private ChessBoardLogic board;
     private ChessBoardInitializer init;
 
     public PawnTest() {
@@ -38,7 +38,7 @@ public class PawnTest {
     @Before
     public void setUp() {
         init = new EmptyBoardInitializer();
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
         init.initialise(board);
         pawn = new Pawn(board.getSquare(2, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);

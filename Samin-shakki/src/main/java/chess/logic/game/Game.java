@@ -1,12 +1,11 @@
 package chess.logic.game;
 
 import java.util.List;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
-import chess.gui.ChessBoardDrawer;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 import java.util.Map;
@@ -20,25 +19,20 @@ import java.util.Scanner;
  */
 public class Game {
 
-    private ChessBoard board;
+    private ChessBoardLogic board;
     private int turn;
     private boolean continues;
     private Scanner reader;
-    private ChessBoardDrawer graphics;
     private boolean cancelled;
-    private legalityChecker checker;
+    private LegalityChecker checker;
 
     public Game(ChessBoardInitializer init) {
-        this.board = new ChessBoard();
+        this.board = new ChessBoardLogic();
         init.initialise(board);
         turn = 1;
         continues = true;
         reader = new Scanner(System.in);
-        checker = new legalityChecker(board);
-    }
-
-    public void setChessBoardDrawer(ChessBoardDrawer drawer) {
-        graphics = drawer;
+        checker = new LegalityChecker(board);
     }
 
     /**
@@ -56,7 +50,7 @@ public class Game {
         }
     }
 
-    public ChessBoard getChessBoard() {
+    public ChessBoardLogic getChessBoard() {
         return this.board;
     }
 
@@ -64,10 +58,9 @@ public class Game {
         Piece chosen = null;
         Square target = null;
         List<Square> possibleMoves;
-        graphics.repaint();
         cancelled = true;
         board.updateThreatenedSquares(getOpponent(player));
-        ChessBoard backUp = board.copy();
+        ChessBoardLogic backUp = board.copy();
 
         if (checkIfChecked(player)) {
             if (checkMate(player)) {
@@ -112,8 +105,8 @@ public class Game {
 
     private Piece chooseAPieceToMove(Player player) {
         String input = "";
-        int column = -1;
-        int row = -1;
+        int column = 0;
+        int row = 0;
 
         while (input.equals("")) {
             System.out.println("Please write coordinates in the form columnrow of a piece to move");
@@ -160,7 +153,7 @@ public class Game {
     }
 
     private boolean checkMate(Player player) {
-        ChessBoard backUp = board.copy();
+        ChessBoardLogic backUp = board.copy();
         for (Piece piece : board.getPieces(player)) {
             for (Square possibility : piece.possibleMoves(board)) {
                 piece.move(possibility, board);

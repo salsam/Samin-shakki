@@ -3,7 +3,7 @@ package chess.logic.pieces;
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Queen;
 import chess.logic.pieces.Piece;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
 import chess.logic.board.StandardBoardInitializer;
@@ -22,7 +22,7 @@ public class PieceTest {
 
     private Piece piece;
     private Piece pawn;
-    private static ChessBoard board;
+    private static ChessBoardLogic board;
     private static ChessBoardInitializer init;
 
     public PieceTest() {
@@ -30,7 +30,7 @@ public class PieceTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
         init = new StandardBoardInitializer();
     }
 

@@ -2,7 +2,7 @@ package chess.logic.pieces;
 
 import chess.logic.pieces.King;
 import chess.logic.pieces.Queen;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -24,7 +24,7 @@ import org.junit.Test;
 public class KingTest {
 
     private King king;
-    private ChessBoard board;
+    private ChessBoardLogic board;
     private ChessBoardInitializer init;
     private List<Square> possibleMoves;
 
@@ -41,7 +41,7 @@ public class KingTest {
 
     @Before
     public void setUp() {
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
         init.initialise(board);
         king = new King(board.getSquare(2, 3), Player.WHITE);

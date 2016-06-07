@@ -3,7 +3,7 @@ package chess.logic.board;
 import chess.logic.board.Player;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.StandardBoardInitializer;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import chess.logic.pieces.Bishop;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Knight;
@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
  */
 public class StandardBoardInitializerTest {
 
-    private static ChessBoard board;
+    private static ChessBoardLogic board;
     private static ChessBoardInitializer init;
 
     public StandardBoardInitializerTest() {
@@ -32,7 +32,7 @@ public class StandardBoardInitializerTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
         init = new StandardBoardInitializer();
     }
 

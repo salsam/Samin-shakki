@@ -1,10 +1,13 @@
 package chess.logic.pieces;
 
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import java.util.ArrayList;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Pawn extends Piece {
 
@@ -13,6 +16,14 @@ public class Pawn extends Piece {
     public Pawn(Square square, Player owner) {
         super(square, owner);
         movedTwoSquaresLastTurn = false;
+        try {
+            if (owner == Player.BLACK) {
+                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackPawn1.png"));
+            } else {
+                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whitePawn1.png"));
+            }
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -27,7 +38,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void move(Square target, ChessBoard board) {
+    public void move(Square target, ChessBoardLogic board) {
         if (Math.abs(this.location.getrow() - target.getrow()) == 2) {
             movedTwoSquaresLastTurn = true;
         }
@@ -52,7 +63,7 @@ public class Pawn extends Piece {
      * @return list containing all squares this pawn threatens
      */
     @Override
-    public List<Square> threatenedSquares(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoardLogic board) {
         List<Square> squares = new ArrayList();
         int[] columnChange = new int[]{1, -1};
         int column = this.location.getcolumn();
@@ -70,7 +81,7 @@ public class Pawn extends Piece {
         return squares;
     }
 
-    private void enPassant(ChessBoard board, int column, int[] columnChange, int i, List<Square> squares) {
+    private void enPassant(ChessBoardLogic board, int column, int[] columnChange, int i, List<Square> squares) {
         Square target;
         if (board.withinTable(column + columnChange[i], this.location.getrow())) {
             target = board.getSquare(column + columnChange[i], this.location.getrow());
@@ -98,7 +109,7 @@ public class Pawn extends Piece {
      * @return a list containing all squares this pawn can legally move to.
      */
     @Override
-    public List<Square> possibleMoves(ChessBoard board) {
+    public List<Square> possibleMoves(ChessBoardLogic board) {
         List<Square> moves = new ArrayList<>();
         int newrow = location.getrow() + owner.getDirection();
 
@@ -114,13 +125,13 @@ public class Pawn extends Piece {
         return moves;
     }
 
-    private void addPossibilitiesToTakeOpposingPieces(ChessBoard board, List<Square> moves) {
+    private void addPossibilitiesToTakeOpposingPieces(ChessBoardLogic board, List<Square> moves) {
         threatenedSquares(board).stream().filter(i -> legalToMoveTo(i, board))
                 .filter(i -> i.containsAPiece())
                 .forEach(i -> moves.add(i));
     }
 
-    private void addSquareIfWithinTableAndEmpty(ChessBoard board, int newrow, List<Square> moves) {
+    private void addSquareIfWithinTableAndEmpty(ChessBoardLogic board, int newrow, List<Square> moves) {
         Square target;
         if (board.withinTable(location.getcolumn(), newrow)) {
             target = board.getSquare(location.getcolumn(), newrow);

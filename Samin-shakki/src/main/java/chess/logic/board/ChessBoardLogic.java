@@ -16,7 +16,7 @@ import java.util.Set;
  *
  * @author samisalo
  */
-public class ChessBoard {
+public class ChessBoardLogic {
 
     private Square[][] board;
     private List<Piece> whitePieces;
@@ -25,7 +25,7 @@ public class ChessBoard {
     private Set<Square> squaresThreatenedByWhite;
     private Map<Player, King> kings;
 
-    public ChessBoard() {
+    public ChessBoardLogic() {
         initializeBoard();
         this.blackPieces = new ArrayList<>();
         this.whitePieces = new ArrayList<>();
@@ -169,8 +169,8 @@ public class ChessBoard {
      *
      * @return a deep copy of this board.
      */
-    public ChessBoard copy() {
-        ChessBoard copy = new ChessBoard();
+    public ChessBoardLogic copy() {
+        ChessBoardLogic copy = new ChessBoardLogic();
         Square[][] copyBoard = copyBoard();
 
         copy.setBoard(copyBoard);

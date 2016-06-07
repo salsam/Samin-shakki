@@ -2,7 +2,7 @@ package chess.logic.pieces;
 
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Bishop;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.SquareTest;
@@ -24,7 +24,7 @@ import org.junit.Test;
 public class BishopTest {
 
     private Bishop bishop;
-    private static ChessBoard board;
+    private static ChessBoardLogic board;
     private static ChessBoardInitializer init;
     private List<Square> possibleMoves;
 
@@ -33,7 +33,7 @@ public class BishopTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
     }
 

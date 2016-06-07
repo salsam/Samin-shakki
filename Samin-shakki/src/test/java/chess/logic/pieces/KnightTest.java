@@ -1,7 +1,7 @@
 package chess.logic.pieces;
 
 import chess.logic.pieces.Knight;
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -23,7 +23,7 @@ import org.junit.Test;
 public class KnightTest {
 
     private Knight knight;
-    private ChessBoard board;
+    private ChessBoardLogic board;
     private ChessBoardInitializer init;
     private List<Square> possibleMoves;
 
@@ -40,7 +40,7 @@ public class KnightTest {
 
     @Before
     public void setUp() {
-        board = new ChessBoard();
+        board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
         init.initialise(board);
         knight = new Knight(board.getSquare(4, 4), Player.WHITE);

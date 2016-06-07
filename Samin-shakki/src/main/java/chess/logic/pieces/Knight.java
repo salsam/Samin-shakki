@@ -5,10 +5,14 @@
  */
 package chess.logic.pieces;
 
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -18,6 +22,14 @@ public class Knight extends Piece {
 
     public Knight(Square square, Player owner) {
         super(square, owner);
+        try {
+            if (owner == Player.BLACK) {
+                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackKnight1.png"));
+            } else {
+                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whiteKnight1.png"));
+            }
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -38,7 +50,7 @@ public class Knight extends Piece {
      * @return list containing all squares this knight threatens
      */
     @Override
-    public List<Square> threatenedSquares(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoardLogic board) {
         int[] rowChange = new int[]{-2, -2, -1, -1, 1, 1, 2, 2};
         int[] columnChange = new int[]{1, -1, 2, -2, 2, -2, 1, -1};
 

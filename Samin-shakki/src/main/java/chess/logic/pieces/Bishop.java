@@ -5,11 +5,14 @@
  */
 package chess.logic.pieces;
 
-import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  * This class is responsible of movement calculation of bishops.
@@ -20,6 +23,14 @@ public class Bishop extends Piece {
 
     public Bishop(Square square, Player owner) {
         super(square, owner);
+        try {
+            if (owner == Player.BLACK) {
+                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackBishop1.png"));
+            } else {
+                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whiteBishop1.png"));
+            }
+        } catch (IOException e) {
+        }
     }
 
     /**
@@ -40,7 +51,7 @@ public class Bishop extends Piece {
      * @return list containing all squares this bishop threatens
      */
     @Override
-    public List<Square> threatenedSquares(ChessBoard board) {
+    public List<Square> threatenedSquares(ChessBoardLogic board) {
         List<Square> possibilities = new ArrayList<>();
         addDiagonalPossibilities(location, board, possibilities);
 
