@@ -1,7 +1,5 @@
 
-import chess.gui.GameWindow;
-import chess.logic.board.StandardBoardInitializer;
-import chess.logic.game.Game;
+import chess.gui.MainFrame;
 import java.io.IOException;
 
 /**
@@ -11,7 +9,6 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Game game = new Game(new StandardBoardInitializer());
-        GameWindow window = new GameWindow(game);
+        MainFrame m = new MainFrame();
     }
 }

@@ -1,6 +1,7 @@
 package chess.gui;
 
 import chess.logic.game.Game;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import javax.swing.JFrame;
@@ -20,16 +21,17 @@ public class GameWindow extends JFrame {
         this.game = game;
         this.setPreferredSize(new Dimension(666, 666));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        initComponents();
+        initComponents(this.getContentPane());
         this.pack();
         this.setVisible(true);
     }
 
-    public void initComponents() {
-        JLabel text = new JLabel();
-        JPanel panel = new ChessBoard(game);
-        this.add(text);
-        this.add(panel);
+    private void initComponents(Container container) {
+        JLabel text = new JLabel("Aaaaa");
+        ChessBoard panel = new ChessBoard(game);
+        panel.addMouseListener(new ChessBoardListener(panel));
+        container.add(text);
+        container.add(panel);
     }
 
 }
