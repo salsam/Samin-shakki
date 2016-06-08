@@ -35,7 +35,7 @@ public class ChessBoard extends JPanel {
                     graphics.setColor(Color.DARK_GRAY);
                 }
                 graphics.fillRect(30 * i, 30 * j, 30, 30);
-
+                
                 if (board.getSquare(i, j).containsAPiece()) {
                     board.getSquare(i, j).getPiece().draw(graphics);
                 }
