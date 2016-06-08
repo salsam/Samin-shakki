@@ -12,7 +12,7 @@ public class ImageLoader {
 
     public static File getFile(String fileName) {
         ClassLoader classLoader = ImageLoader.class.getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());
+        File file = new File(classLoader.getSystemResource(fileName).getFile());
         return file;
     }
 

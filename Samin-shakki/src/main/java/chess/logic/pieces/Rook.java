@@ -5,15 +5,12 @@
  */
 package chess.logic.pieces;
 
+import chess.gui.IO.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import java.awt.Graphics;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -23,13 +20,11 @@ public class Rook extends Piece {
 
     public Rook(Square square, Player owner) {
         super(square, owner);
-        try {
-            if (owner == Player.BLACK) {
-                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackRook1.png"));
-            } else {
-                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whiteRook1.png"));
-            }
-        } catch (IOException e) {
+
+        if (owner == Player.BLACK) {
+            this.picture = ImageLoader.getImage("blackRook1.png");
+        } else {
+            this.picture = ImageLoader.getImage("whiteRook1.png");
         }
     }
 

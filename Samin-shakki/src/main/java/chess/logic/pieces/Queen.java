@@ -5,14 +5,12 @@
  */
 package chess.logic.pieces;
 
+import chess.gui.IO.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -22,13 +20,11 @@ public class Queen extends Piece {
 
     public Queen(Square square, Player owner) {
         super(square, owner);
-        try {
-            if (owner == Player.BLACK) {
-                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackQueen1.png"));
-            } else {
-                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whiteQueen1.png"));
-            }
-        } catch (IOException e) {
+
+        if (owner == Player.BLACK) {
+            this.picture = ImageLoader.getImage("blackQueen1.png");
+        } else {
+            this.picture = ImageLoader.getImage("whiteQueen1.png");
         }
     }
 

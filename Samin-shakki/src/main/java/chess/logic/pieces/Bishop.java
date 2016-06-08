@@ -21,6 +21,7 @@ public class Bishop extends Piece {
 
     public Bishop(Square square, Player owner) {
         super(square, owner);
+
         if (owner == Player.BLACK) {
             this.picture = ImageLoader.getImage("blackBishop1.png");
         } else {

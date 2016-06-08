@@ -1,13 +1,11 @@
 package chess.logic.pieces;
 
+import chess.gui.IO.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
 import java.util.ArrayList;
 import java.util.List;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class Pawn extends Piece {
 
@@ -16,13 +14,11 @@ public class Pawn extends Piece {
     public Pawn(Square square, Player owner) {
         super(square, owner);
         movedTwoSquaresLastTurn = false;
-        try {
-            if (owner == Player.BLACK) {
-                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackPawn1.png"));
-            } else {
-                this.picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whitePawn1.png"));
-            }
-        } catch (IOException e) {
+
+        if (owner == Player.BLACK) {
+            this.picture = ImageLoader.getImage("blackPawn1.png");
+        } else {
+            this.picture = ImageLoader.getImage("whitePawn1.png");
         }
     }
 

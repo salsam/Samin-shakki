@@ -5,17 +5,13 @@
  */
 package chess.logic.pieces;
 
+import chess.gui.IO.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
 import java.util.List;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.board.Square;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -23,17 +19,13 @@ import javax.imageio.ImageIO;
  */
 public class King extends Piece {
 
-    private BufferedImage picture;
-
     public King(Square square, Player owner) {
         super(square, owner);
-        try {
-            if (owner == Player.BLACK) {
-                picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/blackKing1.png"));
-            } else {
-                picture = ImageIO.read(new File("/home/sami/Samin-shakki/Samin-shakki/src/main/resources/whiteKing1.png"));
-            }
-        } catch (IOException e) {
+        
+        if (owner == Player.BLACK) {
+            picture = ImageLoader.getImage("blackKing1.png");
+        } else {
+            picture = ImageLoader.getImage("whiteKing1.png");
         }
     }
 
