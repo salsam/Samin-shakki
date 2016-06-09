@@ -1,5 +1,6 @@
 package chess.logic.board;
 
+import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 
 /**
@@ -11,7 +12,34 @@ import chess.logic.pieces.Piece;
  */
 public abstract class ChessBoardInitializer {
 
+    /**
+     * Adds the piece on target square to list of pieces its owner owns. Also
+     * adds a reference to Map Kings if the piece is of King class.
+     *
+     * @param target Square
+     * @param chessBoardLogic ChessBoardLogic to which piece will be added
+     */
+    public static void addPieceToOwner(Square target, ChessBoardLogic chessBoardLogic) {
+        if (target.containsAPiece()) {
+            Piece piece = target.getPiece();
+            if (piece.getClass() == King.class) {
+                chessBoardLogic.getKings().put(piece.getOwner(), (King) piece);
+            }
+            chessBoardLogic.getPieces(piece.getOwner()).add(piece);
+        }
+    }
+
     public abstract void initialise(ChessBoardLogic board);
+
+    /**
+     * Removes target piece from its owner's owned pieces list.
+     *
+     * @param piece The piece you want to remove.
+     * @param chessBoardLogic ChessBoardLogic where piece will be removed from
+     */
+    public static void removePieceFromOwner(Piece piece, ChessBoardLogic chessBoardLogic) {
+        chessBoardLogic.getPieces(piece.getOwner()).remove(piece);
+    }
 
     protected void clearBoard(ChessBoardLogic board) {
         for (int i = 0; i < 8; i++) {
@@ -28,11 +56,11 @@ public abstract class ChessBoardInitializer {
      * @param board board Piece will be placed on.
      * @param piece piece Piece to be placed.
      */
-    public void putPieceOnBoard(ChessBoardLogic board, Piece piece) {
+    public static void putPieceOnBoard(ChessBoardLogic board, Piece piece) {
         if (board.withinTable(piece.getLocation().getcolumn(), piece.getLocation().getrow())) {
 
             board.getSquare(piece.getLocation().getcolumn(), piece.getLocation().getrow()).setPiece(piece);
-            board.addPieceToOwner(piece.getLocation());
+            addPieceToOwner(piece.getLocation(), board);
         }
     }
 }

@@ -1,6 +1,6 @@
 package chess.logic.pieces;
 
-import chess.gui.IO.ImageLoader;
+import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,11 +64,10 @@ public class Pawn extends Piece {
         int[] columnChange = new int[]{1, -1};
         int column = this.location.getcolumn();
         int row = this.location.getrow() + this.owner.getDirection();
-        Square target;
 
         for (int i = 0; i < 2; i++) {
             if (board.withinTable(column + columnChange[i], row)) {
-                target = board.getSquare(column + columnChange[i], row);
+                Square target = board.getSquare(column + columnChange[i], row);
                 squares.add(target);
             }
             enPassant(board, column, columnChange, i, squares);
@@ -82,15 +81,25 @@ public class Pawn extends Piece {
         if (board.withinTable(column + columnChange[i], this.location.getrow())) {
             target = board.getSquare(column + columnChange[i], this.location.getrow());
 
-            if (target.containsAPiece() && this.owner != target.getPiece().getOwner()) {
-                if (target.getPiece().getClass() == Pawn.class) {
-                    Pawn opposingPawn = (Pawn) target.getPiece();
-                    if (opposingPawn.getMovedTwoSquaresLastTurn()) {
-                        squares.add(target);
-                    }
+            if (targetContainsAnEnemyPawn(target)) {
+                Pawn opposingPawn = (Pawn) target.getPiece();
+                if (opposingPawn.getMovedTwoSquaresLastTurn()) {
+                    squares.add(target);
                 }
             }
         }
+    }
+
+    private boolean targetContainsAnEnemyPawn(Square target) {
+        if (!target.containsAPiece()) {
+            return false;
+        }
+
+        if (target.getPiece().getOwner() == owner) {
+            return false;
+        }
+
+        return target.getPiece().getClass() == Pawn.class;
     }
 
     /**

@@ -31,7 +31,7 @@ public class QueenTest {
         board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
     }
-    
+
     @Before
     public void setUp() {
         init.initialise(board);

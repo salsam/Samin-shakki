@@ -1,5 +1,6 @@
 package chess.logic.board;
 
+import static chess.logic.board.ChessBoardInitializer.addPieceToOwner;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 import java.util.ArrayList;
@@ -35,11 +36,10 @@ public class ChessBoardLogic {
     }
 
     /**
-     * Initialises a new 8x8 board.
+     * Initializes a new 8x8 board.
      */
     private void initializeBoard() {
         board = new Square[8][8];
-
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 this.board[i][j] = new Square(i, j);
@@ -124,10 +124,7 @@ public class ChessBoardLogic {
         if (column < 0 || column >= board.length) {
             return false;
         }
-        if (row < 0 || row >= board[0].length) {
-            return false;
-        }
-        return true;
+        return !(row < 0 || row >= board[0].length);
     }
 
     private Set<Square> squaresThreatenedByBlack() {
@@ -195,40 +192,8 @@ public class ChessBoardLogic {
 
         for (int i = 0; i < this.board.length; i++) {
             for (int j = 0; j < this.board[0].length; j++) {
-                addPieceToOwner(board[i][j]);
+                addPieceToOwner(board[i][j], this);
             }
         }
     }
-
-    /**
-     * Adds the piece on target square to list of pieces its owner owns. Also
-     * adds a reference to Map Kings if the piece is of King class.
-     *
-     * @param target Square
-     */
-    public void addPieceToOwner(Square target) {
-        if (target.containsAPiece()) {
-            Piece piece = target.getPiece();
-
-            if (piece.getClass() == King.class) {
-                kings.put(piece.getOwner(), (King) piece);
-            }
-
-            getPieces(piece.getOwner()).add(piece);
-        }
-    }
-
-    /**
-     * Removes target piece from its owner's owned pieces list.
-     *
-     * @param piece The piece you want to remove.
-     */
-    public void removePieceFromOwner(Piece piece) {
-        if (piece.getOwner() == Player.WHITE) {
-            whitePieces.remove(piece);
-        } else {
-            blackPieces.remove(piece);
-        }
-    }
-
 }

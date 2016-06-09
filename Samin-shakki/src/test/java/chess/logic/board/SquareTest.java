@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  * @author sami
  */
 public class SquareTest {
-    
+
     public static void testMultipleSquares(int[] columns, int[] rows, Set<Square> possibleMoves) {
         Set<Square> realPossibilities = new HashSet<>();
         for (int i = 0; i < columns.length; i++) {
@@ -25,81 +25,81 @@ public class SquareTest {
             assertTrue(possibleMoves.contains(sq));
         }
     }
-    
+
     private Square square;
-    
+
     public SquareTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         square = new Square(2, 3);
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void returnCorrectColumn() {
         assertEquals(2, square.getcolumn());
     }
-    
+
     @Test
     public void returnCorrectRow() {
         assertEquals(3, square.getrow());
     }
-    
+
     @Test
     public void pieceNullIfNoPieceOnThisSquare() {
         assertEquals(null, square.getPiece());
     }
-    
+
     @Test
     public void pieceCorrectIfNotNull() {
         Pawn pawn = new Pawn(new Square(2, 1), Player.WHITE);
         square.setPiece(pawn);
         assertEquals(pawn, square.getPiece());
     }
-    
+
     @Test
     public void twoSquaresAreEqualIfSameColumnAndRow() {
         assertTrue(square.equals(new Square(2, 3)));
     }
-    
+
     @Test
     public void twoSquaresAreNotEqualIfDifferentColumn() {
         assertFalse(square.equals(new Square(3, 3)));
     }
-    
+
     @Test
     public void twoSquaresAreNotEqualIfDifferentRow() {
         assertFalse(square.equals(new Square(2, 2)));
     }
-    
+
     @Test
     public void intIsNotASquare() {
         assertFalse(square.equals(1));
     }
-    
+
     @Test
     public void toStringIsInCorrectFormat() {
         assertEquals("(2,3)", square.toString());
     }
-    
+
     @Test
     public void cloneReturnsEqualsSquare() {
         assertEquals(square, square.clone());
     }
-    
+
     @Test
     public void cloneDoesNotReferToSameSquare() {
         Square clone = square.clone();

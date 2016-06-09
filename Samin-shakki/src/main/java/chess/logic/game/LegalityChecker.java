@@ -2,8 +2,7 @@ package chess.logic.game;
 
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
-import chess.logic.board.Square;
-import java.util.Set;
+import chess.logic.pieces.Piece;
 
 /**
  * This class provides methods to check if playerOwns targeted piece, whether
@@ -65,29 +64,6 @@ public class LegalityChecker {
     }
 
     /**
-     * Checks whether input corresponds a square that chosen piece can legally
-     * move to. If it's true, returns input as it was given. Otherwise returns
-     * empty string "".
-     *
-     * @param possibilities squares chosen piece can legally move to.
-     * @param input input that player gave.
-     * @return input if input corresponds a possible square. Else empty string
-     * "".
-     */
-    public String checkThatMovementIsLegal(Set<Square> possibilities, String input) {
-        int column = Character.getNumericValue(input.charAt(0));
-        int row = Character.getNumericValue(input.charAt(1));
-
-        if (!possibilities.contains(board.getSquare(column, row))) {
-            for (Square possibility : possibilities) {
-                System.out.print(possibility + " ");
-            }
-            input = "";
-        }
-        return input;
-    }
-
-    /**
      * Checks whether player owns a piece on the square of which location is
      * given as input. If player owns a piece on target square, returns input.
      * If not, then returns empty string "".
@@ -98,7 +74,7 @@ public class LegalityChecker {
      * @return input if player does own a piece on target square, else empty
      * string
      */
-    public Boolean checkThatPlayerOwnsAPieceOnTheTargetSquare(Player player, int x, int y) {
+    public Boolean checkPlayerOwnsAPieceOnTheTargetSquare(Player player, int x, int y) {
 
         if (!inputIsInAllowedForm(x + "" + y, false)) {
             return false;
@@ -109,5 +85,20 @@ public class LegalityChecker {
             return false;
         }
         return true;
+    }
+    
+        /**
+     * Checks whether input corresponds a square that chosen piece can legally
+     * move to. If it's true, returns input as it was given. Otherwise returns
+     * empty string "".
+     *
+     * @param piece piece chosen for movement.
+     * @param column column of target square.
+     * @param row row of target square.
+     * @return input if input corresponds a possible square. Else empty string
+     * "".
+     */
+    public boolean checkThatMovementIsLegal(Piece piece, int column, int row) {
+        return piece.possibleMoves(board).contains(board.getSquare(column, row));
     }
 }

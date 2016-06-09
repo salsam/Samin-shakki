@@ -1,0 +1,6 @@
+
+chess.gui
+chess.logic.board
+chess.logic.game
+chess.logic.pieces
+chess.ui

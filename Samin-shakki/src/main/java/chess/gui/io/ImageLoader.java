@@ -1,4 +1,4 @@
-package chess.gui.IO;
+package chess.gui.io;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

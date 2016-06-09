@@ -1,6 +1,5 @@
 package chess.logic.game;
 
-import java.util.List;
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
@@ -44,10 +43,6 @@ public class Game {
         }
     }
 
-    public int getTurn() {
-        return turn;
-    }
-
     public ChessBoardLogic getChessBoard() {
         return this.board;
     }
@@ -57,13 +52,13 @@ public class Game {
     }
 
     public void nextTurn() {
+        board.updateThreatenedSquares(whoseTurn());
         turn++;
     }
 
-    public void turn(Player player) {
+    private void turn(Player player) {
         Piece chosen = null;
         Square target = null;
-        Set<Square> possibleMoves;
         cancelled = true;
         board.updateThreatenedSquares(getOpponent(player));
         ChessBoardLogic backUp = board.copy();
@@ -85,8 +80,7 @@ public class Game {
                 cancelled = false;
                 checker.setBoard(board);
                 chosen = chooseAPieceToMove(player);
-                possibleMoves = chosen.possibleMoves(board);
-                target = chooseATargetSquareForMovement(possibleMoves);
+                target = chooseATargetSquareForMovement(chosen);
 
             }
 
@@ -104,8 +98,9 @@ public class Game {
         }
     }
 
-    private boolean checkIfChecked(Player player) {
+    public boolean checkIfChecked(Player player) {
         Map<Player, King> kings = board.getKings();
+        board.updateThreatenedSquares(getOpponent(player));
         return board.threatenedSquares(getOpponent(player)).contains(kings.get(player).getLocation());
     }
 
@@ -126,7 +121,7 @@ public class Game {
             int x = Character.getNumericValue(input.charAt(0));
             int y = Character.getNumericValue(input.charAt(1));
 
-            if (!checker.checkThatPlayerOwnsAPieceOnTheTargetSquare(player, x, y)) {
+            if (!checkThatPlayerOwnsAPieceOnTargetSquare(player, x, y, input)) {
                 input = "";
             }
 
@@ -134,7 +129,11 @@ public class Game {
         return board.getBoard()[column][row].getPiece();
     }
 
-    private Square chooseATargetSquareForMovement(Set<Square> possibilities) {
+    public boolean checkThatPlayerOwnsAPieceOnTargetSquare(Player player, int x, int y, String input) {
+        return checker.checkPlayerOwnsAPieceOnTheTargetSquare(player, x, y);
+    }
+
+    private Square chooseATargetSquareForMovement(Piece chosen) {
         String input = "";
         int column = 0;
         int row = 0;
@@ -153,7 +152,13 @@ public class Game {
                 continue;
             }
 
-            input = checker.checkThatMovementIsLegal(possibilities, input);
+            int x = Character.getNumericValue(input.charAt(0));
+            int y = Character.getNumericValue(input.charAt(1));
+
+            if (!checker.checkThatMovementIsLegal(chosen, x, y)) {
+                input = "";
+            }
+
             if (input.equals("")) {
                 System.out.println("Please, choose one of the legal movements: ");
             }
@@ -163,7 +168,7 @@ public class Game {
         return board.getSquare(column, row);
     }
 
-    private boolean checkMate(Player player) {
+    public boolean checkMate(Player player) {
         ChessBoardLogic backUp = board.copy();
         for (Piece piece : board.getPieces(player)) {
             for (Square possibility : piece.possibleMoves(board)) {
@@ -179,4 +184,5 @@ public class Game {
 
         return true;
     }
+
 }

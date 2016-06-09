@@ -12,13 +12,13 @@ import javax.swing.WindowConstants;
  * @author sami
  */
 public class GraphicalUserInterface implements Runnable {
-    
+
     private JFrame controller;
     private Game game;
-    
+
     public GraphicalUserInterface() {
     }
-    
+
     @Override
     public void run() {
         controller = new JFrame();
@@ -28,16 +28,16 @@ public class GraphicalUserInterface implements Runnable {
         createComponents(controller.getContentPane());
         controller.pack();
         controller.setVisible(true);
-        
+
     }
-    
+
     private void createComponents(Container container) {
         ChessBoardDrawer window = new ChessBoardDrawer(game);
         window.addMouseListener(new ChessBoardListener(window));
         container.add(window);
-        
+
     }
-    
+
     public JFrame getMainFrame() {
         return controller;
     }

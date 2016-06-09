@@ -1,5 +1,6 @@
 package chess.logic.pieces;
 
+import static chess.logic.board.ChessBoardInitializer.removePieceFromOwner;
 import chess.logic.board.ChessBoardLogic;
 import java.util.Set;
 import chess.logic.board.Player;
@@ -129,7 +130,7 @@ public abstract class Piece {
         this.location.setPiece(null);
 
         if (target.containsAPiece()) {
-            board.removePieceFromOwner(target.getPiece());
+            removePieceFromOwner(target.getPiece(), board);
         }
         target.setPiece(this);
 

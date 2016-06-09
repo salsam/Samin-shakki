@@ -36,7 +36,7 @@ public class RookTest {
         board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
     }
-    
+
     @Before
     public void setUp() {
         init.initialise(board);

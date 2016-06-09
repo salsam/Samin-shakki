@@ -5,7 +5,7 @@
  */
 package chess.logic.pieces;
 
-import chess.gui.IO.ImageLoader;
+import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
 import java.util.Set;
 import chess.logic.board.Player;
@@ -19,7 +19,7 @@ public class Knight extends Piece {
 
     public Knight(Square square, Player owner) {
         super(square, owner);
-        
+
         if (owner == Player.BLACK) {
             this.picture = ImageLoader.getImage("blackKnight1.png");
         } else {

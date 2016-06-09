@@ -18,289 +18,393 @@ specific language governing permissions and limitations
 under the License.
 -->
 <rss version="0.91">
-  <channel>
-    <title>saminShakki - Checkstyle report</title>
-    <link>${project.url}</link>
-    <description>saminShakki - Checkstyle report</description>
-    <language>en-us</language>
-    <copyright>&#169;2016</copyright>
-    <item>
-      <title>File: 18,
-             Errors: 0,
-             Warnings: 0,
-             Infos: 0
-      </title>
+    <channel>
+        <title>saminShakki - Checkstyle report</title>
+        <link>${project.url}</link>
+        <description>saminShakki - Checkstyle report</description>
+        <language>en-us</language>
+        <copyright>&#169;2016</copyright>
+        <item>
+            <title>File: 25,
+                Errors: 1,
+                Warnings: 0,
+                Infos: 0
+            </title>
             <link>${project.url}/checkstyle.html</link>
-      <description>
-        <p>Click <a href="${project.url}/checkstyle.html">here</a> for the full Checkstyle report.</p>
+            <description>
+                <p>Click <a href="${project.url}/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
-        <table summary="Files" boder="1">
-          <thead>
-            <tr>
-              <th>Files</th>
-              <th style="width:30px;"><abbr title="Info">I</abbr></th>
-              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
-              <th style="width:30px;"><abbr title="Error">E</abbr></th>
-            </tr>
-          </thead>
-          <tbody>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.gui.ChessNotationTableDrawer.java">chess/gui/ChessNotationTableDrawer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Knight.java">chess/logic/pieces/Knight.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.board.ChessBoard.java">chess/logic/board/ChessBoard.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.board.StandardBoardInitializer.java">chess/logic/board/StandardBoardInitializer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.board.EmptyBoardInitializer.java">chess/logic/board/EmptyBoardInitializer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.board.ChessBoardInitializer.java">chess/logic/board/ChessBoardInitializer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Queen.java">chess/logic/pieces/Queen.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Bishop.java">chess/logic/pieces/Bishop.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.board.Square.java">chess/logic/board/Square.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.board.Player.java">chess/logic/board/Player.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.game.Game.java">chess/logic/game/Game.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.gui.GraphicalUserInterface.java">chess/gui/GraphicalUserInterface.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Pawn.java">chess/logic/pieces/Pawn.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#Main.java">Main.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.King.java">chess/logic/pieces/King.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.ui.UserInterface.java">chess/ui/UserInterface.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Rook.java">chess/logic/pieces/Rook.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.Piece.java">chess/logic/pieces/Piece.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                      </tbody>
-        </table>
+                <table summary="Files" boder="1">
+                    <thead>
+                        <tr>
+                            <th>Files</th>
+                            <th style="width:30px;">
+                                <abbr title="Info">I</abbr>
+                            </th>
+                            <th style="width:30px;">
+                                <abbr title="Warning">W</abbr>
+                            </th>
+                            <th style="width:30px;">
+                                <abbr title="Error">E</abbr>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.ChessNotationTableDrawer.java">chess/gui/ChessNotationTableDrawer.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.pieces.Knight.java">chess/logic/pieces/Knight.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.board.ChessBoardInitializer.java">chess/logic/board/ChessBoardInitializer.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.pieces.Bishop.java">chess/logic/pieces/Bishop.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.GameStarter.java">chess/gui/GameStarter.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.board.Player.java">chess/logic/board/Player.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.ChessBoardListener.java">chess/gui/ChessBoardListener.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.pieces.Pawn.java">chess/logic/pieces/Pawn.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#Main.java">Main.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.pieces.King.java">chess/logic/pieces/King.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.pieces.Piece.java">chess/logic/pieces/Piece.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.io.ImageLoader.java">chess/gui/io/ImageLoader.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.MainFrame.java">chess/gui/MainFrame.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.game.LegalityChecker.java">chess/logic/game/LegalityChecker.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.ChessBoardDrawer.java">chess/gui/ChessBoardDrawer.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.board.ChessBoardLogic.java">chess/logic/board/ChessBoardLogic.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                1
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.board.StandardBoardInitializer.java">chess/logic/board/StandardBoardInitializer.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.board.EmptyBoardInitializer.java">chess/logic/board/EmptyBoardInitializer.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.pieces.Queen.java">chess/logic/pieces/Queen.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.GameWindow.java">chess/gui/GameWindow.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.board.Square.java">chess/logic/board/Square.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.game.Game.java">chess/logic/game/Game.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.gui.GraphicalUserInterface.java">chess/gui/GraphicalUserInterface.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.ui.UserInterface.java">chess/ui/UserInterface.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="${project.url}/checkstyle.html#chess.logic.pieces.Rook.java">chess/logic/pieces/Rook.java</a>
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                0
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
         
-      </description>
-    </item>
-  </channel>
+            </description>
+        </item>
+    </channel>
 </rss>
 

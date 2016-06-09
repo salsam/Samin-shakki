@@ -5,7 +5,7 @@
  */
 package chess.logic.pieces;
 
-import chess.gui.IO.ImageLoader;
+import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
 import java.util.Set;
 import chess.logic.board.Player;

@@ -5,10 +5,12 @@ import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
+import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.SquareTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +34,7 @@ public class KingTest {
         init = new EmptyBoardInitializer();
         init.initialise(board);
         king = new King(board.getSquare(2, 3), Player.WHITE);
-        init.putPieceOnBoard(board, king);
+        putPieceOnBoard(board, king);
         possibleMoves = king.possibleMoves(board);
     }
 
@@ -63,7 +65,7 @@ public class KingTest {
     public void kingCannotMoveOutOfBoard() {
         init.initialise(board);
         king = new King(board.getSquare(0, 0), Player.WHITE);
-        init.putPieceOnBoard(board, king);
+        putPieceOnBoard(board, king);
         possibleMoves = king.possibleMoves(board);
 
         assertFalse(possibleMoves.contains(new Square(-1, 0)));
@@ -73,14 +75,20 @@ public class KingTest {
     @Test
     public void kingCannotMoveToThreatenedSquare() {
         init.initialise(board);
-        init.putPieceOnBoard(board, king);
+        putPieceOnBoard(board, king);
         Queen q = new Queen(board.getSquare(3, 5), Player.BLACK);
-        init.putPieceOnBoard(board, q);
+        putPieceOnBoard(board, q);
         board.updateThreatenedSquares(Player.BLACK);
         possibleMoves = king.possibleMoves(board);
 
         q.threatenedSquares(board).stream().forEach(i -> {
             assertFalse(possibleMoves.contains(i));
         });
+    }
+
+    @Test
+    public void kingCanTakeOpposingUnprotectedQueen() {
+        putPieceOnBoard(board, new Queen(board.getSquare(2, 4), Player.BLACK));
+        assertTrue(king.possibleMoves(board).contains(board.getSquare(2, 4)));
     }
 }

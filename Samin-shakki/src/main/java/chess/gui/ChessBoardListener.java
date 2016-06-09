@@ -1,6 +1,7 @@
 package chess.gui;
 
 import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.game.Game;
 import chess.logic.game.LegalityChecker;
@@ -26,15 +27,23 @@ public class ChessBoardListener implements MouseListener {
         int y = (e.getY()) / 30;
         Game game = board.getGame();
         ChessBoardLogic cbl = game.getChessBoard();
+        ChessBoardLogic backUp = cbl.copy();
         LegalityChecker checker = game.getChecker();
+        Player player = game.whoseTurn();
 
         if (cbl.withinTable(x, y)) {
             if (board.getChosen() != null && board.getPossibilities().contains(new Square(x, y))) {
                 board.getChosen().move(cbl.getSquare(x, y), cbl);
+
+                if (game.checkIfChecked(player)) {
+                    cbl = backUp;
+                    return;
+                }
+
                 board.setChosen(null);
                 board.setPossibilities(null);
                 game.nextTurn();
-            } else if (checker.checkThatPlayerOwnsAPieceOnTheTargetSquare(game.whoseTurn(), x, y)) {
+            } else if (checker.checkPlayerOwnsAPieceOnTheTargetSquare(game.whoseTurn(), x, y)) {
                 Piece piece = cbl.getSquare(x, y).getPiece();
                 board.setChosen(piece);
             }
