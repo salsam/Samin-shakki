@@ -3,7 +3,7 @@ package chess.logic.game;
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import java.util.List;
+import java.util.Set;
 
 /**
  * This class provides methods to check if playerOwns targeted piece, whether
@@ -74,7 +74,7 @@ public class LegalityChecker {
      * @return input if input corresponds a possible square. Else empty string
      * "".
      */
-    public String checkThatMovementIsLegal(List<Square> possibilities, String input) {
+    public String checkThatMovementIsLegal(Set<Square> possibilities, String input) {
         int column = Character.getNumericValue(input.charAt(0));
         int row = Character.getNumericValue(input.charAt(1));
 
@@ -93,18 +93,21 @@ public class LegalityChecker {
      * If not, then returns empty string "".
      *
      * @param player player whose piece we're choosing.
-     * @param input input for location of target piece.
+     * @param x x-coordinate of target square
+     * @param y y-coordinate of target square
      * @return input if player does own a piece on target square, else empty
      * string
      */
-    public String checkThatPlayerOwnsAPieceOnTheTargetSquare(Player player, String input) {
-        int column = Character.getNumericValue(input.charAt(0));
-        int row = Character.getNumericValue(input.charAt(1));
+    public Boolean checkThatPlayerOwnsAPieceOnTheTargetSquare(Player player, int x, int y) {
 
-        if (board.getSquare(column, row).getPiece().getOwner() != player) {
-            System.out.println("Please, choose one of your own pieces.");
-            input = "";
+        if (!inputIsInAllowedForm(x + "" + y, false)) {
+            return false;
         }
-        return input;
+
+        if (board.getSquare(x, y).getPiece().getOwner() != player) {
+            System.out.println("Please, choose one of your own pieces.");
+            return false;
+        }
+        return true;
     }
 }

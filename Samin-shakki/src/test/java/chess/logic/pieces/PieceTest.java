@@ -34,10 +34,6 @@ public class PieceTest {
         init = new StandardBoardInitializer();
     }
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         init.initialise(board);
@@ -45,10 +41,6 @@ public class PieceTest {
         pawn = new Pawn(board.getSquare(3, 6), Player.BLACK);
         init.putPieceOnBoard(board, pawn);
         init.putPieceOnBoard(board, piece);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

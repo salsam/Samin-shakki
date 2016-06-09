@@ -3,33 +3,47 @@ package chess.gui;
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Square;
 import chess.logic.game.Game;
+import chess.logic.pieces.Piece;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.List;
+import java.util.Set;
 import javax.swing.JPanel;
 
 /**
  *
  * @author sami
  */
-public class ChessBoard extends JPanel {
+public class ChessBoardDrawer extends JPanel {
 
     private Game game;
-    private List<Square> possibilities;
+    private Set<Square> possibilities;
+    private Piece chosen;
 
-    public ChessBoard() {
+    public ChessBoardDrawer() {
     }
 
-    public ChessBoard(Game game) {
+    public ChessBoardDrawer(Game game) {
         this.game = game;
         super.setBackground(Color.CYAN);
+    }
+
+    public Piece getChosen() {
+        return chosen;
+    }
+
+    public void setChosen(Piece chosen) {
+        this.chosen = chosen;
     }
 
     public Game getGame() {
         return game;
     }
 
-    public void setPossibilities(List<Square> possibilities) {
+    public Set<Square> getPossibilities() {
+        return this.possibilities;
+    }
+
+    public void setPossibilities(Set<Square> possibilities) {
         this.possibilities = possibilities;
     }
 
@@ -37,6 +51,9 @@ public class ChessBoard extends JPanel {
     protected void paintComponent(Graphics graphics) {
         super.paintComponents(graphics);
         ChessBoardLogic board = game.getChessBoard();
+        if (chosen != null) {
+            possibilities = chosen.possibleMoves(board);
+        }
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {

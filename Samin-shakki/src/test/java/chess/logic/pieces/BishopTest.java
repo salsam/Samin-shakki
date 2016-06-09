@@ -1,16 +1,12 @@
 package chess.logic.pieces;
 
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Bishop;
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.SquareTest;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.EmptyBoardInitializer;
-import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
+import java.util.Set;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -26,7 +22,7 @@ public class BishopTest {
     private Bishop bishop;
     private static ChessBoardLogic board;
     private static ChessBoardInitializer init;
-    private List<Square> possibleMoves;
+    private Set<Square> possibleMoves;
 
     public BishopTest() {
     }
@@ -37,20 +33,12 @@ public class BishopTest {
         init = new EmptyBoardInitializer();
     }
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         init.initialise(board);
         bishop = new Bishop(board.getSquare(3, 4), Player.WHITE);
         init.putPieceOnBoard(board, bishop);
         possibleMoves = bishop.possibleMoves(board);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

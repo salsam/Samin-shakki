@@ -7,11 +7,11 @@ package chess.logic.pieces;
 
 import chess.gui.IO.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
-import java.util.List;
+import java.util.Set;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.board.Square;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -47,7 +47,7 @@ public class King extends Piece {
      * @return list containing all squares this king threatens
      */
     @Override
-    public List<Square> threatenedSquares(ChessBoardLogic board) {
+    public Set<Square> threatenedSquares(ChessBoardLogic board) {
         int[] columnChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
         int[] rowChange = new int[]{1, 1, 1, 0, 0, -1, -1, -1};
 
@@ -63,8 +63,8 @@ public class King extends Piece {
      * @return a list containing all squares this king can legally move to.
      */
     @Override
-    public List<Square> possibleMoves(ChessBoardLogic board) {
-        List<Square> moves = new ArrayList<>();
+    public Set<Square> possibleMoves(ChessBoardLogic board) {
+        Set<Square> moves = new HashSet<>();
 
         threatenedSquares(board).stream()
                 .filter((target) -> (legalToMoveTo(target, board) && !isThreatenedByOpponent(target, board)))

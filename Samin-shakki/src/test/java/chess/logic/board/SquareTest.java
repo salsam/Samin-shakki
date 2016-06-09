@@ -1,10 +1,8 @@
 package chess.logic.board;
 
-import chess.logic.board.Player;
-import chess.logic.board.Square;
 import chess.logic.pieces.Pawn;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,8 +16,8 @@ import static org.junit.Assert.*;
  */
 public class SquareTest {
     
-    public static void testMultipleSquares(int[] columns, int[] rows, List<Square> possibleMoves) {
-        List<Square> realPossibilities = new ArrayList<>();
+    public static void testMultipleSquares(int[] columns, int[] rows, Set<Square> possibleMoves) {
+        Set<Square> realPossibilities = new HashSet<>();
         for (int i = 0; i < columns.length; i++) {
             realPossibilities.add(new Square(columns[i], rows[i]));
         }

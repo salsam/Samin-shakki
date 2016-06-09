@@ -1,6 +1,5 @@
 
-import chess.gui.MainFrame;
-import java.io.IOException;
+import chess.gui.GraphicalUserInterface;
 
 /**
  *
@@ -8,7 +7,8 @@ import java.io.IOException;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        MainFrame m = new MainFrame();
+    public static void main(String[] args) {
+        GraphicalUserInterface gui = new GraphicalUserInterface();
+        gui.run();
     }
 }

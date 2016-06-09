@@ -10,6 +10,7 @@ import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * This class is responsible for one game of chess with given starting
@@ -35,29 +36,34 @@ public class Game {
         checker = new LegalityChecker(board);
     }
 
-    /**
-     * Starts the game.
-     */
-    public void start() {
-        while (continues) {
-            if (turn % 2 == 1) {
-                turn(Player.WHITE);
-            } else {
-                turn(Player.BLACK);
-            }
-
-            turn++;
+    public Player whoseTurn() {
+        if (turn % 2 == 1) {
+            return Player.WHITE;
+        } else {
+            return Player.BLACK;
         }
+    }
+
+    public int getTurn() {
+        return turn;
     }
 
     public ChessBoardLogic getChessBoard() {
         return this.board;
     }
 
-    private void turn(Player player) {
+    public LegalityChecker getChecker() {
+        return checker;
+    }
+
+    public void nextTurn() {
+        turn++;
+    }
+
+    public void turn(Player player) {
         Piece chosen = null;
         Square target = null;
-        List<Square> possibleMoves;
+        Set<Square> possibleMoves;
         cancelled = true;
         board.updateThreatenedSquares(getOpponent(player));
         ChessBoardLogic backUp = board.copy();
@@ -117,13 +123,18 @@ public class Game {
                 continue;
             }
 
-            input = checker.checkThatPlayerOwnsAPieceOnTheTargetSquare(player, input);
+            int x = Character.getNumericValue(input.charAt(0));
+            int y = Character.getNumericValue(input.charAt(1));
+
+            if (!checker.checkThatPlayerOwnsAPieceOnTheTargetSquare(player, x, y)) {
+                input = "";
+            }
 
         }
         return board.getBoard()[column][row].getPiece();
     }
 
-    private Square chooseATargetSquareForMovement(List<Square> possibilities) {
+    private Square chooseATargetSquareForMovement(Set<Square> possibilities) {
         String input = "";
         int column = 0;
         int row = 0;

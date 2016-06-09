@@ -7,10 +7,10 @@ package chess.logic.pieces;
 
 import chess.gui.IO.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
-import java.util.List;
+import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
@@ -46,8 +46,8 @@ public class Rook extends Piece {
      * @return list containing all squares this rook threatens
      */
     @Override
-    public List<Square> threatenedSquares(ChessBoardLogic board) {
-        List<Square> possibilities = new ArrayList<>();
+    public Set<Square> threatenedSquares(ChessBoardLogic board) {
+        Set<Square> possibilities = new HashSet<>();
         addHorizontalPossibilities(location, board, possibilities);
         addVerticalPossibilities(location, board, possibilities);
 

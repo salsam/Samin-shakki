@@ -1,20 +1,15 @@
 package chess.logic.pieces;
 
-import chess.logic.pieces.King;
-import chess.logic.pieces.Queen;
 import chess.logic.board.ChessBoardLogic;
-import java.util.List;
+import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.SquareTest;
-import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -26,17 +21,9 @@ public class KingTest {
     private King king;
     private ChessBoardLogic board;
     private ChessBoardInitializer init;
-    private List<Square> possibleMoves;
+    private Set<Square> possibleMoves;
 
     public KingTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
     }
 
     @Before
@@ -47,10 +34,6 @@ public class KingTest {
         king = new King(board.getSquare(2, 3), Player.WHITE);
         init.putPieceOnBoard(board, king);
         possibleMoves = king.possibleMoves(board);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

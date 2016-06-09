@@ -1,16 +1,12 @@
 package chess.logic.pieces;
 
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Queen;
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.SquareTest;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.EmptyBoardInitializer;
-import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
+import java.util.Set;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,7 +21,7 @@ public class QueenTest {
     private Queen queen;
     private static ChessBoardLogic board;
     private static ChessBoardInitializer init;
-    private List<Square> possibleMoves;
+    private Set<Square> possibleMoves;
 
     public QueenTest() {
     }
@@ -35,21 +31,13 @@ public class QueenTest {
         board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
     }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
+    
     @Before
     public void setUp() {
         init.initialise(board);
         queen = new Queen(board.getSquare(3, 5), Player.WHITE);
         init.putPieceOnBoard(board, queen);
         possibleMoves = queen.possibleMoves(board);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

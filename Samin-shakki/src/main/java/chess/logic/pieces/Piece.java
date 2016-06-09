@@ -1,12 +1,12 @@
 package chess.logic.pieces;
 
 import chess.logic.board.ChessBoardLogic;
-import java.util.List;
+import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public abstract class Piece {
 
@@ -19,7 +19,7 @@ public abstract class Piece {
         this.owner = owner;
     }
 
-    public abstract List<Square> threatenedSquares(ChessBoardLogic board);
+    public abstract Set<Square> threatenedSquares(ChessBoardLogic board);
 
     public abstract Piece clone(Square location);
 
@@ -41,8 +41,8 @@ public abstract class Piece {
      * @param board ChessBoard this piece moves on
      * @return list containing all squares this piece can legally move to
      */
-    public List<Square> possibleMoves(ChessBoardLogic board) {
-        List<Square> moves = new ArrayList();
+    public Set<Square> possibleMoves(ChessBoardLogic board) {
+        Set<Square> moves = new HashSet();
 
         threatenedSquares(board).stream()
                 .filter((move) -> (legalToMoveTo(move, board)))
@@ -74,25 +74,25 @@ public abstract class Piece {
         return this.owner == piece.getOwner();
     }
 
-    protected void addDiagonalPossibilities(Square current, ChessBoardLogic board, List<Square> possibilities) {
+    protected void addDiagonalPossibilities(Square current, ChessBoardLogic board, Set<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 1, 1);
         possibilitiesToDirection(current, board, possibilities, 1, -1);
         possibilitiesToDirection(current, board, possibilities, -1, 1);
         possibilitiesToDirection(current, board, possibilities, -1, -1);
     }
 
-    protected void addHorizontalPossibilities(Square current, ChessBoardLogic board, List<Square> possibilities) {
+    protected void addHorizontalPossibilities(Square current, ChessBoardLogic board, Set<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 0, 1);
         possibilitiesToDirection(current, board, possibilities, 0, -1);
     }
 
-    protected void addVerticalPossibilities(Square current, ChessBoardLogic board, List<Square> possibilities) {
+    protected void addVerticalPossibilities(Square current, ChessBoardLogic board, Set<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 1, 0);
         possibilitiesToDirection(current, board, possibilities, -1, 0);
     }
 
-    protected List<Square> possibilities(int[] columnChange, int[] rowChange, ChessBoardLogic board) {
-        List<Square> possibilities = new ArrayList();
+    protected Set<Square> possibilities(int[] columnChange, int[] rowChange, ChessBoardLogic board) {
+        Set<Square> possibilities = new HashSet();
 
         for (int i = 0; i < 8; i++) {
             int newcolumn = location.getcolumn() + columnChange[i];
@@ -136,7 +136,7 @@ public abstract class Piece {
         this.location = target;
     }
 
-    protected void possibilitiesToDirection(Square current, ChessBoardLogic board, List<Square> possibilities, int columnChange, int rowChange) {
+    protected void possibilitiesToDirection(Square current, ChessBoardLogic board, Set<Square> possibilities, int columnChange, int rowChange) {
         int newcolumn = current.getcolumn() + columnChange;
         int newrow = current.getrow() + rowChange;
 

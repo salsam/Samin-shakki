@@ -1,16 +1,11 @@
 package chess.logic.pieces;
 
-import chess.logic.pieces.Pawn;
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.EmptyBoardInitializer;
-import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -27,14 +22,6 @@ public class PawnTest {
     public PawnTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         init = new EmptyBoardInitializer();
@@ -42,10 +29,6 @@ public class PawnTest {
         init.initialise(board);
         pawn = new Pawn(board.getSquare(2, 1), Player.WHITE);
         init.putPieceOnBoard(board, pawn);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -28,7 +27,7 @@ public class GameWindow extends JFrame {
 
     private void initComponents(Container container) {
         JLabel text = new JLabel("Aaaaa");
-        ChessBoard panel = new ChessBoard(game);
+        ChessBoardDrawer panel = new ChessBoardDrawer(game);
         panel.addMouseListener(new ChessBoardListener(panel));
         container.add(text);
         container.add(panel);

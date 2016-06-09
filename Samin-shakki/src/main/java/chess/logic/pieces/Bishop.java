@@ -7,10 +7,10 @@ package chess.logic.pieces;
 
 import chess.gui.IO.ImageLoader;
 import chess.logic.board.ChessBoardLogic;
-import java.util.List;
+import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * This class is responsible of movement calculation of bishops.
@@ -47,8 +47,8 @@ public class Bishop extends Piece {
      * @return list containing all squares this bishop threatens
      */
     @Override
-    public List<Square> threatenedSquares(ChessBoardLogic board) {
-        List<Square> possibilities = new ArrayList<>();
+    public Set<Square> threatenedSquares(ChessBoardLogic board) {
+        Set<Square> possibilities = new HashSet<>();
         addDiagonalPossibilities(location, board, possibilities);
 
         return possibilities;

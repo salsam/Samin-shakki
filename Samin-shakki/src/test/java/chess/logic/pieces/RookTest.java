@@ -5,15 +5,12 @@ package chess.logic.pieces;
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Rook;
 import chess.logic.board.ChessBoardLogic;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.EmptyBoardInitializer;
-import java.util.List;
-import org.junit.After;
+import java.util.Set;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -29,7 +26,7 @@ public class RookTest {
     private Rook rook;
     private static ChessBoardLogic board;
     private static ChessBoardInitializer init;
-    private List<Square> possibleMoves;
+    private Set<Square> possibleMoves;
 
     public RookTest() {
     }
@@ -39,20 +36,13 @@ public class RookTest {
         board = new ChessBoardLogic();
         init = new EmptyBoardInitializer();
     }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
+    
     @Before
     public void setUp() {
         init.initialise(board);
         rook = new Rook(board.getSquare(3, 5), Player.WHITE);
         init.putPieceOnBoard(board, rook);
         possibleMoves = rook.possibleMoves(board);
-    }
-
-    public void tearDown() {
     }
 
     @Test
