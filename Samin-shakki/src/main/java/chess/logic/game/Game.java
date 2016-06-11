@@ -109,6 +109,22 @@ public class Game {
     }
 
     /**
+     * Returns whether or not chosen player has any legal moves.
+     *
+     * @param player chosen player
+     * @return true player has no legal moves otherwise false.
+     */
+    public boolean stalemate(Player player) {
+        for (Piece piece : board.getPieces(player)) {
+            if (!piece.possibleMoves(board).isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Changes the field movedTwoSquaresLastTurn to false for every pawn player
      * owns thus making them no longer en passantable.
      *
