@@ -38,12 +38,12 @@ public class KingTest {
 
     @Test
     public void startingcolumnCorrect() {
-        assertEquals(2, king.location.getcolumn());
+        assertEquals(2, king.location.getColumn());
     }
 
     @Test
     public void startingrowCorrect() {
-        assertEquals(3, king.location.getrow());
+        assertEquals(3, king.location.getRow());
     }
 
     @Test

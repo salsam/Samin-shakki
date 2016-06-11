@@ -4,7 +4,6 @@ import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.game.Game;
-import chess.logic.game.LegalityChecker;
 import chess.logic.pieces.Piece;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -43,6 +42,7 @@ public class ChessBoardListener implements MouseListener {
 
                 game.nextTurn();
                 player = getOpponent(player);
+                game.makePawnsUnEnPassantable(player);
 
                 if (game.checkIfChecked(player)) {
                     if (game.checkMate(player)) {

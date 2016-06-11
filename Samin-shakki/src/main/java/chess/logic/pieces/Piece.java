@@ -31,8 +31,8 @@ public abstract class Piece {
      * @param graphics Graphics object used to draw the image.
      */
     public void draw(Graphics graphics) {
-        int x = this.location.getcolumn() * 30;
-        int y = this.location.getrow() * 30;
+        int x = this.location.getColumn() * 30;
+        int y = this.location.getRow() * 30;
         graphics.drawImage(picture, x, y, 30, 30, null);
     }
 
@@ -81,8 +81,8 @@ public abstract class Piece {
         Set<Square> possibilities = new HashSet();
 
         for (int i = 0; i < 8; i++) {
-            int newcolumn = location.getcolumn() + columnChange[i];
-            int newrow = location.getrow() + rowChange[i];
+            int newcolumn = location.getColumn() + columnChange[i];
+            int newrow = location.getRow() + rowChange[i];
 
             if (!board.withinTable(newcolumn, newrow)) {
                 continue;
@@ -123,8 +123,8 @@ public abstract class Piece {
     }
 
     private void possibilitiesToDirection(Square current, ChessBoard board, Set<Square> possibilities, int columnChange, int rowChange) {
-        int newColumn = current.getcolumn() + columnChange;
-        int newRow = current.getrow() + rowChange;
+        int newColumn = current.getColumn() + columnChange;
+        int newRow = current.getRow() + rowChange;
 
         while (board.withinTable(newColumn, newRow)) {
             Square target = board.getSquare(newColumn, newRow);
@@ -133,8 +133,8 @@ public abstract class Piece {
             if (target.containsAPiece()) {
                 break;
             }
-            newColumn = target.getcolumn() + columnChange;
-            newRow = target.getrow() + rowChange;
+            newColumn = target.getColumn() + columnChange;
+            newRow = target.getRow() + rowChange;
         }
     }
 }

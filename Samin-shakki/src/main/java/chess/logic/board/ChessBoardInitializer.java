@@ -57,9 +57,9 @@ public abstract class ChessBoardInitializer {
      * @param piece piece Piece to be placed.
      */
     public static void putPieceOnBoard(ChessBoard board, Piece piece) {
-        if (board.withinTable(piece.getLocation().getcolumn(), piece.getLocation().getrow())) {
+        if (board.withinTable(piece.getLocation().getColumn(), piece.getLocation().getRow())) {
 
-            board.getSquare(piece.getLocation().getcolumn(), piece.getLocation().getrow()).setPiece(piece);
+            board.getSquare(piece.getLocation().getColumn(), piece.getLocation().getRow()).setPiece(piece);
             addPieceToOwner(piece.getLocation(), board);
         }
     }

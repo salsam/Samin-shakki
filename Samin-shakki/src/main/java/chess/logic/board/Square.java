@@ -19,11 +19,11 @@ public class Square {
         this.row = row;
     }
 
-    public int getcolumn() {
+    public int getColumn() {
         return column;
     }
 
-    public int getrow() {
+    public int getRow() {
         return row;
     }
 
@@ -43,11 +43,11 @@ public class Square {
 
         Square square = (Square) obj;
 
-        if (this.column != square.getcolumn()) {
+        if (this.column != square.getColumn()) {
             return false;
         }
 
-        if (this.row != square.getrow()) {
+        if (this.row != square.getRow()) {
             return false;
         }
 

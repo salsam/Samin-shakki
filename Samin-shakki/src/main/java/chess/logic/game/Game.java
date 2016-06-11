@@ -6,6 +6,7 @@ import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.pieces.King;
+import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
 import java.util.Map;
 
@@ -105,6 +106,21 @@ public class Game {
         }
 
         return true;
+    }
+
+    /**
+     * Changes the field movedTwoSquaresLastTurn to false for every pawn player
+     * owns thus making them no longer en passantable.
+     *
+     * @param player player
+     */
+    public void makePawnsUnEnPassantable(Player player) {
+        board.getPieces(player).stream().forEach(piece -> {
+            if (piece.getClass() == Pawn.class) {
+                Pawn pawn = (Pawn) piece;
+                pawn.setMovedTwoSquaresLastTurn(false);
+            }
+        });
     }
 
 }

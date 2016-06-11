@@ -34,12 +34,12 @@ public class PawnTest {
 
     @Test
     public void startingcolumnCorrect() {
-        assertEquals(2, pawn.getLocation().getcolumn());
+        assertEquals(2, pawn.getLocation().getColumn());
     }
 
     @Test
     public void startingrowCorrect() {
-        assertEquals(1, pawn.getLocation().getrow());
+        assertEquals(1, pawn.getLocation().getRow());
     }
 
     @Test
@@ -94,5 +94,22 @@ public class PawnTest {
         pawn = new Pawn(board.getSquare(0, 7), Player.WHITE);
         putPieceOnBoard(board, pawn);
         assertFalse(pawn.possibleMoves(board).contains(new Square(0, 8)));
+    }
+
+    @Test
+    public void pawnCanEnPassantOpposingPawnThatMovedTwoSquaresLastTurn() {
+        Pawn opposingPawn = new Pawn(board.getSquare(3, 3), Player.BLACK);
+        putPieceOnBoard(board, opposingPawn);
+        opposingPawn.move(board.getSquare(3, 1), board);
+        assertTrue(pawn.possibleMoves(board).contains(new Square(3, 2)));
+    }
+
+    @Test
+    public void whenEnPassantingOpposingPawnIsRemovedFromBoard() {
+        Pawn opposingPawn = new Pawn(board.getSquare(3, 3), Player.BLACK);
+        putPieceOnBoard(board, opposingPawn);
+        opposingPawn.move(board.getSquare(3, 1), board);
+        pawn.move(board.getSquare(3, 2), board);
+        assertFalse(board.getSquare(3, 1).containsAPiece());
     }
 }

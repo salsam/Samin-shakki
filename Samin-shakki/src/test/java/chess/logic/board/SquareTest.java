@@ -50,12 +50,12 @@ public class SquareTest {
 
     @Test
     public void returnCorrectColumn() {
-        assertEquals(2, square.getcolumn());
+        assertEquals(2, square.getColumn());
     }
 
     @Test
     public void returnCorrectRow() {
-        assertEquals(3, square.getrow());
+        assertEquals(3, square.getRow());
     }
 
     @Test
