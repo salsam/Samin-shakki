@@ -1,6 +1,6 @@
 package chess.logic.game;
 
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
@@ -8,30 +8,25 @@ import static chess.logic.board.Player.getOpponent;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
 
 /**
  * This class is responsible for one game of chess with given starting
- * positions.
+ * positions. Class offers methods to check legal moves of all pieces on board,
+ * all squares all pieces threaten as well as knowledge of current situation in
+ * the game.
  *
  * @author sami
  */
 public class Game {
 
-    private ChessBoardLogic board;
+    private ChessBoard board;
     private int turn;
-    private boolean continues;
-    private Scanner reader;
-    private boolean cancelled;
     private LegalityChecker checker;
 
     public Game(ChessBoardInitializer init) {
-        this.board = new ChessBoardLogic();
+        this.board = new ChessBoard();
         init.initialise(board);
         turn = 1;
-        continues = true;
-        reader = new Scanner(System.in);
         checker = new LegalityChecker(board);
     }
 
@@ -43,142 +38,69 @@ public class Game {
         }
     }
 
-    public ChessBoardLogic getChessBoard() {
+    public ChessBoard getChessBoard() {
         return this.board;
     }
 
-    public LegalityChecker getChecker() {
-        return checker;
+    public void setChessBoard(ChessBoard chessBoard) {
+        this.board = chessBoard;
+        this.checker = new LegalityChecker(chessBoard);
     }
 
+    /**
+     * Updates the squares that current player threatens and adds 1 to turn
+     * counter in field turn. Thus changing the player whose turn is now.
+     */
     public void nextTurn() {
         board.updateThreatenedSquares(whoseTurn());
         turn++;
     }
 
-    private void turn(Player player) {
-        Piece chosen = null;
-        Square target = null;
-        cancelled = true;
-        board.updateThreatenedSquares(getOpponent(player));
-        ChessBoardLogic backUp = board.copy();
-
-        if (checkIfChecked(player)) {
-            if (checkMate(player)) {
-                System.out.println(getOpponent(player) + "won!");
-                continues = false;
-                return;
-            }
-        }
-
-        board.updateThreatenedSquares(getOpponent(player));
-
-        System.out.println(player + "'s turn");
-
-        while (true) {
-            while (cancelled) {
-                cancelled = false;
-                checker.setBoard(board);
-                chosen = chooseAPieceToMove(player);
-                target = chooseATargetSquareForMovement(chosen);
-
-            }
-
-            chosen.move(target, board);
-            board.updateThreatenedSquares(getOpponent(player));
-
-            if (!checkIfChecked(player)) {
-                break;
-            } else {
-                cancelled = true;
-                board = backUp.copy();
-                board.updateThreatenedSquares(getOpponent(player));
-                System.out.println("Your king is checked, you have to prevent that this turn!");
-            }
-        }
-    }
-
+    /**
+     * Updates set containing all squares that opponent threatens and then
+     * checks if player's king is on one of those.
+     *
+     * @param player
+     * @return true if player's king is threatened by opposing piece
+     */
     public boolean checkIfChecked(Player player) {
         Map<Player, King> kings = board.getKings();
         board.updateThreatenedSquares(getOpponent(player));
         return board.threatenedSquares(getOpponent(player)).contains(kings.get(player).getLocation());
     }
 
-    private Piece chooseAPieceToMove(Player player) {
-        String input = "";
-        int column = 0;
-        int row = 0;
-
-        while (input.equals("")) {
-            System.out.println("Please write coordinates in the form columnrow of a piece to move");
-            input = reader.nextLine();
-
-            if (!checker.inputIsInAllowedForm(input, false)) {
-                input = "";
-                continue;
-            }
-
-            int x = Character.getNumericValue(input.charAt(0));
-            int y = Character.getNumericValue(input.charAt(1));
-
-            if (!checkThatPlayerOwnsAPieceOnTargetSquare(player, x, y, input)) {
-                input = "";
-            }
-
-        }
-        return board.getBoard()[column][row].getPiece();
+    /**
+     * Checks if player owns a piece on square that corresponds given column and
+     * row.
+     *
+     * @see LegalityChecker.checkPlayerOwnsAPieceOnTargetSquare()
+     * @param player chosen player
+     * @param column column of target square
+     * @param row row of target square.
+     * @return true if player owns a piece on square corresponding given column
+     * and row.
+     */
+    public boolean checkPlayerOwnsAPieceOnTargetSquare(Player player, int column, int row) {
+        return checker.checkPlayerOwnsAPieceOnTheTargetSquare(player, column, row);
     }
 
-    public boolean checkThatPlayerOwnsAPieceOnTargetSquare(Player player, int x, int y, String input) {
-        return checker.checkPlayerOwnsAPieceOnTheTargetSquare(player, x, y);
-    }
-
-    private Square chooseATargetSquareForMovement(Piece chosen) {
-        String input = "";
-        int column = 0;
-        int row = 0;
-
-        while (input.equals("")) {
-            System.out.println("Please write coordinates in form columnrow of a square to move to or x to cancel");
-            input = reader.nextLine();
-
-            if (input.equals("x")) {
-                cancelled = true;
-                break;
-            }
-
-            if (!checker.inputIsInAllowedForm(input, true)) {
-                input = "";
-                continue;
-            }
-
-            int x = Character.getNumericValue(input.charAt(0));
-            int y = Character.getNumericValue(input.charAt(1));
-
-            if (!checker.checkThatMovementIsLegal(chosen, x, y)) {
-                input = "";
-            }
-
-            if (input.equals("")) {
-                System.out.println("Please, choose one of the legal movements: ");
-            }
-
-        }
-
-        return board.getSquare(column, row);
-    }
-
+    /**
+     * Checks whether or not player is checkmated in this game.
+     *
+     * @param player player who is possibly checkmated.
+     * @return true if player is checkmated. Else false.
+     */
     public boolean checkMate(Player player) {
-        ChessBoardLogic backUp = board.copy();
+        ChessBoard backUp = board.copy();
         for (Piece piece : board.getPieces(player)) {
             for (Square possibility : piece.possibleMoves(board)) {
                 piece.move(possibility, board);
                 board.updateThreatenedSquares(getOpponent(player));
                 if (!checkIfChecked(player)) {
-                    board = backUp.copy();
+                    setChessBoard(backUp.copy());
                     return false;
                 }
-                board = backUp.copy();
+                setChessBoard(backUp.copy());
             }
         }
 

@@ -1,14 +1,10 @@
 package chess.logic.pieces;
 
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Queen;
-import chess.logic.pieces.Piece;
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.ChessBoardInitializer;
+import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.Player;
 import chess.logic.board.StandardBoardInitializer;
-import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -22,7 +18,7 @@ public class PieceTest {
 
     private Piece piece;
     private Piece pawn;
-    private static ChessBoardLogic board;
+    private static ChessBoard board;
     private static ChessBoardInitializer init;
 
     public PieceTest() {
@@ -30,7 +26,7 @@ public class PieceTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoardLogic();
+        board = new ChessBoard();
         init = new StandardBoardInitializer();
     }
 
@@ -39,8 +35,8 @@ public class PieceTest {
         init.initialise(board);
         piece = new Queen(board.getSquare(3, 4), Player.WHITE);
         pawn = new Pawn(board.getSquare(3, 6), Player.BLACK);
-        init.putPieceOnBoard(board, pawn);
-        init.putPieceOnBoard(board, piece);
+        putPieceOnBoard(board, pawn);
+        putPieceOnBoard(board, piece);
     }
 
     @Test

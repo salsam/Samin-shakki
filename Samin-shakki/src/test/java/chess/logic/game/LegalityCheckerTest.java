@@ -1,7 +1,7 @@
 package chess.logic.game;
 
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.pieces.Pawn;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class LegalityCheckerTest {
 
-    ChessBoardLogic board;
+    ChessBoard board;
     LegalityChecker checker;
 
     public LegalityCheckerTest() {
@@ -22,23 +22,23 @@ public class LegalityCheckerTest {
 
     @Before
     public void setUp() {
-        board = new ChessBoardLogic();
+        board = new ChessBoard();
         checker = new LegalityChecker(board);
     }
 
     @Test
     public void inputIsNotValidIfLocationNotOnBoard() {
-        assertFalse(checker.inputIsInAllowedForm("100", true));
+        assertFalse(checker.inputIsInAllowedForm(10, 0, true));
     }
 
     @Test
     public void inputIsInvalidIfTargetSquareEmptyWhenNotAllowed() {
-        assertFalse(checker.inputIsInAllowedForm("10", false));
+        assertFalse(checker.inputIsInAllowedForm(1, 0, false));
     }
 
     @Test
     public void inputIsValidIfTargetSquareEmptyWhenAllowed() {
-        assertTrue(checker.inputIsInAllowedForm("10", true));
+        assertTrue(checker.inputIsInAllowedForm(1, 0, true));
     }
 
     @Test

@@ -1,6 +1,6 @@
 package chess.gui;
 
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.Square;
 import chess.logic.game.Game;
 import chess.logic.pieces.Piece;
@@ -50,7 +50,7 @@ public class ChessBoardDrawer extends JPanel {
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponents(graphics);
-        ChessBoardLogic board = game.getChessBoard();
+        ChessBoard board = game.getChessBoard();
         if (chosen != null) {
             possibilities = chosen.possibleMoves(board);
         }

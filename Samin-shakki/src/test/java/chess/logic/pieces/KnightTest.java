@@ -1,10 +1,11 @@
 package chess.logic.pieces;
 
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
+import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.SquareTest;
 import static org.junit.Assert.assertFalse;
@@ -18,7 +19,7 @@ import org.junit.Test;
 public class KnightTest {
 
     private Knight knight;
-    private ChessBoardLogic board;
+    private ChessBoard board;
     private ChessBoardInitializer init;
     private Set<Square> possibleMoves;
 
@@ -27,11 +28,11 @@ public class KnightTest {
 
     @Before
     public void setUp() {
-        board = new ChessBoardLogic();
+        board = new ChessBoard();
         init = new EmptyBoardInitializer();
         init.initialise(board);
         knight = new Knight(board.getSquare(4, 4), Player.WHITE);
-        init.putPieceOnBoard(board, knight);
+        putPieceOnBoard(board, knight);
         possibleMoves = knight.possibleMoves(board);
     }
 
@@ -51,7 +52,7 @@ public class KnightTest {
     @Test
     public void knightCannotMoveOverTheEdge() {
         knight = new Knight(board.getSquare(0, 0), Player.WHITE);
-        init.putPieceOnBoard(board, knight);
+        putPieceOnBoard(board, knight);
         assertFalse(knight.possibleMoves(board).contains(new Square(-1, -2)));
         assertFalse(knight.possibleMoves(board).contains(new Square(1, -2)));
         assertFalse(knight.possibleMoves(board).contains(new Square(-1, 2)));

@@ -6,7 +6,7 @@
 package chess.logic.pieces;
 
 import chess.gui.io.ImageLoader;
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -45,7 +45,7 @@ public class Knight extends Piece {
      * @return list containing all squares this knight threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoardLogic board) {
+    public Set<Square> threatenedSquares(ChessBoard board) {
         int[] rowChange = new int[]{-2, -2, -1, -1, 1, 1, 2, 2};
         int[] columnChange = new int[]{1, -1, 2, -2, 2, -2, 1, -1};
 

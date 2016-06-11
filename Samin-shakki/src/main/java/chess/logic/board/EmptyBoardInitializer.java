@@ -14,7 +14,7 @@ public class EmptyBoardInitializer extends ChessBoardInitializer {
      * @param board board to be initialised
      */
     @Override
-    public void initialise(ChessBoardLogic board) {
+    public void initialise(ChessBoard board) {
         clearBoard(board);
     }
 

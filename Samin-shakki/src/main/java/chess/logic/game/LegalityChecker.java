@@ -1,6 +1,6 @@
 package chess.logic.game;
 
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.pieces.Piece;
 
@@ -12,9 +12,9 @@ import chess.logic.pieces.Piece;
  */
 public class LegalityChecker {
 
-    private ChessBoardLogic board;
+    private ChessBoard board;
 
-    public LegalityChecker(ChessBoardLogic board) {
+    public LegalityChecker(ChessBoard board) {
         this.board = board;
     }
 
@@ -23,34 +23,21 @@ public class LegalityChecker {
      *
      * @param board board to be referenced from field board
      */
-    public void setBoard(ChessBoardLogic board) {
+    public void setBoard(ChessBoard board) {
         this.board = board;
     }
 
     /**
-     * Checks whether input is in allowed form. That is length of input must be
-     * 2, input must consist of numbers and square corresponding those numbers
-     * must be within table. If square cannot be empty also checks if chosen
-     * square is empty.
+     * Checks whether input is in allowed form. The square corresponding given
+     * column and row must be within table. If square cannot be empty also
+     * checks if chosen square is empty.
      *
-     * @param input input to be validated
+     * @param column column of target square
+     * @param row row of target square
      * @param squareCanBeEmpty if true square corresponding input can be empty
      * @return true if input is in allowed form
      */
-    public boolean inputIsInAllowedForm(String input, boolean squareCanBeEmpty) {
-        int column;
-        int row;
-
-        if (input.length() != 2) {
-            return false;
-        }
-
-        try {
-            column = Character.getNumericValue(input.charAt(0));
-            row = Character.getNumericValue(input.charAt(1));
-        } catch (Exception e) {
-            return false;
-        }
+    public boolean inputIsInAllowedForm(int column, int row, boolean squareCanBeEmpty) {
 
         if (!board.withinTable(column, row)) {
             return false;
@@ -76,18 +63,17 @@ public class LegalityChecker {
      */
     public Boolean checkPlayerOwnsAPieceOnTheTargetSquare(Player player, int x, int y) {
 
-        if (!inputIsInAllowedForm(x + "" + y, false)) {
+        if (!inputIsInAllowedForm(x, y, false)) {
             return false;
         }
 
         if (board.getSquare(x, y).getPiece().getOwner() != player) {
-            System.out.println("Please, choose one of your own pieces.");
             return false;
         }
         return true;
     }
-    
-        /**
+
+    /**
      * Checks whether input corresponds a square that chosen piece can legally
      * move to. If it's true, returns input as it was given. Otherwise returns
      * empty string "".

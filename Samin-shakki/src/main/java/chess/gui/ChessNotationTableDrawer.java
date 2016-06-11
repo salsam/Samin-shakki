@@ -1,6 +1,6 @@
 package chess.gui;
 
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.pieces.Knight;
 import chess.logic.pieces.Piece;
@@ -11,7 +11,7 @@ import chess.logic.pieces.Piece;
  */
 public class ChessNotationTableDrawer {
 
-    public String[][] graphicalBoard(ChessBoardLogic board) {
+    public String[][] graphicalBoard(ChessBoard board) {
         String[][] graphicalBoard = new String[8][8];
         Piece piece;
 
@@ -28,7 +28,7 @@ public class ChessNotationTableDrawer {
         return graphicalBoard;
     }
 
-    public void draw(ChessBoardLogic board) {
+    public void draw(ChessBoard board) {
         Piece piece;
 
         System.out.print("  ");

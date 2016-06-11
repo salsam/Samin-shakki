@@ -6,7 +6,7 @@
 package chess.logic.pieces;
 
 import chess.gui.io.ImageLoader;
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -46,7 +46,7 @@ public class Queen extends Piece {
      * @return list containing all squares this queen threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoardLogic board) {
+    public Set<Square> threatenedSquares(ChessBoard board) {
         Set<Square> possibilities = new HashSet<>();
         addDiagonalPossibilities(location, board, possibilities);
         addHorizontalPossibilities(location, board, possibilities);

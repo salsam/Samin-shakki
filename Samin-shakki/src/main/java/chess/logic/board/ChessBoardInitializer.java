@@ -19,7 +19,7 @@ public abstract class ChessBoardInitializer {
      * @param target Square
      * @param chessBoardLogic ChessBoardLogic to which piece will be added
      */
-    public static void addPieceToOwner(Square target, ChessBoardLogic chessBoardLogic) {
+    public static void addPieceToOwner(Square target, ChessBoard chessBoardLogic) {
         if (target.containsAPiece()) {
             Piece piece = target.getPiece();
             if (piece.getClass() == King.class) {
@@ -29,7 +29,7 @@ public abstract class ChessBoardInitializer {
         }
     }
 
-    public abstract void initialise(ChessBoardLogic board);
+    public abstract void initialise(ChessBoard board);
 
     /**
      * Removes target piece from its owner's owned pieces list.
@@ -37,11 +37,11 @@ public abstract class ChessBoardInitializer {
      * @param piece The piece you want to remove.
      * @param chessBoardLogic ChessBoardLogic where piece will be removed from
      */
-    public static void removePieceFromOwner(Piece piece, ChessBoardLogic chessBoardLogic) {
+    public static void removePieceFromOwner(Piece piece, ChessBoard chessBoardLogic) {
         chessBoardLogic.getPieces(piece.getOwner()).remove(piece);
     }
 
-    protected void clearBoard(ChessBoardLogic board) {
+    protected void clearBoard(ChessBoard board) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 board.getSquare(i, j).setPiece(null);
@@ -56,7 +56,7 @@ public abstract class ChessBoardInitializer {
      * @param board board Piece will be placed on.
      * @param piece piece Piece to be placed.
      */
-    public static void putPieceOnBoard(ChessBoardLogic board, Piece piece) {
+    public static void putPieceOnBoard(ChessBoard board, Piece piece) {
         if (board.withinTable(piece.getLocation().getcolumn(), piece.getLocation().getrow())) {
 
             board.getSquare(piece.getLocation().getcolumn(), piece.getLocation().getrow()).setPiece(piece);

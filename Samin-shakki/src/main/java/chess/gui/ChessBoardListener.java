@@ -1,8 +1,8 @@
 package chess.gui;
 
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
-import chess.logic.board.Square;
+import static chess.logic.board.Player.getOpponent;
 import chess.logic.game.Game;
 import chess.logic.game.LegalityChecker;
 import chess.logic.pieces.Piece;
@@ -26,27 +26,35 @@ public class ChessBoardListener implements MouseListener {
         int x = (e.getX()) / 30;
         int y = (e.getY()) / 30;
         Game game = board.getGame();
-        ChessBoardLogic cbl = game.getChessBoard();
-        ChessBoardLogic backUp = cbl.copy();
-        LegalityChecker checker = game.getChecker();
+        ChessBoard cbl = game.getChessBoard();
+        ChessBoard backUp = cbl.copy();
         Player player = game.whoseTurn();
 
         if (cbl.withinTable(x, y)) {
-            if (board.getChosen() != null && board.getPossibilities().contains(new Square(x, y))) {
+            if (board.getChosen() != null && board.getPossibilities().contains(cbl.getSquare(x, y))) {
                 board.getChosen().move(cbl.getSquare(x, y), cbl);
+                board.setChosen(null);
+                board.setPossibilities(null);
 
                 if (game.checkIfChecked(player)) {
-                    cbl = backUp;
+                    game.setChessBoard(backUp);
+                    board.repaint();
                     return;
                 }
 
-                board.setChosen(null);
-                board.setPossibilities(null);
                 game.nextTurn();
-            } else if (checker.checkPlayerOwnsAPieceOnTheTargetSquare(game.whoseTurn(), x, y)) {
+                player = getOpponent(player);
+
+                if (game.checkIfChecked(player)) {
+                    if (game.checkMate(player)) {
+
+                    }
+                }
+            } else if (game.checkPlayerOwnsAPieceOnTargetSquare(game.whoseTurn(), x, y)) {
                 Piece piece = cbl.getSquare(x, y).getPiece();
                 board.setChosen(piece);
             }
+
             board.repaint();
         }
     }

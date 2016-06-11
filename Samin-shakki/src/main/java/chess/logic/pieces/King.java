@@ -6,7 +6,7 @@
 package chess.logic.pieces;
 
 import chess.gui.io.ImageLoader;
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
@@ -47,7 +47,7 @@ public class King extends Piece {
      * @return list containing all squares this king threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoardLogic board) {
+    public Set<Square> threatenedSquares(ChessBoard board) {
         int[] columnChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
         int[] rowChange = new int[]{1, 1, 1, 0, 0, -1, -1, -1};
 
@@ -63,7 +63,7 @@ public class King extends Piece {
      * @return a list containing all squares this king can legally move to.
      */
     @Override
-    public Set<Square> possibleMoves(ChessBoardLogic board) {
+    public Set<Square> possibleMoves(ChessBoard board) {
         Set<Square> moves = new HashSet<>();
 
         threatenedSquares(board).stream()
@@ -75,7 +75,7 @@ public class King extends Piece {
         return moves;
     }
 
-    private boolean isThreatenedByOpponent(Square target, ChessBoardLogic board) {
+    private boolean isThreatenedByOpponent(Square target, ChessBoard board) {
         return board.threatenedSquares(getOpponent(owner)).contains(target);
     }
 

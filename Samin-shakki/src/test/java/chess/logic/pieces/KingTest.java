@@ -1,6 +1,6 @@
 package chess.logic.pieces;
 
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -21,7 +21,7 @@ import org.junit.Test;
 public class KingTest {
 
     private King king;
-    private ChessBoardLogic board;
+    private ChessBoard board;
     private ChessBoardInitializer init;
     private Set<Square> possibleMoves;
 
@@ -30,7 +30,7 @@ public class KingTest {
 
     @Before
     public void setUp() {
-        board = new ChessBoardLogic();
+        board = new ChessBoard();
         init = new EmptyBoardInitializer();
         init.initialise(board);
         king = new King(board.getSquare(2, 3), Player.WHITE);

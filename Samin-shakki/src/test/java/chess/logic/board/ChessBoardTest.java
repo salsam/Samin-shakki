@@ -1,5 +1,6 @@
 package chess.logic.board;
 
+import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.pieces.Queen;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,18 +14,18 @@ import static org.junit.Assert.*;
  *
  * @author sami
  */
-public class ChessBoardLogicTest {
+public class ChessBoardTest {
 
-    private ChessBoardLogic board;
+    private ChessBoard board;
     private static ChessBoardInitializer init;
 
-    public ChessBoardLogicTest() {
+    public ChessBoardTest() {
         init = new StandardBoardInitializer();
     }
 
     @Before
     public void setUp() {
-        board = new ChessBoardLogic();
+        board = new ChessBoard();
     }
 
     @Test
@@ -149,7 +150,7 @@ public class ChessBoardLogicTest {
     @Test
     public void copyCreatesAnIdenticalChessBoard() {
         init.initialise(board);
-        ChessBoardLogic copy = board.copy();
+        ChessBoard copy = board.copy();
 
         assertTrue(Arrays.deepEquals(board.getBoard(), copy.getBoard()));
     }
@@ -157,10 +158,10 @@ public class ChessBoardLogicTest {
     @Test
     public void copyCreatesANewChessBoard() {
         init.initialise(board);
-        ChessBoardLogic copy = board.copy();
+        ChessBoard copy = board.copy();
 
         Queen queen = new Queen(board.getSquare(4, 4), Player.BLACK);
-        init.putPieceOnBoard(board, queen);
+        putPieceOnBoard(board, queen);
 
         assertTrue(board.getSquare(4, 4).containsAPiece());
         assertFalse(copy.getSquare(4, 4).containsAPiece());

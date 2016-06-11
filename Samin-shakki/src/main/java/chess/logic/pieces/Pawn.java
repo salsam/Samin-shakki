@@ -1,7 +1,7 @@
 package chess.logic.pieces;
 
 import chess.gui.io.ImageLoader;
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import java.util.HashSet;
 import java.util.Set;
 import chess.logic.board.Player;
@@ -34,7 +34,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void move(Square target, ChessBoardLogic board) {
+    public void move(Square target, ChessBoard board) {
         if (Math.abs(this.location.getrow() - target.getrow()) == 2) {
             movedTwoSquaresLastTurn = true;
         }
@@ -59,7 +59,7 @@ public class Pawn extends Piece {
      * @return list containing all squares this pawn threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoardLogic board) {
+    public Set<Square> threatenedSquares(ChessBoard board) {
         Set<Square> squares = new HashSet();
         int[] columnChange = new int[]{1, -1};
         int column = this.location.getcolumn();
@@ -76,7 +76,7 @@ public class Pawn extends Piece {
         return squares;
     }
 
-    private void enPassant(ChessBoardLogic board, int column, int[] columnChange, int i, Set<Square> squares) {
+    private void enPassant(ChessBoard board, int column, int[] columnChange, int i, Set<Square> squares) {
         Square target;
         if (board.withinTable(column + columnChange[i], this.location.getrow())) {
             target = board.getSquare(column + columnChange[i], this.location.getrow());
@@ -114,7 +114,7 @@ public class Pawn extends Piece {
      * @return a list containing all squares this pawn can legally move to.
      */
     @Override
-    public Set<Square> possibleMoves(ChessBoardLogic board) {
+    public Set<Square> possibleMoves(ChessBoard board) {
         Set<Square> moves = new HashSet<>();
         int newrow = location.getrow() + owner.getDirection();
 
@@ -130,13 +130,13 @@ public class Pawn extends Piece {
         return moves;
     }
 
-    private void addPossibilitiesToTakeOpposingPieces(ChessBoardLogic board, Set<Square> moves) {
+    private void addPossibilitiesToTakeOpposingPieces(ChessBoard board, Set<Square> moves) {
         threatenedSquares(board).stream().filter(i -> legalToMoveTo(i, board))
                 .filter(i -> i.containsAPiece())
                 .forEach(i -> moves.add(i));
     }
 
-    private void addSquareIfWithinTableAndEmpty(ChessBoardLogic board, int newrow, Set<Square> moves) {
+    private void addSquareIfWithinTableAndEmpty(ChessBoard board, int newrow, Set<Square> moves) {
         Square target;
         if (board.withinTable(location.getcolumn(), newrow)) {
             target = board.getSquare(location.getcolumn(), newrow);

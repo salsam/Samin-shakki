@@ -1,7 +1,7 @@
 package chess.logic.game;
 
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.ChessBoardLogic;
+import chess.logic.board.ChessBoard;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.Player;
 import chess.logic.pieces.King;
@@ -26,7 +26,7 @@ public class GameTest {
     @Before
     public void setUp() {
         game = new Game(new EmptyBoardInitializer());
-        ChessBoardLogic board = game.getChessBoard();
+        ChessBoard board = game.getChessBoard();
         putPieceOnBoard(board, new King(board.getSquare(0, 0), Player.WHITE));
     }
 
@@ -37,7 +37,7 @@ public class GameTest {
 
     @Test
     public void checkIfCheckedReturnsTrueIfKingIsChecked() {
-        ChessBoardLogic board = game.getChessBoard();
+        ChessBoard board = game.getChessBoard();
         putPieceOnBoard(board, new Queen(board.getSquare(1, 1), Player.BLACK));
         assertTrue(game.checkIfChecked(Player.WHITE));
     }
@@ -49,7 +49,7 @@ public class GameTest {
 
     @Test
     public void checkMateTrueIfKingCheckedAndCheckCannotBePrevented() {
-        ChessBoardLogic board = game.getChessBoard();
+        ChessBoard board = game.getChessBoard();
         putPieceOnBoard(board, new Queen(board.getSquare(1, 1), Player.BLACK));
         putPieceOnBoard(board, new King(board.getSquare(2, 2), Player.BLACK));
         assertTrue(game.checkMate(Player.WHITE));
@@ -57,14 +57,14 @@ public class GameTest {
 
     @Test
     public void checkMateFalseIfKingCheckedButCheckingPieceCanBeTaken() {
-        ChessBoardLogic board = game.getChessBoard();
+        ChessBoard board = game.getChessBoard();
         putPieceOnBoard(board, new Queen(board.getSquare(1, 0), Player.BLACK));
         assertFalse(game.checkMate(Player.WHITE));
     }
 
     @Test
     public void checkMateFalseIfCheckCanBeBlocked() {
-        ChessBoardLogic board = game.getChessBoard();
+        ChessBoard board = game.getChessBoard();
         putPieceOnBoard(board, new Queen(board.getSquare(6, 6), Player.BLACK));
         putPieceOnBoard(board, new Rook(board.getSquare(1, 6), Player.BLACK));
         putPieceOnBoard(board, new Rook(board.getSquare(6, 1), Player.BLACK));
