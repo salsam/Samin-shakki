@@ -56,7 +56,7 @@ public class King extends Piece {
 
     /**
      * Returns a list containing all squares this king can legally move to. That
-     * means all neighboring squares of king's location that aren't threatened
+     * means all neighbor squares of king's location that aren't threatened
      * by opponent or contain player's own piece.
      *
      * @param board chessboard on which movement happens

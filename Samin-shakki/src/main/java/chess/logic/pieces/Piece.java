@@ -60,21 +60,6 @@ public abstract class Piece {
         return this.location;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj.getClass() != this.getClass()) {
-            return false;
-        }
-
-        Piece piece = (Piece) obj;
-
-        if (piece.getLocation() != this.location) {
-            return false;
-        }
-
-        return this.owner == piece.getOwner();
-    }
-
     protected void addDiagonalPossibilities(Square current, ChessBoard board, Set<Square> possibilities) {
         possibilitiesToDirection(current, board, possibilities, 1, 1);
         possibilitiesToDirection(current, board, possibilities, 1, -1);
@@ -137,18 +122,19 @@ public abstract class Piece {
         this.location = target;
     }
 
-    protected void possibilitiesToDirection(Square current, ChessBoard board, Set<Square> possibilities, int columnChange, int rowChange) {
-        int newcolumn = current.getcolumn() + columnChange;
-        int newrow = current.getrow() + rowChange;
+    private void possibilitiesToDirection(Square current, ChessBoard board, Set<Square> possibilities, int columnChange, int rowChange) {
+        int newColumn = current.getcolumn() + columnChange;
+        int newRow = current.getrow() + rowChange;
 
-        while (board.withinTable(newcolumn, newrow)) {
-            Square target = board.getSquare(newcolumn, newrow);
+        while (board.withinTable(newColumn, newRow)) {
+            Square target = board.getSquare(newColumn, newRow);
             possibilities.add(target);
+
             if (target.containsAPiece()) {
                 break;
             }
-            newcolumn = target.getcolumn() + columnChange;
-            newrow = target.getrow() + rowChange;
+            newColumn = target.getcolumn() + columnChange;
+            newRow = target.getrow() + rowChange;
         }
     }
 }

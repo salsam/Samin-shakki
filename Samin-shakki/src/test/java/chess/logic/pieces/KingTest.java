@@ -23,7 +23,6 @@ public class KingTest {
     private King king;
     private ChessBoard board;
     private ChessBoardInitializer init;
-    private Set<Square> possibleMoves;
 
     public KingTest() {
     }
@@ -35,7 +34,6 @@ public class KingTest {
         init.initialise(board);
         king = new King(board.getSquare(2, 3), Player.WHITE);
         putPieceOnBoard(board, king);
-        possibleMoves = king.possibleMoves(board);
     }
 
     @Test
@@ -50,7 +48,7 @@ public class KingTest {
 
     @Test
     public void kingCannotStayStillWhenMoving() {
-        assertFalse(possibleMoves.contains(new Square(2, 3)));
+        assertFalse(king.possibleMoves(board).contains(new Square(2, 3)));
     }
 
     @Test
@@ -58,7 +56,7 @@ public class KingTest {
         int[] columns = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
         int[] rows = new int[]{4, 4, 4, 3, 3, 2, 2, 2};
 
-        SquareTest.testMultipleSquares(columns, rows, possibleMoves);
+        SquareTest.testMultipleSquares(columns, rows, king.possibleMoves(board));
     }
 
     @Test
@@ -66,10 +64,9 @@ public class KingTest {
         init.initialise(board);
         king = new King(board.getSquare(0, 0), Player.WHITE);
         putPieceOnBoard(board, king);
-        possibleMoves = king.possibleMoves(board);
 
-        assertFalse(possibleMoves.contains(new Square(-1, 0)));
-        assertFalse(possibleMoves.contains(new Square(0, -1)));
+        assertFalse(king.possibleMoves(board).contains(new Square(-1, 0)));
+        assertFalse(king.possibleMoves(board).contains(new Square(0, -1)));
     }
 
     @Test
@@ -79,16 +76,25 @@ public class KingTest {
         Queen q = new Queen(board.getSquare(3, 5), Player.BLACK);
         putPieceOnBoard(board, q);
         board.updateThreatenedSquares(Player.BLACK);
-        possibleMoves = king.possibleMoves(board);
 
         q.threatenedSquares(board).stream().forEach(i -> {
-            assertFalse(possibleMoves.contains(i));
+            assertFalse(king.possibleMoves(board).contains(i));
         });
     }
 
     @Test
-    public void kingCanTakeOpposingUnprotectedQueen() {
+    public void kingCanTakeOpposingUnprotectedPieceThatChecksIt() {
         putPieceOnBoard(board, new Queen(board.getSquare(2, 4), Player.BLACK));
+        board.updateThreatenedSquares(Player.BLACK);
         assertTrue(king.possibleMoves(board).contains(board.getSquare(2, 4)));
+    }
+
+    @Test
+    public void kingCannotTakeProtectedPieces() {
+        putPieceOnBoard(board, new Queen(board.getSquare(2, 4), Player.BLACK));
+        putPieceOnBoard(board, new Bishop(board.getSquare(3, 5), Player.BLACK));
+        board.updateThreatenedSquares(Player.BLACK);
+
+        assertFalse(king.possibleMoves(board).contains(board.getSquare(2, 4)));
     }
 }

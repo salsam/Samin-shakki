@@ -131,7 +131,7 @@ public class ChessBoard {
         Set<Square> set = new HashSet();
 
         blackPieces.stream().forEach((blackPiece) -> {
-            set.addAll(blackPiece.possibleMoves(this));
+            set.addAll(blackPiece.threatenedSquares(this));
         });
 
         return set;
@@ -141,7 +141,7 @@ public class ChessBoard {
         Set<Square> set = new HashSet();
 
         whitePieces.stream().forEach((whitePiece) -> {
-            set.addAll(whitePiece.possibleMoves(this));
+            set.addAll(whitePiece.threatenedSquares(this));
         });
 
         return set;

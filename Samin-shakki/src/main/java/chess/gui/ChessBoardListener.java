@@ -38,7 +38,6 @@ public class ChessBoardListener implements MouseListener {
 
                 if (game.checkIfChecked(player)) {
                     game.setChessBoard(backUp);
-                    board.repaint();
                     return;
                 }
 
@@ -47,7 +46,7 @@ public class ChessBoardListener implements MouseListener {
 
                 if (game.checkIfChecked(player)) {
                     if (game.checkMate(player)) {
-
+                        System.out.println("Checkmate");
                     }
                 }
             } else if (game.checkPlayerOwnsAPieceOnTargetSquare(game.whoseTurn(), x, y)) {
