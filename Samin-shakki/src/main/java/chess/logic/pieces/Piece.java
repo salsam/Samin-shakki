@@ -29,11 +29,12 @@ public abstract class Piece {
      * piece as well as the owner of piece.
      *
      * @param graphics Graphics object used to draw the image.
+     * @param sideLength length of each squares sides
      */
-    public void draw(Graphics graphics) {
-        int x = this.location.getColumn() * 30;
-        int y = this.location.getRow() * 30;
-        graphics.drawImage(picture, x, y, 30, 30, null);
+    public void draw(Graphics graphics, int sideLength) {
+        int x = this.location.getColumn() * sideLength;
+        int y = this.location.getRow() * sideLength;
+        graphics.drawImage(picture, x, y, sideLength, sideLength, null);
     }
 
     /**

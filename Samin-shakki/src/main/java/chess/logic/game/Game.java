@@ -31,6 +31,11 @@ public class Game {
         checker = new LegalityChecker(board);
     }
 
+    /**
+     * Returns player whose turn is now.
+     *
+     * @return white it is whites turn else black.
+     */
     public Player whoseTurn() {
         if (turn % 2 == 1) {
             return Player.WHITE;
@@ -50,11 +55,14 @@ public class Game {
 
     /**
      * Updates the squares that current player threatens and adds 1 to turn
-     * counter in field turn. Thus changing the player whose turn is now.
+     * counter in field turn. Thus changing the player whose turn is now. After
+     * turn has changed also makes new player's pawns no longer possible to
+     * capture en passant as one turn has passed.
      */
     public void nextTurn() {
         board.updateThreatenedSquares(whoseTurn());
         turn++;
+        makePawnsUnEnPassantable(whoseTurn());
     }
 
     /**
@@ -102,6 +110,7 @@ public class Game {
                     return false;
                 }
                 setChessBoard(backUp.copy());
+                board.updateThreatenedSquares(getOpponent(player));
             }
         }
 
@@ -126,7 +135,7 @@ public class Game {
 
     /**
      * Changes the field movedTwoSquaresLastTurn to false for every pawn player
-     * owns thus making them no longer en passantable.
+     * owns thus making them no longer possible to be captured en passant.
      *
      * @param player player
      */

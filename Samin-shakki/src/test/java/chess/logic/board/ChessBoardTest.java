@@ -56,11 +56,17 @@ public class ChessBoardTest {
     }
 
     @Test
-    public void whitePossibleMovesReturnsAllPossibleMovesInStandardStart() {
+    public void whiteThreatenedSquaresReturnsAllSquaresThreatenedByWhiteInStandardStart() {
         init.initialise(board);
         Set<Square> correct = new HashSet();
+        int[] rows = new int[]{0, 0, 0, 0, 0, 0};
+        int[] cols = new int[]{1, 2, 3, 4, 5, 6};
 
-        for (int i = 2; i < 4; i++) {
+        for (int i = 0; i < cols.length; i++) {
+            correct.add(board.getSquare(cols[i], rows[i]));
+        }
+
+        for (int i = 1; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
                 correct.add(board.getSquare(j, i));
             }
@@ -73,14 +79,17 @@ public class ChessBoardTest {
     }
 
     @Test
-    public void whitePossibleMovesReturnsOnlyPossibleMoves() {
+    public void whiteThreatenedSquaresReturnsOnlyThreatenedSquares() {
         init.initialise(board);
         Set<Square> wrong = new HashSet();
+        int[] cols = new int[]{0, 7};
+        int[] rows = new int[]{0, 0};
 
-        for (int i = 0; i < 8; i++) {
-            if (i == 2 || i == 3) {
-                continue;
-            }
+        for (int i = 0; i < cols.length; i++) {
+            wrong.add(board.getSquare(cols[i], rows[i]));
+        }
+
+        for (int i = 3; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 wrong.add(board.getSquare(j, i));
             }
@@ -93,11 +102,17 @@ public class ChessBoardTest {
     }
 
     @Test
-    public void blackPossibleMovesReturnsAllPossibleMovesInStandardStart() {
+    public void blackThreatenedSquaresReturnsAllSquaresThreatenedByBlackInStandardStart() {
         init.initialise(board);
         Set<Square> correct = new HashSet();
+        int[] rows = new int[]{7, 7, 7, 7, 7, 7};
+        int[] cols = new int[]{1, 2, 3, 4, 5, 6};
 
-        for (int i = 4; i < 6; i++) {
+        for (int i = 0; i < cols.length; i++) {
+            correct.add(board.getSquare(cols[i], rows[i]));
+        }
+
+        for (int i = 5; i < 7; i++) {
             for (int j = 0; j < 8; j++) {
                 correct.add(board.getSquare(j, i));
             }
@@ -110,14 +125,17 @@ public class ChessBoardTest {
     }
 
     @Test
-    public void blackPossibleMovesReturnsOnlyPossibleMoves() {
+    public void blackThreatenedSquaresReturnsOnlySquaresThreatenedByBlack() {
         init.initialise(board);
         Set<Square> wrong = new HashSet();
+        int[] cols = new int[]{0, 7};
+        int[] rows = new int[]{7, 7};
 
-        for (int i = 0; i < 8; i++) {
-            if (i == 4 || i == 5) {
-                continue;
-            }
+        for (int i = 0; i < cols.length; i++) {
+            wrong.add(board.getSquare(cols[i], rows[i]));
+        }
+
+        for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 8; j++) {
                 wrong.add(board.getSquare(j, i));
             }
@@ -130,12 +148,12 @@ public class ChessBoardTest {
     }
 
     @Test
-    public void whitePossibleMovesWorksInMoreComplexSituation() {
+    public void whiteThreatenedSquaresWorksInMoreComplexSituation() {
         init.initialise(board);
-        init.putPieceOnBoard(board, new Queen(board.getSquare(4, 4), Player.WHITE));
+        putPieceOnBoard(board, new Queen(board.getSquare(4, 4), Player.WHITE));
         Queen q = (Queen) board.getSquare(4, 4).getPiece();
         board.updateThreatenedSquares(Player.WHITE);
-        for (Square sq : q.possibleMoves(board)) {
+        for (Square sq : q.threatenedSquares(board)) {
             assertTrue(board.threatenedSquares(Player.WHITE).contains(sq));
         }
     }

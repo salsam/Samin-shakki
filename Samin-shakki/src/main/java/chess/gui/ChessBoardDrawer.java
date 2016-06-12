@@ -18,12 +18,14 @@ public class ChessBoardDrawer extends JPanel {
     private Game game;
     private Set<Square> possibilities;
     private Piece chosen;
+    private int sideLength;
 
     public ChessBoardDrawer() {
     }
 
-    public ChessBoardDrawer(Game game) {
+    public ChessBoardDrawer(Game game, int sideLength) {
         this.game = game;
+        this.sideLength = sideLength;
         super.setBackground(Color.CYAN);
     }
 
@@ -66,10 +68,10 @@ public class ChessBoardDrawer extends JPanel {
                         graphics.setColor(Color.DARK_GRAY);
                     }
                 }
-                graphics.fillRect(30 * i, 30 * j, 30, 30);
+                graphics.fillRect(sideLength * i, sideLength * j, sideLength, sideLength);
 
                 if (board.getSquare(i, j).containsAPiece()) {
-                    board.getSquare(i, j).getPiece().draw(graphics);
+                    board.getSquare(i, j).getPiece().draw(graphics, sideLength);
                 }
             }
         }

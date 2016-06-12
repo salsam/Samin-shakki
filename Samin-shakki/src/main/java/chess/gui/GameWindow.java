@@ -28,9 +28,9 @@ public class GameWindow extends JFrame {
 
     private void initComponents(Container container) {
         JLabel text = new JLabel("Aaaaa");
-        ChessBoardDrawer panel = new ChessBoardDrawer(game);
+        ChessBoardDrawer panel = new ChessBoardDrawer(game, 30);
         panel.setPreferredSize(new Dimension(240, 240));
-        panel.addMouseListener(new ChessBoardListener(panel));
+        panel.addMouseListener(new ChessBoardListener(panel, text, 30));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         container.add(text);
         container.add(panel);
