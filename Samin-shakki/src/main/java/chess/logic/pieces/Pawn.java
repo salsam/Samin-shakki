@@ -184,4 +184,16 @@ public class Pawn extends Piece {
         }
         return location.getRow() == 6;
     }
+
+    /**
+     * Returns last row in the direction this pawn is moving towards.
+     *
+     * @return integer value of last row on board in direction of movement.
+     */
+    public int opposingEnd() {
+        if (owner == Player.BLACK) {
+            return 0;
+        }
+        return 7;
+    }
 }

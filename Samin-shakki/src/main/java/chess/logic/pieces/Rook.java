@@ -18,14 +18,21 @@ import java.util.HashSet;
  */
 public class Rook extends Piece {
 
+    private boolean hasBeenMoved;
+
     public Rook(Square square, Player owner) {
         super(square, owner);
+        hasBeenMoved = false;
 
         if (owner == Player.BLACK) {
             this.picture = ImageLoader.getImage("blackRook1.png");
         } else {
             this.picture = ImageLoader.getImage("whiteRook1.png");
         }
+    }
+
+    public boolean getHasBeenMoved() {
+        return hasBeenMoved;
     }
 
     /**
@@ -37,6 +44,19 @@ public class Rook extends Piece {
     @Override
     public Piece clone(Square location) {
         return new Rook(location, this.owner);
+    }
+
+    /**
+     * This method moves rook on the board and saves true to field hasBeenMoved.
+     *
+     * @see chess.logic.pieces.Piece.move()
+     * @param target square this rook is moving to.
+     * @param board board on which movement happens.
+     */
+    @Override
+    public void move(Square target, ChessBoard board) {
+        hasBeenMoved = true;
+        super.move(target, board);
     }
 
     /**
