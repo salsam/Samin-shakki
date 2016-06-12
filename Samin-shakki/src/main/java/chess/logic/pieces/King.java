@@ -49,6 +49,8 @@ public class King extends Piece {
 
     /**
      * This method moves king on the board and saves true to field hasBeenMoved.
+     * If movement is castling, this method also moves the chosen rook to
+     * correct square. Castling is noticed from king moving two squares.
      *
      * @see chess.logic.pieces.Piece.move()
      * @param target square this king is moving to.
@@ -57,6 +59,16 @@ public class King extends Piece {
     @Override
     public void move(Square target, ChessBoard board) {
         hasBeenMoved = true;
+
+        if (location.getColumn() - target.getColumn() == 2) {
+            Rook rook = (Rook) board.getSquare(0, location.getRow()).getPiece();
+            rook.move(board.getSquare(target.getColumn() + 1, target.getRow()), board);
+        } else if (location.getColumn() - target.getColumn() == -2) {
+            Rook rook = (Rook) board.getSquare(7, location.getRow()).getPiece();
+            rook.move(board.getSquare(target.getColumn() - 1, target.getRow()), board);
+
+        }
+
         super.move(target, board);
     }
 
@@ -91,6 +103,7 @@ public class King extends Piece {
                 .forEach((target) -> {
                     moves.add(target);
                 });
+        addCastling(board, moves);
 
         return moves;
     }
@@ -107,20 +120,24 @@ public class King extends Piece {
                     Piece piece = board.getSquare(cols[i], location.getRow()).getPiece();
                     if (piece.getClass() == Rook.class && piece.getOwner() == owner) {
                         Rook rook = (Rook) piece;
-                        if (!rook.getHasBeenMoved()) {
-                            if (cols[i] < location.getColumn()) {
-                                if (squaresAreAllEmpty(board, cols[i], location.getColumn(), location.getRow())) {
-                                    if (squaresAreAllUnthreatened(board, location.getColumn() - 2, location.getColumn(), location.getRow())) {
-                                        possibilities.add(board.getSquare(location.getColumn() - 2, location.getRow()));
-                                    }
-                                }
-                            } else if (squaresAreAllEmpty(board, location.getColumn(), cols[i], location.getRow())) {
-                                if (squaresAreAllUnthreatened(board, location.getColumn(), location.getColumn() + 2, location.getRow())) {
-                                    possibilities.add(board.getSquare(location.getColumn() + 2, location.getRow()));
-                                }
-                            }
-                        }
+                        addCastlingIfPossible(rook, cols[i], board, possibilities);
                     }
+                }
+            }
+        }
+    }
+
+    private void addCastlingIfPossible(Rook rook, int columnOfRook, ChessBoard board, Set<Square> possibilities) {
+        if (!rook.getHasBeenMoved()) {
+            if (columnOfRook < location.getColumn()) {
+                if (squaresAreAllEmpty(board, columnOfRook, location.getColumn(), location.getRow())) {
+                    if (squaresAreAllUnthreatened(board, location.getColumn() - 2, location.getColumn(), location.getRow())) {
+                        possibilities.add(board.getSquare(location.getColumn() - 2, location.getRow()));
+                    }
+                }
+            } else if (squaresAreAllEmpty(board, location.getColumn(), columnOfRook, location.getRow())) {
+                if (squaresAreAllUnthreatened(board, location.getColumn(), location.getColumn() + 2, location.getRow())) {
+                    possibilities.add(board.getSquare(location.getColumn() + 2, location.getRow()));
                 }
             }
         }
@@ -137,7 +154,7 @@ public class King extends Piece {
     }
 
     private boolean squaresAreAllEmpty(ChessBoard board, int minCol, int maxCol, int row) {
-        for (int col = minCol; col < maxCol + 1; col++) {
+        for (int col = minCol + 1; col < maxCol; col++) {
             if (board.getSquare(col, row).containsAPiece()) {
                 return false;
             }

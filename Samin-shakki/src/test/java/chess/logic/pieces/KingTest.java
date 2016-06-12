@@ -1,7 +1,6 @@
 package chess.logic.pieces;
 
 import chess.logic.board.ChessBoard;
-import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
@@ -37,12 +36,12 @@ public class KingTest {
     }
 
     @Test
-    public void startingcolumnCorrect() {
+    public void startingColumnCorrect() {
         assertEquals(2, king.location.getColumn());
     }
 
     @Test
-    public void startingrowCorrect() {
+    public void startingRowCorrect() {
         assertEquals(3, king.location.getRow());
     }
 
@@ -96,5 +95,41 @@ public class KingTest {
         board.updateThreatenedSquares(Player.BLACK);
 
         assertFalse(king.possibleMoves(board).contains(board.getSquare(2, 4)));
+    }
+
+    @Test
+    public void kingCanCastleKingSideIfAllRequirementsAreMet() {
+        King blackKing = new King(board.getSquare(4, 7), Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, new Rook(board.getSquare(7, 7), Player.BLACK));
+        assertTrue(blackKing.possibleMoves(board).contains(board.getSquare(6, 7)));
+    }
+
+    @Test
+    public void kingCanCastleQueenSideIfAllRequirementsAreMet() {
+        King blackKing = new King(board.getSquare(4, 7), Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, new Rook(board.getSquare(0, 7), Player.BLACK));
+        assertTrue(blackKing.possibleMoves(board).contains(board.getSquare(2, 7)));
+    }
+
+    @Test
+    public void whenCastlingKingSideChosenRookIsAlsoMovedToCorrectSquare() {
+        King blackKing = new King(board.getSquare(4, 7), Player.BLACK);
+        Rook blackRook = new Rook(board.getSquare(7, 7), Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, blackRook);
+        blackKing.move(board.getSquare(6, 7), board);
+        assertEquals(board.getSquare(5, 7), blackRook.getLocation());
+    }
+
+    @Test
+    public void whenCastlingQueenSideChosenRookIsAlsoMovedToCorrectSquare() {
+        King blackKing = new King(board.getSquare(4, 7), Player.BLACK);
+        Rook blackRook = new Rook(board.getSquare(0, 7), Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, blackRook);
+        blackKing.move(board.getSquare(2, 7), board);
+        assertEquals(board.getSquare(3, 7), blackRook.getLocation());
     }
 }
