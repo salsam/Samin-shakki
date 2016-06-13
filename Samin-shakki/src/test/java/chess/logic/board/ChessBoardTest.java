@@ -1,7 +1,7 @@
 package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.pieces.Queen;
+import chess.logic.piecemovers.QueenMover;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -150,8 +150,8 @@ public class ChessBoardTest {
     @Test
     public void whiteThreatenedSquaresWorksInMoreComplexSituation() {
         init.initialise(board);
-        putPieceOnBoard(board, new Queen(board.getSquare(4, 4), Player.WHITE));
-        Queen q = (Queen) board.getSquare(4, 4).getPiece();
+        putPieceOnBoard(board, new QueenMover(board.getSquare(4, 4), Player.WHITE));
+        QueenMover q = (QueenMover) board.getSquare(4, 4).getPiece();
         board.updateThreatenedSquares(Player.WHITE);
         for (Square sq : q.threatenedSquares(board)) {
             assertTrue(board.threatenedSquares(Player.WHITE).contains(sq));
@@ -178,7 +178,7 @@ public class ChessBoardTest {
         init.initialise(board);
         ChessBoard copy = board.copy();
 
-        Queen queen = new Queen(board.getSquare(4, 4), Player.BLACK);
+        QueenMover queen = new QueenMover(board.getSquare(4, 4), Player.BLACK);
         putPieceOnBoard(board, queen);
 
         assertTrue(board.getSquare(4, 4).containsAPiece());

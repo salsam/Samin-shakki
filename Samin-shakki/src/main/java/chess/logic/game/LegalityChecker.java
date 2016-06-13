@@ -2,10 +2,10 @@ package chess.logic.game;
 
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
-import chess.logic.pieces.Piece;
+import chess.logic.piecemovers.PieceMover;
 
 /**
- * This class provides methods to check if playerOwns targeted piece, whether
+ * This class provides methods to check if player owns targeted piece, whether
  * certain movement is legal and whether given input in in allowed form.
  *
  * @author samisalo
@@ -84,7 +84,7 @@ public class LegalityChecker {
      * @return input if input corresponds a possible square. Else empty string
      * "".
      */
-    public boolean checkThatMovementIsLegal(Piece piece, int column, int row) {
+    public boolean checkThatMovementIsLegal(PieceMover piece, int column, int row) {
         return piece.possibleMoves(board).contains(board.getSquare(column, row));
     }
 }

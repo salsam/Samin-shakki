@@ -1,10 +1,12 @@
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
+import chess.logic.piecemovers.PawnMover;
+import chess.logic.piecemovers.RookMover;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -23,7 +25,7 @@ import static org.junit.Assert.*;
  */
 public class RookTest {
 
-    private Rook rook;
+    private RookMover rook;
     private static ChessBoard board;
     private static ChessBoardInitializer init;
     private Set<Square> possibleMoves;
@@ -40,7 +42,7 @@ public class RookTest {
     @Before
     public void setUp() {
         init.initialise(board);
-        rook = new Rook(board.getSquare(3, 5), Player.WHITE);
+        rook = new RookMover(board.getSquare(3, 5), Player.WHITE);
         putPieceOnBoard(board, rook);
         possibleMoves = rook.possibleMoves(board);
     }
@@ -70,7 +72,7 @@ public class RookTest {
 
     @Test
     public void rookCannotOnTopOfOwnPiece() {
-        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.WHITE);
+        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.WHITE);
         putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 1)));
@@ -78,7 +80,7 @@ public class RookTest {
 
     @Test
     public void rookCanMoveOnTopOfEnemyPiece() {
-        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.BLACK);
+        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.BLACK);
         putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertTrue(possibleMoves.contains(new Square(3, 1)));
@@ -86,7 +88,7 @@ public class RookTest {
 
     @Test
     public void rookCannotMovePastAPiece() {
-        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.WHITE);
+        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.WHITE);
         putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 0)));
@@ -94,7 +96,7 @@ public class RookTest {
 
     @Test
     public void rookCannotMovePastOpposingPiece() {
-        Pawn pawn = new Pawn(board.getSquare(3, 1), Player.BLACK);
+        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.BLACK);
         putPieceOnBoard(board, pawn);
         possibleMoves = rook.possibleMoves(board);
         assertFalse(possibleMoves.contains(new Square(3, 0)));

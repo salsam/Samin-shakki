@@ -5,9 +5,9 @@ import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
+import chess.logic.piecemovers.KingMover;
+import chess.logic.piecemovers.PawnMover;
+import chess.logic.piecemovers.PieceMover;
 import java.util.Map;
 
 /**
@@ -73,7 +73,7 @@ public class Game {
      * @return true if player's king is threatened by opposing piece
      */
     public boolean checkIfChecked(Player player) {
-        Map<Player, King> kings = board.getKings();
+        Map<Player, KingMover> kings = board.getKings();
         board.updateThreatenedSquares(getOpponent(player));
         return board.threatenedSquares(getOpponent(player)).contains(kings.get(player).getLocation());
     }
@@ -82,7 +82,6 @@ public class Game {
      * Checks if player owns a piece on square that corresponds given column and
      * row.
      *
-     * @see LegalityChecker.checkPlayerOwnsAPieceOnTargetSquare()
      * @param player chosen player
      * @param column column of target square
      * @param row row of target square.
@@ -101,7 +100,7 @@ public class Game {
      */
     public boolean checkMate(Player player) {
         ChessBoard backUp = board.copy();
-        for (Piece piece : board.getPieces(player)) {
+        for (PieceMover piece : board.getPieces(player)) {
             for (Square possibility : piece.possibleMoves(board)) {
                 piece.move(possibility, board);
                 board.updateThreatenedSquares(getOpponent(player));
@@ -124,7 +123,7 @@ public class Game {
      * @return true player has no legal moves otherwise false.
      */
     public boolean stalemate(Player player) {
-        for (Piece piece : board.getPieces(player)) {
+        for (PieceMover piece : board.getPieces(player)) {
             if (!piece.possibleMoves(board).isEmpty()) {
                 return false;
             }
@@ -141,8 +140,8 @@ public class Game {
      */
     public void makePawnsUnEnPassantable(Player player) {
         board.getPieces(player).stream().forEach(piece -> {
-            if (piece.getClass() == Pawn.class) {
-                Pawn pawn = (Pawn) piece;
+            if (piece.getClass() == PawnMover.class) {
+                PawnMover pawn = (PawnMover) piece;
                 pawn.setMovedTwoSquaresLastTurn(false);
             }
         });

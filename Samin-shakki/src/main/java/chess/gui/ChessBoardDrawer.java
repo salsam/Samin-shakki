@@ -3,7 +3,7 @@ package chess.gui;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Square;
 import chess.logic.game.Game;
-import chess.logic.pieces.Piece;
+import chess.logic.piecemovers.PieceMover;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Set;
@@ -17,7 +17,7 @@ public class ChessBoardDrawer extends JPanel {
 
     private Game game;
     private Set<Square> possibilities;
-    private Piece chosen;
+    private PieceMover chosen;
     private int sideLength;
 
     public ChessBoardDrawer() {
@@ -29,11 +29,11 @@ public class ChessBoardDrawer extends JPanel {
         super.setBackground(Color.CYAN);
     }
 
-    public Piece getChosen() {
+    public PieceMover getChosen() {
         return chosen;
     }
 
-    public void setChosen(Piece chosen) {
+    public void setChosen(PieceMover chosen) {
         this.chosen = chosen;
     }
 

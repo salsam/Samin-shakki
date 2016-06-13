@@ -3,7 +3,7 @@
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
 import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
@@ -15,9 +15,9 @@ import chess.logic.board.Square;
  *
  * @author sami
  */
-public class Knight extends Piece {
+public class KnightMover extends PieceMover {
 
-    public Knight(Square square, Player owner) {
+    public KnightMover(Square square, Player owner) {
         super(square, owner);
 
         if (owner == Player.BLACK) {
@@ -34,8 +34,8 @@ public class Knight extends Piece {
      * @return deep copy of this knight
      */
     @Override
-    public Piece clone(Square location) {
-        return new Knight(location, this.owner);
+    public PieceMover clone(Square location) {
+        return new KnightMover(location, this.owner);
     }
 
     /**

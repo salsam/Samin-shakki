@@ -1,7 +1,7 @@
 package chess.logic.board;
 
-import chess.logic.pieces.King;
-import chess.logic.pieces.Piece;
+import chess.logic.piecemovers.KingMover;
+import chess.logic.piecemovers.PieceMover;
 
 /**
  * All classes that inherit this abstract class are used to initialise different
@@ -21,9 +21,9 @@ public abstract class ChessBoardInitializer {
      */
     public static void addPieceToOwner(Square target, ChessBoard chessBoardLogic) {
         if (target.containsAPiece()) {
-            Piece piece = target.getPiece();
-            if (piece.getClass() == King.class) {
-                chessBoardLogic.getKings().put(piece.getOwner(), (King) piece);
+            PieceMover piece = target.getPiece();
+            if (piece.getClass() == KingMover.class) {
+                chessBoardLogic.getKings().put(piece.getOwner(), (KingMover) piece);
             }
             chessBoardLogic.getPieces(piece.getOwner()).add(piece);
         }
@@ -37,7 +37,7 @@ public abstract class ChessBoardInitializer {
      * @param piece The piece you want to remove.
      * @param chessBoardLogic ChessBoardLogic where piece will be removed from
      */
-    public static void removePieceFromOwner(Piece piece, ChessBoard chessBoardLogic) {
+    public static void removePieceFromOwner(PieceMover piece, ChessBoard chessBoardLogic) {
         chessBoardLogic.getPieces(piece.getOwner()).remove(piece);
     }
 
@@ -56,7 +56,7 @@ public abstract class ChessBoardInitializer {
      * @param board board Piece will be placed on.
      * @param piece piece Piece to be placed.
      */
-    public static void putPieceOnBoard(ChessBoard board, Piece piece) {
+    public static void putPieceOnBoard(ChessBoard board, PieceMover piece) {
         if (board.withinTable(piece.getLocation().getColumn(), piece.getLocation().getRow())) {
 
             board.getSquare(piece.getLocation().getColumn(), piece.getLocation().getRow()).setPiece(piece);

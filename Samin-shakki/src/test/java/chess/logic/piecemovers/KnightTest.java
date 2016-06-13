@@ -1,5 +1,6 @@
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
+import chess.logic.piecemovers.KnightMover;
 import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
@@ -18,7 +19,7 @@ import org.junit.Test;
  */
 public class KnightTest {
 
-    private Knight knight;
+    private KnightMover knight;
     private ChessBoard board;
     private ChessBoardInitializer init;
     private Set<Square> possibleMoves;
@@ -31,7 +32,7 @@ public class KnightTest {
         board = new ChessBoard();
         init = new EmptyBoardInitializer();
         init.initialise(board);
-        knight = new Knight(board.getSquare(4, 4), Player.WHITE);
+        knight = new KnightMover(board.getSquare(4, 4), Player.WHITE);
         putPieceOnBoard(board, knight);
         possibleMoves = knight.possibleMoves(board);
     }
@@ -51,7 +52,7 @@ public class KnightTest {
 
     @Test
     public void knightCannotMoveOverTheEdge() {
-        knight = new Knight(board.getSquare(0, 0), Player.WHITE);
+        knight = new KnightMover(board.getSquare(0, 0), Player.WHITE);
         putPieceOnBoard(board, knight);
         assertFalse(knight.possibleMoves(board).contains(new Square(-1, -2)));
         assertFalse(knight.possibleMoves(board).contains(new Square(1, -2)));

@@ -1,8 +1,8 @@
 package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.addPieceToOwner;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Piece;
+import chess.logic.piecemovers.KingMover;
+import chess.logic.piecemovers.PieceMover;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,11 +20,11 @@ import java.util.Set;
 public class ChessBoard {
 
     private Square[][] board;
-    private List<Piece> whitePieces;
-    private List<Piece> blackPieces;
+    private List<PieceMover> whitePieces;
+    private List<PieceMover> blackPieces;
     private Set<Square> squaresThreatenedByBlack;
     private Set<Square> squaresThreatenedByWhite;
-    private Map<Player, King> kings;
+    private Map<Player, KingMover> kings;
 
     public ChessBoard() {
         initializeBoard();
@@ -70,7 +70,7 @@ public class ChessBoard {
      *
      * @return map with references from each player to their king.
      */
-    public Map<Player, King> getKings() {
+    public Map<Player, KingMover> getKings() {
         return this.kings;
     }
 
@@ -94,7 +94,7 @@ public class ChessBoard {
      * @param player player whose pieces you want.
      * @return list containing all pieces owned by the player.
      */
-    public List<Piece> getPieces(Player player) {
+    public List<PieceMover> getPieces(Player player) {
         if (player == Player.WHITE) {
             return whitePieces;
         } else {

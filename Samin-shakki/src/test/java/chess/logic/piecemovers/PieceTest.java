@@ -1,5 +1,8 @@
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
+import chess.logic.piecemovers.PawnMover;
+import chess.logic.piecemovers.PieceMover;
+import chess.logic.piecemovers.QueenMover;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
@@ -16,8 +19,8 @@ import org.junit.Test;
  */
 public class PieceTest {
 
-    private Piece piece;
-    private Piece pawn;
+    private PieceMover piece;
+    private PieceMover pawn;
     private static ChessBoard board;
     private static ChessBoardInitializer init;
 
@@ -33,8 +36,8 @@ public class PieceTest {
     @Before
     public void setUp() {
         init.initialise(board);
-        piece = new Queen(board.getSquare(3, 4), Player.WHITE);
-        pawn = new Pawn(board.getSquare(3, 6), Player.BLACK);
+        piece = new QueenMover(board.getSquare(3, 4), Player.WHITE);
+        pawn = new PawnMover(board.getSquare(3, 6), Player.BLACK);
         putPieceOnBoard(board, pawn);
         putPieceOnBoard(board, piece);
     }

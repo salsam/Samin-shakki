@@ -1,4 +1,4 @@
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
 import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
@@ -8,11 +8,11 @@ import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 
-public class Pawn extends Piece {
+public class PawnMover extends PieceMover {
 
     private boolean movedTwoSquaresLastTurn;
 
-    public Pawn(Square square, Player owner) {
+    public PawnMover(Square square, Player owner) {
         super(square, owner);
         movedTwoSquaresLastTurn = false;
 
@@ -30,8 +30,8 @@ public class Pawn extends Piece {
      * @return deep copy of this pawn
      */
     @Override
-    public Piece clone(Square location) {
-        return new Pawn(location, this.owner);
+    public PieceMover clone(Square location) {
+        return new PawnMover(location, this.owner);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Pawn extends Piece {
 
         if (!target.containsAPiece() && target.getColumn() != this.location.getColumn()) {
             Square enpassanted = board.getSquare(target.getColumn(), target.getRow() - this.owner.getDirection());
-            Piece piece = enpassanted.getPiece();
+            PieceMover piece = enpassanted.getPiece();
             removePieceFromOwner(piece, board);
             enpassanted.setPiece(null);
         }
@@ -111,7 +111,7 @@ public class Pawn extends Piece {
                 target = board.getSquare(this.location.getColumn() + columnChange[i], this.location.getRow());
 
                 if (targetContainsAnEnemyPawn(target)) {
-                    Pawn opposingPawn = (Pawn) target.getPiece();
+                    PawnMover opposingPawn = (PawnMover) target.getPiece();
                     if (opposingPawn.getMovedTwoSquaresLastTurn()) {
                         squares.add(board.getSquare(target.getColumn(), target.getRow() + this.owner.getDirection()));
                     }
@@ -129,7 +129,7 @@ public class Pawn extends Piece {
             return false;
         }
 
-        return target.getPiece().getClass() == Pawn.class;
+        return target.getPiece().getClass() == PawnMover.class;
     }
 
     /**

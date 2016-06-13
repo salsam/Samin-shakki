@@ -1,4 +1,4 @@
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
 import static chess.logic.board.ChessBoardInitializer.removePieceFromOwner;
 import chess.logic.board.ChessBoard;
@@ -9,20 +9,20 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 
-public abstract class Piece {
+public abstract class PieceMover {
 
     protected Square location;
     protected Player owner;
     protected BufferedImage picture;
 
-    public Piece(Square square, Player owner) {
+    public PieceMover(Square square, Player owner) {
         this.location = square;
         this.owner = owner;
     }
 
     public abstract Set<Square> threatenedSquares(ChessBoard board);
 
-    public abstract Piece clone(Square location);
+    public abstract PieceMover clone(Square location);
 
     /**
      * Draws a picture of this piece. Picture depends on the class of chosen

@@ -3,7 +3,7 @@
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
 import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
@@ -17,11 +17,11 @@ import java.util.HashSet;
  *
  * @author sami
  */
-public class King extends Piece {
+public class KingMover extends PieceMover {
 
     private boolean hasBeenMoved;
 
-    public King(Square square, Player owner) {
+    public KingMover(Square square, Player owner) {
         super(square, owner);
         hasBeenMoved = false;
 
@@ -43,8 +43,8 @@ public class King extends Piece {
      * @return deep copy of this king
      */
     @Override
-    public Piece clone(Square location) {
-        return new King(location, this.owner);
+    public PieceMover clone(Square location) {
+        return new KingMover(location, this.owner);
     }
 
     /**
@@ -61,10 +61,10 @@ public class King extends Piece {
         hasBeenMoved = true;
 
         if (location.getColumn() - target.getColumn() == 2) {
-            Rook rook = (Rook) board.getSquare(0, location.getRow()).getPiece();
+            RookMover rook = (RookMover) board.getSquare(0, location.getRow()).getPiece();
             rook.move(board.getSquare(target.getColumn() + 1, target.getRow()), board);
         } else if (location.getColumn() - target.getColumn() == -2) {
-            Rook rook = (Rook) board.getSquare(7, location.getRow()).getPiece();
+            RookMover rook = (RookMover) board.getSquare(7, location.getRow()).getPiece();
             rook.move(board.getSquare(target.getColumn() - 1, target.getRow()), board);
 
         }
@@ -117,9 +117,9 @@ public class King extends Piece {
         if (!hasBeenMoved) {
             for (int i = 0; i < 2; i++) {
                 if (board.getSquare(cols[i], location.getRow()).containsAPiece()) {
-                    Piece piece = board.getSquare(cols[i], location.getRow()).getPiece();
-                    if (piece.getClass() == Rook.class && piece.getOwner() == owner) {
-                        Rook rook = (Rook) piece;
+                    PieceMover piece = board.getSquare(cols[i], location.getRow()).getPiece();
+                    if (piece.getClass() == RookMover.class && piece.getOwner() == owner) {
+                        RookMover rook = (RookMover) piece;
                         addCastlingIfPossible(rook, cols[i], board, possibilities);
                     }
                 }
@@ -127,18 +127,28 @@ public class King extends Piece {
         }
     }
 
-    private void addCastlingIfPossible(Rook rook, int columnOfRook, ChessBoard board, Set<Square> possibilities) {
+    private void addCastlingIfPossible(RookMover rook, int columnOfRook, ChessBoard board, Set<Square> possibilities) {
         if (!rook.getHasBeenMoved()) {
             if (columnOfRook < location.getColumn()) {
-                if (squaresAreAllEmpty(board, columnOfRook, location.getColumn(), location.getRow())) {
-                    if (squaresAreAllUnthreatened(board, location.getColumn() - 2, location.getColumn(), location.getRow())) {
-                        possibilities.add(board.getSquare(location.getColumn() - 2, location.getRow()));
-                    }
-                }
-            } else if (squaresAreAllEmpty(board, location.getColumn(), columnOfRook, location.getRow())) {
-                if (squaresAreAllUnthreatened(board, location.getColumn(), location.getColumn() + 2, location.getRow())) {
-                    possibilities.add(board.getSquare(location.getColumn() + 2, location.getRow()));
-                }
+                addPossibilityToCastleRight(board, columnOfRook, possibilities);
+            } else {
+                addPossibilityToCastleLeft(board, columnOfRook, possibilities);
+            }
+        }
+    }
+
+    private void addPossibilityToCastleLeft(ChessBoard board, int columnOfRook, Set<Square> possibilities) {
+        if (squaresAreAllEmpty(board, location.getColumn(), columnOfRook, location.getRow())) {
+            if (squaresAreAllUnthreatened(board, location.getColumn(), location.getColumn() + 2, location.getRow())) {
+                possibilities.add(board.getSquare(location.getColumn() + 2, location.getRow()));
+            }
+        }
+    }
+
+    private void addPossibilityToCastleRight(ChessBoard board, int columnOfRook, Set<Square> possibilities) {
+        if (squaresAreAllEmpty(board, columnOfRook, location.getColumn(), location.getRow())) {
+            if (squaresAreAllUnthreatened(board, location.getColumn() - 2, location.getColumn(), location.getRow())) {
+                possibilities.add(board.getSquare(location.getColumn() - 2, location.getRow()));
             }
         }
     }

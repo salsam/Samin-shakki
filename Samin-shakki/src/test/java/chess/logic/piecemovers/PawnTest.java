@@ -1,5 +1,6 @@
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
+import chess.logic.piecemovers.PawnMover;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -16,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class PawnTest {
 
-    private Pawn pawn;
+    private PawnMover pawn;
     private ChessBoard board;
     private ChessBoardInitializer init;
 
@@ -28,7 +29,7 @@ public class PawnTest {
         init = new EmptyBoardInitializer();
         board = new ChessBoard();
         init.initialise(board);
-        pawn = new Pawn(board.getSquare(2, 1), Player.WHITE);
+        pawn = new PawnMover(board.getSquare(2, 1), Player.WHITE);
         putPieceOnBoard(board, pawn);
     }
 
@@ -64,41 +65,41 @@ public class PawnTest {
 
     @Test
     public void pawnCannotMoveTwoStepsUpFromOtherLocations() {
-        pawn = new Pawn(board.getSquare(2, 2), Player.WHITE);
+        pawn = new PawnMover(board.getSquare(2, 2), Player.WHITE);
         assertFalse(pawn.possibleMoves(board).contains(new Square(2, 4)));
     }
 
     @Test
     public void pawnCanTakeAPieceDiagonallyForwardToRight() {
-        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.BLACK);
+        PawnMover enemyPawn = new PawnMover(board.getSquare(3, 2), Player.BLACK);
         putPieceOnBoard(board, enemyPawn);
         assertTrue(pawn.possibleMoves(board).contains(new Square(3, 2)));
     }
 
     @Test
     public void pawnCanTakeAPieceDiagonallyForwardToLeft() {
-        Pawn enemyPawn = new Pawn(board.getSquare(1, 2), Player.BLACK);
+        PawnMover enemyPawn = new PawnMover(board.getSquare(1, 2), Player.BLACK);
         putPieceOnBoard(board, enemyPawn);
         assertTrue(pawn.possibleMoves(board).contains(new Square(1, 2)));
     }
 
     @Test
     public void pawnCannotTakeOwnPieceDiagonallyForward() {
-        Pawn enemyPawn = new Pawn(board.getSquare(3, 2), Player.WHITE);
+        PawnMover enemyPawn = new PawnMover(board.getSquare(3, 2), Player.WHITE);
         putPieceOnBoard(board, enemyPawn);
         assertFalse(pawn.possibleMoves(board).contains(new Square(3, 2)));
     }
 
     @Test
     public void pawnCannotMoveOverTheEdge() {
-        pawn = new Pawn(board.getSquare(0, 7), Player.WHITE);
+        pawn = new PawnMover(board.getSquare(0, 7), Player.WHITE);
         putPieceOnBoard(board, pawn);
         assertFalse(pawn.possibleMoves(board).contains(new Square(0, 8)));
     }
 
     @Test
     public void pawnCanEnPassantOpposingPawnThatMovedTwoSquaresLastTurn() {
-        Pawn opposingPawn = new Pawn(board.getSquare(3, 3), Player.BLACK);
+        PawnMover opposingPawn = new PawnMover(board.getSquare(3, 3), Player.BLACK);
         putPieceOnBoard(board, opposingPawn);
         opposingPawn.move(board.getSquare(3, 1), board);
         assertTrue(pawn.possibleMoves(board).contains(new Square(3, 2)));
@@ -106,7 +107,7 @@ public class PawnTest {
 
     @Test
     public void whenEnPassantingOpposingPawnIsRemovedFromBoard() {
-        Pawn opposingPawn = new Pawn(board.getSquare(3, 3), Player.BLACK);
+        PawnMover opposingPawn = new PawnMover(board.getSquare(3, 3), Player.BLACK);
         putPieceOnBoard(board, opposingPawn);
         opposingPawn.move(board.getSquare(3, 1), board);
         pawn.move(board.getSquare(3, 2), board);

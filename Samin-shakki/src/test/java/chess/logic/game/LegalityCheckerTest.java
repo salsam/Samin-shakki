@@ -3,7 +3,7 @@ package chess.logic.game;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
-import chess.logic.pieces.Pawn;
+import chess.logic.piecemovers.PawnMover;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -48,13 +48,13 @@ public class LegalityCheckerTest {
 
     @Test
     public void checkPlayerOwnsAPieceOnTargetSquareReturnsFalseIfTargetSquareContainsOpposingPiece() {
-        putPieceOnBoard(board, new Pawn(board.getSquare(2, 2), Player.WHITE));
+        putPieceOnBoard(board, new PawnMover(board.getSquare(2, 2), Player.WHITE));
         assertFalse(checker.checkPlayerOwnsAPieceOnTheTargetSquare(Player.BLACK, 2, 2));
     }
 
     @Test
     public void checkPlayerOwnsAPieceOnTargetSquareReturnsTrueIfTargetSquareContainsOwnPiece() {
-        putPieceOnBoard(board, new Pawn(board.getSquare(2, 2), Player.WHITE));
+        putPieceOnBoard(board, new PawnMover(board.getSquare(2, 2), Player.WHITE));
         assertTrue(checker.checkPlayerOwnsAPieceOnTheTargetSquare(Player.WHITE, 2, 2));
     }
 }

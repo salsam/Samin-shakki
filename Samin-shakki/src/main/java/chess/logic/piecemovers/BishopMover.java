@@ -3,7 +3,7 @@
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
 import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
@@ -17,9 +17,9 @@ import java.util.HashSet;
  *
  * @author sami
  */
-public class Bishop extends Piece {
+public class BishopMover extends PieceMover {
 
-    public Bishop(Square square, Player owner) {
+    public BishopMover(Square square, Player owner) {
         super(square, owner);
 
         if (owner == Player.BLACK) {
@@ -36,8 +36,8 @@ public class Bishop extends Piece {
      * @return deep copy of this bishop
      */
     @Override
-    public Piece clone(Square location) {
-        return new Bishop(location, this.owner);
+    public PieceMover clone(Square location) {
+        return new BishopMover(location, this.owner);
     }
 
     /**

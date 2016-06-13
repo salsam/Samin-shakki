@@ -1,6 +1,6 @@
 package chess.logic.board;
 
-import chess.logic.pieces.Piece;
+import chess.logic.piecemovers.PieceMover;
 
 /**
  * Square class is responsible for keeping track of its location and possible
@@ -12,7 +12,7 @@ public class Square {
 
     private int column;
     private int row;
-    private Piece piece;
+    private PieceMover piece;
 
     public Square(int column, int row) {
         this.column = column;
@@ -27,11 +27,11 @@ public class Square {
         return row;
     }
 
-    public Piece getPiece() {
+    public PieceMover getPiece() {
         return piece;
     }
 
-    public void setPiece(Piece piece) {
+    public void setPiece(PieceMover piece) {
         this.piece = piece;
     }
 

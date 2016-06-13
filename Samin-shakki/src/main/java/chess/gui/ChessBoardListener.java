@@ -6,9 +6,9 @@ import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.game.Game;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
-import chess.logic.pieces.Queen;
+import chess.logic.piecemovers.PawnMover;
+import chess.logic.piecemovers.PieceMover;
+import chess.logic.piecemovers.QueenMover;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -41,7 +41,7 @@ public class ChessBoardListener implements MouseListener {
             if (board.getChosen() != null && board.getPossibilities().contains(cbl.getSquare(column, row))) {
                 moveToTargetLocation(column, row, game, player);
             } else if (game.checkPlayerOwnsAPieceOnTargetSquare(game.whoseTurn(), column, row)) {
-                Piece piece = cbl.getSquare(column, row).getPiece();
+                PieceMover piece = cbl.getSquare(column, row).getPiece();
                 board.setChosen(piece);
             }
             
@@ -66,11 +66,11 @@ public class ChessBoardListener implements MouseListener {
     
     private void promote(int column, int row) {
         ChessBoard cbl = board.getGame().getChessBoard();
-        Piece piece = cbl.getSquare(column, row).getPiece();
-        if (piece.getClass() == Pawn.class) {
-            Pawn chosenPawn = (Pawn) piece;
+        PieceMover piece = cbl.getSquare(column, row).getPiece();
+        if (piece.getClass() == PawnMover.class) {
+            PawnMover chosenPawn = (PawnMover) piece;
             if (chosenPawn.opposingEnd() == row) {
-                putPieceOnBoard(cbl, new Queen(chosenPawn.getLocation(), chosenPawn.getOwner()));
+                putPieceOnBoard(cbl, new QueenMover(chosenPawn.getLocation(), chosenPawn.getOwner()));
                 ChessBoardInitializer.removePieceFromOwner(chosenPawn, cbl);
             }
         }

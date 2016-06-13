@@ -1,6 +1,6 @@
 package chess.logic.board;
 
-import chess.logic.pieces.Pawn;
+import chess.logic.piecemovers.PawnMover;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.After;
@@ -65,7 +65,7 @@ public class SquareTest {
 
     @Test
     public void pieceCorrectIfNotNull() {
-        Pawn pawn = new Pawn(new Square(2, 1), Player.WHITE);
+        PawnMover pawn = new PawnMover(new Square(2, 1), Player.WHITE);
         square.setPiece(pawn);
         assertEquals(pawn, square.getPiece());
     }

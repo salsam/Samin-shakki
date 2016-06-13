@@ -4,9 +4,9 @@ import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.Player;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Queen;
-import chess.logic.pieces.Rook;
+import chess.logic.piecemovers.KingMover;
+import chess.logic.piecemovers.QueenMover;
+import chess.logic.piecemovers.RookMover;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class GameTest {
     public void setUp() {
         game = new Game(new EmptyBoardInitializer());
         ChessBoard board = game.getChessBoard();
-        putPieceOnBoard(board, new King(board.getSquare(0, 0), Player.WHITE));
+        putPieceOnBoard(board, new KingMover(board.getSquare(0, 0), Player.WHITE));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class GameTest {
     @Test
     public void checkIfCheckedReturnsTrueIfKingIsChecked() {
         ChessBoard board = game.getChessBoard();
-        putPieceOnBoard(board, new Queen(board.getSquare(1, 1), Player.BLACK));
+        putPieceOnBoard(board, new QueenMover(board.getSquare(1, 1), Player.BLACK));
         assertTrue(game.checkIfChecked(Player.WHITE));
     }
 
@@ -50,25 +50,25 @@ public class GameTest {
     @Test
     public void checkMateTrueIfKingCheckedAndCheckCannotBePrevented() {
         ChessBoard board = game.getChessBoard();
-        putPieceOnBoard(board, new Queen(board.getSquare(1, 1), Player.BLACK));
-        putPieceOnBoard(board, new King(board.getSquare(2, 2), Player.BLACK));
+        putPieceOnBoard(board, new QueenMover(board.getSquare(1, 1), Player.BLACK));
+        putPieceOnBoard(board, new KingMover(board.getSquare(2, 2), Player.BLACK));
         assertTrue(game.checkMate(Player.WHITE));
     }
 
     @Test
     public void checkMateFalseIfKingCheckedButCheckingPieceCanBeTaken() {
         ChessBoard board = game.getChessBoard();
-        putPieceOnBoard(board, new Queen(board.getSquare(1, 0), Player.BLACK));
+        putPieceOnBoard(board, new QueenMover(board.getSquare(1, 0), Player.BLACK));
         assertFalse(game.checkMate(Player.WHITE));
     }
 
     @Test
     public void checkMateFalseIfCheckCanBeBlocked() {
         ChessBoard board = game.getChessBoard();
-        putPieceOnBoard(board, new Queen(board.getSquare(6, 6), Player.BLACK));
-        putPieceOnBoard(board, new Rook(board.getSquare(1, 6), Player.BLACK));
-        putPieceOnBoard(board, new Rook(board.getSquare(6, 1), Player.BLACK));
-        putPieceOnBoard(board, new Rook(board.getSquare(4, 1), Player.WHITE));
+        putPieceOnBoard(board, new QueenMover(board.getSquare(6, 6), Player.BLACK));
+        putPieceOnBoard(board, new RookMover(board.getSquare(1, 6), Player.BLACK));
+        putPieceOnBoard(board, new RookMover(board.getSquare(6, 1), Player.BLACK));
+        putPieceOnBoard(board, new RookMover(board.getSquare(4, 1), Player.WHITE));
 
     }
 }

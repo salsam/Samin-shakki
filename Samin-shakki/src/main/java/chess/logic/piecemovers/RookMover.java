@@ -3,7 +3,7 @@
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.logic.pieces;
+package chess.logic.piecemovers;
 
 import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
@@ -16,11 +16,11 @@ import java.util.HashSet;
  *
  * @author sami
  */
-public class Rook extends Piece {
+public class RookMover extends PieceMover {
 
     private boolean hasBeenMoved;
 
-    public Rook(Square square, Player owner) {
+    public RookMover(Square square, Player owner) {
         super(square, owner);
         hasBeenMoved = false;
 
@@ -42,8 +42,8 @@ public class Rook extends Piece {
      * @return deep copy of this rook
      */
     @Override
-    public Piece clone(Square location) {
-        return new Rook(location, this.owner);
+    public PieceMover clone(Square location) {
+        return new RookMover(location, this.owner);
     }
 
     /**

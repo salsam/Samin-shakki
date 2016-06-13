@@ -1,13 +1,13 @@
 package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.pieces.Bishop;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Knight;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
-import chess.logic.pieces.Queen;
-import chess.logic.pieces.Rook;
+import chess.logic.piecemovers.BishopMover;
+import chess.logic.piecemovers.KingMover;
+import chess.logic.piecemovers.KnightMover;
+import chess.logic.piecemovers.PawnMover;
+import chess.logic.piecemovers.PieceMover;
+import chess.logic.piecemovers.QueenMover;
+import chess.logic.piecemovers.RookMover;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,7 +51,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
         int[] rows = new int[]{1, 6};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Pawn(board.getSquare(0, 1), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new PawnMover(board.getSquare(0, 1), Player.WHITE));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{0, 7, 0, 7};
         int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Rook(board.getSquare(0, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new RookMover(board.getSquare(0, 0), Player.WHITE));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{1, 6, 1, 6};
         int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Knight(board.getSquare(1, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new KnightMover(board.getSquare(1, 0), Player.WHITE));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{2, 5, 2, 5};
         int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Bishop(board.getSquare(2, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new BishopMover(board.getSquare(2, 0), Player.WHITE));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{4, 3};
         int[] rows = new int[]{0, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new King(board.getSquare(4, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new KingMover(board.getSquare(4, 0), Player.WHITE));
     }
 
     @Test
@@ -91,10 +91,10 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{3, 4};
         int[] rows = new int[]{0, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Queen(board.getSquare(3, 0), Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new QueenMover(board.getSquare(3, 0), Player.WHITE));
     }
 
-    private void testThatSquaresHavePieceOfCorrectClass(int[] rows, int[] columns, Piece piece) {
+    private void testThatSquaresHavePieceOfCorrectClass(int[] rows, int[] columns, PieceMover piece) {
         for (int i = 0; i < rows.length; i++) {
             for (int j = 0; j < columns.length; j++) {
                 assertEquals(piece.getClass(), board.getSquare(columns[i], rows[i]).getPiece().getClass());
@@ -126,10 +126,10 @@ public class StandardBoardInitializerTest {
     }
 
     public void putPieceOnBoardPutsCorrectPieceInCorrectSpot() {
-        Pawn pawn = new Pawn(board.getSquare(5, 4), Player.WHITE);
+        PawnMover pawn = new PawnMover(board.getSquare(5, 4), Player.WHITE);
         putPieceOnBoard(board, pawn);
         assertTrue(board.getSquare(5, 4).containsAPiece());
-        assertEquals(Pawn.class, board.getSquare(5, 4).getPiece().getClass());
+        assertEquals(PawnMover.class, board.getSquare(5, 4).getPiece().getClass());
         assertEquals(Player.WHITE, board.getSquare(5, 4).getPiece().getOwner());
     }
 }
