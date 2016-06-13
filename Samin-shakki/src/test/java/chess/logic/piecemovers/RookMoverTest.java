@@ -5,15 +5,14 @@ package chess.logic.piecemovers;
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-import chess.logic.piecemovers.PawnMover;
-import chess.logic.piecemovers.RookMover;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
-import java.util.Set;
+import chess.pieces.Pawn;
+import chess.pieces.Rook;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,33 +22,33 @@ import static org.junit.Assert.*;
  *
  * @author sami
  */
-public class RookTest {
+public class RookMoverTest {
 
-    private RookMover rook;
+    private Rook rook;
     private static ChessBoard board;
     private static ChessBoardInitializer init;
-    private Set<Square> possibleMoves;
+    private static RookMover rookMover;
 
-    public RookTest() {
+    public RookMoverTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
         board = new ChessBoard();
         init = new EmptyBoardInitializer();
+        rookMover = new RookMover();
     }
 
     @Before
     public void setUp() {
         init.initialise(board);
-        rook = new RookMover(board.getSquare(3, 5), Player.WHITE);
+        rook = new Rook(3, 5, Player.WHITE);
         putPieceOnBoard(board, rook);
-        possibleMoves = rook.possibleMoves(board);
     }
 
     @Test
     public void rookCannotStayStill() {
-        assertFalse(possibleMoves.contains(new Square(3, 5)));
+        assertFalse(rookMover.possibleMoves(rook, board).contains(new Square(3, 5)));
     }
 
     @Test
@@ -57,7 +56,7 @@ public class RookTest {
         int[] columns = new int[]{0, 1, 2, 4, 5, 6, 7};
 
         for (int i = 0; i < columns.length; i++) {
-            assertTrue(possibleMoves.contains(new Square(columns[i], 5)));
+            assertTrue(rookMover.possibleMoves(rook, board).contains(new Square(columns[i], 5)));
         }
     }
 
@@ -66,39 +65,35 @@ public class RookTest {
         int[] rows = new int[]{0, 1, 2, 3, 4, 6, 7};
 
         for (int i = 0; i < rows.length; i++) {
-            assertTrue(possibleMoves.contains(new Square(3, rows[i])));
+            assertTrue(rookMover.possibleMoves(rook, board).contains(new Square(3, rows[i])));
         }
     }
 
     @Test
     public void rookCannotOnTopOfOwnPiece() {
-        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.WHITE);
+        Pawn pawn = new Pawn(3, 1, Player.WHITE);
         putPieceOnBoard(board, pawn);
-        possibleMoves = rook.possibleMoves(board);
-        assertFalse(possibleMoves.contains(new Square(3, 1)));
+        assertFalse(rookMover.possibleMoves(rook, board).contains(new Square(3, 1)));
     }
 
     @Test
     public void rookCanMoveOnTopOfEnemyPiece() {
-        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.BLACK);
+        Pawn pawn = new Pawn(3, 1, Player.BLACK);
         putPieceOnBoard(board, pawn);
-        possibleMoves = rook.possibleMoves(board);
-        assertTrue(possibleMoves.contains(new Square(3, 1)));
+        assertTrue(rookMover.possibleMoves(rook, board).contains(new Square(3, 1)));
     }
 
     @Test
     public void rookCannotMovePastAPiece() {
-        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.WHITE);
+        Pawn pawn = new Pawn(3, 1, Player.WHITE);
         putPieceOnBoard(board, pawn);
-        possibleMoves = rook.possibleMoves(board);
-        assertFalse(possibleMoves.contains(new Square(3, 0)));
+        assertFalse(rookMover.possibleMoves(rook, board).contains(new Square(3, 0)));
     }
 
     @Test
     public void rookCannotMovePastOpposingPiece() {
-        PawnMover pawn = new PawnMover(board.getSquare(3, 1), Player.BLACK);
+        Pawn pawn = new Pawn(3, 1, Player.BLACK);
         putPieceOnBoard(board, pawn);
-        possibleMoves = rook.possibleMoves(board);
-        assertFalse(possibleMoves.contains(new Square(3, 0)));
+        assertFalse(rookMover.possibleMoves(rook, board).contains(new Square(3, 0)));
     }
 }

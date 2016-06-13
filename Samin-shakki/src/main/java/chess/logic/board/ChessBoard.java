@@ -1,8 +1,9 @@
 package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.addPieceToOwner;
-import chess.logic.piecemovers.KingMover;
-import chess.logic.piecemovers.PieceMover;
+import chess.logic.game.MovementLogic;
+import chess.pieces.King;
+import chess.pieces.Piece;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,14 +21,16 @@ import java.util.Set;
 public class ChessBoard {
 
     private Square[][] board;
-    private List<PieceMover> whitePieces;
-    private List<PieceMover> blackPieces;
+    private List<Piece> whitePieces;
+    private List<Piece> blackPieces;
     private Set<Square> squaresThreatenedByBlack;
     private Set<Square> squaresThreatenedByWhite;
-    private Map<Player, KingMover> kings;
+    private MovementLogic movementLogic;
+    private Map<Player, King> kings;
 
     public ChessBoard() {
         initializeBoard();
+        movementLogic = new MovementLogic();
         this.blackPieces = new ArrayList<>();
         this.whitePieces = new ArrayList<>();
         this.squaresThreatenedByBlack = new HashSet();
@@ -56,6 +59,10 @@ public class ChessBoard {
         return board;
     }
 
+    public MovementLogic getMovementLogic() {
+        return movementLogic;
+    }
+
     /**
      * Sets the board given as parameter to field board.
      *
@@ -70,7 +77,7 @@ public class ChessBoard {
      *
      * @return map with references from each player to their king.
      */
-    public Map<Player, KingMover> getKings() {
+    public Map<Player, King> getKings() {
         return this.kings;
     }
 
@@ -94,7 +101,7 @@ public class ChessBoard {
      * @param player player whose pieces you want.
      * @return list containing all pieces owned by the player.
      */
-    public List<PieceMover> getPieces(Player player) {
+    public List<Piece> getPieces(Player player) {
         if (player == Player.WHITE) {
             return whitePieces;
         } else {
@@ -131,7 +138,7 @@ public class ChessBoard {
         Set<Square> set = new HashSet();
 
         blackPieces.stream().forEach((blackPiece) -> {
-            set.addAll(blackPiece.threatenedSquares(this));
+            set.addAll(movementLogic.threatenedSquares(blackPiece, this));
         });
 
         return set;
@@ -141,7 +148,7 @@ public class ChessBoard {
         Set<Square> set = new HashSet();
 
         whitePieces.stream().forEach((whitePiece) -> {
-            set.addAll(whitePiece.threatenedSquares(this));
+            set.addAll(movementLogic.threatenedSquares(whitePiece, this));
         });
 
         return set;

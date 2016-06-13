@@ -6,38 +6,49 @@ import chess.logic.board.Player;
  *
  * @author samisalo
  */
-public class Pawn {
+public class Pawn extends Piece {
 
-    private Player owner;
-    private int column;
-    private int row;
     private boolean movedTwoSquaresLastTurn;
+    private boolean hasBeenMoved;
 
-    public Pawn(Player owner, int column, int row) {
-        this.owner = owner;
-        this.column = column;
-        this.row = row;
+    public Pawn(int column, int row, Player owner) {
+        super(column, row, owner);
         movedTwoSquaresLastTurn = false;
+        hasBeenMoved = false;
     }
 
-    public Player getOwner() {
-        return owner;
+    public boolean getHasBeenMoved() {
+        return hasBeenMoved;
     }
 
-    public int getColumn() {
-        return column;
+    public void setHasBeenMoved(boolean hasBeenMoved) {
+        this.hasBeenMoved = hasBeenMoved;
     }
 
-    public void setColumn(int column) {
-        this.column = column;
+    public boolean getMovedTwoSquaresLastTurn() {
+        return movedTwoSquaresLastTurn;
     }
 
-    public int getRow() {
-        return row;
+    public void setMovedTwoSquaresLastTurn(boolean movedTwoSquaresLastTurn) {
+        this.movedTwoSquaresLastTurn = movedTwoSquaresLastTurn;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    @Override
+    public Piece clone() {
+        Pawn clone = new Pawn(column, row, owner);
+        clone.setMovedTwoSquaresLastTurn(movedTwoSquaresLastTurn);
+        return clone;
     }
 
+    /**
+     * Returns last row in the direction this pawn is moving towards.
+     *
+     * @return integer value of last row on board in direction of movement.
+     */
+    public int opposingEnd() {
+        if (owner == Player.BLACK) {
+            return 0;
+        }
+        return 7;
+    }
 }

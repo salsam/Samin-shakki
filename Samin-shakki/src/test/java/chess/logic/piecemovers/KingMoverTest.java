@@ -1,0 +1,149 @@
+package chess.logic.piecemovers;
+
+import chess.logic.board.ChessBoard;
+import chess.logic.board.Player;
+import chess.logic.board.Square;
+import chess.logic.board.ChessBoardInitializer;
+import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.EmptyBoardInitializer;
+import chess.logic.board.SquareTest;
+import chess.pieces.Bishop;
+import chess.pieces.King;
+import chess.pieces.Queen;
+import chess.pieces.Rook;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+/**
+ *
+ * @author sami
+ */
+public class KingMoverTest {
+
+    private King king;
+    private static ChessBoard board;
+    private static ChessBoardInitializer init;
+    private static KingMover kingMover;
+
+    public KingMoverTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+        board = new ChessBoard();
+        init = new EmptyBoardInitializer();
+        kingMover = new KingMover();
+    }
+
+    @Before
+    public void setUp() {
+        init.initialise(board);
+        king = new King(2, 3, Player.WHITE);
+        putPieceOnBoard(board, king);
+    }
+
+    @Test
+    public void startingColumnCorrect() {
+        assertEquals(2, king.getColumn());
+    }
+
+    @Test
+    public void startingRowCorrect() {
+        assertEquals(3, king.getRow());
+    }
+
+    @Test
+    public void kingCannotStayStillWhenMoving() {
+        assertFalse(kingMover.possibleMoves(king, board).contains(new Square(2, 3)));
+    }
+
+    @Test
+    public void kingCanMoveToEveryNeighboringSquare() {
+        int[] columns = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
+        int[] rows = new int[]{4, 4, 4, 3, 3, 2, 2, 2};
+
+        SquareTest.testMultipleSquares(columns, rows, kingMover.possibleMoves(king, board));
+    }
+
+    @Test
+    public void kingCannotMoveOutOfBoard() {
+        init.initialise(board);
+        king = new King(0, 0, Player.WHITE);
+        putPieceOnBoard(board, king);
+
+        assertFalse(kingMover.possibleMoves(king, board).contains(new Square(-1, 0)));
+        assertFalse(kingMover.possibleMoves(king, board).contains(new Square(0, -1)));
+    }
+
+    @Test
+    public void kingCannotMoveToThreatenedSquare() {
+        init.initialise(board);
+        putPieceOnBoard(board, king);
+        Queen opposingQueen = new Queen(3, 5, Player.BLACK);
+        putPieceOnBoard(board, opposingQueen);
+        board.updateThreatenedSquares(Player.BLACK);
+
+        board.getMovementLogic().threatenedSquares(opposingQueen, board).stream().forEach(i -> {
+            assertFalse(kingMover.possibleMoves(king, board).contains(i));
+        });
+    }
+
+    @Test
+    public void kingCanTakeOpposingUnprotectedPieceThatChecksIt() {
+        putPieceOnBoard(board, new Queen(2, 4, Player.BLACK));
+        board.updateThreatenedSquares(Player.BLACK);
+        assertTrue(kingMover.possibleMoves(king, board).contains(board.getSquare(2, 4)));
+    }
+
+    @Test
+    public void kingCannotTakeProtectedPieces() {
+        putPieceOnBoard(board, new Queen(2, 4, Player.BLACK));
+        putPieceOnBoard(board, new Bishop(3, 5, Player.BLACK));
+        board.updateThreatenedSquares(Player.BLACK);
+
+        assertFalse(kingMover.possibleMoves(king, board).contains(board.getSquare(2, 4)));
+    }
+
+    @Test
+    public void kingCanCastleKingSideIfAllRequirementsAreMet() {
+        King blackKing = new King(4, 7, Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, new Rook(7, 7, Player.BLACK));
+        assertTrue(kingMover.possibleMoves(blackKing, board).contains(board.getSquare(6, 7)));
+    }
+
+    @Test
+    public void kingCanCastleQueenSideIfAllRequirementsAreMet() {
+        King blackKing = new King(4, 7, Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, new Rook(0, 7, Player.BLACK));
+        assertTrue(kingMover.possibleMoves(blackKing, board).contains(board.getSquare(2, 7)));
+    }
+
+    @Test
+    public void whenCastlingKingSideChosenRookIsAlsoMovedToCorrectSquare() {
+        King blackKing = new King(4, 7, Player.BLACK);
+        Rook blackRook = new Rook(7, 7, Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, blackRook);
+        kingMover.move(blackKing, board.getSquare(6, 7), board);
+        assertEquals(board.getSquare(5, 7), board.getSquare(blackRook.getColumn(), blackRook.getRow()));
+    }
+
+    @Test
+    public void whenCastlingQueenSideChosenRookIsAlsoMovedToCorrectSquare() {
+        King blackKing = new King(4, 7, Player.BLACK);
+        Rook blackRook = new Rook(0, 7, Player.BLACK);
+        putPieceOnBoard(board, blackKing);
+        putPieceOnBoard(board, blackRook);
+        kingMover.move(blackKing, board.getSquare(2, 7), board);
+        assertEquals(board.getSquare(3, 7), board.getSquare(blackRook.getColumn(), blackRook.getRow()));
+    }
+}

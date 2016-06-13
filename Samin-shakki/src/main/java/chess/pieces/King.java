@@ -6,46 +6,28 @@ import chess.logic.board.Player;
  *
  * @author samisalo
  */
-public class King {
+public class King extends Piece {
 
-    private Player owner;
-    private int column;
-    private int row;
     private boolean hasBeenMoved;
 
-    public King(Player owner, int column, int row) {
-        this.owner = owner;
-        this.column = column;
-        this.row = row;
+    public King(int column, int row, Player player) {
+        super(column, row, player);
         this.hasBeenMoved = false;
     }
 
-    public Player getOwner() {
-        return owner;
-    }
-
-    public int getColumn() {
-        return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public boolean isHasBeenMoved() {
+    public boolean getHasBeenMoved() {
         return hasBeenMoved;
     }
 
     public void setHasBeenMoved(boolean hasBeenMoved) {
         this.hasBeenMoved = hasBeenMoved;
+    }
+
+    @Override
+    public Piece clone() {
+        King clone = new King(column, row, owner);
+        clone.setHasBeenMoved(hasBeenMoved);
+        return clone;
     }
 
 }

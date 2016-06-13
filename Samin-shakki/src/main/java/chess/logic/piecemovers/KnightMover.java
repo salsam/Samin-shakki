@@ -5,11 +5,10 @@
  */
 package chess.logic.piecemovers;
 
-import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
 import java.util.Set;
-import chess.logic.board.Player;
 import chess.logic.board.Square;
+import chess.pieces.Piece;
 
 /**
  *
@@ -17,25 +16,7 @@ import chess.logic.board.Square;
  */
 public class KnightMover extends PieceMover {
 
-    public KnightMover(Square square, Player owner) {
-        super(square, owner);
-
-        if (owner == Player.BLACK) {
-            this.picture = ImageLoader.getImage("blackKnight1.png");
-        } else {
-            this.picture = ImageLoader.getImage("whiteKnight1.png");
-        }
-    }
-
-    /**
-     * Returns a field to field copy of this piece.
-     *
-     * @param location location where the clone will be placed
-     * @return deep copy of this knight
-     */
-    @Override
-    public PieceMover clone(Square location) {
-        return new KnightMover(location, this.owner);
+    public KnightMover() {
     }
 
     /**
@@ -45,10 +26,10 @@ public class KnightMover extends PieceMover {
      * @return list containing all squares this knight threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoard board) {
+    public Set<Square> threatenedSquares(Piece piece, ChessBoard board) {
         int[] rowChange = new int[]{-2, -2, -1, -1, 1, 1, 2, 2};
         int[] columnChange = new int[]{1, -1, 2, -2, 2, -2, 1, -1};
 
-        return possibilities(columnChange, rowChange, board);
+        return possibilities(board.getSquare(piece.getColumn(), piece.getRow()), columnChange, rowChange, board);
     }
 }

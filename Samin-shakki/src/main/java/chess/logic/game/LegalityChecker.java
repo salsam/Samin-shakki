@@ -2,7 +2,7 @@ package chess.logic.game;
 
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
-import chess.logic.piecemovers.PieceMover;
+import chess.pieces.Piece;
 
 /**
  * This class provides methods to check if player owns targeted piece, whether
@@ -84,7 +84,7 @@ public class LegalityChecker {
      * @return input if input corresponds a possible square. Else empty string
      * "".
      */
-    public boolean checkThatMovementIsLegal(PieceMover piece, int column, int row) {
-        return piece.possibleMoves(board).contains(board.getSquare(column, row));
+    public boolean checkThatMovementIsLegal(Piece piece, int column, int row) {
+        return board.getMovementLogic().possibleMoves(piece, board).contains(board.getSquare(column, row));
     }
 }

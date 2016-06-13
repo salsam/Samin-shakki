@@ -2,6 +2,8 @@ package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.piecemovers.QueenMover;
+import chess.pieces.King;
+import chess.pieces.Queen;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -150,10 +152,10 @@ public class ChessBoardTest {
     @Test
     public void whiteThreatenedSquaresWorksInMoreComplexSituation() {
         init.initialise(board);
-        putPieceOnBoard(board, new QueenMover(board.getSquare(4, 4), Player.WHITE));
-        QueenMover q = (QueenMover) board.getSquare(4, 4).getPiece();
+        putPieceOnBoard(board, new Queen(4, 4, Player.WHITE));
+        Queen q = (Queen) board.getSquare(4, 4).getPiece();
         board.updateThreatenedSquares(Player.WHITE);
-        for (Square sq : q.threatenedSquares(board)) {
+        for (Square sq : board.getMovementLogic().threatenedSquares(q, board)) {
             assertTrue(board.threatenedSquares(Player.WHITE).contains(sq));
         }
     }
@@ -161,8 +163,10 @@ public class ChessBoardTest {
     @Test
     public void getKingsReturnsMapThatContainsKingLocations() {
         init.initialise(board);
-        assertEquals(board.getSquare(4, 0), board.getKings().get(Player.WHITE).getLocation());
-        assertEquals(board.getSquare(3, 7), board.getKings().get(Player.BLACK).getLocation());
+        King whiteKing = board.getKings().get(Player.WHITE);
+        King blackKing = board.getKings().get(Player.BLACK);
+        assertEquals(board.getSquare(4, 0), board.getSquare(whiteKing.getColumn(), whiteKing.getRow()));
+        assertEquals(board.getSquare(3, 7), board.getSquare(blackKing.getColumn(), blackKing.getRow()));
     }
 
     @Test
@@ -178,13 +182,13 @@ public class ChessBoardTest {
         init.initialise(board);
         ChessBoard copy = board.copy();
 
-        QueenMover queen = new QueenMover(board.getSquare(4, 4), Player.BLACK);
+        Queen queen = new Queen(4, 4, Player.BLACK);
         putPieceOnBoard(board, queen);
 
         assertTrue(board.getSquare(4, 4).containsAPiece());
         assertFalse(copy.getSquare(4, 4).containsAPiece());
 
-        queen.move(board.getSquare(4, 1), board);
+        board.getMovementLogic().move(queen, board.getSquare(4, 1), board);
         assertEquals(Player.BLACK, board.getSquare(4, 1).getPiece().getOwner());
         assertEquals(Player.WHITE, copy.getSquare(4, 1).getPiece().getOwner());
     }

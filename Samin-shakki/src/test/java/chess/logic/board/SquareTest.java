@@ -1,12 +1,9 @@
 package chess.logic.board;
 
-import chess.logic.piecemovers.PawnMover;
+import chess.pieces.Pawn;
 import java.util.HashSet;
 import java.util.Set;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -31,21 +28,9 @@ public class SquareTest {
     public SquareTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         square = new Square(2, 3);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test
@@ -65,7 +50,7 @@ public class SquareTest {
 
     @Test
     public void pieceCorrectIfNotNull() {
-        PawnMover pawn = new PawnMover(new Square(2, 1), Player.WHITE);
+        Pawn pawn = new Pawn(2, 1, Player.WHITE);
         square.setPiece(pawn);
         assertEquals(pawn, square.getPiece());
     }

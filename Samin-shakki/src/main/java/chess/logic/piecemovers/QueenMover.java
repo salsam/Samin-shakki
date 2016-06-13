@@ -5,11 +5,10 @@
  */
 package chess.logic.piecemovers;
 
-import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
 import java.util.Set;
-import chess.logic.board.Player;
 import chess.logic.board.Square;
+import chess.pieces.Piece;
 import java.util.HashSet;
 
 /**
@@ -18,25 +17,7 @@ import java.util.HashSet;
  */
 public class QueenMover extends PieceMover {
 
-    public QueenMover(Square square, Player owner) {
-        super(square, owner);
-
-        if (owner == Player.BLACK) {
-            this.picture = ImageLoader.getImage("blackQueen1.png");
-        } else {
-            this.picture = ImageLoader.getImage("whiteQueen1.png");
-        }
-    }
-
-    /**
-     * Returns a field to field copy of this piece.
-     *
-     * @param location location where the clone will be placed
-     * @return deep copy of this queen
-     */
-    @Override
-    public PieceMover clone(Square location) {
-        return new QueenMover(location, this.owner);
+    public QueenMover() {
     }
 
     /**
@@ -46,11 +27,11 @@ public class QueenMover extends PieceMover {
      * @return list containing all squares this queen threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoard board) {
+    public Set<Square> threatenedSquares(Piece piece, ChessBoard board) {
         Set<Square> possibilities = new HashSet<>();
-        addDiagonalPossibilities(location, board, possibilities);
-        addHorizontalPossibilities(location, board, possibilities);
-        addVerticalPossibilities(location, board, possibilities);
+        addDiagonalPossibilities(board.getSquare(piece.getColumn(), piece.getRow()), board, possibilities);
+        addHorizontalPossibilities(board.getSquare(piece.getColumn(), piece.getRow()), board, possibilities);
+        addVerticalPossibilities(board.getSquare(piece.getColumn(), piece.getRow()), board, possibilities);
 
         return possibilities;
     }

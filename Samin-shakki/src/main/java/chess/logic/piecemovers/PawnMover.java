@@ -1,37 +1,16 @@
 package chess.logic.piecemovers;
 
-import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
 import static chess.logic.board.ChessBoardInitializer.removePieceFromOwner;
 import java.util.HashSet;
 import java.util.Set;
-import chess.logic.board.Player;
 import chess.logic.board.Square;
+import chess.pieces.Pawn;
+import chess.pieces.Piece;
 
 public class PawnMover extends PieceMover {
-
-    private boolean movedTwoSquaresLastTurn;
-
-    public PawnMover(Square square, Player owner) {
-        super(square, owner);
-        movedTwoSquaresLastTurn = false;
-
-        if (owner == Player.BLACK) {
-            this.picture = ImageLoader.getImage("blackPawn1.png");
-        } else {
-            this.picture = ImageLoader.getImage("whitePawn1.png");
-        }
-    }
-
-    /**
-     * Returns a field to field copy of this piece.
-     *
-     * @param location location where the clone will be placed
-     * @return deep copy of this pawn
-     */
-    @Override
-    public PieceMover clone(Square location) {
-        return new PawnMover(location, this.owner);
+    
+    public PawnMover() {
     }
 
     /**
@@ -46,32 +25,22 @@ public class PawnMover extends PieceMover {
      * @param board ChessBoard on which movement happens.
      */
     @Override
-    public void move(Square target, ChessBoard board) {
-        if (Math.abs(this.location.getRow() - target.getRow()) == 2) {
-            movedTwoSquaresLastTurn = true;
+    public void move(Piece piece, Square target, ChessBoard board) {
+        Pawn pawn = (Pawn) piece;
+        pawn.setHasBeenMoved(true);
+        
+        if (Math.abs(piece.getRow() - target.getRow()) == 2) {
+            pawn.setMovedTwoSquaresLastTurn(true);
         }
-
-        if (!target.containsAPiece() && target.getColumn() != this.location.getColumn()) {
-            Square enpassanted = board.getSquare(target.getColumn(), target.getRow() - this.owner.getDirection());
-            PieceMover piece = enpassanted.getPiece();
-            removePieceFromOwner(piece, board);
+        
+        if (!target.containsAPiece() && target.getColumn() != piece.getColumn()) {
+            Square enpassanted = board.getSquare(target.getColumn(), target.getRow() - piece.getOwner().getDirection());
+            Piece enpassantedPiece = enpassanted.getPiece();
+            removePieceFromOwner(enpassantedPiece, board);
             enpassanted.setPiece(null);
         }
-
-        super.move(target, board);
-    }
-
-    /**
-     * Returns whether or not this pawn moved two squares on owner's last turn.
-     *
-     * @return true if this pawn moved two squares last turn.
-     */
-    public boolean getMovedTwoSquaresLastTurn() {
-        return movedTwoSquaresLastTurn;
-    }
-
-    public void setMovedTwoSquaresLastTurn(boolean movedTwoSquaresLastTurn) {
-        this.movedTwoSquaresLastTurn = movedTwoSquaresLastTurn;
+        
+        super.move(piece, target, board);
     }
 
     /**
@@ -84,52 +53,52 @@ public class PawnMover extends PieceMover {
      * @return list containing all squares this pawn threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoard board) {
+    public Set<Square> threatenedSquares(Piece piece, ChessBoard board) {
         Set<Square> squares = new HashSet();
         int[] columnChange = new int[]{1, -1};
-        int column = this.location.getColumn();
-        int row = this.location.getRow() + this.owner.getDirection();
-
+        int column = piece.getColumn();
+        int row = piece.getRow() + piece.getOwner().getDirection();
+        
         for (int i = 0; i < 2; i++) {
             if (board.withinTable(column + columnChange[i], row)) {
                 Square target = board.getSquare(column + columnChange[i], row);
                 squares.add(target);
             }
         }
-
-        addPossibleEnPassant(board, squares);
-
+        
+        addPossibleEnPassant(piece, board, squares);
+        
         return squares;
     }
-
-    private void addPossibleEnPassant(ChessBoard board, Set<Square> squares) {
+    
+    private void addPossibleEnPassant(Piece piece, ChessBoard board, Set<Square> squares) {
         Square target;
         int[] columnChange = new int[]{1, -1};
-
+        
         for (int i = 0; i < 2; i++) {
-            if (board.withinTable(this.location.getColumn() + columnChange[i], this.location.getRow())) {
-                target = board.getSquare(this.location.getColumn() + columnChange[i], this.location.getRow());
-
-                if (targetContainsAnEnemyPawn(target)) {
-                    PawnMover opposingPawn = (PawnMover) target.getPiece();
+            if (board.withinTable(piece.getColumn() + columnChange[i], piece.getRow())) {
+                target = board.getSquare(piece.getColumn() + columnChange[i], piece.getRow());
+                
+                if (targetContainsAnEnemyPawn(piece, target)) {
+                    Pawn opposingPawn = (Pawn) target.getPiece();
                     if (opposingPawn.getMovedTwoSquaresLastTurn()) {
-                        squares.add(board.getSquare(target.getColumn(), target.getRow() + this.owner.getDirection()));
+                        squares.add(board.getSquare(target.getColumn(), target.getRow() + piece.getOwner().getDirection()));
                     }
                 }
             }
         }
     }
-
-    private boolean targetContainsAnEnemyPawn(Square target) {
+    
+    private boolean targetContainsAnEnemyPawn(Piece chosen, Square target) {
         if (!target.containsAPiece()) {
             return false;
         }
-
-        if (target.getPiece().getOwner() == owner) {
+        
+        if (target.getPiece().getOwner() == chosen.getOwner()) {
             return false;
         }
-
-        return target.getPiece().getClass() == PawnMover.class;
+        
+        return target.getPiece().getClass() == Pawn.class;
     }
 
     /**
@@ -144,56 +113,38 @@ public class PawnMover extends PieceMover {
      * @return a list containing all squares this pawn can legally move to.
      */
     @Override
-    public Set<Square> possibleMoves(ChessBoard board) {
+    public Set<Square> possibleMoves(Piece piece, ChessBoard board) {
+        Pawn pawn = (Pawn) piece;
         Set<Square> moves = new HashSet<>();
-        int newrow = location.getRow() + owner.getDirection();
-
-        addSquareIfWithinTableAndEmpty(board, newrow, moves);
-
-        if (firstMovement()) {
-            newrow += owner.getDirection();
-            addSquareIfWithinTableAndEmpty(board, newrow, moves);
+        int newrow = piece.getRow() + piece.getOwner().getDirection();
+        
+        addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves);
+        
+        if (!pawn.getHasBeenMoved()) {
+            newrow += piece.getOwner().getDirection();
+            addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves);
         }
-
-        addPossibilitiesToTakeOpposingPieces(board, moves);
-
+        
+        addPossibilitiesToTakeOpposingPieces(pawn, board, moves);
+        
         return moves;
     }
-
-    private void addPossibilitiesToTakeOpposingPieces(ChessBoard board, Set<Square> moves) {
-        threatenedSquares(board).stream().filter(i -> legalToMoveTo(i, board))
+    
+    private void addPossibilitiesToTakeOpposingPieces(Piece piece, ChessBoard board, Set<Square> moves) {
+        threatenedSquares(piece, board).stream().filter(i -> legalToMoveTo(piece, i, board))
                 .filter(i -> i.containsAPiece())
                 .forEach(i -> moves.add(i));
-        addPossibleEnPassant(board, moves);
+        addPossibleEnPassant(piece, board, moves);
     }
-
-    private void addSquareIfWithinTableAndEmpty(ChessBoard board, int newrow, Set<Square> moves) {
+    
+    private void addSquareIfWithinTableAndEmpty(ChessBoard board, int column, int newrow, Set<Square> moves) {
         Square target;
-        if (board.withinTable(location.getColumn(), newrow)) {
-            target = board.getSquare(location.getColumn(), newrow);
-
+        if (board.withinTable(column, newrow)) {
+            target = board.getSquare(column, newrow);
+            
             if (!target.containsAPiece()) {
                 moves.add(target);
             }
         }
-    }
-
-    private boolean firstMovement() {
-        if (owner == Player.WHITE) {
-            return location.getRow() == 1;
-        }
-        return location.getRow() == 6;
-    }
-
-    /**
-     * Returns last row in the direction this pawn is moving towards.
-     *
-     * @return integer value of last row on board in direction of movement.
-     */
-    public int opposingEnd() {
-        if (owner == Player.BLACK) {
-            return 0;
-        }
-        return 7;
     }
 }

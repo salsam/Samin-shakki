@@ -5,10 +5,9 @@ import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
-import chess.logic.piecemovers.KingMover;
-import chess.logic.piecemovers.PawnMover;
-import chess.logic.piecemovers.PieceMover;
-import java.util.Map;
+import chess.pieces.King;
+import chess.pieces.Pawn;
+import chess.pieces.Piece;
 
 /**
  * This class is responsible for one game of chess with given starting
@@ -73,9 +72,9 @@ public class Game {
      * @return true if player's king is threatened by opposing piece
      */
     public boolean checkIfChecked(Player player) {
-        Map<Player, KingMover> kings = board.getKings();
+        King playersKing = board.getKings().get(player);
         board.updateThreatenedSquares(getOpponent(player));
-        return board.threatenedSquares(getOpponent(player)).contains(kings.get(player).getLocation());
+        return board.threatenedSquares(getOpponent(player)).contains(board.getSquare(playersKing.getColumn(), playersKing.getRow()));
     }
 
     /**
@@ -100,9 +99,9 @@ public class Game {
      */
     public boolean checkMate(Player player) {
         ChessBoard backUp = board.copy();
-        for (PieceMover piece : board.getPieces(player)) {
-            for (Square possibility : piece.possibleMoves(board)) {
-                piece.move(possibility, board);
+        for (Piece piece : board.getPieces(player)) {
+            for (Square possibility : board.getMovementLogic().possibleMoves(piece, board)) {
+                board.getMovementLogic().move(piece, possibility, board);
                 board.updateThreatenedSquares(getOpponent(player));
                 if (!checkIfChecked(player)) {
                     setChessBoard(backUp.copy());
@@ -123,8 +122,8 @@ public class Game {
      * @return true player has no legal moves otherwise false.
      */
     public boolean stalemate(Player player) {
-        for (PieceMover piece : board.getPieces(player)) {
-            if (!piece.possibleMoves(board).isEmpty()) {
+        for (Piece piece : board.getPieces(player)) {
+            if (!board.getMovementLogic().possibleMoves(piece, board).isEmpty()) {
                 return false;
             }
         }
@@ -140,8 +139,8 @@ public class Game {
      */
     public void makePawnsUnEnPassantable(Player player) {
         board.getPieces(player).stream().forEach(piece -> {
-            if (piece.getClass() == PawnMover.class) {
-                PawnMover pawn = (PawnMover) piece;
+            if (piece.getClass() == Pawn.class) {
+                Pawn pawn = (Pawn) piece;
                 pawn.setMovedTwoSquaresLastTurn(false);
             }
         });

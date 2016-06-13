@@ -5,11 +5,12 @@
  */
 package chess.logic.piecemovers;
 
-import chess.gui.io.ImageLoader;
 import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
+import chess.pieces.Bishop;
+import chess.pieces.Piece;
 import java.util.HashSet;
 
 /**
@@ -19,25 +20,7 @@ import java.util.HashSet;
  */
 public class BishopMover extends PieceMover {
 
-    public BishopMover(Square square, Player owner) {
-        super(square, owner);
-
-        if (owner == Player.BLACK) {
-            this.picture = ImageLoader.getImage("blackBishop1.png");
-        } else {
-            this.picture = ImageLoader.getImage("whiteBishop1.png");
-        }
-    }
-
-    /**
-     * Returns a field to field copy of this piece.
-     *
-     * @param location location where the clone will be placed
-     * @return deep copy of this bishop
-     */
-    @Override
-    public PieceMover clone(Square location) {
-        return new BishopMover(location, this.owner);
+    public BishopMover() {
     }
 
     /**
@@ -47,10 +30,12 @@ public class BishopMover extends PieceMover {
      * @return list containing all squares this bishop threatens
      */
     @Override
-    public Set<Square> threatenedSquares(ChessBoard board) {
+    public Set<Square> threatenedSquares(Piece bishop, ChessBoard board) {
+        bishop = (Bishop) bishop;
         Set<Square> possibilities = new HashSet<>();
-        addDiagonalPossibilities(location, board, possibilities);
+        addDiagonalPossibilities(board.getSquare(bishop.getColumn(), bishop.getRow()), board, possibilities);
 
         return possibilities;
     }
+
 }
