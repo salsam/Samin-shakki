@@ -1,6 +1,6 @@
 package chess.logic.board;
 
-import chess.pieces.Pawn;
+import chess.logic.pieces.Pawn;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.Before;

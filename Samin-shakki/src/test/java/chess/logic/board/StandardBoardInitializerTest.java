@@ -1,14 +1,15 @@
 package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.game.MovementLogic;
 import chess.logic.piecemovers.PawnMover;
-import chess.pieces.Bishop;
-import chess.pieces.King;
-import chess.pieces.Knight;
-import chess.pieces.Pawn;
-import chess.pieces.Piece;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
+import chess.logic.pieces.Bishop;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Knight;
+import chess.logic.pieces.Pawn;
+import chess.logic.pieces.Piece;
+import chess.logic.pieces.Queen;
+import chess.logic.pieces.Rook;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,7 +31,7 @@ public class StandardBoardInitializerTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         init = new StandardBoardInitializer();
     }
 

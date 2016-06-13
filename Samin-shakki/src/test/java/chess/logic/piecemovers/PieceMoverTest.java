@@ -5,9 +5,10 @@ import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.Player;
 import chess.logic.board.StandardBoardInitializer;
-import chess.pieces.Pawn;
-import chess.pieces.Piece;
-import chess.pieces.Queen;
+import chess.logic.game.MovementLogic;
+import chess.logic.pieces.Pawn;
+import chess.logic.pieces.Piece;
+import chess.logic.pieces.Queen;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -30,7 +31,7 @@ public class PieceMoverTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         init = new StandardBoardInitializer();
     }
 

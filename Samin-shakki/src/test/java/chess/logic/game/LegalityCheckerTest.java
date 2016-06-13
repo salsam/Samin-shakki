@@ -3,7 +3,7 @@ package chess.logic.game;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
-import chess.pieces.Pawn;
+import chess.logic.pieces.Pawn;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,7 +22,7 @@ public class LegalityCheckerTest {
 
     @Before
     public void setUp() {
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         checker = new LegalityChecker(board);
     }
 

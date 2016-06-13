@@ -11,8 +11,9 @@ import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
-import chess.pieces.Pawn;
-import chess.pieces.Rook;
+import chess.logic.game.MovementLogic;
+import chess.logic.pieces.Pawn;
+import chess.logic.pieces.Rook;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class RookMoverTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         init = new EmptyBoardInitializer();
         rookMover = new RookMover();
     }

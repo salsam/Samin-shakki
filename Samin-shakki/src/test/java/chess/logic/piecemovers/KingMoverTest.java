@@ -7,13 +7,11 @@ import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.SquareTest;
-import chess.pieces.Bishop;
-import chess.pieces.King;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import chess.logic.game.MovementLogic;
+import chess.logic.pieces.Bishop;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Queen;
+import chess.logic.pieces.Rook;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,7 +35,7 @@ public class KingMoverTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         init = new EmptyBoardInitializer();
         kingMover = new KingMover();
     }
@@ -65,11 +63,20 @@ public class KingMoverTest {
     }
 
     @Test
-    public void kingCanMoveToEveryNeighboringSquare() {
-        int[] columns = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
+    public void kingThreatensEveryNeighboringSquare() {
+        int[] cols = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
         int[] rows = new int[]{4, 4, 4, 3, 3, 2, 2, 2};
 
-        SquareTest.testMultipleSquares(columns, rows, kingMover.possibleMoves(king, board));
+        SquareTest.testMultipleSquares(cols, rows, kingMover.threatenedSquares(king, board));
+    }
+
+    @Test
+    public void kingCanMoveToEveryNeighboringSquare() {
+        int[] cols = new int[]{3, 2, 1, 3, 1, 3, 2, 1};
+        int[] rows = new int[]{4, 4, 4, 3, 3, 2, 2, 2};
+        board.updateThreatenedSquares(Player.BLACK);
+
+        SquareTest.testMultipleSquares(cols, rows, kingMover.possibleMoves(king, board));
     }
 
     @Test

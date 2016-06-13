@@ -1,9 +1,9 @@
 package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.piecemovers.QueenMover;
-import chess.pieces.King;
-import chess.pieces.Queen;
+import chess.logic.game.MovementLogic;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Queen;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +27,7 @@ public class ChessBoardTest {
 
     @Before
     public void setUp() {
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
     }
 
     @Test

@@ -9,8 +9,8 @@ import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import chess.pieces.Piece;
-import chess.pieces.Rook;
+import chess.logic.pieces.Piece;
+import chess.logic.pieces.Rook;
 import java.util.HashSet;
 
 /**

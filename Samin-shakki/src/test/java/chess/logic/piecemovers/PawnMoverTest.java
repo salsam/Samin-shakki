@@ -6,7 +6,8 @@ import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
-import chess.pieces.Pawn;
+import chess.logic.game.MovementLogic;
+import chess.logic.pieces.Pawn;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -29,7 +30,7 @@ public class PawnMoverTest {
     @BeforeClass
     public static void setUpClass() {
         init = new EmptyBoardInitializer();
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         pawnMover = new PawnMover();
     }
 

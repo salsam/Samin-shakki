@@ -1,7 +1,7 @@
 package chess.gui;
 
-import chess.logic.board.StandardBoardInitializer;
 import chess.logic.game.Game;
+import chess.logic.guilogic.GUILogic;
 import javax.swing.JFrame;
 
 /**
@@ -12,13 +12,10 @@ public class GraphicalUserInterface implements Runnable {
 
     private JFrame mainFrame;
     private JFrame gameWindow;
-    private Game game;
 
-    public GraphicalUserInterface() {
-        game = new Game(new StandardBoardInitializer());
-        this.gameWindow = new GameWindow(game);
+    public GraphicalUserInterface(GUILogic guiLogic, Game game) {
+        this.gameWindow = new GameWindow(guiLogic, game);
         this.mainFrame = new MainFrame(gameWindow);
-        this.gameWindow.setVisible(false);
     }
 
     @Override

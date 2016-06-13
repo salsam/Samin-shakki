@@ -2,7 +2,7 @@ package chess.logic.game;
 
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
-import chess.pieces.Piece;
+import chess.logic.pieces.Piece;
 
 /**
  * This class provides methods to check if player owns targeted piece, whether

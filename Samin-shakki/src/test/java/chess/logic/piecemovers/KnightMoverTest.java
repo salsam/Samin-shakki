@@ -7,7 +7,8 @@ import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.SquareTest;
-import chess.pieces.Knight;
+import chess.logic.game.MovementLogic;
+import chess.logic.pieces.Knight;
 import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,7 +32,7 @@ public class KnightMoverTest {
     @BeforeClass
     public static void setUpClass() {
         knightMover = new KnightMover();
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         init = new EmptyBoardInitializer();
     }
 

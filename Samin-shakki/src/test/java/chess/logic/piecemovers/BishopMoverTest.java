@@ -7,10 +7,9 @@ import chess.logic.board.SquareTest;
 import chess.logic.board.ChessBoardInitializer;
 import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.EmptyBoardInitializer;
-import chess.pieces.Bishop;
-import chess.pieces.Pawn;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import chess.logic.game.MovementLogic;
+import chess.logic.pieces.Bishop;
+import chess.logic.pieces.Pawn;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,7 +32,7 @@ public class BishopMoverTest {
 
     @BeforeClass
     public static void setUpClass() {
-        board = new ChessBoard();
+        board = new ChessBoard(new MovementLogic());
         bishopMover = new BishopMover();
         init = new EmptyBoardInitializer();
     }

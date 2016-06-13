@@ -5,20 +5,20 @@ import static chess.logic.board.ChessBoardInitializer.removePieceFromOwner;
 import java.util.HashSet;
 import java.util.Set;
 import chess.logic.board.Square;
-import chess.pieces.Pawn;
-import chess.pieces.Piece;
+import chess.logic.pieces.Pawn;
+import chess.logic.pieces.Piece;
 
 public class PawnMover extends PieceMover {
-    
+
     public PawnMover() {
     }
 
     /**
      * This method moves pawns on board to target square. If pawn moves two
      * squares that is saved to field movedTwoSquaresLastTurn and thus this pawn
-     * will be enpassantable on opponent's next turn. Also if movement is
-     * enpassant, piece in the square one step back from target will be removed.
-     * Enpassant is spotted from target square being empty and in different
+     * will be en passantable on opponent's next turn. Also if movement is en
+     * passant, piece in the square one step back from target will be removed.
+     * En passant is spotted from target square being empty and in different
      * column as moving pawn.
      *
      * @param target square that pawn is moving to.
@@ -28,18 +28,18 @@ public class PawnMover extends PieceMover {
     public void move(Piece piece, Square target, ChessBoard board) {
         Pawn pawn = (Pawn) piece;
         pawn.setHasBeenMoved(true);
-        
+
         if (Math.abs(piece.getRow() - target.getRow()) == 2) {
             pawn.setMovedTwoSquaresLastTurn(true);
         }
-        
+
         if (!target.containsAPiece() && target.getColumn() != piece.getColumn()) {
             Square enpassanted = board.getSquare(target.getColumn(), target.getRow() - piece.getOwner().getDirection());
             Piece enpassantedPiece = enpassanted.getPiece();
             removePieceFromOwner(enpassantedPiece, board);
             enpassanted.setPiece(null);
         }
-        
+
         super.move(piece, target, board);
     }
 
@@ -49,6 +49,7 @@ public class PawnMover extends PieceMover {
      * opposing pawn moves two squares to be next to your own pawn, on your next
      * turn your pawn can take it as if it had only moved one square.
      *
+     * @param piece chosen pawn
      * @param board board on which this pawn moves
      * @return list containing all squares this pawn threatens
      */
@@ -58,27 +59,27 @@ public class PawnMover extends PieceMover {
         int[] columnChange = new int[]{1, -1};
         int column = piece.getColumn();
         int row = piece.getRow() + piece.getOwner().getDirection();
-        
+
         for (int i = 0; i < 2; i++) {
             if (board.withinTable(column + columnChange[i], row)) {
                 Square target = board.getSquare(column + columnChange[i], row);
                 squares.add(target);
             }
         }
-        
+
         addPossibleEnPassant(piece, board, squares);
-        
+
         return squares;
     }
-    
+
     private void addPossibleEnPassant(Piece piece, ChessBoard board, Set<Square> squares) {
         Square target;
         int[] columnChange = new int[]{1, -1};
-        
+
         for (int i = 0; i < 2; i++) {
             if (board.withinTable(piece.getColumn() + columnChange[i], piece.getRow())) {
                 target = board.getSquare(piece.getColumn() + columnChange[i], piece.getRow());
-                
+
                 if (targetContainsAnEnemyPawn(piece, target)) {
                     Pawn opposingPawn = (Pawn) target.getPiece();
                     if (opposingPawn.getMovedTwoSquaresLastTurn()) {
@@ -88,16 +89,16 @@ public class PawnMover extends PieceMover {
             }
         }
     }
-    
+
     private boolean targetContainsAnEnemyPawn(Piece chosen, Square target) {
         if (!target.containsAPiece()) {
             return false;
         }
-        
+
         if (target.getPiece().getOwner() == chosen.getOwner()) {
             return false;
         }
-        
+
         return target.getPiece().getClass() == Pawn.class;
     }
 
@@ -109,6 +110,7 @@ public class PawnMover extends PieceMover {
      * then pawn can move up to two squares forward if there's no pieces of
      * either owner on the way.
      *
+     * @param piece chosen pawn
      * @param board chessboard on which movement happens
      * @return a list containing all squares this pawn can legally move to.
      */
@@ -117,31 +119,31 @@ public class PawnMover extends PieceMover {
         Pawn pawn = (Pawn) piece;
         Set<Square> moves = new HashSet<>();
         int newrow = piece.getRow() + piece.getOwner().getDirection();
-        
+
         addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves);
-        
+
         if (!pawn.getHasBeenMoved()) {
             newrow += piece.getOwner().getDirection();
             addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves);
         }
-        
+
         addPossibilitiesToTakeOpposingPieces(pawn, board, moves);
-        
+
         return moves;
     }
-    
+
     private void addPossibilitiesToTakeOpposingPieces(Piece piece, ChessBoard board, Set<Square> moves) {
         threatenedSquares(piece, board).stream().filter(i -> legalToMoveTo(piece, i, board))
                 .filter(i -> i.containsAPiece())
                 .forEach(i -> moves.add(i));
         addPossibleEnPassant(piece, board, moves);
     }
-    
+
     private void addSquareIfWithinTableAndEmpty(ChessBoard board, int column, int newrow, Set<Square> moves) {
         Square target;
         if (board.withinTable(column, newrow)) {
             target = board.getSquare(column, newrow);
-            
+
             if (!target.containsAPiece()) {
                 moves.add(target);
             }

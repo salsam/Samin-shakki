@@ -4,9 +4,9 @@ import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.Player;
-import chess.pieces.King;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Queen;
+import chess.logic.pieces.Rook;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -25,7 +25,7 @@ public class GameTest {
 
     @Before
     public void setUp() {
-        game = new Game(new EmptyBoardInitializer());
+        game = new Game(new EmptyBoardInitializer(), new MovementLogic());
         ChessBoard board = game.getChessBoard();
         putPieceOnBoard(board, new King(0, 0, Player.WHITE));
     }

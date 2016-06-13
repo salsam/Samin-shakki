@@ -5,15 +5,15 @@ import chess.logic.board.Square;
 import chess.logic.board.ChessBoardInitializer;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
-import chess.pieces.King;
-import chess.pieces.Pawn;
-import chess.pieces.Piece;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Pawn;
+import chess.logic.pieces.Piece;
 
 /**
- * This class is responsible for one game of chess with given starting
- * positions. Class offers methods to check legal moves of all pieces on board,
- * all squares all pieces threaten as well as knowledge of current situation in
- * the game.
+ * This class is responsible for keeping track of current situation on the
+ * chessboard. Class offers methods to check legal moves of all pieces on board
+ * and all squares threatened by players. Class also offers methods to check if
+ * game has ended and whether or not one player is checked.
  *
  * @author sami
  */
@@ -23,8 +23,8 @@ public class Game {
     private int turn;
     private LegalityChecker checker;
 
-    public Game(ChessBoardInitializer init) {
-        this.board = new ChessBoard();
+    public Game(ChessBoardInitializer init, MovementLogic movementLogic) {
+        this.board = new ChessBoard(movementLogic);
         init.initialise(board);
         turn = 1;
         checker = new LegalityChecker(board);
@@ -41,6 +41,10 @@ public class Game {
         } else {
             return Player.BLACK;
         }
+    }
+
+    public LegalityChecker getChecker() {
+        return checker;
     }
 
     public ChessBoard getChessBoard() {
@@ -75,20 +79,6 @@ public class Game {
         King playersKing = board.getKings().get(player);
         board.updateThreatenedSquares(getOpponent(player));
         return board.threatenedSquares(getOpponent(player)).contains(board.getSquare(playersKing.getColumn(), playersKing.getRow()));
-    }
-
-    /**
-     * Checks if player owns a piece on square that corresponds given column and
-     * row.
-     *
-     * @param player chosen player
-     * @param column column of target square
-     * @param row row of target square.
-     * @return true if player owns a piece on square corresponding given column
-     * and row.
-     */
-    public boolean checkPlayerOwnsAPieceOnTargetSquare(Player player, int column, int row) {
-        return checker.checkPlayerOwnsAPieceOnTheTargetSquare(player, column, row);
     }
 
     /**

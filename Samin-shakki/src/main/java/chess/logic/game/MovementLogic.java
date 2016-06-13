@@ -2,25 +2,17 @@ package chess.logic.game;
 
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Square;
-import chess.logic.piecemovers.BishopMover;
-import chess.logic.piecemovers.KingMover;
-import chess.logic.piecemovers.KnightMover;
-import chess.logic.piecemovers.PawnMover;
-import chess.logic.piecemovers.QueenMover;
-import chess.logic.piecemovers.RookMover;
-import chess.pieces.Bishop;
-import chess.pieces.King;
-import chess.pieces.Knight;
-import chess.pieces.Pawn;
-import chess.pieces.Piece;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
+import chess.logic.piecemovers.*;
+import chess.logic.pieces.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * This class is responsible for movement related logic. Class offers methods to
+ * get possible moves and threatened squares of a Piece on ChessBoard given as
+ * parameter. Also offers method to move piece to target location on chessboard.
  *
- * @author samisalo
+ * @author sami
  */
 public class MovementLogic {
 
@@ -54,7 +46,7 @@ public class MovementLogic {
         } else if (piece.getClass() == Rook.class) {
             return rookMover.threatenedSquares(piece, board);
         }
-        return new HashSet<Square>();
+        return new HashSet<>();
     }
 
     public Set<Square> possibleMoves(Piece piece, ChessBoard board) {
@@ -71,7 +63,7 @@ public class MovementLogic {
         } else if (piece.getClass() == Rook.class) {
             return rookMover.possibleMoves(piece, board);
         }
-        return new HashSet<Square>();
+        return new HashSet<>();
     }
 
     public void move(Piece piece, Square target, ChessBoard board) {

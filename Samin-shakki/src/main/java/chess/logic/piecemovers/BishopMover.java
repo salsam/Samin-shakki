@@ -7,10 +7,9 @@ package chess.logic.piecemovers;
 
 import chess.logic.board.ChessBoard;
 import java.util.Set;
-import chess.logic.board.Player;
 import chess.logic.board.Square;
-import chess.pieces.Bishop;
-import chess.pieces.Piece;
+import chess.logic.pieces.Bishop;
+import chess.logic.pieces.Piece;
 import java.util.HashSet;
 
 /**
@@ -26,6 +25,7 @@ public class BishopMover extends PieceMover {
     /**
      * Return a list containing all squares that this bishop threatens.
      *
+     * @param bishop chosen bishop
      * @param board board where this bishop moves
      * @return list containing all squares this bishop threatens
      */

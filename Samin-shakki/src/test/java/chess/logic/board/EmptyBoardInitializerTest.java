@@ -1,8 +1,6 @@
 package chess.logic.board;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
+import chess.logic.game.MovementLogic;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,28 +11,38 @@ import static org.junit.Assert.*;
  */
 public class EmptyBoardInitializerTest {
 
+    private static ChessBoardInitializer init;
+
     public EmptyBoardInitializerTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
+        init = new EmptyBoardInitializer();
     }
 
-    @AfterClass
-    public static void tearDownClass() {
+    @Test
+    public void initializerClearsBoardOfAllPiecesWhenInitializingABoard() {
+        ChessBoard board = new ChessBoard(new MovementLogic());
+        ChessBoardInitializer stdinit = new StandardBoardInitializer();
+        stdinit.initialise(board);
+        init.initialise(board);
+
+        for (int i = 0; i < board.getBoard().length; i++) {
+            for (int j = 0; j < board.getBoard()[0].length; j++) {
+                assertFalse(board.getSquare(i, j).containsAPiece());
+            }
+        }
     }
 
-    @Before
-    public void setUp() {
-    }
+    @Test
+    public void initializerClearsAllPiecesFromPlayersToo() {
+        ChessBoard board = new ChessBoard(new MovementLogic());
+        ChessBoardInitializer stdinit = new StandardBoardInitializer();
+        stdinit.initialise(board);
+        init.initialise(board);
 
-    @After
-    public void tearDown() {
+        assertTrue(board.getPieces(Player.WHITE).isEmpty());
+        assertTrue(board.getPieces(Player.BLACK).isEmpty());
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

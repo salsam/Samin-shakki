@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess.logic.pieces;
 
 import chess.logic.board.Player;
 
@@ -6,11 +6,11 @@ import chess.logic.board.Player;
  *
  * @author samisalo
  */
-public class King extends Piece {
+public class Rook extends Piece {
 
     private boolean hasBeenMoved;
 
-    public King(int column, int row, Player player) {
+    public Rook(int column, int row, Player player) {
         super(column, row, player);
         this.hasBeenMoved = false;
     }
@@ -25,7 +25,7 @@ public class King extends Piece {
 
     @Override
     public Piece clone() {
-        King clone = new King(column, row, owner);
+        Rook clone = new Rook(column, row, owner);
         clone.setHasBeenMoved(hasBeenMoved);
         return clone;
     }

@@ -7,12 +7,12 @@ import java.util.Objects;
  *
  * @author samisalo
  */
-public class Tuple {
+public class Pair {
 
     private Class klass;
     private Player owner;
 
-    public Tuple(Class klass, Player owner) {
+    public Pair(Class klass, Player owner) {
         this.klass = klass;
         this.owner = owner;
     }
@@ -52,7 +52,7 @@ public class Tuple {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Tuple other = (Tuple) obj;
+        final Pair other = (Pair) obj;
         if (!Objects.equals(this.klass, other.klass)) {
             return false;
         }

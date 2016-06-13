@@ -8,7 +8,7 @@ package chess.logic.piecemovers;
 import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Square;
-import chess.pieces.Piece;
+import chess.logic.pieces.Piece;
 
 /**
  *

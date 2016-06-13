@@ -1,11 +1,11 @@
 package chess.logic.board;
 
-import chess.pieces.Bishop;
-import chess.pieces.King;
-import chess.pieces.Knight;
-import chess.pieces.Pawn;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
+import chess.logic.pieces.Bishop;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Knight;
+import chess.logic.pieces.Pawn;
+import chess.logic.pieces.Queen;
+import chess.logic.pieces.Rook;
 
 /**
  * This class is used to initialise standard starting positions of chess. Using

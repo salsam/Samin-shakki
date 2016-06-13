@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess.logic.pieces;
 
 import chess.logic.board.Player;
 

@@ -2,8 +2,8 @@ package chess.logic.board;
 
 import static chess.logic.board.ChessBoardInitializer.addPieceToOwner;
 import chess.logic.game.MovementLogic;
-import chess.pieces.King;
-import chess.pieces.Piece;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Piece;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,9 +28,9 @@ public class ChessBoard {
     private MovementLogic movementLogic;
     private Map<Player, King> kings;
 
-    public ChessBoard() {
+    public ChessBoard(MovementLogic movementLogic) {
         initializeBoard();
-        movementLogic = new MovementLogic();
+        this.movementLogic = movementLogic;
         this.blackPieces = new ArrayList<>();
         this.whitePieces = new ArrayList<>();
         this.squaresThreatenedByBlack = new HashSet();
@@ -123,8 +123,8 @@ public class ChessBoard {
     /**
      * Checks if the given location is on the chessboard.
      *
-     * @param column Column of the Square you want.
-     * @param row Row of the Square you want.
+     * @param column Column of the Square being checked.
+     * @param row Row of the Square being checked.
      * @return true if given coordinates are within the table.
      */
     public boolean withinTable(int column, int row) {
@@ -174,7 +174,7 @@ public class ChessBoard {
      * @return a deep copy of this board.
      */
     public ChessBoard copy() {
-        ChessBoard copy = new ChessBoard();
+        ChessBoard copy = new ChessBoard(movementLogic);
         Square[][] copyBoard = copyBoard();
 
         copy.setBoard(copyBoard);

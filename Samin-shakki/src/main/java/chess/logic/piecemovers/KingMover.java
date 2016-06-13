@@ -10,9 +10,9 @@ import java.util.Set;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.board.Square;
-import chess.pieces.King;
-import chess.pieces.Piece;
-import chess.pieces.Rook;
+import chess.logic.pieces.King;
+import chess.logic.pieces.Piece;
+import chess.logic.pieces.Rook;
 import java.util.HashSet;
 
 /**
@@ -21,10 +21,7 @@ import java.util.HashSet;
  */
 public class KingMover extends PieceMover {
 
-    private RookMover rm;
-
     public KingMover() {
-        rm = new RookMover();
     }
 
     /**
@@ -32,6 +29,7 @@ public class KingMover extends PieceMover {
      * If movement is castling, this method also moves the chosen rook to
      * correct square. Castling is noticed from king moving two squares.
      *
+     * @param piece target king for movement
      * @see chess.logic.pieces.Piece.move()
      * @param target square this king is moving to.
      * @param board board on which movement happens.
@@ -40,13 +38,14 @@ public class KingMover extends PieceMover {
     public void move(Piece piece, Square target, ChessBoard board) {
         King king = (King) piece;
         king.setHasBeenMoved(true);
+        RookMover rookMover = new RookMover();
 
         if (king.getColumn() - target.getColumn() == 2) {
             Rook rook = (Rook) board.getSquare(0, king.getRow()).getPiece();
-            rm.move(rook, board.getSquare(target.getColumn() + 1, target.getRow()), board);
+            rookMover.move(rook, board.getSquare(target.getColumn() + 1, target.getRow()), board);
         } else if (king.getColumn() - target.getColumn() == -2) {
             Rook rook = (Rook) board.getSquare(7, king.getRow()).getPiece();
-            rm.move(rook, board.getSquare(target.getColumn() - 1, target.getRow()), board);
+            rookMover.move(rook, board.getSquare(target.getColumn() - 1, target.getRow()), board);
 
         }
 
@@ -54,14 +53,15 @@ public class KingMover extends PieceMover {
     }
 
     /**
-     * Return a list containing all squares that this king threatens.
+     * Return a list containing all squares that target king threatens.
      *
+     * @param piece target king
      * @param board board where this king moves
-     * @return list containing all squares this king threatens
+     * @return list containing all squares target king threatens
      */
     @Override
-    public Set<Square> threatenedSquares(Piece king, ChessBoard board) {
-        king = (King) king;
+    public Set<Square> threatenedSquares(Piece piece, ChessBoard board) {
+        King king = (King) piece;
         int[] columnChange = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
         int[] rowChange = new int[]{1, 1, 1, 0, 0, -1, -1, -1};
 
@@ -69,19 +69,21 @@ public class KingMover extends PieceMover {
     }
 
     /**
-     * Returns a list containing all squares this king can legally move to. That
-     * means all neighbor squares of king's location that aren't threatened by
-     * opponent or contain player's own piece.
+     * Returns a list containing all squares chosen king can legally move to.
+     * That means all neighbor squares of king's location that aren't threatened
+     * by opponent or contain player's own piece.
      *
+     * @param piece target king
      * @param board chessboard on which movement happens
-     * @return a list containing all squares this king can legally move to.
+     * @return a list containing all squares target king can legally move to.
      */
     @Override
     public Set<Square> possibleMoves(Piece piece, ChessBoard board) {
         Set<Square> moves = new HashSet<>();
         King king = (King) piece;
+        board.updateThreatenedSquares(getOpponent(piece.getOwner()));
 
-        threatenedSquares(piece, board).stream()
+        threatenedSquares(king, board).stream()
                 .filter((target) -> (legalToMoveTo(king, target, board) && !isThreatenedByOpponent(king.getOwner(), target, board)))
                 .forEach((target) -> {
                     moves.add(target);
@@ -122,7 +124,7 @@ public class KingMover extends PieceMover {
 
     private void addPossibilityToCastleLeft(King king, Rook rook, ChessBoard board, Set<Square> possibilities) {
         if (squaresAreAllEmpty(board, king.getColumn(), rook.getColumn(), king.getRow())) {
-            if (squaresAreAllUnthreatened(board, getOpponent(king.getOwner()), king.getRow(), king.getColumn() + 2, king.getRow())) {
+            if (squaresAreAllUnthreatened(board, getOpponent(king.getOwner()), king.getColumn(), king.getColumn() + 2, king.getRow())) {
                 possibilities.add(board.getSquare(king.getColumn() + 2, king.getRow()));
             }
         }
