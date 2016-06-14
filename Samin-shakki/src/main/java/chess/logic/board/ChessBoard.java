@@ -1,6 +1,5 @@
 package chess.logic.board;
 
-import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.addPieceToOwner;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
@@ -20,7 +19,7 @@ import java.util.Set;
  */
 public class ChessBoard {
 
-    private Square[][] board;
+    private Square[][] table;
     private List<Piece> whitePieces;
     private List<Piece> blackPieces;
     private Set<Square> squaresThreatenedByBlack;
@@ -47,10 +46,10 @@ public class ChessBoard {
      * Initializes a new 8x8 board.
      */
     private void initializeBoard() {
-        board = new Square[8][8];
+        table = new Square[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                this.board[i][j] = new Square(i, j);
+                this.table[i][j] = new Square(i, j);
             }
         }
     }
@@ -60,8 +59,8 @@ public class ChessBoard {
      *
      * @return Reference to Square[][] that is saved to field board.
      */
-    public Square[][] getBoard() {
-        return board;
+    public Square[][] getTable() {
+        return table;
     }
 
     public MovementLogic getMovementLogic() {
@@ -73,8 +72,8 @@ public class ChessBoard {
      *
      * @param newBoard Square[][] to be saved to field board.
      */
-    public void setBoard(Square[][] newBoard) {
-        this.board = newBoard;
+    public void setTable(Square[][] newBoard) {
+        this.table = newBoard;
     }
 
     /**
@@ -130,7 +129,7 @@ public class ChessBoard {
      * @return Square at given location.
      */
     public Square getSquare(int column, int row) {
-        return board[column][row];
+        return table[column][row];
     }
 
     /**
@@ -141,10 +140,10 @@ public class ChessBoard {
      * @return true if given coordinates are within the table.
      */
     public boolean withinTable(int column, int row) {
-        if (column < 0 || column >= board.length) {
+        if (column < 0 || column >= table.length) {
             return false;
         }
-        return !(row < 0 || row >= board[0].length);
+        return !(row < 0 || row >= table[0].length);
     }
 
     private Set<Square> squaresThreatenedByBlack() {
@@ -178,42 +177,6 @@ public class ChessBoard {
             return squaresThreatenedByWhite;
         } else {
             return squaresThreatenedByBlack;
-        }
-    }
-
-    /**
-     * Returns a new ChessBoard that deeply equals this one.
-     *
-     * @return a deep copy of this board.
-     */
-    public ChessBoard copy() {
-        ChessBoard copy = new ChessBoard(movementLogic);
-        Square[][] copyBoard = copyBoard();
-
-        copy.setBoard(copyBoard);
-        copy.findPieces();
-
-        return copy;
-    }
-
-    private Square[][] copyBoard() {
-        Square[][] copyBoard = new Square[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                copyBoard[i][j] = board[i][j].clone();
-            }
-        }
-        return copyBoard;
-    }
-
-    private void findPieces() {
-        this.blackPieces = new ArrayList();
-        this.whitePieces = new ArrayList();
-
-        for (int i = 0; i < this.board.length; i++) {
-            for (int j = 0; j < this.board[0].length; j++) {
-                addPieceToOwner(board[i][j], this);
-            }
         }
     }
 }

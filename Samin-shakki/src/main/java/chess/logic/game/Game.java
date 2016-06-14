@@ -1,6 +1,7 @@
 package chess.logic.game;
 
 import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardCopier;
 import chess.logic.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import chess.logic.board.Player;
@@ -100,16 +101,16 @@ public class Game {
      * @return true if player is checkmated. Else false.
      */
     public boolean checkMate(Player player) {
-        ChessBoard backUp = board.copy();
+        ChessBoard backUp = ChessBoardCopier.copy(board);
         for (Piece piece : board.getPieces(player)) {
             for (Square possibility : board.getMovementLogic().possibleMoves(piece, board)) {
                 board.getMovementLogic().move(piece, possibility, board);
                 board.updateThreatenedSquares(getOpponent(player));
                 if (!checkIfChecked(player)) {
-                    setChessBoard(backUp.copy());
+                    setChessBoard(ChessBoardCopier.copy(backUp));
                     return false;
                 }
-                setChessBoard(backUp.copy());
+                setChessBoard(ChessBoardCopier.copy(backUp));
                 board.updateThreatenedSquares(getOpponent(player));
             }
         }

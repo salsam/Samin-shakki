@@ -32,6 +32,29 @@ public abstract class Piece {
     @Override
     public abstract Piece clone();
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Piece piece = (Piece) obj;
+
+        if (this.column != piece.getColumn()) {
+            return false;
+        }
+
+        if (this.row != piece.getRow()) {
+            return false;
+        }
+
+        return this.owner == piece.getOwner();
+    }
+
     public int getColumn() {
         return column;
     }

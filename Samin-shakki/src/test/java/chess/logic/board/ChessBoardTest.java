@@ -34,14 +34,14 @@ public class ChessBoardTest {
 
     @Test
     public void getBoardReturnsBoard() {
-        Square[][] emptyBoard = new Square[board.getBoard().length][board.getBoard()[0].length];
+        Square[][] emptyBoard = new Square[board.getTable().length][board.getTable()[0].length];
 
         for (int i = 0; i < emptyBoard.length; i++) {
             for (int j = 0; j < emptyBoard[0].length; j++) {
                 emptyBoard[i][j] = new Square(i, j);
             }
         }
-        Assert.assertArrayEquals(emptyBoard, board.getBoard());
+        Assert.assertArrayEquals(emptyBoard, board.getTable());
     }
 
     @Test
@@ -169,35 +169,5 @@ public class ChessBoardTest {
         King blackKing = board.getKings().get(Player.BLACK);
         assertEquals(board.getSquare(4, 0), board.getSquare(whiteKing.getColumn(), whiteKing.getRow()));
         assertEquals(board.getSquare(3, 7), board.getSquare(blackKing.getColumn(), blackKing.getRow()));
-    }
-
-    @Test
-    public void copyCreatesAnIdenticalChessBoard() {
-        init.initialize(board);
-        ChessBoard copy = board.copy();
-
-        assertTrue(Arrays.deepEquals(board.getBoard(), copy.getBoard()));
-    }
-
-    @Test
-    public void copyAndOriginalAreNotSame() {
-        init.initialize(board);
-        assertFalse(board.copy() == board);
-    }
-
-    @Test
-    public void copyCreatesANewChessBoard() {
-        init.initialize(board);
-        ChessBoard copy = board.copy();
-
-        Queen queen = new Queen(4, 4, Player.BLACK);
-        putPieceOnBoard(board, queen);
-
-        assertTrue(board.getSquare(4, 4).containsAPiece());
-        assertFalse(copy.getSquare(4, 4).containsAPiece());
-
-        board.getMovementLogic().move(queen, board.getSquare(4, 1), board);
-        assertEquals(Player.BLACK, board.getSquare(4, 1).getPiece().getOwner());
-        assertEquals(Player.WHITE, copy.getSquare(4, 1).getPiece().getOwner());
     }
 }

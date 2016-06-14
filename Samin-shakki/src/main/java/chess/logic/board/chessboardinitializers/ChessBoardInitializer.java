@@ -50,8 +50,8 @@ public abstract class ChessBoardInitializer {
     }
 
     protected void clearBoard(ChessBoard board) {
-        for (int i = 0; i < board.getBoard().length; i++) {
-            for (int j = 0; j < board.getBoard()[0].length; j++) {
+        for (int i = 0; i < board.getTable().length; i++) {
+            for (int j = 0; j < board.getTable()[0].length; j++) {
                 if (board.getSquare(i, j).containsAPiece()) {
                     removePieceFromOwner(board.getSquare(i, j).getPiece(), board);
                     board.getSquare(i, j).setPiece(null);

@@ -1,6 +1,7 @@
 package chess.logic.guilogic;
 
 import chess.logic.board.ChessBoard;
+import chess.logic.board.ChessBoardCopier;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import static chess.logic.board.Player.getOpponent;
@@ -66,7 +67,7 @@ public class GUILogic {
     }
 
     private void moveToTargetLocation(int column, int row, Game game) {
-        ChessBoard backUp = game.getChessBoard().copy();
+        ChessBoard backUp = ChessBoardCopier.copy(game.getChessBoard());
 
         game.getChessBoard().getMovementLogic().move(chosen, game.getChessBoard().getSquare(column, row), game.getChessBoard());
         chosen = null;
