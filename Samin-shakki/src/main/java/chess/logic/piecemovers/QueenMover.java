@@ -12,11 +12,15 @@ import chess.logic.pieces.Piece;
 import java.util.HashSet;
 
 /**
+ * This class is responsible for all queen-related movement logic.
  *
  * @author sami
  */
 public class QueenMover extends PieceMover {
 
+    /**
+     * Creates a new QueenMover-object.
+     */
     public QueenMover() {
     }
 

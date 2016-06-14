@@ -1,8 +1,8 @@
 package chess.logic.game;
 
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.pieces.Pawn;
 import org.junit.Before;
 import org.junit.Test;

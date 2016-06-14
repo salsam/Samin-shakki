@@ -1,6 +1,6 @@
 package chess.logic.board;
 
-import static chess.logic.board.ChessBoardInitializer.addPieceToOwner;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.addPieceToOwner;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
@@ -16,7 +16,7 @@ import java.util.Set;
  * board. This class also offers methods to access every piece on board and
  * Squares they threaten or can move to.
  *
- * @author samisalo
+ * @author sami
  */
 public class ChessBoard {
 
@@ -28,6 +28,11 @@ public class ChessBoard {
     private MovementLogic movementLogic;
     private Map<Player, King> kings;
 
+    /**
+     * Creates a new chessboard with given movement logic.
+     *
+     * @param movementLogic movement logic to be applied on this chessboard.
+     */
     public ChessBoard(MovementLogic movementLogic) {
         initializeBoard();
         this.movementLogic = movementLogic;
@@ -107,6 +112,14 @@ public class ChessBoard {
         } else {
             return blackPieces;
         }
+    }
+
+    public void setBlackPieces(List<Piece> blackPieces) {
+        this.blackPieces = blackPieces;
+    }
+
+    public void setWhitePieces(List<Piece> whitePieces) {
+        this.whitePieces = whitePieces;
     }
 
     /**

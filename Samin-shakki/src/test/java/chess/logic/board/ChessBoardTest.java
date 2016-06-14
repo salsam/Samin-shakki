@@ -1,6 +1,8 @@
 package chess.logic.board;
 
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Queen;
@@ -59,7 +61,7 @@ public class ChessBoardTest {
 
     @Test
     public void whiteThreatenedSquaresReturnsAllSquaresThreatenedByWhiteInStandardStart() {
-        init.initialise(board);
+        init.initialize(board);
         Set<Square> correct = new HashSet();
         int[] rows = new int[]{0, 0, 0, 0, 0, 0};
         int[] cols = new int[]{1, 2, 3, 4, 5, 6};
@@ -82,7 +84,7 @@ public class ChessBoardTest {
 
     @Test
     public void whiteThreatenedSquaresReturnsOnlyThreatenedSquares() {
-        init.initialise(board);
+        init.initialize(board);
         Set<Square> wrong = new HashSet();
         int[] cols = new int[]{0, 7};
         int[] rows = new int[]{0, 0};
@@ -105,7 +107,7 @@ public class ChessBoardTest {
 
     @Test
     public void blackThreatenedSquaresReturnsAllSquaresThreatenedByBlackInStandardStart() {
-        init.initialise(board);
+        init.initialize(board);
         Set<Square> correct = new HashSet();
         int[] rows = new int[]{7, 7, 7, 7, 7, 7};
         int[] cols = new int[]{1, 2, 3, 4, 5, 6};
@@ -128,7 +130,7 @@ public class ChessBoardTest {
 
     @Test
     public void blackThreatenedSquaresReturnsOnlySquaresThreatenedByBlack() {
-        init.initialise(board);
+        init.initialize(board);
         Set<Square> wrong = new HashSet();
         int[] cols = new int[]{0, 7};
         int[] rows = new int[]{7, 7};
@@ -151,7 +153,7 @@ public class ChessBoardTest {
 
     @Test
     public void whiteThreatenedSquaresWorksInMoreComplexSituation() {
-        init.initialise(board);
+        init.initialize(board);
         putPieceOnBoard(board, new Queen(4, 4, Player.WHITE));
         Queen q = (Queen) board.getSquare(4, 4).getPiece();
         board.updateThreatenedSquares(Player.WHITE);
@@ -162,7 +164,7 @@ public class ChessBoardTest {
 
     @Test
     public void getKingsReturnsMapThatContainsKingLocations() {
-        init.initialise(board);
+        init.initialize(board);
         King whiteKing = board.getKings().get(Player.WHITE);
         King blackKing = board.getKings().get(Player.BLACK);
         assertEquals(board.getSquare(4, 0), board.getSquare(whiteKing.getColumn(), whiteKing.getRow()));
@@ -171,15 +173,21 @@ public class ChessBoardTest {
 
     @Test
     public void copyCreatesAnIdenticalChessBoard() {
-        init.initialise(board);
+        init.initialize(board);
         ChessBoard copy = board.copy();
 
         assertTrue(Arrays.deepEquals(board.getBoard(), copy.getBoard()));
     }
 
     @Test
+    public void copyAndOriginalAreNotSame() {
+        init.initialize(board);
+        assertFalse(board.copy() == board);
+    }
+
+    @Test
     public void copyCreatesANewChessBoard() {
-        init.initialise(board);
+        init.initialize(board);
         ChessBoard copy = board.copy();
 
         Queen queen = new Queen(4, 4, Player.BLACK);

@@ -1,6 +1,6 @@
 package chess.gui;
 
-import static chess.gui.io.ImageLoader.getImage;
+import static chess.io.ImageLoader.getImage;
 import chess.logic.board.Player;
 import chess.logic.pieces.Bishop;
 import chess.logic.pieces.King;

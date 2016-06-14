@@ -1,6 +1,5 @@
 package chess.gui;
 
-import chess.logic.board.Square;
 import chess.logic.game.Game;
 import chess.logic.guilogic.GUILogic;
 import java.awt.Color;
@@ -36,7 +35,7 @@ public class ChessBoardDrawer extends JPanel {
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (guiLogic.getPossibilities() != null && guiLogic.getPossibilities().contains(new Square(i, j))) {
+                if (guiLogic.getPossibilities() != null && guiLogic.getPossibilities().contains(game.getChessBoard().getSquare(i, j))) {
                     graphics.setColor(Color.red);
                 } else if ((i + j) % 2 == 0) {
                     graphics.setColor(Color.LIGHT_GRAY);

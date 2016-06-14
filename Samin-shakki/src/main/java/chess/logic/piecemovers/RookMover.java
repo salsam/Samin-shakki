@@ -7,18 +7,21 @@ package chess.logic.piecemovers;
 
 import chess.logic.board.ChessBoard;
 import java.util.Set;
-import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.pieces.Piece;
 import chess.logic.pieces.Rook;
 import java.util.HashSet;
 
 /**
+ * This class is responsible for all rook-related movement logic.
  *
  * @author sami
  */
 public class RookMover extends PieceMover {
 
+    /**
+     * Creates a new RookMover-object.
+     */
     public RookMover() {
     }
 

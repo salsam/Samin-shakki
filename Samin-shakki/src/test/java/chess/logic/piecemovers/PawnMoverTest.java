@@ -3,9 +3,9 @@ package chess.logic.piecemovers;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import chess.logic.board.ChessBoardInitializer;
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.EmptyBoardInitializer;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.Pawn;
 import org.junit.Before;
@@ -36,7 +36,7 @@ public class PawnMoverTest {
 
     @Before
     public void setUp() {
-        init.initialise(board);
+        init.initialize(board);
         pawn = new Pawn(2, 1, Player.WHITE);
         putPieceOnBoard(board, pawn);
     }

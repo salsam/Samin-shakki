@@ -3,8 +3,11 @@ package chess.logic.pieces;
 import chess.logic.board.Player;
 
 /**
+ * This is an abstract parent class of all chess pieces containing information
+ * of its location and owner. This class also offers methods to access that
+ * knowledge.
  *
- * @author samisalo
+ * @author sami
  */
 public abstract class Piece {
 
@@ -12,6 +15,14 @@ public abstract class Piece {
     protected int row;
     protected Player owner;
 
+    /**
+     * This is a dummy constructor that is used to avoid copy-paste code on all
+     * inheriting classes.
+     *
+     * @param column column of the square this piece will be placed
+     * @param row row of the square this piece will be placed on
+     * @param owner owner of this piece
+     */
     public Piece(int column, int row, Player owner) {
         this.column = column;
         this.row = row;

@@ -1,6 +1,8 @@
 package chess.logic.board;
 
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.game.MovementLogic;
 import chess.logic.piecemovers.PawnMover;
 import chess.logic.pieces.Bishop;
@@ -41,7 +43,7 @@ public class StandardBoardInitializerTest {
 
     @Before
     public void setUp() {
-        init.initialise(board);
+        init.initialize(board);
     }
 
     @After

@@ -14,6 +14,13 @@ public class Square {
     private int row;
     private Piece piece;
 
+    /**
+     * Creates a new square with given row and column.Field piece will be null
+     * if there's no piece on a square so initialized as null.
+     *
+     * @param column column of created square
+     * @param row row of created square
+     */
     public Square(int column, int row) {
         this.column = column;
         this.row = row;

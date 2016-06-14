@@ -8,12 +8,17 @@ import chess.logic.pieces.Piece;
  * This class provides methods to check if player owns targeted piece, whether
  * certain movement is legal and whether given input in in allowed form.
  *
- * @author samisalo
+ * @author sami
  */
 public class LegalityChecker {
 
     private ChessBoard board;
 
+    /**
+     * Creates a new LegalityChecker for given chessboard.
+     *
+     * @param board board which this checker will be checking
+     */
     public LegalityChecker(ChessBoard board) {
         this.board = board;
     }

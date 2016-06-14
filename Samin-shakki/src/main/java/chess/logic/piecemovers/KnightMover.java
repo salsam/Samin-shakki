@@ -11,19 +11,24 @@ import chess.logic.board.Square;
 import chess.logic.pieces.Piece;
 
 /**
+ * This class is responsible for all knight-related movement logic.
  *
  * @author sami
  */
 public class KnightMover extends PieceMover {
 
+    /**
+     * Creates a new KnightMover-object.
+     */
     public KnightMover() {
     }
 
     /**
-     * Return a list containing all squares that this knight threatens.
+     * Return a list containing all squares that given knight threatens.
      *
+     * @param piece knight
      * @param board board where this knight moves
-     * @return list containing all squares this knight threatens
+     * @return list containing all squares given knight threatens
      */
     @Override
     public Set<Square> threatenedSquares(Piece piece, ChessBoard board) {

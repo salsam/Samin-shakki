@@ -3,10 +3,10 @@ package chess.logic.piecemovers;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import chess.logic.board.ChessBoardInitializer;
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.SquareTest;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.Bishop;
 import chess.logic.pieces.King;
@@ -42,7 +42,7 @@ public class KingMoverTest {
 
     @Before
     public void setUp() {
-        init.initialise(board);
+        init.initialize(board);
         king = new King(2, 3, Player.WHITE);
         putPieceOnBoard(board, king);
     }
@@ -81,7 +81,7 @@ public class KingMoverTest {
 
     @Test
     public void kingCannotMoveOutOfBoard() {
-        init.initialise(board);
+        init.initialize(board);
         king = new King(0, 0, Player.WHITE);
         putPieceOnBoard(board, king);
 
@@ -91,7 +91,7 @@ public class KingMoverTest {
 
     @Test
     public void kingCannotMoveToThreatenedSquare() {
-        init.initialise(board);
+        init.initialize(board);
         putPieceOnBoard(board, king);
         Queen opposingQueen = new Queen(3, 5, Player.BLACK);
         putPieceOnBoard(board, opposingQueen);

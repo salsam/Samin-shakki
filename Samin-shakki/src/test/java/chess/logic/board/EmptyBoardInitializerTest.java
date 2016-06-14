@@ -1,5 +1,8 @@
 package chess.logic.board;
 
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
+import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.game.MovementLogic;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,8 +28,8 @@ public class EmptyBoardInitializerTest {
     public void initializerClearsBoardOfAllPiecesWhenInitializingABoard() {
         ChessBoard board = new ChessBoard(new MovementLogic());
         ChessBoardInitializer stdinit = new StandardBoardInitializer();
-        stdinit.initialise(board);
-        init.initialise(board);
+        stdinit.initialize(board);
+        init.initialize(board);
 
         for (int i = 0; i < board.getBoard().length; i++) {
             for (int j = 0; j < board.getBoard()[0].length; j++) {
@@ -39,8 +42,8 @@ public class EmptyBoardInitializerTest {
     public void initializerClearsAllPiecesFromPlayersToo() {
         ChessBoard board = new ChessBoard(new MovementLogic());
         ChessBoardInitializer stdinit = new StandardBoardInitializer();
-        stdinit.initialise(board);
-        init.initialise(board);
+        stdinit.initialize(board);
+        init.initialize(board);
 
         assertTrue(board.getPieces(Player.WHITE).isEmpty());
         assertTrue(board.getPieces(Player.BLACK).isEmpty());

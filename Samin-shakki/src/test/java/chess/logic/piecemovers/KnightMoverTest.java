@@ -3,13 +3,12 @@ package chess.logic.piecemovers;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import chess.logic.board.ChessBoardInitializer;
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.EmptyBoardInitializer;
 import chess.logic.board.SquareTest;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.Knight;
-import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class KnightMoverTest {
 
     @Before
     public void setUp() {
-        init.initialise(board);
+        init.initialize(board);
         knight = new Knight(4, 4, Player.WHITE);
         putPieceOnBoard(board, knight);
     }

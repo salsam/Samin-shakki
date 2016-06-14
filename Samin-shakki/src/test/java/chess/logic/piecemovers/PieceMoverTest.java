@@ -1,15 +1,14 @@
 package chess.logic.piecemovers;
 
 import chess.logic.board.ChessBoard;
-import chess.logic.board.ChessBoardInitializer;
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.Player;
-import chess.logic.board.StandardBoardInitializer;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
 import chess.logic.pieces.Queen;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class PieceMoverTest {
 
     @Before
     public void setUp() {
-        init.initialise(board);
+        init.initialize(board);
         piece = new Queen(3, 4, Player.WHITE);
         pawn = new Pawn(3, 6, Player.BLACK);
         putPieceOnBoard(board, pawn);

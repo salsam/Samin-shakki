@@ -1,15 +1,23 @@
 package chess.logic.piecemovers;
 
 import chess.logic.board.ChessBoard;
-import static chess.logic.board.ChessBoardInitializer.removePieceFromOwner;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.removePieceFromOwner;
 import java.util.HashSet;
 import java.util.Set;
 import chess.logic.board.Square;
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
 
+/**
+ * This class is responsible for containing all pawn-related movement logic.
+ *
+ * @author sami
+ */
 public class PawnMover extends PieceMover {
 
+    /**
+     * Creates a new PawnMover-object.
+     */
     public PawnMover() {
     }
 
@@ -21,6 +29,7 @@ public class PawnMover extends PieceMover {
      * En passant is spotted from target square being empty and in different
      * column as moving pawn.
      *
+     * @param piece pawn to be moved.
      * @param target square that pawn is moving to.
      * @param board ChessBoard on which movement happens.
      */
@@ -120,11 +129,11 @@ public class PawnMover extends PieceMover {
         Set<Square> moves = new HashSet<>();
         int newrow = piece.getRow() + piece.getOwner().getDirection();
 
-        addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves);
-
-        if (!pawn.getHasBeenMoved()) {
-            newrow += piece.getOwner().getDirection();
-            addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves);
+        if (addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves)) {
+            if (!pawn.getHasBeenMoved()) {
+                newrow += piece.getOwner().getDirection();
+                addSquareIfWithinTableAndEmpty(board, pawn.getColumn(), newrow, moves);
+            }
         }
 
         addPossibilitiesToTakeOpposingPieces(pawn, board, moves);
@@ -139,14 +148,15 @@ public class PawnMover extends PieceMover {
         addPossibleEnPassant(piece, board, moves);
     }
 
-    private void addSquareIfWithinTableAndEmpty(ChessBoard board, int column, int newrow, Set<Square> moves) {
-        Square target;
+    private boolean addSquareIfWithinTableAndEmpty(ChessBoard board, int column, int newrow, Set<Square> moves) {
         if (board.withinTable(column, newrow)) {
-            target = board.getSquare(column, newrow);
+            Square target = board.getSquare(column, newrow);
 
             if (!target.containsAPiece()) {
                 moves.add(target);
+                return true;
             }
         }
+        return false;
     }
 }

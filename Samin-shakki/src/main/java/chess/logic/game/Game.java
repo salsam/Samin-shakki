@@ -2,7 +2,7 @@ package chess.logic.game;
 
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Square;
-import chess.logic.board.ChessBoardInitializer;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import chess.logic.board.Player;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.pieces.King;
@@ -10,10 +10,10 @@ import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
 
 /**
- * This class is responsible for keeping track of current situation on the
- * chessboard. Class offers methods to check legal moves of all pieces on board
- * and all squares threatened by players. Class also offers methods to check if
- * game has ended and whether or not one player is checked.
+ * This class is responsible for keeping track of current game situation. Class
+ * offers methods to check if game has ended and whether or not one player is
+ * checked. Class also offers methods to keep track of current turn and start
+ * next turn.
  *
  * @author sami
  */
@@ -23,9 +23,15 @@ public class Game {
     private int turn;
     private LegalityChecker checker;
 
+    /**
+     * Creates a new game with given movement logic and chessboard initializer.
+     *
+     * @param init chessboard initializer to be used for this game
+     * @param movementLogic movement logic to be used for this game
+     */
     public Game(ChessBoardInitializer init, MovementLogic movementLogic) {
         this.board = new ChessBoard(movementLogic);
-        init.initialise(board);
+        init.initialize(board);
         turn = 1;
         checker = new LegalityChecker(board);
     }
@@ -33,7 +39,7 @@ public class Game {
     /**
      * Returns player whose turn is now.
      *
-     * @return white it is whites turn else black.
+     * @return white if it is whites turn else black.
      */
     public Player whoseTurn() {
         if (turn % 2 == 1) {
@@ -51,9 +57,15 @@ public class Game {
         return this.board;
     }
 
+    /**
+     * Sets the given chessBoard in the field board and updates LegalityChecker
+     * to check that board instead of old board.
+     *
+     * @param chessBoard new chessboard
+     */
     public void setChessBoard(ChessBoard chessBoard) {
         this.board = chessBoard;
-        this.checker = new LegalityChecker(chessBoard);
+        this.checker.setBoard(chessBoard);
     }
 
     /**
@@ -72,7 +84,7 @@ public class Game {
      * Updates set containing all squares that opponent threatens and then
      * checks if player's king is on one of those.
      *
-     * @param player
+     * @param player player being checked
      * @return true if player's king is threatened by opposing piece
      */
     public boolean checkIfChecked(Player player) {

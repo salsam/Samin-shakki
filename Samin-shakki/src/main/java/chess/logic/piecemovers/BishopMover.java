@@ -19,6 +19,10 @@ import java.util.HashSet;
  */
 public class BishopMover extends PieceMover {
 
+    /**
+     * Creates a new BishopMover-object that contains bishop's movement related
+     * logic.
+     */
     public BishopMover() {
     }
 

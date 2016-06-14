@@ -4,12 +4,23 @@ import chess.logic.board.Player;
 
 /**
  *
- * @author samisalo
+ * This class corresponds physical king-piece thus only containing knowledge of
+ * it's place and whether or not is has been moved. This class also offers a
+ * method to clone this king.
+ *
+ * @author sami
  */
 public class King extends Piece {
 
     private boolean hasBeenMoved;
 
+    /**
+     * Creates a new King-object in given location with given owner.
+     *
+     * @param column column of the square this king will be placed on
+     * @param row row of the square this king will be placed on
+     * @param player owner of this king
+     */
     public King(int column, int row, Player player) {
         super(column, row, player);
         this.hasBeenMoved = false;

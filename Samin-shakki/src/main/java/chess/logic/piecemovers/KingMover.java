@@ -16,11 +16,15 @@ import chess.logic.pieces.Rook;
 import java.util.HashSet;
 
 /**
+ * This class is responsible for all king-related movement logic.
  *
  * @author sami
  */
 public class KingMover extends PieceMover {
 
+    /**
+     * Creates a new KingMover-object.
+     */
     public KingMover() {
     }
 

@@ -1,11 +1,13 @@
-package chess.logic.board;
+package chess.logic.board.chessboardinitializers;
 
+import chess.logic.board.ChessBoard;
+import chess.logic.board.Square;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 
 /**
- * All classes that inherit this abstract class are used to initialise different
- * starting situation on chessboard like empty board or standard starting
+ * All classes that inherit this abstract class are used to initialize different
+ * starting situations on chessboard like empty board or standard starting
  * positions.
  *
  * @author samisalo
@@ -13,32 +15,38 @@ import chess.logic.pieces.Piece;
 public abstract class ChessBoardInitializer {
 
     /**
+     * This method will be used to initialize chessboard meaning setting up
+     * starting positions depending on which ChessBoardInitializer is used..
+     *
+     * @param board board to initialized
+     */
+    public abstract void initialize(ChessBoard board);
+
+    /**
      * Adds the piece on target square to list of pieces its owner owns. Also
      * adds a reference to Map Kings if the piece is of King class.
      *
      * @param target Square
-     * @param chessBoardLogic ChessBoardLogic to which piece will be added
+     * @param chessBoard ChessBoard to which piece will be added
      */
-    public static void addPieceToOwner(Square target, ChessBoard chessBoardLogic) {
+    public static void addPieceToOwner(Square target, ChessBoard chessBoard) {
         if (target.containsAPiece()) {
             Piece piece = target.getPiece();
             if (piece.getClass() == King.class) {
-                chessBoardLogic.getKings().put(piece.getOwner(), (King) piece);
+                chessBoard.getKings().put(piece.getOwner(), (King) piece);
             }
-            chessBoardLogic.getPieces(piece.getOwner()).add(piece);
+            chessBoard.getPieces(piece.getOwner()).add(piece);
         }
     }
-
-    public abstract void initialise(ChessBoard board);
 
     /**
      * Removes target piece from its owner's owned pieces list.
      *
      * @param piece The piece you want to remove.
-     * @param chessBoardLogic ChessBoardLogic where piece will be removed from
+     * @param chessBoard ChessBoardLogic where piece will be removed from
      */
-    public static void removePieceFromOwner(Piece piece, ChessBoard chessBoardLogic) {
-        chessBoardLogic.getPieces(piece.getOwner()).remove(piece);
+    public static void removePieceFromOwner(Piece piece, ChessBoard chessBoard) {
+        chessBoard.getPieces(piece.getOwner()).remove(piece);
     }
 
     protected void clearBoard(ChessBoard board) {

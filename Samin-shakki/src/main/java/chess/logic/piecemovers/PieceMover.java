@@ -1,6 +1,6 @@
 package chess.logic.piecemovers;
 
-import static chess.logic.board.ChessBoardInitializer.removePieceFromOwner;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.removePieceFromOwner;
 import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Square;
@@ -9,13 +9,23 @@ import java.util.HashSet;
 
 public abstract class PieceMover {
 
+    /**
+     * Returns set containing all squares given piece threatens on given
+     * chessboard.
+     *
+     * @param piece given piece
+     * @param board given board
+     * @return set containing containing all squares given piece threatens on
+     * given chessboard
+     */
     public abstract Set<Square> threatenedSquares(Piece piece, ChessBoard board);
 
     /**
-     * Returns a list of squares this piece can legally move to.
+     * Returns a list of squares given piece can legally move to.
      *
-     * @param board ChessBoard this piece moves on
-     * @return list containing all squares this piece can legally move to
+     * @param piece given piece
+     * @param board ChessBoard on which given piece moves on
+     * @return list containing all squares given piece can legally move to
      */
     public Set<Square> possibleMoves(Piece piece, ChessBoard board) {
         Set<Square> moves = new HashSet();
@@ -75,6 +85,7 @@ public abstract class PieceMover {
      * Moves this piece to target location on the given board. If this piece
      * takes an opposing piece, that will be removed from its owner on board.
      *
+     * @param piece piece to be moved.
      * @param target Square where this piece will be moved.
      * @param board Board on which this piece will be moved.
      */

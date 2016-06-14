@@ -23,6 +23,10 @@ public class MovementLogic {
     private QueenMover queenMover;
     private RookMover rookMover;
 
+    /**
+     * Creates a new MovementLogic initializing mover-objects for each chess
+     * piece-class.
+     */
     public MovementLogic() {
         bishopMover = new BishopMover();
         kingMover = new KingMover();
@@ -32,6 +36,14 @@ public class MovementLogic {
         rookMover = new RookMover();
     }
 
+    /**
+     * Uses corresponding mover to returns a set containing all squares given
+     * piece threatens on given board.
+     *
+     * @param piece piece of which threatened squares are being checked
+     * @param board board on which piece is placed
+     * @return a set containing all squares given piece threatens on given board
+     */
     public Set<Square> threatenedSquares(Piece piece, ChessBoard board) {
         if (piece.getClass() == Bishop.class) {
             return bishopMover.threatenedSquares(piece, board);
@@ -49,6 +61,15 @@ public class MovementLogic {
         return new HashSet<>();
     }
 
+    /**
+     * Uses corresponding mover to returns a set containing all squares given
+     * piece can move to on given board.
+     *
+     * @param piece piece of which possible moves are being checked
+     * @param board board on which piece is placed
+     * @return a set containing all squares given piece can move to on given
+     * board
+     */
     public Set<Square> possibleMoves(Piece piece, ChessBoard board) {
         if (piece.getClass() == Bishop.class) {
             return bishopMover.possibleMoves(piece, board);
@@ -66,6 +87,14 @@ public class MovementLogic {
         return new HashSet<>();
     }
 
+    /**
+     * Uses corresponding PieceMover to move given piece to target square on
+     * given board.
+     *
+     * @param piece piece to be moved
+     * @param target square where piece will be moved to
+     * @param board board on which movement happens
+     */
     public void move(Piece piece, Square target, ChessBoard board) {
         if (piece.getClass() == Bishop.class) {
             bishopMover.move(piece, target, board);

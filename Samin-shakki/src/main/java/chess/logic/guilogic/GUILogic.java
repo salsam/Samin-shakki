@@ -1,9 +1,8 @@
 package chess.logic.guilogic;
 
 import chess.logic.board.ChessBoard;
-import chess.logic.board.ChessBoardInitializer;
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.Player;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import static chess.logic.board.Player.getOpponent;
 import chess.logic.board.Square;
 import chess.logic.game.Game;
@@ -14,6 +13,9 @@ import java.util.Set;
 import javax.swing.JLabel;
 
 /**
+ * This is responsible for connecting graphical user interface to other logic
+ * classes. Class offers methods update text given to players and process
+ * information given by graphical user interface to move pieces accordingly.
  *
  * @author sami
  */
@@ -23,6 +25,9 @@ public class GUILogic {
     private Piece chosen;
     private Set<Square> possibilities;
 
+    /**
+     * Creates a new GUILogic-object.
+     */
     public GUILogic() {
     }
 
@@ -38,12 +43,20 @@ public class GUILogic {
         return possibilities;
     }
 
+    /**
+     * Processes input given by ChessBoardListener to do correct action in the
+     * game.
+     *
+     * @param column column that was clicked
+     * @param row row that was clicked
+     * @param game game which is going on
+     */
     public void processClick(int column, int row, Game game) {
 
         if (game.getChessBoard().withinTable(column, row)) {
             if (chosen != null && possibilities.contains(game.getChessBoard().getSquare(column, row))) {
                 moveToTargetLocation(column, row, game);
-            } else if (game.getChecker().checkPlayerOwnsAPieceOnTheTargetSquare(game.whoseTurn(), row, row)) {
+            } else if (game.getChecker().checkPlayerOwnsAPieceOnTheTargetSquare(game.whoseTurn(), column, row)) {
                 chosen = game.getChessBoard().getSquare(column, row).getPiece();
             }
             if (chosen != null) {
@@ -58,12 +71,12 @@ public class GUILogic {
         game.getChessBoard().getMovementLogic().move(chosen, game.getChessBoard().getSquare(column, row), game.getChessBoard());
         chosen = null;
         possibilities = null;
-        
+
         if (game.checkIfChecked(game.whoseTurn())) {
             game.setChessBoard(backUp);
             return;
         }
-        
+
         promote(column, row, game);
         startNextTurn(game);
     }
@@ -82,9 +95,9 @@ public class GUILogic {
 
     private void startNextTurn(Game game) {
         game.nextTurn();
-        textArea.setText(game.whoseTurn() + "'s turn");
+        textArea.setText(game.whoseTurn() + "'s turn.");
         if (game.checkIfChecked(game.whoseTurn())) {
-            textArea.setText(textArea.getText() + ". Check!");
+            textArea.setText(textArea.getText() + " Check!");
             if (game.checkMate(game.whoseTurn())) {
                 textArea.setText("Checkmate!" + getOpponent(game.whoseTurn()) + " won!");
             }

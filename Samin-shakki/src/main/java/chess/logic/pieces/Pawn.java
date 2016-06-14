@@ -4,13 +4,25 @@ import chess.logic.board.Player;
 
 /**
  *
- * @author samisalo
+ * This class corresponds physical bishop-piece thus only containing knowledge
+ * of it's place, whether or not is has moved yet and if it moved two squares
+ * last turn. Class also offers methods to access this information and clone
+ * this pawn.
+ *
+ * @author sami
  */
 public class Pawn extends Piece {
 
     private boolean movedTwoSquaresLastTurn;
     private boolean hasBeenMoved;
 
+    /**
+     * Creates a new Pawn-class object with given location and owner.
+     *
+     * @param column column of the square this pawn is placed on
+     * @param row row of the square this pawn is placed on
+     * @param owner owner of this pawn
+     */
     public Pawn(int column, int row, Player owner) {
         super(column, row, owner);
         movedTwoSquaresLastTurn = false;

@@ -1,4 +1,6 @@
-package chess.logic.board;
+package chess.logic.board.chessboardinitializers;
+
+import chess.logic.board.ChessBoard;
 
 /**
  * This class is responsible for cleaning a ChessBoard of all pieces.
@@ -14,7 +16,7 @@ public class EmptyBoardInitializer extends ChessBoardInitializer {
      * @param board board to be initialised
      */
     @Override
-    public void initialise(ChessBoard board) {
+    public void initialize(ChessBoard board) {
         clearBoard(board);
     }
 

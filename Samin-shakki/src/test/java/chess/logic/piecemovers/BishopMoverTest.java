@@ -4,9 +4,9 @@ import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.SquareTest;
-import chess.logic.board.ChessBoardInitializer;
-import static chess.logic.board.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.EmptyBoardInitializer;
+import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.game.MovementLogic;
 import chess.logic.pieces.Bishop;
 import chess.logic.pieces.Pawn;
@@ -39,7 +39,7 @@ public class BishopMoverTest {
 
     @Before
     public void setUp() {
-        init.initialise(board);
+        init.initialize(board);
         bishop = new Bishop(3, 4, Player.WHITE);
         putPieceOnBoard(board, bishop);
     }

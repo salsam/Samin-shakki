@@ -1,5 +1,7 @@
-package chess.logic.board;
+package chess.logic.board.chessboardinitializers;
 
+import chess.logic.board.ChessBoard;
+import chess.logic.board.Player;
 import chess.logic.pieces.Bishop;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Knight;
@@ -22,7 +24,7 @@ public class StandardBoardInitializer extends ChessBoardInitializer {
      * @param board ChessBoard to initialised.
      */
     @Override
-    public void initialise(ChessBoard board) {
+    public void initialize(ChessBoard board) {
         clearBoard(board);
         initialiseBishops(board);
         initialiseKingsAndQueens(board);
