@@ -28,7 +28,6 @@ public class RookMover extends PieceMover {
     /**
      * This method moves rook on the board and saves true to field hasBeenMoved.
      *
-     * @see chess.logic.pieces.Piece.move()
      * @param target square this rook is moving to.
      * @param board board on which movement happens.
      */

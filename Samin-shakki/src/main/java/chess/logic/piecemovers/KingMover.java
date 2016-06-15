@@ -34,7 +34,6 @@ public class KingMover extends PieceMover {
      * correct square. Castling is noticed from king moving two squares.
      *
      * @param piece target king for movement
-     * @see chess.logic.pieces.Piece.move()
      * @param target square this king is moving to.
      * @param board board on which movement happens.
      */
