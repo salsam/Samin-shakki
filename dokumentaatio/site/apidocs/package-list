@@ -1,0 +1,9 @@
+
+chess.gui
+chess.io
+chess.logic.board
+chess.logic.board.chessboardinitializers
+chess.logic.game
+chess.logic.guilogic
+chess.logic.piecemovers
+chess.logic.pieces
