@@ -1,6 +1,6 @@
 package chess.gui;
 
-import chess.logic.guilogic.GUILogic;
+import chess.logic.guilogic.InputProcessor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,9 +12,9 @@ public class ChessBoardListener implements MouseListener {
 
     private ChessBoardDrawer board;
     private int sideLength;
-    private GUILogic logic;
+    private InputProcessor logic;
 
-    public ChessBoardListener(GUILogic guiLogic, ChessBoardDrawer board, int sideLength) {
+    public ChessBoardListener(InputProcessor guiLogic, ChessBoardDrawer board, int sideLength) {
         this.board = board;
         this.logic = guiLogic;
         this.sideLength = sideLength;

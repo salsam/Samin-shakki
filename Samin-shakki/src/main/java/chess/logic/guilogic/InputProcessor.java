@@ -1,5 +1,6 @@
 package chess.logic.guilogic;
 
+import chess.gui.EndingScreen;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.ChessBoardCopier;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
@@ -10,7 +11,9 @@ import chess.logic.game.Game;
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
 import chess.logic.pieces.Queen;
+import java.util.Collection;
 import java.util.Set;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
@@ -21,16 +24,21 @@ import javax.swing.JLabel;
  *
  * @author sami
  */
-public class GUILogic {
+public class InputProcessor {
 
     private JLabel textArea;
+    private Collection<JFrame> frames;
     private Piece chosen;
     private Set<Square> possibilities;
 
     /**
      * Creates a new GUILogic-object.
      */
-    public GUILogic() {
+    public InputProcessor() {
+    }
+
+    public void setFrames(Collection<JFrame> frames) {
+        this.frames = frames;
     }
 
     public JLabel getTextArea() {
@@ -105,9 +113,11 @@ public class GUILogic {
             textArea.setText(textArea.getText() + " Check!");
             if (game.checkMate(game.whoseTurn())) {
                 textArea.setText("Checkmate!" + getOpponent(game.whoseTurn()) + " won!");
+                EndingScreen end = new EndingScreen(game, frames);
             }
         } else if (game.stalemate(game.whoseTurn())) {
             textArea.setText("Stalemate! Game ended as a draw!");
+            EndingScreen end = new EndingScreen(game, frames);
         }
     }
 

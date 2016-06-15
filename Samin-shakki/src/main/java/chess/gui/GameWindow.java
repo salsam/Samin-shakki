@@ -1,7 +1,7 @@
 package chess.gui;
 
 import chess.logic.game.Game;
-import chess.logic.guilogic.GUILogic;
+import chess.logic.guilogic.InputProcessor;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,9 +17,9 @@ import javax.swing.WindowConstants;
 public class GameWindow extends JFrame {
 
     private Game game;
-    private GUILogic guiLogic;
+    private InputProcessor guiLogic;
 
-    public GameWindow(GUILogic guiLogic, Game game) {
+    public GameWindow(InputProcessor guiLogic, Game game) {
         this.game = game;
         this.guiLogic = guiLogic;
         this.setPreferredSize(new Dimension(450, 500));

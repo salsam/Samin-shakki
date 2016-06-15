@@ -21,6 +21,7 @@ import chess.logic.pieces.Piece;
 public class Game {
 
     private ChessBoard board;
+    private ChessBoardInitializer init;
     private int turn;
     private LegalityChecker checker;
     private boolean continues;
@@ -33,7 +34,8 @@ public class Game {
      */
     public Game(ChessBoardInitializer init, MovementLogic movementLogic) {
         this.board = new ChessBoard(movementLogic);
-        init.initialize(board);
+        this.init = init;
+        this.init.initialize(board);
         turn = 1;
         checker = new LegalityChecker(board);
         continues = true;
@@ -158,6 +160,15 @@ public class Game {
                 pawn.setMovedTwoSquaresLastTurn(false);
             }
         });
+    }
+
+    /**
+     * Resets the game situation to beginning of the game.
+     */
+    public void reset() {
+        init.initialize(board);
+        turn = 1;
+        continues = true;
     }
 
 }

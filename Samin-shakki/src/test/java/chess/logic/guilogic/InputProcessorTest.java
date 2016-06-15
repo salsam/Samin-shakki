@@ -11,11 +11,11 @@ import static org.junit.Assert.*;
  *
  * @author sami
  */
-public class GUILogicTest {
+public class InputProcessorTest {
 
-    private GUILogic guiLogic;
+    private InputProcessor guiLogic;
 
-    public GUILogicTest() {
+    public InputProcessorTest() {
     }
 
     @BeforeClass

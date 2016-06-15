@@ -1,7 +1,9 @@
 package chess.gui;
 
 import chess.logic.game.Game;
-import chess.logic.guilogic.GUILogic;
+import chess.logic.guilogic.InputProcessor;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 
 /**
@@ -10,16 +12,17 @@ import javax.swing.JFrame;
  */
 public class GraphicalUserInterface implements Runnable {
 
-    private JFrame mainFrame;
-    private JFrame gameWindow;
+    private Map<String, JFrame> frames;
 
-    public GraphicalUserInterface(GUILogic guiLogic, Game game) {
-        this.gameWindow = new GameWindow(guiLogic, game);
-        this.mainFrame = new MainFrame(gameWindow);
+    public GraphicalUserInterface(InputProcessor inputProcessor, Game game) {
+        frames = new HashMap();
+        frames.put("game", new GameWindow(inputProcessor, game));
+        frames.put("main", new MainFrame(frames.get("game")));
+        inputProcessor.setFrames(frames.values());
     }
 
     @Override
     public void run() {
-        mainFrame.setVisible(true);
+        frames.get("main").setVisible(true);
     }
 }

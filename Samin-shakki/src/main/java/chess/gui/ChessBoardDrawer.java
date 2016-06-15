@@ -1,7 +1,7 @@
 package chess.gui;
 
 import chess.logic.game.Game;
-import chess.logic.guilogic.GUILogic;
+import chess.logic.guilogic.InputProcessor;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -13,11 +13,11 @@ import javax.swing.JPanel;
 public class ChessBoardDrawer extends JPanel {
 
     private Game game;
-    private GUILogic guiLogic;
+    private InputProcessor guiLogic;
     private int sideLength;
     private PieceDrawer pieceDrawer;
 
-    public ChessBoardDrawer(GUILogic guiLogic, Game game, int sideLength) {
+    public ChessBoardDrawer(InputProcessor guiLogic, Game game, int sideLength) {
         this.game = game;
         this.guiLogic = guiLogic;
         this.sideLength = sideLength;
