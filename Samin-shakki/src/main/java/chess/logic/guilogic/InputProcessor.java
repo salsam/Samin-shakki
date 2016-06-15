@@ -1,6 +1,7 @@
 package chess.logic.guilogic;
 
 import chess.gui.EndingScreen;
+import chess.gui.GameWindow;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.ChessBoardCopier;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
@@ -11,7 +12,7 @@ import chess.logic.game.Game;
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
 import chess.logic.pieces.Queen;
-import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,7 +28,7 @@ import javax.swing.JLabel;
 public class InputProcessor {
 
     private JLabel textArea;
-    private Collection<JFrame> frames;
+    private Map<String, JFrame> frames;
     private Piece chosen;
     private Set<Square> possibilities;
 
@@ -37,7 +38,7 @@ public class InputProcessor {
     public InputProcessor() {
     }
 
-    public void setFrames(Collection<JFrame> frames) {
+    public void setFrames(Map<String, JFrame> frames) {
         this.frames = frames;
     }
 
@@ -113,11 +114,11 @@ public class InputProcessor {
             textArea.setText(textArea.getText() + " Check!");
             if (game.checkMate(game.whoseTurn())) {
                 textArea.setText("Checkmate!" + getOpponent(game.whoseTurn()) + " won!");
-                EndingScreen end = new EndingScreen(game, frames);
+                frames.get("endingScreen").setVisible(true);
             }
         } else if (game.stalemate(game.whoseTurn())) {
             textArea.setText("Stalemate! Game ended as a draw!");
-            EndingScreen end = new EndingScreen(game, frames);
+            frames.get("endingScreen").setVisible(true);
         }
     }
 

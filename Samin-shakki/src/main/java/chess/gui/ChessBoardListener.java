@@ -1,5 +1,6 @@
 package chess.gui;
 
+import chess.gui.boarddrawing.ChessBoardDrawer;
 import chess.logic.guilogic.InputProcessor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

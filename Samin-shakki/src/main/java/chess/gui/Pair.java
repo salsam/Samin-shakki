@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  *
- * @author samisalo
+ * @author sami
  */
 public class Pair {
 

@@ -1,5 +1,6 @@
-package chess.gui;
+package chess.gui.boarddrawing;
 
+import chess.gui.boarddrawing.PieceDrawer;
 import chess.logic.game.Game;
 import chess.logic.guilogic.InputProcessor;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package chess.gui;
+package chess.gui.boarddrawing;
 
 import chess.logic.board.Square;
 import java.awt.Color;

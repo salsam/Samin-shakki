@@ -2,7 +2,7 @@ package chess.gui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Collection;
+import java.util.Map;
 import javax.swing.JFrame;
 
 /**
@@ -11,20 +11,17 @@ import javax.swing.JFrame;
  */
 public class WindowCloser implements MouseListener {
 
-    private Collection<JFrame> frames;
-    private EndingScreen screen;
+    private Map<String, JFrame> frames;
 
-    public WindowCloser(Collection<JFrame> frames, EndingScreen endingScreen) {
+    public WindowCloser(Map<String, JFrame> frames) {
         this.frames = frames;
-        this.screen = endingScreen;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        frames.stream().forEach(frame -> {
+        frames.values().stream().forEach(frame -> {
             frame.dispose();
         });
-        screen.dispose();
     }
 
     @Override

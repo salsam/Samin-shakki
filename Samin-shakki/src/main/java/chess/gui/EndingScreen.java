@@ -1,10 +1,9 @@
 package chess.gui;
 
-import chess.logic.game.Game;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
-import java.util.Collection;
+import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,25 +15,22 @@ import javax.swing.WindowConstants;
  */
 public class EndingScreen extends JFrame {
 
-    private Game game;
-
-    public EndingScreen(Game game, Collection<JFrame> windows) throws HeadlessException {
+    public EndingScreen(Map<String, JFrame> frames) throws HeadlessException {
         this.setPreferredSize(new Dimension(300, 300));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        initComponents(this.getContentPane(), windows);
+        initComponents(this.getContentPane(), frames);
         this.pack();
-        this.setVisible(true);
+        this.setVisible(false);
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    private void initComponents(Container container, Collection<JFrame> windows) {
+    private void initComponents(Container container, Map<String, JFrame> frames) {
         JButton playAgain = new JButton("Play again");
-        playAgain.addMouseListener(new GameRestarter(this));
+        playAgain.addMouseListener(new GameRestarter(frames));
+        playAgain.setMaximumSize(new Dimension(300, 150));
+
         JButton exit = new JButton("Exit");
-        exit.addMouseListener(new WindowCloser(windows, this));
+        exit.addMouseListener(new WindowCloser(frames));
+        exit.setMaximumSize(new Dimension(300, 150));
 
         container.setPreferredSize(new Dimension(300, 300));
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));

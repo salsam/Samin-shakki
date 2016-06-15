@@ -1,5 +1,6 @@
 package chess.gui;
 
+import chess.gui.boarddrawing.ChessBoardDrawer;
 import chess.logic.game.Game;
 import chess.logic.guilogic.InputProcessor;
 import java.awt.Container;
@@ -15,41 +16,48 @@ import javax.swing.WindowConstants;
  * @author sami
  */
 public class GameWindow extends JFrame {
-
+    
     private Game game;
-    private InputProcessor guiLogic;
-
-    public GameWindow(InputProcessor guiLogic, Game game) {
+    private InputProcessor inputProcessor;
+    private JLabel textArea;
+    
+    public GameWindow(InputProcessor inputProcessor, Game game) {
         this.game = game;
-        this.guiLogic = guiLogic;
-        this.setPreferredSize(new Dimension(450, 500));
+        this.inputProcessor = inputProcessor;
+        this.setPreferredSize(new Dimension(450, 550));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createComponents(this.getContentPane());
         this.pack();
         this.setVisible(false);
     }
-
+    
     public Game getGame() {
         return game;
     }
-
+    
     private void createComponents(Container container) {
-        JLabel text = new JLabel("WHITE's turn.");
-        text.setFont(new Font("Serif", Font.PLAIN, 30));
-        text.setPreferredSize(new Dimension(100, 50));
-        text.setAlignmentX(CENTER_ALIGNMENT);
-        text.setAlignmentY(TOP_ALIGNMENT);
-        guiLogic.setTextArea(text);
-
-        ChessBoardDrawer window = new ChessBoardDrawer(guiLogic, game, 50);
-        window.setPreferredSize(new Dimension(400, 400));
+        textArea = new JLabel(game.whoseTurn() + "'s turn.");
+        textArea.setFont(new Font("Serif", Font.PLAIN, 20));
+        textArea.setMaximumSize(new Dimension(300, 100));
+        textArea.setAlignmentX(CENTER_ALIGNMENT);
+        textArea.setAlignmentY(TOP_ALIGNMENT);
+        inputProcessor.setTextArea(textArea);
+        
+        ChessBoardDrawer window = new ChessBoardDrawer(inputProcessor, game, 50);
+        window.setMaximumSize(new Dimension(400, 400));
         window.setAlignmentX(CENTER_ALIGNMENT);
         window.setAlignmentY(CENTER_ALIGNMENT);
-        window.addMouseListener(new ChessBoardListener(guiLogic, window, 50));
-
+        window.addMouseListener(new ChessBoardListener(inputProcessor, window, 50));
+        
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-        container.add(text);
+        container.add(textArea);
         container.add(window);
     }
-
+    
+    @Override
+    public void repaint() {
+        textArea.setText(game.whoseTurn() + "'s turn.");
+        super.repaint();
+    }
+    
 }

@@ -18,7 +18,8 @@ public class GraphicalUserInterface implements Runnable {
         frames = new HashMap();
         frames.put("game", new GameWindow(inputProcessor, game));
         frames.put("main", new MainFrame(frames.get("game")));
-        inputProcessor.setFrames(frames.values());
+        frames.put("endingScreen", new EndingScreen(frames));
+        inputProcessor.setFrames(frames);
     }
 
     @Override
