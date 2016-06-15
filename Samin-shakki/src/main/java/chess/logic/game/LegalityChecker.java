@@ -6,7 +6,7 @@ import chess.logic.pieces.Piece;
 
 /**
  * This class provides methods to check if player owns targeted piece, whether
- * certain movement is legal and whether given input in in allowed form.
+ * certain movement is legal and whether given input is in allowed form.
  *
  * @author sami
  */
