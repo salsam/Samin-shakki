@@ -22,25 +22,23 @@ public class KingTest {
     }
 
     @Test
-    public void cloneReturnsDifferentBishop() {
+    public void kingsAreEqualIfInSameLocationAndHavingSameHasBeenMovedAndOwner() {
+        assertTrue(king.equals(new King(7, 5, Player.WHITE)));
+    }
+
+    @Test
+    public void kingsAreNotEqualIfOneHasBeenMovedAndOtherHasNot() {
+        king.setHasBeenMoved(true);
+        assertFalse(king.equals(new King(7, 5, Player.WHITE)));
+    }
+
+    @Test
+    public void cloneReturnsDifferentKing() {
         assertFalse(king == king.clone());
     }
 
     @Test
-    public void cloneReturnsIdenticalBishop() {
+    public void cloneReturnsIdenticalKing() {
         assertTrue(king.equals(king.clone()));
-    }
-
-    @Test
-    public void cloneHasBeenMovedIfKingHasBeenMoved() {
-        king.setHasBeenMoved(true);
-        King clone = (King) king.clone();
-        assertTrue(clone.getHasBeenMoved());
-    }
-
-    @Test
-    public void cloneHasNotBeenMovedIfKingHasNot() {
-        King clone = (King) king.clone();
-        assertFalse(clone.getHasBeenMoved());
     }
 }

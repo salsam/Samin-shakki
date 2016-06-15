@@ -16,7 +16,8 @@ import javax.swing.JLabel;
 /**
  * This is responsible for connecting graphical user interface to other logic
  * classes. Class offers methods update text given to players and process
- * information given by graphical user interface to move pieces accordingly.
+ * information given by graphical user interface to move pieces accordingly in
+ * game.
  *
  * @author sami
  */
@@ -53,6 +54,9 @@ public class GUILogic {
      * @param game game which is going on
      */
     public void processClick(int column, int row, Game game) {
+        if (!game.getContinues()) {
+            return;
+        }
 
         if (game.getChessBoard().withinTable(column, row)) {
             if (chosen != null && possibilities.contains(game.getChessBoard().getSquare(column, row))) {

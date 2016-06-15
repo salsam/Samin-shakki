@@ -41,4 +41,13 @@ public class Rook extends Piece {
         return clone;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        Rook rook = (Rook) obj;
+        return rook.getHasBeenMoved() == hasBeenMoved;
+    }
+
 }

@@ -52,6 +52,21 @@ public class Pawn extends Piece {
         return clone;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        Pawn pawn = (Pawn) obj;
+
+        if (hasBeenMoved != pawn.getHasBeenMoved()) {
+            return false;
+        }
+
+        return movedTwoSquaresLastTurn == pawn.getMovedTwoSquaresLastTurn();
+    }
+
     /**
      * Returns last row in the direction this pawn is moving towards.
      *

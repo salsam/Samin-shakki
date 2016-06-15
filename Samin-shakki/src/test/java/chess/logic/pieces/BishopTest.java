@@ -1,6 +1,7 @@
 package chess.logic.pieces;
 
 import chess.logic.board.Player;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -20,6 +21,11 @@ public class BishopTest {
     @Before
     public void setUp() {
         bishop = new Bishop(2, 3, Player.BLACK);
+    }
+
+    @Test
+    public void cloneIsAlsoBishop() {
+        assertEquals(Bishop.class, bishop.clone().getClass());
     }
 
     @Test

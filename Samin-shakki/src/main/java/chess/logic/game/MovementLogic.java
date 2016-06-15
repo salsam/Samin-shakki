@@ -1,6 +1,7 @@
 package chess.logic.game;
 
 import chess.logic.board.ChessBoard;
+import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.piecemovers.*;
 import chess.logic.pieces.*;
@@ -9,8 +10,9 @@ import java.util.Set;
 
 /**
  * This class is responsible for movement related logic. Class offers methods to
- * get possible moves and threatened squares of a Piece on ChessBoard given as
- * parameter. Also offers method to move piece to target location on chessboard.
+ * get possible moves and threatened squares of a Piece or Player on ChessBoard
+ * given as parameter. Also offers method to move piece to target location on
+ * chessboard.
  *
  * @author sami
  */
@@ -109,6 +111,22 @@ public class MovementLogic {
         } else if (piece.getClass() == Rook.class) {
             rookMover.move(piece, target, board);
         }
+    }
+
+    public Set<Square> squaresThreatenedByPlayer(Player player, ChessBoard board) {
+        Set<Square> threatenedSquares = new HashSet();
+        board.getPieces(player).stream().forEach(piece -> {
+            threatenedSquares.addAll(threatenedSquares(piece, board));
+        });
+        return threatenedSquares;
+    }
+
+    public Set<Square> possibleMovesByPlayer(Player player, ChessBoard board) {
+        Set<Square> possibleMoves = new HashSet();
+        board.getPieces(player).stream().forEach(piece -> {
+            possibleMoves.addAll(possibleMoves(piece, board));
+        });
+        return possibleMoves;
     }
 
 }

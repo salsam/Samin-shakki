@@ -23,6 +23,7 @@ public class Game {
     private ChessBoard board;
     private int turn;
     private LegalityChecker checker;
+    private boolean continues;
 
     /**
      * Creates a new game with given movement logic and chessboard initializer.
@@ -35,6 +36,7 @@ public class Game {
         init.initialize(board);
         turn = 1;
         checker = new LegalityChecker(board);
+        continues = true;
     }
 
     /**
@@ -48,6 +50,14 @@ public class Game {
         } else {
             return Player.BLACK;
         }
+    }
+
+    public boolean getContinues() {
+        return continues;
+    }
+
+    public void setContinues(boolean continues) {
+        this.continues = continues;
     }
 
     public LegalityChecker getChecker() {
@@ -115,6 +125,7 @@ public class Game {
             }
         }
 
+        continues = false;
         return true;
     }
 

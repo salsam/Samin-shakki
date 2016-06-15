@@ -22,25 +22,23 @@ public class RookTest {
     }
 
     @Test
-    public void cloneReturnsDifferentBishop() {
+    public void rooksAreEqualIfTheyAreInSameLocationWithSameOwnerAndHasBeenMoved() {
+        assertTrue(rook.equals(new Rook(7, 5, Player.WHITE)));
+    }
+
+    @Test
+    public void rooksAreNotEqualIfOneHasBeenMovedAndOtherHasNot() {
+        rook.setHasBeenMoved(true);
+        assertFalse(rook.equals(new Rook(7, 5, Player.WHITE)));
+    }
+
+    @Test
+    public void cloneReturnsDifferentRook() {
         assertFalse(rook == rook.clone());
     }
 
     @Test
-    public void cloneReturnsIdenticalBishop() {
+    public void cloneReturnsIdenticalRook() {
         assertTrue(rook.equals(rook.clone()));
-    }
-
-    @Test
-    public void cloneHasBeenMovedIfRookHasBeenMoved() {
-        rook.setHasBeenMoved(true);
-        Rook clone = (Rook) rook.clone();
-        assertTrue(clone.getHasBeenMoved());
-    }
-
-    @Test
-    public void cloneHasNotBeenMovedIfRookHasNot() {
-        Rook clone = (Rook) rook.clone();
-        assertFalse(clone.getHasBeenMoved());
     }
 }

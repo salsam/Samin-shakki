@@ -87,14 +87,16 @@ public class ChessBoard {
 
     /**
      * Updates the Squares that player's pieces threaten to corresponding field.
+     * This methods uses the MovementLogic given to it in constructor to check
+     * which squares are currently threatened by player.
      *
      * @param player Player whose corresponding field you want to update.
      */
     public void updateThreatenedSquares(Player player) {
         if (player == Player.WHITE) {
-            squaresThreatenedByWhite = squaresThreatenedByWhite();
+            squaresThreatenedByWhite = movementLogic.squaresThreatenedByPlayer(Player.WHITE, this);
         } else {
-            squaresThreatenedByBlack = squaresThreatenedByBlack();
+            squaresThreatenedByBlack = movementLogic.squaresThreatenedByPlayer(Player.BLACK, this);
         }
     }
 
@@ -144,26 +146,6 @@ public class ChessBoard {
             return false;
         }
         return !(row < 0 || row >= table[0].length);
-    }
-
-    private Set<Square> squaresThreatenedByBlack() {
-        Set<Square> set = new HashSet();
-
-        blackPieces.stream().forEach((blackPiece) -> {
-            set.addAll(movementLogic.threatenedSquares(blackPiece, this));
-        });
-
-        return set;
-    }
-
-    private Set<Square> squaresThreatenedByWhite() {
-        Set<Square> set = new HashSet();
-
-        whitePieces.stream().forEach((whitePiece) -> {
-            set.addAll(movementLogic.threatenedSquares(whitePiece, this));
-        });
-
-        return set;
     }
 
     /**
