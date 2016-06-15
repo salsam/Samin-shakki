@@ -8,8 +8,10 @@ Shakki, jossa kaikki shakin yleiset säännöt voimassa mukaanlukien linnoittaut
 
 ###Pelaajan toiminnot:
 - Pelin aloitus valitsemalla aloita peli
+
 - Pelitilanteen näkeminen ruudukkona
-  * Ruudukko valko-musta, nappulat toisella pelaajista vaaleanruaskeat, toisella tumman ruskeat
+  * Ruudukko vaalean-tummanharmaa, nappulat toisella pelaajista valkoiset, toisella mustat
+
 - Nappuloiden siirtäminen
   1. Nappulan valitseminen
     * Jos nappula on pelaajan, valinta onnistuu. Muutoin ilmoitetaan pelaajalle virheestä.
@@ -18,15 +20,17 @@ Shakki, jossa kaikki shakin yleiset säännöt voimassa mukaanlukien linnoittaut
     * Vaihtoehdot riippuvat nappulan liikkumistavasta, nappulan sijainnista ja kuningas ei voi siirtyä uhattuun ruutuun
   3. Siirtokehotuksen lähettäminen
      * Jos pelaajan kuningas on uhattu, tarkastetaan muuttaako siirto tilannettaa
-       * Jos ei muuta, palataan takaisin ja ilmoitetaan siirron olevan laiton
+       * Jos ei muuta, palataan takaisin aiempaan tilanteeseen ja ilmoitetaan siirron olevan laiton
        * Muutoin suoritetaan siirto
      * Jos siirto on laiton, ilmoitetaan käyttäjälle. Muutoin siirrytään.
   4. Jos ruudussa on vastustajan nappula, poistetaan se laudalta
+
 - Pelin lopetus
   * Vuoron aluksi katsotaan onko pelaajan kuningas uhattu, jos on täytyy pelaajan korjata tilanne tällä vuorolla
   * Vuoron aluksi katsotaan myös onko pelaajalla yhtään laillista siirtoa, jos ei niin peli loppuu
   * Jos peli loppuu ja kuningas uhattu, on pelaaja hävinnyt ja vastustaja voittanut, muutoin tasapeli (patti)
   * Ilmoitetaan pelin lopputulos ja kysytään pelataanko uudelleen
+
 - Päätyynastipäässeen sotilaan korottaminen valinnaiseksi nappulaksi
   1. Kun sotilas siirtyy viimeiseen ruutuun, kysytään pelaajalta miksi nappulaksi pelaaja haluaa sotilaan korottaa
   2. Pelaaja valitsee jonkin vaihtoehdon klikkaamalla
