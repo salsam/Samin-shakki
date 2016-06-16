@@ -1,7 +1,5 @@
 package chess.logic.inputprocessing;
 
-import chess.gui.EndingScreen;
-import chess.gui.GameWindow;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.ChessBoardCopier;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
@@ -70,7 +68,7 @@ public class InputProcessor {
         if (game.getChessBoard().withinTable(column, row)) {
             if (chosen != null && possibilities.contains(game.getChessBoard().getSquare(column, row))) {
                 moveToTargetLocation(column, row, game);
-            } else if (game.getChecker().checkPlayerOwnsAPieceOnTheTargetSquare(game.whoseTurn(), column, row)) {
+            } else if (game.getChecker().checkPlayerOwnsPieceOnTargetSquare(game.whoseTurn(), column, row)) {
                 chosen = game.getChessBoard().getSquare(column, row).getPiece();
             }
             if (chosen != null) {
@@ -81,8 +79,9 @@ public class InputProcessor {
 
     private void moveToTargetLocation(int column, int row, Game game) {
         ChessBoard backUp = ChessBoardCopier.copy(game.getChessBoard());
+        Square target = game.getChessBoard().getSquare(column, row);
 
-        game.getChessBoard().getMovementLogic().move(chosen, game.getChessBoard().getSquare(column, row), game.getChessBoard());
+        game.getChessBoard().getMovementLogic().move(chosen, target, game.getChessBoard());
         chosen = null;
         possibilities = null;
 
@@ -91,16 +90,16 @@ public class InputProcessor {
             return;
         }
 
-        promote(column, row, game);
+        promote(target, game);
         startNextTurn(game);
     }
 
-    private void promote(int column, int row, Game game) {
+    private void promote(Square target, Game game) {
         ChessBoard cbl = game.getChessBoard();
-        Piece piece = cbl.getSquare(column, row).getPiece();
+        Piece piece = target.getPiece();
         if (piece.getClass() == Pawn.class) {
             Pawn chosenPawn = (Pawn) piece;
-            if (chosenPawn.opposingEnd() == row) {
+            if (chosenPawn.opposingEnd() == target.getRow()) {
                 putPieceOnBoard(cbl, new Queen(chosenPawn.getColumn(), chosenPawn.getRow(), chosenPawn.getOwner()));
                 ChessBoardInitializer.removePieceFromOwner(chosenPawn, cbl);
             }

@@ -27,34 +27,19 @@ public class LegalityCheckerTest {
     }
 
     @Test
-    public void inputIsNotValidIfLocationNotOnBoard() {
-        assertFalse(checker.inputIsInAllowedForm(10, 0, true));
-    }
-
-    @Test
-    public void inputIsInvalidIfTargetSquareEmptyWhenNotAllowed() {
-        assertFalse(checker.inputIsInAllowedForm(1, 0, false));
-    }
-
-    @Test
-    public void inputIsValidIfTargetSquareEmptyWhenAllowed() {
-        assertTrue(checker.inputIsInAllowedForm(1, 0, true));
-    }
-
-    @Test
     public void checkPlayerOwnsAPieceOnTargetSquareReturnsFalseIfSquareEmpty() {
-        assertFalse(checker.checkPlayerOwnsAPieceOnTheTargetSquare(Player.WHITE, 3, 3));
+        assertFalse(checker.checkPlayerOwnsPieceOnTargetSquare(Player.WHITE, 3, 3));
     }
 
     @Test
     public void checkPlayerOwnsAPieceOnTargetSquareReturnsFalseIfTargetSquareContainsOpposingPiece() {
         putPieceOnBoard(board, new Pawn(2, 2, Player.WHITE));
-        assertFalse(checker.checkPlayerOwnsAPieceOnTheTargetSquare(Player.BLACK, 2, 2));
+        assertFalse(checker.checkPlayerOwnsPieceOnTargetSquare(Player.BLACK, 2, 2));
     }
 
     @Test
     public void checkPlayerOwnsAPieceOnTargetSquareReturnsTrueIfTargetSquareContainsOwnPiece() {
         putPieceOnBoard(board, new Pawn(2, 2, Player.WHITE));
-        assertTrue(checker.checkPlayerOwnsAPieceOnTheTargetSquare(Player.WHITE, 2, 2));
+        assertTrue(checker.checkPlayerOwnsPieceOnTargetSquare(Player.WHITE, 2, 2));
     }
 }

@@ -33,46 +33,23 @@ public class LegalityChecker {
     }
 
     /**
-     * Checks whether input is in allowed form. The square corresponding given
-     * column and row must be within table. If square cannot be empty also
-     * checks if chosen square is empty.
-     *
-     * @param column column of target square
-     * @param row row of target square
-     * @param squareCanBeEmpty if true square corresponding input can be empty
-     * @return true if input is in allowed form
-     */
-    public boolean inputIsInAllowedForm(int column, int row, boolean squareCanBeEmpty) {
-
-        if (!board.withinTable(column, row)) {
-            return false;
-        }
-
-        if (!squareCanBeEmpty && !board.getSquare(column, row).containsAPiece()) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Checks whether player owns a piece on the square of which location is
      * given as input. If player owns a piece on target square, returns input.
      * If not, then returns empty string "".
      *
      * @param player player whose piece we're choosing.
-     * @param x x-coordinate of target square
-     * @param y y-coordinate of target square
+     * @param column x-coordinate of target square
+     * @param row y-coordinate of target square
      * @return input if player does own a piece on target square, else empty
      * string
      */
-    public Boolean checkPlayerOwnsAPieceOnTheTargetSquare(Player player, int x, int y) {
+    public Boolean checkPlayerOwnsPieceOnTargetSquare(Player player, int column, int row) {
 
-        if (!inputIsInAllowedForm(x, y, false)) {
+        if (!board.getSquare(column, row).containsAPiece()) {
             return false;
         }
 
-        if (board.getSquare(x, y).getPiece().getOwner() != player) {
+        if (board.getSquare(column, row).getPiece().getOwner() != player) {
             return false;
         }
         return true;

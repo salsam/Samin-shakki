@@ -24,9 +24,7 @@ public class ChessBoardCopier {
      */
     public static ChessBoard copy(ChessBoard board) {
         ChessBoard copy = new ChessBoard(board.getMovementLogic());
-        Square[][] copyBoard = copyBoard(board.getTable());
-
-        copy.setTable(copyBoard);
+        copy.setTable(copyBoard(board.getTable()));
         setPieces(copy);
 
         return copy;
