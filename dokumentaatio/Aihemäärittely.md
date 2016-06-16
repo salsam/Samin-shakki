@@ -33,9 +33,5 @@ Shakki, jossa kaikki shakin yleiset säännöt voimassa mukaanlukien linnoittaut
 
 - Päätyynastipäässeen sotilaan korottaminen kuningattareksi (Oikeasti nappulan saa valita, mutta 99% tapauksista valitaan kuningatar ja lopuissa valinnallaa ei väliä)
   1. Kun sotilas siirtyy viimeiseen ruutuun, korvataan sotilas kuningattarella
-
-- Pelin lopetus
-
-- Pelin uudelleenaloitus
   
 
