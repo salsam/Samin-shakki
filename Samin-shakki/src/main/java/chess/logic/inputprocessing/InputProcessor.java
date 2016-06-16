@@ -36,12 +36,16 @@ public class InputProcessor {
     public InputProcessor() {
     }
 
-    public void setFrames(Map<String, JFrame> frames) {
-        this.frames = frames;
+    public Piece getChosen() {
+        return chosen;
     }
 
-    public JLabel getTextArea() {
-        return textArea;
+    public void setChosen(Piece chosen) {
+        this.chosen = chosen;
+    }
+
+    public void setFrames(Map<String, JFrame> frames) {
+        this.frames = frames;
     }
 
     public void setTextArea(JLabel textArea) {
@@ -50,6 +54,10 @@ public class InputProcessor {
 
     public Set<Square> getPossibilities() {
         return possibilities;
+    }
+
+    public void setPossibilities(Set<Square> possibilities) {
+        this.possibilities = possibilities;
     }
 
     /**
@@ -69,7 +77,7 @@ public class InputProcessor {
             if (chosen != null && possibilities.contains(game.getChessBoard().getSquare(column, row))) {
                 moveToTargetLocation(column, row, game);
             } else if (game.getChecker().checkPlayerOwnsPieceOnTargetSquare(game.whoseTurn(), column, row)) {
-                chosen = game.getChessBoard().getSquare(column, row).getPiece();
+                setChosen(game.getChessBoard().getSquare(column, row).getPiece());
             }
             if (chosen != null) {
                 possibilities = game.getChessBoard().getMovementLogic().possibleMoves(chosen, game.getChessBoard());

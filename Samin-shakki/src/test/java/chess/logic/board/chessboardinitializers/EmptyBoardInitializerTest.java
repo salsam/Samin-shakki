@@ -2,9 +2,6 @@ package chess.logic.board.chessboardinitializers;
 
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
-import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
-import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
-import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
 import org.junit.BeforeClass;
 import org.junit.Test;
