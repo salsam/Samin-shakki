@@ -24,4 +24,4 @@ Päivät | Tunnit | Kuvaus
 13.06.2016 | 5h | Eriytetty nappuloiden tietosisältö niiden piirtämisestä ja liikkumislogiikasta. Korjattu suurin osa ilmenneistä bugeista, mutta peli väittää mattia myös kun pelaaja voi syödä uhkaavan nappulan.
 14.06.2016 | 5h | Korjattu pelin logiikka jälleen toimimaan, siirretty luokan ChessBoardListener sisältämä syötteen käsittely omaan luokaan GUILogic. Lisätty javadocceja ja korjattu kaikki checkstyle-virheet.
 15.06.2016 | 4h | Lisätty testejä huonosti katetuille luokille, peli ei ota vastaan syötteitä pelin loputtua. Refaktoroitu guita vähentäen yhteyksiä. ChessBoardCopier luokka luotu vähentämään ChessBoardin vastuita.
-16.06.2016 | 7h | Päivitetty luokkakaavio, luotu kaksi sekvenssikaaviota (PS.websequencediagrams.com on huijaus sivusto joka pilaa tekemäsi kaaviot tallennus vaiheessa, jos et maksa premiumista).
+16.06.2016 | 7h | Päivitetty luokkakaavio, luotu kaksi sekvenssikaaviota (PS.websequencediagrams.com on huijaussivusto, joka pilaa tekemäsi kaaviot tallennus vaiheessa, jos et maksa premiumista).
