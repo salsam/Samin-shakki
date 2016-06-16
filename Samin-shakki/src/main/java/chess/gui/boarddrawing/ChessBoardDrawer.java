@@ -2,7 +2,7 @@ package chess.gui.boarddrawing;
 
 import chess.gui.boarddrawing.PieceDrawer;
 import chess.logic.game.Game;
-import chess.logic.guilogic.InputProcessor;
+import chess.logic.inputprocessing.InputProcessor;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;

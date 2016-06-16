@@ -1,4 +1,4 @@
-package chess.logic.guilogic;
+package chess.logic.inputprocessing;
 
 import org.junit.After;
 import org.junit.AfterClass;

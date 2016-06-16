@@ -1,5 +1,6 @@
 package chess.gui;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -34,7 +35,7 @@ public class MainFrame extends JFrame {
 
     private void initComponents(Container container) {
         JLabel head = new JLabel("Chess");
-        head.setFont(new Font("Serif", Font.PLAIN, 50));
+        head.setFont(new Font("Serif", Font.BOLD, 50));
         head.setMaximumSize(new Dimension(250, 100));
         head.setAlignmentX(CENTER_ALIGNMENT);
         head.setAlignmentY(TOP_ALIGNMENT);

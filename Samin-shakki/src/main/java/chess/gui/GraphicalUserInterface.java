@@ -1,7 +1,7 @@
 package chess.gui;
 
 import chess.logic.game.Game;
-import chess.logic.guilogic.InputProcessor;
+import chess.logic.inputprocessing.InputProcessor;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;

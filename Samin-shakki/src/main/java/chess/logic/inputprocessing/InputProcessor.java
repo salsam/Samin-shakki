@@ -1,4 +1,4 @@
-package chess.logic.guilogic;
+package chess.logic.inputprocessing;
 
 import chess.gui.EndingScreen;
 import chess.gui.GameWindow;

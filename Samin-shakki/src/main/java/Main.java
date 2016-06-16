@@ -3,7 +3,7 @@ import chess.gui.GraphicalUserInterface;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.game.Game;
 import chess.logic.game.MovementLogic;
-import chess.logic.guilogic.InputProcessor;
+import chess.logic.inputprocessing.InputProcessor;
 
 /**
  *
