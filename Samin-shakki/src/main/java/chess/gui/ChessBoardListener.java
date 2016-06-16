@@ -25,7 +25,6 @@ public class ChessBoardListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int column = (e.getX()) / sideLength;
         int row = (e.getY()) / sideLength;
-        board.repaint();
         logic.processClick(column, row, board.getGame());
         board.repaint();
     }
