@@ -31,8 +31,6 @@ Shakki, jossa kaikki shakin yleiset säännöt voimassa mukaanlukien linnoittaut
   * Jos peli loppuu ja kuningas uhattu, on pelaaja hävinnyt ja vastustaja voittanut, muutoin tasapeli (patti)
   * Ilmoitetaan pelin lopputulos ja kysytään pelataanko uudelleen
 
-- Päätyynastipäässeen sotilaan korottaminen valinnaiseksi nappulaksi
-  1. Kun sotilas siirtyy viimeiseen ruutuun, kysytään pelaajalta miksi nappulaksi pelaaja haluaa sotilaan korottaa
-  2. Pelaaja valitsee jonkin vaihtoehdon klikkaamalla
-  3. Korvataan sotilas valitulla nappulalla
+- Päätyynastipäässeen sotilaan korottaminen kuningattareksi (Oikeasti nappulan saa valita, mutta 99% tapauksista valitaan kuningatar ja lopuissa valinnallaa ei väliä)
+  1. Kun sotilas siirtyy viimeiseen ruutuun, korvataan sotilas kuningattarella
 
