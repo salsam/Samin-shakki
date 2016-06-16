@@ -1,9 +1,10 @@
 
 chess.gui
+chess.gui.boarddrawing
 chess.io
 chess.logic.board
 chess.logic.board.chessboardinitializers
 chess.logic.game
-chess.logic.guilogic
+chess.logic.inputprocessing
 chess.logic.piecemovers
 chess.logic.pieces

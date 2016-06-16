@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 35,
+      <title>File: 38,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -61,6 +61,34 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#chess.logic.pieces.Knight.java">chess/logic/pieces/Knight.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#chess.gui.WindowCloser.java">chess/gui/WindowCloser.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#chess.gui.EndingScreen.java">chess/gui/EndingScreen.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +214,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.King.java">chess/logic/pieces/King.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.inputprocessing.InputProcessor.java">chess/logic/inputprocessing/InputProcessor.java</a>
                 </td>
                 <td>
                   0
@@ -200,7 +228,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.logic.guilogic.GUILogic.java">chess/logic/guilogic/GUILogic.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.logic.pieces.King.java">chess/logic/pieces/King.java</a>
                 </td>
                 <td>
                   0
@@ -256,7 +284,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.gui.PieceDrawer.java">chess/gui/PieceDrawer.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.gui.Pair.java">chess/gui/Pair.java</a>
                 </td>
                 <td>
                   0
@@ -270,7 +298,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#chess.gui.Pair.java">chess/gui/Pair.java</a>
+                  <a href="${project.url}/checkstyle.html#chess.gui.boarddrawing.PieceDrawer.java">chess/gui/boarddrawing/PieceDrawer.java</a>
                 </td>
                 <td>
                   0
@@ -313,20 +341,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#chess.logic.piecemovers.KingMover.java">chess/logic/piecemovers/KingMover.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#chess.gui.ChessBoardDrawer.java">chess/gui/ChessBoardDrawer.java</a>
                 </td>
                 <td>
                   0
@@ -424,7 +438,35 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#chess.gui.boarddrawing.ChessBoardDrawer.java">chess/gui/boarddrawing/ChessBoardDrawer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#chess.logic.board.Square.java">chess/logic/board/Square.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#chess.gui.GameRestarter.java">chess/gui/GameRestarter.java</a>
                 </td>
                 <td>
                   0

@@ -11,7 +11,7 @@
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> chess.logic.game.Game;
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">import</strong> chess.logic.game.MovementLogic;
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">import</strong> chess.logic.guilogic.GUILogic;
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">import</strong> chess.logic.inputprocessing.InputProcessor;
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_javadoccomment"> *</em>
@@ -21,7 +21,7 @@
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String[] args) {
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>          <a href="../chess/logic/game/Game.html">Game</a> game = <strong class="jxr_keyword">new</strong> <a href="../chess/logic/game/Game.html">Game</a>(<strong class="jxr_keyword">new</strong> <a href="../chess/logic/board/chessboardinitializers/StandardBoardInitializer.html">StandardBoardInitializer</a>(), <strong class="jxr_keyword">new</strong> MovementLogic());
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>          <a href="../chess/logic/guilogic/GUILogic.html">GUILogic</a> guiLogic = <strong class="jxr_keyword">new</strong> <a href="../chess/logic/guilogic/GUILogic.html">GUILogic</a>();
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>          <a href="../chess/logic/inputprocessing/InputProcessor.html">InputProcessor</a> guiLogic = <strong class="jxr_keyword">new</strong> <a href="../chess/logic/inputprocessing/InputProcessor.html">InputProcessor</a>();
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>          <a href="../chess/gui/GraphicalUserInterface.html">GraphicalUserInterface</a> gui = <strong class="jxr_keyword">new</strong> <a href="../chess/gui/GraphicalUserInterface.html">GraphicalUserInterface</a>(guiLogic, game);
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>          gui.run();
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>      }

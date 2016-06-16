@@ -113,6 +113,14 @@ public class MovementLogic {
         }
     }
 
+    /**
+     * Returns set containing all squares that given player's pieces threaten on
+     * given board.
+     *
+     * @param player given player
+     * @param board given chessboard
+     * @return set containing all squares that given player's pieces threaten
+     */
     public Set<Square> squaresThreatenedByPlayer(Player player, ChessBoard board) {
         Set<Square> threatenedSquares = new HashSet();
         board.getPieces(player).stream().forEach(piece -> {
@@ -121,6 +129,14 @@ public class MovementLogic {
         return threatenedSquares;
     }
 
+    /**
+     * Returns set containing all squares that given player's pieces can move to
+     * on given board.
+     *
+     * @param player given player
+     * @param board given chessboard
+     * @return set containing all squares that given player's pieces can move to
+     */
     public Set<Square> possibleMovesByPlayer(Player player, ChessBoard board) {
         Set<Square> possibleMoves = new HashSet();
         board.getPieces(player).stream().forEach(piece -> {
