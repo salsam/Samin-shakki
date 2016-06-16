@@ -1,5 +1,6 @@
 package chess.logic.game;
 
+import chess.logic.movementlogic.MovementLogic;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.ChessBoardCopier;
 import chess.logic.board.Square;

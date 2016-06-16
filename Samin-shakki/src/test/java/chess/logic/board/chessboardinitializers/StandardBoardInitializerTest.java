@@ -1,10 +1,12 @@
-package chess.logic.board;
+package chess.logic.board.chessboardinitializers;
 
+import chess.logic.board.ChessBoard;
+import chess.logic.board.Player;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
-import chess.logic.game.MovementLogic;
-import chess.logic.piecemovers.PawnMover;
+import chess.logic.movementlogic.MovementLogic;
+import chess.logic.movementlogic.piecemovers.PawnMover;
 import chess.logic.pieces.Bishop;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Knight;

@@ -1,9 +1,14 @@
-package chess.logic.game;
+package chess.logic.movementlogic;
 
+import chess.logic.movementlogic.piecemovers.RookMover;
+import chess.logic.movementlogic.piecemovers.KingMover;
+import chess.logic.movementlogic.piecemovers.PawnMover;
+import chess.logic.movementlogic.piecemovers.BishopMover;
+import chess.logic.movementlogic.piecemovers.QueenMover;
+import chess.logic.movementlogic.piecemovers.KnightMover;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
-import chess.logic.piecemovers.*;
 import chess.logic.pieces.*;
 import java.util.HashSet;
 import java.util.Set;

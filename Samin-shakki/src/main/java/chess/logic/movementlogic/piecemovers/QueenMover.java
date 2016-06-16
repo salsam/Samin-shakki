@@ -3,7 +3,7 @@
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.logic.piecemovers;
+package chess.logic.movementlogic.piecemovers;
 
 import chess.logic.board.ChessBoard;
 import java.util.Set;

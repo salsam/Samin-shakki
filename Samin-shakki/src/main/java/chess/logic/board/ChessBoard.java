@@ -1,6 +1,6 @@
 package chess.logic.board;
 
-import chess.logic.game.MovementLogic;
+import chess.logic.movementlogic.MovementLogic;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Piece;
 import java.util.ArrayList;

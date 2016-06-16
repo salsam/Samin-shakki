@@ -3,7 +3,7 @@ package chess.logic.board;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
-import chess.logic.game.MovementLogic;
+import chess.logic.movementlogic.MovementLogic;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Queen;
 import java.util.Arrays;

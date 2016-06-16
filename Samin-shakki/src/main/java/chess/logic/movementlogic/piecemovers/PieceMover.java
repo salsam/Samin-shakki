@@ -1,4 +1,4 @@
-package chess.logic.piecemovers;
+package chess.logic.movementlogic.piecemovers;
 
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.removePieceFromOwner;
 import chess.logic.board.ChessBoard;

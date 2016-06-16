@@ -6,5 +6,6 @@ chess.logic.board
 chess.logic.board.chessboardinitializers
 chess.logic.game
 chess.logic.inputprocessing
-chess.logic.piecemovers
+chess.logic.movementlogic
+chess.logic.movementlogic.piecemovers
 chess.logic.pieces
