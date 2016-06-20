@@ -116,6 +116,7 @@ public class Game {
     public boolean checkMate(Player player) {
         ChessBoard backUp = ChessBoardCopier.copy(board);
         for (Piece piece : board.getPieces(player)) {
+            board.updateThreatenedSquares(getOpponent(player));
             for (Square possibility : board.getMovementLogic().possibleMoves(piece, board)) {
                 board.getMovementLogic().move(piece, possibility, board);
                 board.updateThreatenedSquares(getOpponent(player));
@@ -124,7 +125,6 @@ public class Game {
                     return false;
                 }
                 setChessBoard(ChessBoardCopier.copy(backUp));
-                board.updateThreatenedSquares(getOpponent(player));
             }
         }
 

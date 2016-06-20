@@ -33,6 +33,11 @@ public class RookMover extends PieceMover {
      */
     @Override
     public void move(Piece piece, Square target, ChessBoard board) {
+
+        if (piece == null || piece.getClass() != Rook.class) {
+            return;
+        }
+
         Rook rook = (Rook) piece;
         rook.setHasBeenMoved(true);
         super.move(rook, target, board);

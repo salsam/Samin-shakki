@@ -90,6 +90,11 @@ public abstract class PieceMover {
      * @param board Board on which this piece will be moved.
      */
     public void move(Piece piece, Square target, ChessBoard board) {
+
+        if (piece == null) {
+            return;
+        }
+
         board.getSquare(piece.getColumn(), piece.getRow()).setPiece(null);
 
         if (target.containsAPiece()) {

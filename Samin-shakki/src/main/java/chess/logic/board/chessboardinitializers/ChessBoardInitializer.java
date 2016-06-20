@@ -10,7 +10,7 @@ import chess.logic.pieces.Piece;
  * starting situations on chessboard like empty board or standard starting
  * positions.
  *
- * @author samisalo
+ * @author sami
  */
 public abstract class ChessBoardInitializer {
 

@@ -5,6 +5,7 @@ import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
+import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Queen;
@@ -85,6 +86,39 @@ public class GameTest {
         putPieceOnBoard(board, new Rook(1, 6, Player.BLACK));
         putPieceOnBoard(board, new Rook(6, 1, Player.BLACK));
         putPieceOnBoard(board, new Rook(4, 1, Player.WHITE));
+        assertFalse(game.checkMate(Player.WHITE));
+    }
+
+    @Test
+    public void checkMateFalseIfKingCanMoveToUnthreatenedSquare() {
+        ChessBoard board = game.getChessBoard();
+        putPieceOnBoard(board, new Pawn(1, 1, Player.BLACK));
+        putPieceOnBoard(board, new Pawn(2, 2, Player.BLACK));
+        assertFalse(game.checkMate(Player.WHITE));
+    }
+
+    @Test
+    public void checkMateFalseInComplexSituationWhereKingThreatenedByProtectedPieceButCanBeAvoided() {
+        game = new Game(new StandardBoardInitializer(), new MovementLogic());
+        ChessBoard board = game.getChessBoard();
+        MovementLogic mvl = board.getMovementLogic();
+        King whiteKing = board.getKings().get(Player.WHITE);
+        Pawn whitePawn = (Pawn) board.getSquare(5, 1).getPiece();
+        Pawn blackPawn1 = (Pawn) board.getSquare(5, 6).getPiece();
+        Pawn blackPawn2 = (Pawn) board.getSquare(4, 6).getPiece();
+
+        mvl.move(whitePawn, board.getSquare(5, 2), board);
+        game.nextTurn();
+        mvl.move(blackPawn1, board.getSquare(5, 4), board);
+        game.nextTurn();
+        mvl.move(whiteKing, board.getSquare(5, 1), board);
+        game.nextTurn();
+        mvl.move(blackPawn2, board.getSquare(4, 4), board);
+        game.nextTurn();
+        mvl.move(whiteKing, board.getSquare(6, 2), board);
+        game.nextTurn();
+        mvl.move(blackPawn1, board.getSquare(5, 3), board);
+        game.nextTurn();
         assertFalse(game.checkMate(Player.WHITE));
     }
 

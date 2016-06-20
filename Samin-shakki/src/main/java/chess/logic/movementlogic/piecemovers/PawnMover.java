@@ -35,6 +35,11 @@ public class PawnMover extends PieceMover {
      */
     @Override
     public void move(Piece piece, Square target, ChessBoard board) {
+
+        if (piece == null || piece.getClass() != Pawn.class) {
+            return;
+        }
+        
         Pawn pawn = (Pawn) piece;
         pawn.setHasBeenMoved(true);
 

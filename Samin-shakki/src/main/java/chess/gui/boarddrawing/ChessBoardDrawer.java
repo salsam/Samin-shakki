@@ -1,6 +1,5 @@
 package chess.gui.boarddrawing;
 
-import chess.gui.boarddrawing.PieceDrawer;
 import chess.logic.game.Game;
 import chess.logic.inputprocessing.InputProcessor;
 import java.awt.Color;
@@ -43,7 +42,9 @@ public class ChessBoardDrawer extends JPanel {
                 } else {
                     graphics.setColor(Color.DARK_GRAY);
                 }
-                graphics.fillRect(sideLength * i, sideLength * j, sideLength, sideLength);
+                graphics.fillRect(sideLength * i + 1, sideLength * j + 1, sideLength - 1, sideLength - 1);
+                graphics.setColor(Color.BLACK);
+                graphics.drawRect(sideLength * i, sideLength * j, sideLength, sideLength);
 
                 if (game.getChessBoard().getSquare(i, j).containsAPiece()) {
                     pieceDrawer.draw(game.getChessBoard().getSquare(i, j).getPiece(), graphics, sideLength);

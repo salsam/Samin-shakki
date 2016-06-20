@@ -24,20 +24,20 @@ public class ChessBoardCopier {
      */
     public static ChessBoard copy(ChessBoard board) {
         ChessBoard copy = new ChessBoard(board.getMovementLogic());
-        copy.setTable(copyBoard(board.getTable()));
+        copy.setTable(copyTable(board.getTable()));
         setPieces(copy);
 
         return copy;
     }
 
-    private static Square[][] copyBoard(Square[][] table) {
-        Square[][] copyBoard = new Square[table.length][table[0].length];
+    private static Square[][] copyTable(Square[][] table) {
+        Square[][] copyTable = new Square[table.length][table[0].length];
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table[0].length; j++) {
-                copyBoard[i][j] = table[i][j].clone();
+                copyTable[i][j] = table[i][j].clone();
             }
         }
-        return copyBoard;
+        return copyTable;
     }
 
     private static void setPieces(ChessBoard board) {

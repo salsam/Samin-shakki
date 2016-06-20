@@ -39,10 +39,21 @@ public class KingMover extends PieceMover {
      */
     @Override
     public void move(Piece piece, Square target, ChessBoard board) {
+
+        if (piece == null || piece.getClass() != King.class) {
+            return;
+        }
+
         King king = (King) piece;
         king.setHasBeenMoved(true);
         RookMover rookMover = new RookMover();
 
+        castleIfChosen(king, target, board, rookMover);
+
+        super.move(king, target, board);
+    }
+
+    private void castleIfChosen(King king, Square target, ChessBoard board, RookMover rookMover) {
         if (king.getColumn() - target.getColumn() == 2) {
             Rook rook = (Rook) board.getSquare(0, king.getRow()).getPiece();
             rookMover.move(rook, board.getSquare(target.getColumn() + 1, target.getRow()), board);
@@ -51,8 +62,6 @@ public class KingMover extends PieceMover {
             rookMover.move(rook, board.getSquare(target.getColumn() - 1, target.getRow()), board);
 
         }
-
-        super.move(king, target, board);
     }
 
     /**
