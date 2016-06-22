@@ -34,4 +34,7 @@ Shakki, jossa kaikki shakin yleiset säännöt voimassa mukaanlukien linnoittaut
 - Päätyynastipäässeen sotilaan korottaminen kuningattareksi (Oikeasti nappulan saa valita, mutta 99% tapauksista valitaan kuningatar ja lopuissa valinnallaa ei väliä)
   1. Kun sotilas siirtyy viimeiseen ruutuun, korvataan sotilas kuningattarella
   
+###Rakennekuvaus
+Ohjelman rakenne koostuu pääasiassa kolmesta osasta: GUI (luokkakaavion yläreuna), logiikka(luokkakaavion vasenalareuna-keskiosa) ja entiteetit (luokkakaavion oikea-alareuna). Näin esimerkiksi nappulatluokat lähinnä sisältävät tietoa, jota logiikka kuten MovementLogic-luokka käsittelee. GUI, kuten ChessBoardDrawer taas piirtää pelaajille näkymän entiteettien pohjalta. Pakkaus IO sisältää luokan ImageLoader, jolla taas ladataan GUIta varten kuvia. 
 
+Näiden pakkausten sisällä luokkia on jaettu vielä alipakkauksiin asiakokonaisuuksien mukaan. GUIssa muu GUI ja laudanpiirtäminen erillään, sillä laudan piirtämisen saattaa hyvinkin tulla uusia luokkia, jos peliin tulee erilaisia kuvia nappuloille. Logiikassa pelin etenemislogiikka ja nappuloiden liikkumislogiikka erillään. Domainissa taas laudan sisällöstä nappulat jaettu erilleen omaksi kokonaisuudekseen.
