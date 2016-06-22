@@ -82,8 +82,8 @@ public class KingMover extends PieceMover {
 
     /**
      * Returns a list containing all squares chosen king can legally move to.
-     * That means all neighbor squares of king's location that aren't threatened
-     * by opponent or contain player's own piece.
+     * That means all neighbour squares of king's location that aren't
+     * threatened by opponent or contain player's own piece.
      *
      * @param piece target king
      * @param board chessboard on which movement happens

@@ -121,7 +121,7 @@ public class InputProcessor {
         if (game.checkIfChecked(game.whoseTurn())) {
             textArea.setText(textArea.getText() + " Check!");
             if (game.checkMate(game.whoseTurn())) {
-                textArea.setText("Checkmate!" + getOpponent(game.whoseTurn()) + " won!");
+                textArea.setText("Checkmate! " + getOpponent(game.whoseTurn()) + " won!");
                 frames.get("endingScreen").setVisible(true);
             }
         } else if (game.stalemate(game.whoseTurn())) {

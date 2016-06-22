@@ -26,10 +26,10 @@ public class ChessBoardCopier {
         ChessBoard copy = new ChessBoard(board.getMovementLogic());
         copy.setTable(copyTable(board.getTable()));
         setPieces(copy);
-
+        
         return copy;
     }
-
+    
     private static Square[][] copyTable(Square[][] table) {
         Square[][] copyTable = new Square[table.length][table[0].length];
         for (int i = 0; i < table.length; i++) {
@@ -39,11 +39,11 @@ public class ChessBoardCopier {
         }
         return copyTable;
     }
-
+    
     private static void setPieces(ChessBoard board) {
         board.setBlackPieces(new ArrayList());
         board.setWhitePieces(new ArrayList());
-
+        
         for (int i = 0; i < board.getTable().length; i++) {
             for (int j = 0; j < board.getTable()[0].length; j++) {
                 addPieceToOwner(board.getSquare(i, j), board);

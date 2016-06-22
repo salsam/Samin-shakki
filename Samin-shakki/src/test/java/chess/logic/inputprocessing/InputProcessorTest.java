@@ -3,12 +3,18 @@ package chess.logic.inputprocessing;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.game.Game;
 import chess.logic.movementlogic.MovementLogic;
+import chess.logic.pieces.King;
 import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
 import chess.logic.pieces.Queen;
+import chess.logic.pieces.Rook;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -43,6 +49,7 @@ public class InputProcessorTest {
         game.reset();
         inputProcessor = new InputProcessor();
         inputProcessor.setTextArea(output);
+        output.setText("");
     }
 
     @Test
@@ -111,10 +118,72 @@ public class InputProcessorTest {
         ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Pawn(1, 6, Player.WHITE, "wp9"));
         inputProcessor.processClick(1, 6, game);
         inputProcessor.processClick(0, 7, game);
-        game.getChessBoard().getPieces(Player.WHITE).stream().forEach(whitePiece -> {
-            assertFalse(whitePiece.getPieceCode().equals("wp9"));
-        });
+        assertTrue(game.getChessBoard().getPieces(Player.WHITE).stream()
+                .noneMatch(whitePiece -> whitePiece.getPieceCode().equals("wp9")));
+
         assertTrue(game.getChessBoard().getPieces(Player.WHITE).stream()
                 .anyMatch(whitePiece -> whitePiece.getPieceCode().equals("wq9")));
+    }
+
+    @Test
+    public void outputTellsWhoseTurnItIsCorrectly() {
+        inputProcessor.processClick(1, 1, game);
+        inputProcessor.processClick(1, 2, game);
+        assertEquals("BLACK's turn.", output.getText());
+        inputProcessor.processClick(1, 6, game);
+        inputProcessor.processClick(1, 5, game);
+        assertEquals("WHITE's turn.", output.getText());
+    }
+
+    @Test
+    public void outputTellsIfPlayerIsChecked() {
+        EmptyBoardInitializer emptyinit = new EmptyBoardInitializer();
+        emptyinit.initialize(game.getChessBoard());
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new King(4, 0, Player.WHITE, "wk"));
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Pawn(4, 2, Player.BLACK, "bp1"));
+        inputProcessor.processClick(4, 0, game);
+        inputProcessor.processClick(5, 0, game);
+        inputProcessor.processClick(4, 2, game);
+        inputProcessor.processClick(4, 1, game);
+
+        assertEquals("WHITE's turn. Check!", output.getText());
+    }
+
+    @Test
+    public void outputTellsIfGameHasEndedInCheckMate() {
+        Map<String, JFrame> frames = new HashMap<>();
+        frames.put("endingScreen", new JFrame());
+        frames.get("endingScreen").setVisible(false);
+        inputProcessor.setFrames(frames);
+        EmptyBoardInitializer emptyinit = new EmptyBoardInitializer();
+        emptyinit.initialize(game.getChessBoard());
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new King(1, 0, Player.WHITE, "wk"));
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Queen(4, 1, Player.BLACK, "bq"));
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Rook(7, 1, Player.BLACK, "br1"));
+        inputProcessor.processClick(1, 0, game);
+        inputProcessor.processClick(0, 0, game);
+        inputProcessor.processClick(4, 1, game);
+        inputProcessor.processClick(1, 1, game);
+
+        assertEquals("Checkmate! BLACK won!", output.getText());
+    }
+
+    @Test
+    public void outputTellsIfGameHasEndedInStaleMate() {
+        Map<String, JFrame> frames = new HashMap<>();
+        frames.put("endingScreen", new JFrame());
+        frames.get("endingScreen").setVisible(false);
+        inputProcessor.setFrames(frames);
+        EmptyBoardInitializer emptyinit = new EmptyBoardInitializer();
+        emptyinit.initialize(game.getChessBoard());
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new King(1, 0, Player.WHITE, "wk"));
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Queen(1, 7, Player.BLACK, "bq"));
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Rook(7, 1, Player.BLACK, "br1"));
+        inputProcessor.processClick(1, 0, game);
+        inputProcessor.processClick(0, 0, game);
+        inputProcessor.processClick(1, 7, game);
+        inputProcessor.processClick(1, 6, game);
+
+        assertEquals("Stalemate! Game ended as a draw!", output.getText());
     }
 }

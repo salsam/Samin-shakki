@@ -1,0 +1,155 @@
+<html>
+<head>
+  
+    <style type='text/css'>
+   
+   .tests{ 
+     width : 50%;
+     float : left;
+   }
+   
+   .mutees{
+     float : right;
+     width : 50%;
+   }
+   
+   .unit {
+     padding-top : 20px;
+     clear : both;
+   }
+   
+   .coverage_bar {
+    display : inline-block;
+    height : 1.1em;
+    width: 130px;
+    background: #FAA;
+    margin: 0 5px;
+    vertical-align: middle;
+    border: 1px solid #AAA;
+    position : relative;
+   }
+   
+   .coverage_complete {
+    display : inline-block;
+    height : 100%;
+    background: #DFD;
+    float: left;
+   }
+   
+   .coverage_ledgend {
+        position : absolute;
+        height : 100%;
+        width : 100%;
+        left : 0;
+        top : 0;
+        text-align : center;
+   }
+   
+   .line, .mut {
+        vertical-align : middle;
+   }
+   
+   .coveragePercentage {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+   }
+  </style>
+  
+</head>
+<body>
+
+<h1>Pit Test Coverage Report</h1>
+
+<h3>Project Summary</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Number of Classes</th>
+            <th>Line Coverage</th>
+            <th>Mutation Coverage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>25</td>
+            <td>95% <div class="coverage_bar"><div class="coverage_complete" style="width:95%"></div><div class="coverage_ledgend">623/654</div></div></td>
+            <td>84% <div class="coverage_bar"><div class="coverage_complete" style="width:84%"></div><div class="coverage_ledgend">375/447</div></div></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>Breakdown by Package</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Number of Classes</th>
+            <th>Line Coverage</th>
+            <th>Mutation Coverage</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td><a href="./chess.logic.board/index.html">chess.logic.board</a></td>
+            <td>4</td>
+            <td><div class="coveragePercentage">98% </div><div class="coverage_bar"><div class="coverage_complete" style="width:98%"></div><div class="coverage_ledgend">107/109</div></div></td>
+            <td><div class="coveragePercentage">84% </div><div class="coverage_bar"><div class="coverage_complete" style="width:84%"></div><div class="coverage_ledgend">79/94</div></div></td>
+        </tr>
+
+        <tr>
+            <td><a href="./chess.logic.board.chessboardinitializers/index.html">chess.logic.board.chessboardinitializers</a></td>
+            <td>3</td>
+            <td><div class="coveragePercentage">100% </div><div class="coverage_bar"><div class="coverage_complete" style="width:100%"></div><div class="coverage_ledgend">59/59</div></div></td>
+            <td><div class="coveragePercentage">91% </div><div class="coverage_bar"><div class="coverage_complete" style="width:91%"></div><div class="coverage_ledgend">41/45</div></div></td>
+        </tr>
+
+        <tr>
+            <td><a href="./chess.logic.game/index.html">chess.logic.game</a></td>
+            <td>2</td>
+            <td><div class="coveragePercentage">87% </div><div class="coverage_bar"><div class="coverage_complete" style="width:87%"></div><div class="coverage_ledgend">60/69</div></div></td>
+            <td><div class="coveragePercentage">80% </div><div class="coverage_bar"><div class="coverage_complete" style="width:80%"></div><div class="coverage_ledgend">32/40</div></div></td>
+        </tr>
+
+        <tr>
+            <td><a href="./chess.logic.inputprocessing/index.html">chess.logic.inputprocessing</a></td>
+            <td>1</td>
+            <td><div class="coveragePercentage">91% </div><div class="coverage_bar"><div class="coverage_complete" style="width:91%"></div><div class="coverage_ledgend">48/53</div></div></td>
+            <td><div class="coveragePercentage">90% </div><div class="coverage_bar"><div class="coverage_complete" style="width:90%"></div><div class="coverage_ledgend">26/29</div></div></td>
+        </tr>
+
+        <tr>
+            <td><a href="./chess.logic.movementlogic/index.html">chess.logic.movementlogic</a></td>
+            <td>1</td>
+            <td><div class="coveragePercentage">92% </div><div class="coverage_bar"><div class="coverage_complete" style="width:92%"></div><div class="coverage_ledgend">56/61</div></div></td>
+            <td><div class="coveragePercentage">78% </div><div class="coverage_bar"><div class="coverage_complete" style="width:78%"></div><div class="coverage_ledgend">36/46</div></div></td>
+        </tr>
+
+        <tr>
+            <td><a href="./chess.logic.movementlogic.piecemovers/index.html">chess.logic.movementlogic.piecemovers</a></td>
+            <td>7</td>
+            <td><div class="coveragePercentage">98% </div><div class="coverage_bar"><div class="coverage_complete" style="width:98%"></div><div class="coverage_ledgend">197/202</div></div></td>
+            <td><div class="coveragePercentage">89% </div><div class="coverage_bar"><div class="coverage_complete" style="width:89%"></div><div class="coverage_ledgend">139/156</div></div></td>
+        </tr>
+
+        <tr>
+            <td><a href="./chess.logic.pieces/index.html">chess.logic.pieces</a></td>
+            <td>7</td>
+            <td><div class="coveragePercentage">95% </div><div class="coverage_bar"><div class="coverage_complete" style="width:95%"></div><div class="coverage_ledgend">96/101</div></div></td>
+            <td><div class="coveragePercentage">59% </div><div class="coverage_bar"><div class="coverage_complete" style="width:59%"></div><div class="coverage_ledgend">22/37</div></div></td>
+        </tr>
+
+     </tbody>
+</table>
+<br/>
+
+
+
+<hr/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.1.8
+
+</body>
+</html>
