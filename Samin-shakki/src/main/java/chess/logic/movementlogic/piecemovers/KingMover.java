@@ -5,14 +5,14 @@
  */
 package chess.logic.movementlogic.piecemovers;
 
-import chess.logic.board.ChessBoard;
+import chess.domain.board.ChessBoard;
 import java.util.Set;
-import chess.logic.board.Player;
-import static chess.logic.board.Player.getOpponent;
-import chess.logic.board.Square;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Piece;
-import chess.logic.pieces.Rook;
+import chess.domain.board.Player;
+import static chess.domain.board.Player.getOpponent;
+import chess.domain.board.Square;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Piece;
+import chess.domain.pieces.Rook;
 import java.util.HashSet;
 
 /**

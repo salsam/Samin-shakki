@@ -1,6 +1,6 @@
 package chess.gui;
 
-import chess.logic.board.Player;
+import chess.domain.board.Player;
 import java.util.Objects;
 
 /**

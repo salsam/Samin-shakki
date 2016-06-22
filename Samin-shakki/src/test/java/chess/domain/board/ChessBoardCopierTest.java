@@ -1,10 +1,13 @@
-package chess.logic.board;
+package chess.domain.board;
 
+import chess.domain.board.ChessBoardCopier;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.pieces.Queen;
+import chess.domain.pieces.Queen;
 import java.util.Arrays;
 import org.junit.Before;
 import org.junit.BeforeClass;

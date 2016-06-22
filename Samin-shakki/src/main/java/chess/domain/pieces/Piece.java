@@ -1,6 +1,6 @@
-package chess.logic.pieces;
+package chess.domain.pieces;
 
-import chess.logic.board.Player;
+import chess.domain.board.Player;
 
 /**
  * This is an abstract parent class of all chess pieces containing information

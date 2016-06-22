@@ -1,10 +1,10 @@
 package chess.logic.movementlogic.piecemovers;
 
-import chess.logic.board.ChessBoard;
+import chess.domain.board.ChessBoard;
 import java.util.Set;
-import chess.logic.board.Square;
+import chess.domain.board.Square;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.setPieceAsTaken;
-import chess.logic.pieces.Piece;
+import chess.domain.pieces.Piece;
 import java.util.HashSet;
 
 public abstract class PieceMover {

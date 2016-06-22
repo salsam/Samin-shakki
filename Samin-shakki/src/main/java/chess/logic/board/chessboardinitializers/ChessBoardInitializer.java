@@ -1,9 +1,9 @@
 package chess.logic.board.chessboardinitializers;
 
-import chess.logic.board.ChessBoard;
-import chess.logic.board.Square;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Piece;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Square;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Piece;
 
 /**
  * All classes that inherit this abstract class are used to initialize different

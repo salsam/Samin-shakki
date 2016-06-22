@@ -1,7 +1,7 @@
 package chess.gui;
 
 import chess.gui.boarddrawing.ChessBoardDrawer;
-import chess.logic.game.Game;
+import chess.domain.GameSituation;
 import chess.logic.inputprocessing.InputProcessor;
 import java.awt.Color;
 import java.awt.Container;
@@ -18,11 +18,11 @@ import javax.swing.WindowConstants;
  */
 public class GameWindow extends JFrame {
 
-    private Game game;
+    private GameSituation game;
     private InputProcessor inputProcessor;
     private JLabel textArea;
 
-    public GameWindow(InputProcessor inputProcessor, Game game) {
+    public GameWindow(InputProcessor inputProcessor, GameSituation game) {
         this.game = game;
         this.inputProcessor = inputProcessor;
         this.setPreferredSize(new Dimension(450, 550));
@@ -32,7 +32,7 @@ public class GameWindow extends JFrame {
         this.setVisible(false);
     }
 
-    public Game getGame() {
+    public GameSituation getGame() {
         return game;
     }
 

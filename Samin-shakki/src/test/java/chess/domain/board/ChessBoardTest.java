@@ -1,11 +1,14 @@
-package chess.logic.board;
+package chess.domain.board;
 
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
+import chess.domain.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Queen;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Queen;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.Assert;

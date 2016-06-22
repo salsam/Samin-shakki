@@ -1,6 +1,6 @@
 package chess.logic.board.chessboardinitializers;
 
-import chess.logic.board.ChessBoard;
+import chess.domain.board.ChessBoard;
 
 /**
  * This class is responsible for cleaning a ChessBoard of all pieces.

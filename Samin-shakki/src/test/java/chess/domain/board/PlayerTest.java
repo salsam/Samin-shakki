@@ -1,6 +1,7 @@
-package chess.logic.board;
+package chess.domain.board;
 
-import static chess.logic.board.Player.getOpponent;
+import chess.domain.board.Player;
+import static chess.domain.board.Player.getOpponent;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

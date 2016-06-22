@@ -1,6 +1,7 @@
-package chess.logic.pieces;
+package chess.domain.pieces;
 
-import chess.logic.board.Player;
+import chess.domain.pieces.Pawn;
+import chess.domain.board.Player;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -1,6 +1,6 @@
 package chess.gui;
 
-import chess.logic.game.Game;
+import chess.domain.GameSituation;
 import chess.logic.inputprocessing.InputProcessor;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class GraphicalUserInterface implements Runnable {
 
     private Map<String, JFrame> frames;
 
-    public GraphicalUserInterface(InputProcessor inputProcessor, Game game) {
+    public GraphicalUserInterface(InputProcessor inputProcessor, GameSituation game) {
         frames = new HashMap();
         frames.put("game", new GameWindow(inputProcessor, game));
         frames.put("main", new MainFrame(frames.get("game")));

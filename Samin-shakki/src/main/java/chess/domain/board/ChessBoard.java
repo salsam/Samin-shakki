@@ -1,8 +1,8 @@
-package chess.logic.board;
+package chess.domain.board;
 
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Piece;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Piece;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package chess.logic.board;
+package chess.domain.board;
 
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.addPieceToOwner;
 import java.util.ArrayList;

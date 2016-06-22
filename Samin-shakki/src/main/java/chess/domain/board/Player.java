@@ -3,7 +3,7 @@
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.logic.board;
+package chess.domain.board;
 
 /**
  * This enum contains all possible players of chess and the direction their

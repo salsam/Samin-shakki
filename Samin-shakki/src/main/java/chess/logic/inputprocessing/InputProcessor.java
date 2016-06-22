@@ -1,15 +1,15 @@
 package chess.logic.inputprocessing;
 
-import chess.logic.board.ChessBoard;
-import chess.logic.board.ChessBoardCopier;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.ChessBoardCopier;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
-import static chess.logic.board.Player.getOpponent;
-import chess.logic.board.Square;
-import chess.logic.game.Game;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
-import chess.logic.pieces.Queen;
+import static chess.domain.board.Player.getOpponent;
+import chess.domain.board.Square;
+import chess.domain.GameSituation;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Piece;
+import chess.domain.pieces.Queen;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.JFrame;
@@ -68,7 +68,7 @@ public class InputProcessor {
      * @param row row that was clicked
      * @param game game which is going on
      */
-    public void processClick(int column, int row, Game game) {
+    public void processClick(int column, int row, GameSituation game) {
         if (!game.getContinues()) {
             return;
         }
@@ -85,7 +85,7 @@ public class InputProcessor {
         }
     }
 
-    private void moveToTargetLocation(int column, int row, Game game) {
+    private void moveToTargetLocation(int column, int row, GameSituation game) {
         ChessBoard backUp = ChessBoardCopier.copy(game.getChessBoard());
         Square target = game.getChessBoard().getSquare(column, row);
 
@@ -102,7 +102,7 @@ public class InputProcessor {
         startNextTurn(game);
     }
 
-    private void promote(Square target, Game game) {
+    private void promote(Square target, GameSituation game) {
         ChessBoard cbl = game.getChessBoard();
         Piece piece = target.getPiece();
         if (piece.getClass() == Pawn.class) {
@@ -115,7 +115,7 @@ public class InputProcessor {
         }
     }
 
-    private void startNextTurn(Game game) {
+    private void startNextTurn(GameSituation game) {
         game.nextTurn();
         textArea.setText(game.whoseTurn() + "'s turn.");
         if (game.checkIfChecked(game.whoseTurn())) {

@@ -1,6 +1,6 @@
 package chess.gui.boarddrawing;
 
-import chess.logic.game.Game;
+import chess.domain.GameSituation;
 import chess.logic.inputprocessing.InputProcessor;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,12 +12,12 @@ import javax.swing.JPanel;
  */
 public class ChessBoardDrawer extends JPanel {
 
-    private Game game;
+    private GameSituation game;
     private InputProcessor guiLogic;
     private int sideLength;
     private PieceDrawer pieceDrawer;
 
-    public ChessBoardDrawer(InputProcessor guiLogic, Game game, int sideLength) {
+    public ChessBoardDrawer(InputProcessor guiLogic, GameSituation game, int sideLength) {
         this.game = game;
         this.guiLogic = guiLogic;
         this.sideLength = sideLength;
@@ -25,7 +25,7 @@ public class ChessBoardDrawer extends JPanel {
         super.setBackground(Color.CYAN);
     }
 
-    public Game getGame() {
+    public GameSituation getGame() {
         return game;
     }
 

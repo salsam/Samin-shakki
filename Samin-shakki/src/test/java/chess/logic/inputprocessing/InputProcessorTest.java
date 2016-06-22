@@ -1,17 +1,17 @@
 package chess.logic.inputprocessing;
 
-import chess.logic.board.Player;
-import chess.logic.board.Square;
+import chess.domain.board.Player;
+import chess.domain.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
-import chess.logic.game.Game;
+import chess.domain.GameSituation;
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
-import chess.logic.pieces.Queen;
-import chess.logic.pieces.Rook;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Piece;
+import chess.domain.pieces.Queen;
+import chess.domain.pieces.Rook;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
@@ -31,7 +31,7 @@ public class InputProcessorTest {
 
     private InputProcessor inputProcessor;
     private static JLabel output;
-    private static Game game;
+    private static GameSituation game;
     private static ChessBoardInitializer init;
 
     public InputProcessorTest() {
@@ -40,7 +40,7 @@ public class InputProcessorTest {
     @BeforeClass
     public static void setUpClass() {
         init = new StandardBoardInitializer();
-        game = new Game(init, new MovementLogic());
+        game = new GameSituation(init, new MovementLogic());
         output = new JLabel("");
     }
 

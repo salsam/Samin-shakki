@@ -1,15 +1,21 @@
 package chess.logic.movementlogic;
 
+import chess.domain.pieces.King;
+import chess.domain.pieces.Bishop;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Rook;
+import chess.domain.pieces.Knight;
+import chess.domain.pieces.Piece;
+import chess.domain.pieces.Queen;
 import chess.logic.movementlogic.piecemovers.RookMover;
 import chess.logic.movementlogic.piecemovers.KingMover;
 import chess.logic.movementlogic.piecemovers.PawnMover;
 import chess.logic.movementlogic.piecemovers.BishopMover;
 import chess.logic.movementlogic.piecemovers.QueenMover;
 import chess.logic.movementlogic.piecemovers.KnightMover;
-import chess.logic.board.ChessBoard;
-import chess.logic.board.Player;
-import chess.logic.board.Square;
-import chess.logic.pieces.*;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
+import chess.domain.board.Square;
 import java.util.HashSet;
 import java.util.Set;
 

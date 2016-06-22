@@ -1,10 +1,11 @@
 package chess.logic.game;
 
+import chess.logic.gameLogic.LegalityChecker;
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.board.ChessBoard;
-import chess.logic.board.Player;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.pieces.Pawn;
+import chess.domain.pieces.Pawn;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

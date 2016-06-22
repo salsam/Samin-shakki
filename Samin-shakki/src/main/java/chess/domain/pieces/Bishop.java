@@ -1,6 +1,6 @@
-package chess.logic.pieces;
+package chess.domain.pieces;
 
-import chess.logic.board.Player;
+import chess.domain.board.Player;
 
 /**
  * This class corresponds physical bishop-piece thus only containing knowledge

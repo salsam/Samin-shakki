@@ -1,15 +1,15 @@
 package chess.logic.movementlogic.piecemovers;
 
-import chess.logic.board.ChessBoard;
-import chess.logic.board.Player;
-import chess.logic.board.Square;
-import chess.logic.board.SquareTest;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
+import chess.domain.board.Square;
+import chess.domain.board.SquareTest;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Queen;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Queen;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

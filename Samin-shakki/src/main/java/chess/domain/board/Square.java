@@ -1,6 +1,6 @@
-package chess.logic.board;
+package chess.domain.board;
 
-import chess.logic.pieces.Piece;
+import chess.domain.pieces.Piece;
 
 /**
  * Square class is responsible for keeping track of its location and possible

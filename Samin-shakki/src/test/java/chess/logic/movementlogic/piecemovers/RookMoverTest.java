@@ -5,15 +5,15 @@ package chess.logic.movementlogic.piecemovers;
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-import chess.logic.board.ChessBoard;
-import chess.logic.board.Player;
-import chess.logic.board.Square;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
+import chess.domain.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Rook;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Rook;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

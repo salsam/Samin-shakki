@@ -1,19 +1,19 @@
 package chess.logic.board.chessboardinitializers;
 
-import chess.logic.board.ChessBoard;
-import chess.logic.board.Player;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
 import chess.logic.movementlogic.piecemovers.PawnMover;
-import chess.logic.pieces.Bishop;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Knight;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
-import chess.logic.pieces.Queen;
-import chess.logic.pieces.Rook;
+import chess.domain.pieces.Bishop;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Knight;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Piece;
+import chess.domain.pieces.Queen;
+import chess.domain.pieces.Rook;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

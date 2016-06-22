@@ -1,12 +1,12 @@
 package chess.logic.movementlogic.piecemovers;
 
-import chess.logic.board.ChessBoard;
+import chess.domain.board.ChessBoard;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.removePieceFromOwner;
 import java.util.HashSet;
 import java.util.Set;
-import chess.logic.board.Square;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
+import chess.domain.board.Square;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Piece;
 
 /**
  * This class is responsible for containing all pawn-related movement logic.

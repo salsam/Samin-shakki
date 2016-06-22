@@ -5,11 +5,11 @@
  */
 package chess.logic.movementlogic.piecemovers;
 
-import chess.logic.board.ChessBoard;
+import chess.domain.board.ChessBoard;
 import java.util.Set;
-import chess.logic.board.Square;
-import chess.logic.pieces.Bishop;
-import chess.logic.pieces.Piece;
+import chess.domain.board.Square;
+import chess.domain.pieces.Bishop;
+import chess.domain.pieces.Piece;
 import java.util.HashSet;
 
 /**

@@ -1,15 +1,16 @@
-package chess.logic.game;
+package chess.domain;
 
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.board.ChessBoard;
-import chess.logic.board.ChessBoardCopier;
-import chess.logic.board.Square;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.ChessBoardCopier;
+import chess.domain.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
-import chess.logic.board.Player;
-import static chess.logic.board.Player.getOpponent;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Piece;
+import chess.domain.board.Player;
+import static chess.domain.board.Player.getOpponent;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Piece;
+import chess.logic.gameLogic.LegalityChecker;
 
 /**
  * This class is responsible for keeping track of current game situation. Class
@@ -19,7 +20,7 @@ import chess.logic.pieces.Piece;
  *
  * @author sami
  */
-public class Game {
+public class GameSituation {
 
     private ChessBoard board;
     private ChessBoardInitializer init;
@@ -33,7 +34,7 @@ public class Game {
      * @param init chessboard initializer to be used for this game
      * @param movementLogic movement logic to be used for this game
      */
-    public Game(ChessBoardInitializer init, MovementLogic movementLogic) {
+    public GameSituation(ChessBoardInitializer init, MovementLogic movementLogic) {
         this.board = new ChessBoard(movementLogic);
         this.init = init;
         this.init.initialize(board);

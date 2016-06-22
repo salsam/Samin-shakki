@@ -1,38 +1,42 @@
-package chess.logic.game;
+package chess.domain;
 
+import chess.domain.GameSituation;
 import chess.logic.movementlogic.MovementLogic;
-import chess.logic.board.ChessBoard;
-import chess.logic.board.ChessBoardCopier;
-import chess.logic.board.Player;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.ChessBoardCopier;
+import chess.domain.board.Player;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Queen;
-import chess.logic.pieces.Rook;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Queen;
+import chess.domain.pieces.Rook;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
  * @author sami
  */
-public class GameTest {
+public class GameSituationTest {
 
-    private Game game;
+    private GameSituation game;
 
-    public GameTest() {
+    public GameSituationTest() {
     }
 
     @Before
     public void setUp() {
-        game = new Game(new EmptyBoardInitializer(), new MovementLogic());
+        game = new GameSituation(new EmptyBoardInitializer(), new MovementLogic());
         ChessBoard board = game.getChessBoard();
         putPieceOnBoard(board, new King(0, 0, Player.WHITE, "wk"));
     }
@@ -122,7 +126,7 @@ public class GameTest {
 
     @Test
     public void checkMateFalseInComplexSituationWhereKingThreatenedByProtectedPieceButCanBeAvoided() {
-        game = new Game(new StandardBoardInitializer(), new MovementLogic());
+        game = new GameSituation(new StandardBoardInitializer(), new MovementLogic());
         ChessBoard board = game.getChessBoard();
         MovementLogic mvl = board.getMovementLogic();
         King whiteKing = board.getKings().get(Player.WHITE);

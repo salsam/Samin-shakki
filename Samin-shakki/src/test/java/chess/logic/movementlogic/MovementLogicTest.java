@@ -1,16 +1,16 @@
 package chess.logic.movementlogic;
 
-import chess.logic.board.ChessBoard;
-import chess.logic.board.Player;
-import chess.logic.board.Square;
+import chess.domain.board.ChessBoard;
+import chess.domain.board.Player;
+import chess.domain.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
-import chess.logic.pieces.Bishop;
-import chess.logic.pieces.King;
-import chess.logic.pieces.Knight;
-import chess.logic.pieces.Pawn;
-import chess.logic.pieces.Queen;
-import chess.logic.pieces.Rook;
+import chess.domain.pieces.Bishop;
+import chess.domain.pieces.King;
+import chess.domain.pieces.Knight;
+import chess.domain.pieces.Pawn;
+import chess.domain.pieces.Queen;
+import chess.domain.pieces.Rook;
 import java.util.Set;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
