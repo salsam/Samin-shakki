@@ -93,7 +93,7 @@ public class InputProcessor {
         chosen = null;
         possibilities = null;
 
-        if (game.checkIfChecked(game.whoseTurn())) {
+        if (game.getCheckLogic().checkIfChecked(game.whoseTurn())) {
             game.getChessBoard().makeFieldsEqualTo(backUp);
             return;
         }
@@ -118,13 +118,13 @@ public class InputProcessor {
     private void startNextTurn(GameSituation game) {
         game.nextTurn();
         textArea.setText(game.whoseTurn() + "'s turn.");
-        if (game.checkIfChecked(game.whoseTurn())) {
+        if (game.getCheckLogic().checkIfChecked(game.whoseTurn())) {
             textArea.setText(textArea.getText() + " Check!");
             if (game.checkMate(game.whoseTurn())) {
                 textArea.setText("Checkmate! " + getOpponent(game.whoseTurn()) + " won!");
                 frames.get("endingScreen").setVisible(true);
             }
-        } else if (game.stalemate(game.whoseTurn())) {
+        } else if (game.getCheckLogic().stalemate(game.whoseTurn())) {
             textArea.setText("Stalemate! Game ended as a draw!");
             frames.get("endingScreen").setVisible(true);
         }

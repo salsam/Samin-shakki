@@ -1,4 +1,4 @@
-package chess.logic.gameLogic;
+package chess.logic.gamelogic;
 
 import chess.domain.board.ChessBoard;
 import chess.domain.board.Player;

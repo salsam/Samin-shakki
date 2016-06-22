@@ -2,15 +2,11 @@ package chess.domain;
 
 import chess.logic.movementlogic.MovementLogic;
 import chess.domain.board.ChessBoard;
-import chess.domain.board.ChessBoardCopier;
-import chess.domain.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import chess.domain.board.Player;
-import static chess.domain.board.Player.getOpponent;
-import chess.domain.pieces.King;
 import chess.domain.pieces.Pawn;
-import chess.domain.pieces.Piece;
-import chess.logic.gameLogic.LegalityChecker;
+import chess.logic.gamelogic.CheckingLogic;
+import chess.logic.gamelogic.LegalityChecker;
 
 /**
  * This class is responsible for keeping track of current game situation. Class
@@ -25,7 +21,8 @@ public class GameSituation {
     private ChessBoard board;
     private ChessBoardInitializer init;
     private int turn;
-    private LegalityChecker checker;
+    private LegalityChecker legalityChecker;
+    private CheckingLogic checkLogic;
     private boolean continues;
 
     /**
@@ -39,7 +36,8 @@ public class GameSituation {
         this.init = init;
         this.init.initialize(board);
         turn = 1;
-        checker = new LegalityChecker(board);
+        legalityChecker = new LegalityChecker(board);
+        checkLogic = new CheckingLogic(board);
         continues = true;
     }
 
@@ -65,11 +63,19 @@ public class GameSituation {
     }
 
     public LegalityChecker getChecker() {
-        return checker;
+        return legalityChecker;
     }
 
     public ChessBoard getChessBoard() {
         return this.board;
+    }
+
+    public CheckingLogic getCheckLogic() {
+        return checkLogic;
+    }
+
+    public void setCheckLogic(CheckingLogic checkLogic) {
+        this.checkLogic = checkLogic;
     }
 
     /**
@@ -80,7 +86,8 @@ public class GameSituation {
      */
     public void setChessBoard(ChessBoard chessBoard) {
         this.board = chessBoard;
-        this.checker.setBoard(chessBoard);
+        this.legalityChecker.setBoard(chessBoard);
+        this.checkLogic.setBoard(board);
     }
 
     /**
@@ -96,60 +103,16 @@ public class GameSituation {
     }
 
     /**
-     * Updates set containing all squares that opponent threatens and then
-     * checks if player's king is on one of those.
-     *
-     * @param player player being checked
-     * @return true if player's king is threatened by opposing piece
-     */
-    public boolean checkIfChecked(Player player) {
-        King playersKing = board.getKings().get(player);
-        board.updateThreatenedSquares(getOpponent(player));
-        return board.threatenedSquares(getOpponent(player)).contains(board.getSquare(playersKing.getColumn(), playersKing.getRow()));
-    }
-
-    /**
      * Checks whether or not player is checkmated in this game.
      *
      * @param player player who is possibly checkmated.
      * @return true if player is checkmated. Else false.
      */
     public boolean checkMate(Player player) {
-        ChessBoard backUp = ChessBoardCopier.copy(board);
-        for (Piece piece : board.getPieces(player)) {
-            if (piece.isTaken()) {
-                continue;
-            }
-            board.updateThreatenedSquares(getOpponent(player));
-            for (Square possibility : board.getMovementLogic().possibleMoves(piece, board)) {
-                board.getMovementLogic().move(piece, possibility, board);
-                board.updateThreatenedSquares(getOpponent(player));
-                if (!checkIfChecked(player)) {
-                    board.makeFieldsEqualTo(backUp);
-                    return false;
-                }
-                board.makeFieldsEqualTo(backUp);
-            }
+        if (checkLogic.checkMate(player)) {
+            continues = false;
+            return true;
         }
-        board.makeFieldsEqualTo(backUp);
-
-        continues = false;
-        return true;
-    }
-
-    /**
-     * Returns whether or not chosen player has any legal moves.
-     *
-     * @param player chosen player
-     * @return true player has no legal moves otherwise false.
-     */
-    public boolean stalemate(Player player) {
-        for (Piece piece : board.getPieces(player)) {
-            if (!board.getMovementLogic().possibleMoves(piece, board).isEmpty()) {
-                return false;
-            }
-        }
-
         return true;
     }
 

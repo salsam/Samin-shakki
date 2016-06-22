@@ -1,4 +1,4 @@
-package chess.logic.gameLogic;
+package chess.logic.gamelogic;
 
 import chess.domain.board.ChessBoard;
 import chess.domain.board.ChessBoardCopier;
@@ -12,11 +12,19 @@ import chess.domain.pieces.Piece;
  *
  * @author sami
  */
-public class CheckChecker {
+public class CheckingLogic {
 
     private ChessBoard board;
 
-    public CheckChecker(ChessBoard board) {
+    public CheckingLogic(ChessBoard board) {
+        this.board = board;
+    }
+
+    public ChessBoard getBoard() {
+        return board;
+    }
+
+    public void setBoard(ChessBoard board) {
         this.board = board;
     }
 

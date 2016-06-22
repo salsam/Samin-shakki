@@ -1,6 +1,5 @@
-package chess.logic.game;
+package chess.logic.gamelogic;
 
-import chess.logic.gameLogic.LegalityChecker;
 import chess.logic.movementlogic.MovementLogic;
 import chess.domain.board.ChessBoard;
 import chess.domain.board.Player;
