@@ -1,11 +1,14 @@
 package chess.logic.inputprocessing;
 
+import chess.logic.board.Player;
 import chess.logic.board.Square;
 import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
 import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.game.Game;
 import chess.logic.movementlogic.MovementLogic;
+import chess.logic.pieces.Pawn;
 import chess.logic.pieces.Piece;
+import chess.logic.pieces.Queen;
 import javax.swing.JLabel;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -51,7 +54,6 @@ public class InputProcessorTest {
     @Test
     public void ifNoPieceIsChosenSelectPieceOnTargetSquare() {
         inputProcessor.processClick(1, 1, game);
-        System.out.println(game.whoseTurn());
         assertEquals(game.getChessBoard().getSquare(1, 1).getPiece(), inputProcessor.getChosen());
     }
 
@@ -89,5 +91,30 @@ public class InputProcessorTest {
         assertFalse(game.getChessBoard().getSquare(1, 1).containsAPiece());
         assertTrue(game.getChessBoard().getSquare(1, 2).containsAPiece());
         assertEquals(piece, game.getChessBoard().getSquare(1, 2).getPiece());
+    }
+
+    @Test
+    public void ifPawnIsMovedToOpposingEndOfBoardItIsPromotedToQueenOnSameSquare() {
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Pawn(1, 6, Player.WHITE, "wp9"));
+        inputProcessor.processClick(1, 6, game);
+        inputProcessor.processClick(0, 7, game);
+
+        assertTrue(game.getChessBoard().getSquare(0, 7).containsAPiece());
+        assertTrue(game.getChessBoard().getSquare(0, 7).getPiece().getClass() == Queen.class);
+        Queen q = (Queen) game.getChessBoard().getSquare(0, 7).getPiece();
+        assertEquals(Player.WHITE, q.getOwner());
+        assertEquals("wq9", q.getPieceCode());
+    }
+
+    @Test
+    public void ifPawnIsMovedToOpposingEndOfBoardItIsReplacedByQueen() {
+        ChessBoardInitializer.putPieceOnBoard(game.getChessBoard(), new Pawn(1, 6, Player.WHITE, "wp9"));
+        inputProcessor.processClick(1, 6, game);
+        inputProcessor.processClick(0, 7, game);
+        game.getChessBoard().getPieces(Player.WHITE).stream().forEach(whitePiece -> {
+            assertFalse(whitePiece.getPieceCode().equals("wp9"));
+        });
+        assertTrue(game.getChessBoard().getPieces(Player.WHITE).stream()
+                .anyMatch(whitePiece -> whitePiece.getPieceCode().equals("wq9")));
     }
 }
