@@ -18,18 +18,23 @@ public class KingTest {
 
     @Before
     public void setUp() {
-        king = new King(7, 5, Player.WHITE);
+        king = new King(7, 5, Player.WHITE, "wk");
     }
 
     @Test
-    public void kingsAreEqualIfInSameLocationAndHavingSameHasBeenMovedAndOwner() {
-        assertTrue(king.equals(new King(7, 5, Player.WHITE)));
+    public void kingsAreNotEqualIfDifferentPieceCode() {
+        assertFalse(king.equals(new King(7, 5, Player.WHITE, "wk1")));
     }
 
     @Test
-    public void kingsAreNotEqualIfOneHasBeenMovedAndOtherHasNot() {
+    public void kingsAreEqualIfOneHasBeenMovedAndOtherHasNotButSamePieceCode() {
         king.setHasBeenMoved(true);
-        assertFalse(king.equals(new King(7, 5, Player.WHITE)));
+        assertTrue(king.equals(new King(7, 5, Player.WHITE, "wk")));
+    }
+
+    @Test
+    public void kingsAreEqualIfSamePieceCodeEvenInDifferentLocations() {
+        assertTrue(king.equals(new King(3, 5, Player.BLACK, "wk")));
     }
 
     @Test

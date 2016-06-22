@@ -70,13 +70,16 @@ public class Square {
     }
 
     /**
-     * Returns true if Square contains a piece that is field piece doesn't refer
-     * to null.
+     * Returns true if Square contains a piece. Square contains a piece if field
+     * piece doesn't refer to null or taken piece.
      *
      * @return true if Square contains a piece
      */
     public boolean containsAPiece() {
-        return piece != null;
+        if (piece == null) {
+            return false;
+        }
+        return !piece.isTaken();
     }
 
     @Override

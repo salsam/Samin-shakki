@@ -17,14 +17,17 @@ public class Queen extends Piece {
      * @param column column of the square this queen is placed on
      * @param row row of the square this queen is placed on
      * @param player owner of this queen
+     * @param pieceCode pieceCode of this piece
      */
-    public Queen(int column, int row, Player player) {
-        super(column, row, player);
+    public Queen(int column, int row, Player player, String pieceCode) {
+        super(column, row, player, pieceCode);
     }
 
     @Override
     public Piece clone() {
-        return new Queen(column, row, owner);
+        Queen clone = new Queen(column, row, owner, pieceCode);
+        clone.setTaken(taken);
+        return clone;
     }
 
 }

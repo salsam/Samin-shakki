@@ -22,7 +22,7 @@ import java.util.Set;
  * @author sami
  */
 public class MovementLogic {
-
+    
     private BishopMover bishopMover;
     private KingMover kingMover;
     private KnightMover knightMover;
@@ -128,9 +128,11 @@ public class MovementLogic {
      */
     public Set<Square> squaresThreatenedByPlayer(Player player, ChessBoard board) {
         Set<Square> threatenedSquares = new HashSet();
-        board.getPieces(player).stream().forEach(piece -> {
-            threatenedSquares.addAll(threatenedSquares(piece, board));
-        });
+        board.getPieces(player).stream()
+                .filter(owned -> !owned.isTaken())
+                .forEach(piece -> {
+                    threatenedSquares.addAll(threatenedSquares(piece, board));
+                });
         return threatenedSquares;
     }
 
@@ -144,10 +146,12 @@ public class MovementLogic {
      */
     public Set<Square> possibleMovesByPlayer(Player player, ChessBoard board) {
         Set<Square> possibleMoves = new HashSet();
-        board.getPieces(player).stream().forEach(piece -> {
-            possibleMoves.addAll(possibleMoves(piece, board));
-        });
+        board.getPieces(player).stream()
+                .filter(owned -> !owned.isTaken())
+                .forEach(piece -> {
+                    possibleMoves.addAll(possibleMoves(piece, board));
+                });
         return possibleMoves;
     }
-
+    
 }

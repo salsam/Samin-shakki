@@ -18,18 +18,17 @@ public class RookTest {
 
     @Before
     public void setUp() {
-        rook = new Rook(7, 5, Player.WHITE);
+        rook = new Rook(7, 5, Player.WHITE, "wr");
     }
 
     @Test
-    public void rooksAreEqualIfTheyAreInSameLocationWithSameOwnerAndHasBeenMoved() {
-        assertTrue(rook.equals(new Rook(7, 5, Player.WHITE)));
+    public void rooksAreEqualIfSamePieceCode() {
+        assertTrue(rook.equals(new Rook(4, 5, Player.BLACK, "wr")));
     }
 
     @Test
-    public void rooksAreNotEqualIfOneHasBeenMovedAndOtherHasNot() {
-        rook.setHasBeenMoved(true);
-        assertFalse(rook.equals(new Rook(7, 5, Player.WHITE)));
+    public void rooksAreNotEqualIfDifferentPieceCode() {
+        assertFalse(rook.equals(new Rook(7, 5, Player.WHITE, "wr1")));
     }
 
     @Test

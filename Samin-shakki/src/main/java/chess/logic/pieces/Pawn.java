@@ -22,11 +22,23 @@ public class Pawn extends Piece {
      * @param column column of the square this pawn is placed on
      * @param row row of the square this pawn is placed on
      * @param owner owner of this pawn
+     * @param pieceCode pieceCode of this piece
      */
-    public Pawn(int column, int row, Player owner) {
-        super(column, row, owner);
+    public Pawn(int column, int row, Player owner, String pieceCode) {
+        super(column, row, owner, pieceCode);
         movedTwoSquaresLastTurn = false;
         hasBeenMoved = false;
+    }
+
+    @Override
+    public void makeFieldsEqualTo(Piece piece) {
+        if (piece.getClass() != Pawn.class) {
+            return;
+        }
+        Pawn pawn = (Pawn) piece;
+        this.hasBeenMoved = pawn.getHasBeenMoved();
+        this.movedTwoSquaresLastTurn = pawn.getMovedTwoSquaresLastTurn();
+        super.makeFieldsEqualTo(piece);
     }
 
     public boolean getHasBeenMoved() {
@@ -47,24 +59,10 @@ public class Pawn extends Piece {
 
     @Override
     public Piece clone() {
-        Pawn clone = new Pawn(column, row, owner);
+        Pawn clone = new Pawn(column, row, owner, pieceCode);
         clone.setMovedTwoSquaresLastTurn(movedTwoSquaresLastTurn);
+        clone.setTaken(taken);
         return clone;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!super.equals(obj)) {
-            return false;
-        }
-
-        Pawn pawn = (Pawn) obj;
-
-        if (hasBeenMoved != pawn.getHasBeenMoved()) {
-            return false;
-        }
-
-        return movedTwoSquaresLastTurn == pawn.getMovedTwoSquaresLastTurn();
     }
 
     /**

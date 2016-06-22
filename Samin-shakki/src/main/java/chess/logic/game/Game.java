@@ -116,17 +116,21 @@ public class Game {
     public boolean checkMate(Player player) {
         ChessBoard backUp = ChessBoardCopier.copy(board);
         for (Piece piece : board.getPieces(player)) {
+            if (piece.isTaken()) {
+                continue;
+            }
             board.updateThreatenedSquares(getOpponent(player));
             for (Square possibility : board.getMovementLogic().possibleMoves(piece, board)) {
                 board.getMovementLogic().move(piece, possibility, board);
                 board.updateThreatenedSquares(getOpponent(player));
                 if (!checkIfChecked(player)) {
-                    setChessBoard(ChessBoardCopier.copy(backUp));
+                    board.makeFieldsEqualTo(backUp);
                     return false;
                 }
-                setChessBoard(ChessBoardCopier.copy(backUp));
+                board.makeFieldsEqualTo(backUp);
             }
         }
+        board.makeFieldsEqualTo(backUp);
 
         continues = false;
         return true;

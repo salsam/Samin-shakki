@@ -18,32 +18,17 @@ public class PawnTest {
 
     @Before
     public void setUp() {
-        pawn = new Pawn(7, 5, Player.WHITE);
+        pawn = new Pawn(7, 5, Player.WHITE, "wp");
     }
 
     @Test
-    public void pawnsAreEqualIfTheyAreInSameLocationWithSameOwnerAndHasBeenMoved() {
-        assertTrue(pawn.equals(new Pawn(7, 5, Player.WHITE)));
+    public void pawnsAreNotEqualIfDifferentPieceCode() {
+        assertFalse(pawn.equals(new Pawn(7, 5, Player.WHITE, "wp1")));
     }
 
     @Test
-    public void pawnsAreNotEqualIfOneHasBeenMovedAndOtherHasNot() {
-        pawn.setHasBeenMoved(true);
-        assertFalse(pawn.equals(new Pawn(7, 5, Player.WHITE)));
-    }
-
-    @Test
-    public void pawnAreEqualIfBothMovedTwoSquaresLastTurn() {
-        pawn.setHasBeenMoved(true);
-        Pawn comp = new Pawn(7, 5, Player.WHITE);
-        comp.setHasBeenMoved(true);
-        assertTrue(pawn.equals(comp));
-    }
-
-    @Test
-    public void pawnAreNotEqualIfOnlyOneOfThemMovedTwoSquaresLastTurn() {
-        pawn.setHasBeenMoved(true);
-        assertFalse(pawn.equals(new Pawn(7, 5, Player.WHITE)));
+    public void pawnsAreEqualIfSamePieceCode() {
+        assertTrue(pawn.equals(new Pawn(1, 5, Player.BLACK, "wp")));
     }
 
     @Test

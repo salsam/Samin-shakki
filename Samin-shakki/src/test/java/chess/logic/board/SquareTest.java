@@ -50,7 +50,7 @@ public class SquareTest {
 
     @Test
     public void pieceCorrectIfNotNull() {
-        Pawn pawn = new Pawn(2, 1, Player.WHITE);
+        Pawn pawn = new Pawn(2, 1, Player.WHITE, "wp");
         square.setPiece(pawn);
         assertEquals(pawn, square.getPiece());
     }

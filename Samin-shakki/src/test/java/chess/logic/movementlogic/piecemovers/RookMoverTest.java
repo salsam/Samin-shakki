@@ -5,7 +5,6 @@ package chess.logic.movementlogic.piecemovers;
  * To change this template column, choose Tools | Templates
  * and open the template in the editor.
  */
-import chess.logic.movementlogic.piecemovers.RookMover;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -44,7 +43,7 @@ public class RookMoverTest {
     @Before
     public void setUp() {
         init.initialize(board);
-        rook = new Rook(3, 5, Player.WHITE);
+        rook = new Rook(3, 5, Player.WHITE, "wr");
         putPieceOnBoard(board, rook);
     }
 
@@ -73,28 +72,28 @@ public class RookMoverTest {
 
     @Test
     public void rookCannotOnTopOfOwnPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(3, 1, Player.WHITE, "wp");
         putPieceOnBoard(board, pawn);
         assertFalse(rookMover.possibleMoves(rook, board).contains(new Square(3, 1)));
     }
 
     @Test
     public void rookCanMoveOnTopOfEnemyPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(3, 1, Player.BLACK, "bp");
         putPieceOnBoard(board, pawn);
         assertTrue(rookMover.possibleMoves(rook, board).contains(new Square(3, 1)));
     }
 
     @Test
     public void rookCannotMovePastAPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(3, 1, Player.WHITE, "wp");
         putPieceOnBoard(board, pawn);
         assertFalse(rookMover.possibleMoves(rook, board).contains(new Square(3, 0)));
     }
 
     @Test
     public void rookCannotMovePastOpposingPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(3, 1, Player.BLACK, "bp");
         putPieceOnBoard(board, pawn);
         assertFalse(rookMover.possibleMoves(rook, board).contains(new Square(3, 0)));
     }

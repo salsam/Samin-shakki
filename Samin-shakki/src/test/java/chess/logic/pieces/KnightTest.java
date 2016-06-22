@@ -18,7 +18,7 @@ public class KnightTest {
 
     @Before
     public void setUp() {
-        knight = new Knight(2, 3, Player.BLACK);
+        knight = new Knight(2, 3, Player.BLACK, "bn");
     }
 
     @Test

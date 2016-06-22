@@ -1,9 +1,9 @@
 package chess.logic.movementlogic.piecemovers;
 
-import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.removePieceFromOwner;
 import chess.logic.board.ChessBoard;
 import java.util.Set;
 import chess.logic.board.Square;
+import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.setPieceAsTaken;
 import chess.logic.pieces.Piece;
 import java.util.HashSet;
 
@@ -98,7 +98,7 @@ public abstract class PieceMover {
         board.getSquare(piece.getColumn(), piece.getRow()).setPiece(null);
 
         if (target.containsAPiece()) {
-            removePieceFromOwner(target.getPiece(), board);
+            setPieceAsTaken(target.getPiece(), board);
         }
         target.setPiece(piece);
 

@@ -57,7 +57,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{0, 1, 2, 3, 4, 5, 6, 7};
         int[] rows = new int[]{1, 6};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Pawn(0, 1, Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Pawn(0, 1, Player.WHITE, "wp"));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{0, 7, 0, 7};
         int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Rook(0, 0, Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Rook(0, 0, Player.WHITE, "wr"));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{1, 6, 1, 6};
         int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Knight(1, 0, Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Knight(1, 0, Player.WHITE, "wn"));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{2, 5, 2, 5};
         int[] rows = new int[]{0, 0, 7, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Bishop(2, 0, Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Bishop(2, 0, Player.WHITE, "wb"));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{4, 3};
         int[] rows = new int[]{0, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new King(4, 0, Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new King(4, 0, Player.WHITE, "wk"));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class StandardBoardInitializerTest {
         int[] columns = new int[]{3, 4};
         int[] rows = new int[]{0, 7};
 
-        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Queen(3, 0, Player.WHITE));
+        testThatSquaresHavePieceOfCorrectClass(rows, columns, new Queen(3, 0, Player.WHITE, "wq"));
     }
 
     private void testThatSquaresHavePieceOfCorrectClass(int[] rows, int[] columns, Piece piece) {
@@ -132,10 +132,10 @@ public class StandardBoardInitializerTest {
     }
 
     public void putPieceOnBoardPutsCorrectPieceInCorrectSpot() {
-        Pawn pawn = new Pawn(5, 4, Player.WHITE);
+        Pawn pawn = new Pawn(5, 4, Player.WHITE, "wp");
         putPieceOnBoard(board, pawn);
         assertTrue(board.getSquare(5, 4).containsAPiece());
-        assertEquals(PawnMover.class, board.getSquare(5, 4).getPiece().getClass());
+        assertEquals(Pawn.class, board.getSquare(5, 4).getPiece().getClass());
         assertEquals(Player.WHITE, board.getSquare(5, 4).getPiece().getOwner());
     }
 }

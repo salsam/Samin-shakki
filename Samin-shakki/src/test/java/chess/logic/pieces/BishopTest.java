@@ -20,7 +20,27 @@ public class BishopTest {
 
     @Before
     public void setUp() {
-        bishop = new Bishop(2, 3, Player.BLACK);
+        bishop = new Bishop(2, 3, Player.BLACK, "bp");
+    }
+
+    @Test
+    public void bishopIsNotEqualToNull() {
+        assertFalse(bishop.equals(null));
+    }
+
+    @Test
+    public void bishopsAreNotEqualToKingsEvenWithSamePieceCode() {
+        assertFalse(bishop.equals(new King(2, 3, Player.BLACK, "bp")));
+    }
+
+    @Test
+    public void bishopsAreEqualIfSamePieceCode() {
+        assertTrue(bishop.equals(new Bishop(1, 1, Player.WHITE, "bp")));
+    }
+
+    @Test
+    public void bishopsAreNotEqualIfDifferentPieceCode() {
+        assertFalse(bishop.equals(new Bishop(2, 3, Player.BLACK, "bp1")));
     }
 
     @Test

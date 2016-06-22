@@ -161,4 +161,31 @@ public class ChessBoard {
             return squaresThreatenedByBlack;
         }
     }
+
+    public void makeFieldsEqualTo(ChessBoard chessboard) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                table[i][j].setPiece(null);
+            }
+            
+        }
+        for (Player player : Player.values()) {
+            getPieces(player).stream().forEach(playersPiece -> {
+                chessboard.getPieces(player).stream().forEach(piece -> {
+                    if (piece.equals(playersPiece)) {
+                        playersPiece.makeFieldsEqualTo(piece);
+                    }
+                });
+            });
+        }
+
+        for (Player player : Player.values()) {
+            getPieces(player).stream().forEach(piece -> {
+                Square location = table[piece.getColumn()][piece.getRow()];
+                if (!piece.isTaken()) {
+                    location.setPiece(piece);
+                }
+            });
+        }
+    }
 }

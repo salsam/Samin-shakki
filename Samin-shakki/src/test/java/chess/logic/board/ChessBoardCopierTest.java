@@ -84,7 +84,7 @@ public class ChessBoardCopierTest {
         init.initialize(board);
         ChessBoard copy = ChessBoardCopier.copy(board);
 
-        Queen queen = new Queen(4, 4, Player.BLACK);
+        Queen queen = new Queen(4, 4, Player.BLACK, "bp1");
         putPieceOnBoard(board, queen);
 
         assertTrue(board.getSquare(4, 4).containsAPiece());

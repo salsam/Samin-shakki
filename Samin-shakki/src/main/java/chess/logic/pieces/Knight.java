@@ -17,14 +17,17 @@ public class Knight extends Piece {
      * @param column column of the square this knight will be placed on
      * @param row row of the square this knight will be placed on
      * @param player owner of this knight
+     * @param pieceCode pieceCode of this piece
      */
-    public Knight(int column, int row, Player player) {
-        super(column, row, player);
+    public Knight(int column, int row, Player player, String pieceCode) {
+        super(column, row, player, pieceCode);
     }
 
     @Override
     public Piece clone() {
-        return new Knight(column, row, owner);
+        Knight clone = new Knight(column, row, owner, pieceCode);
+        clone.setTaken(taken);
+        return clone;
     }
 
 }

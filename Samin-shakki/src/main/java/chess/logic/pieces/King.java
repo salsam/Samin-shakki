@@ -20,10 +20,21 @@ public class King extends Piece {
      * @param column column of the square this king will be placed on
      * @param row row of the square this king will be placed on
      * @param player owner of this king
+     * @param pieceCode pieceCode of this piece
      */
-    public King(int column, int row, Player player) {
-        super(column, row, player);
+    public King(int column, int row, Player player, String pieceCode) {
+        super(column, row, player, pieceCode);
         this.hasBeenMoved = false;
+    }
+
+    @Override
+    public void makeFieldsEqualTo(Piece piece) {
+        if (piece.getClass() != King.class) {
+            return;
+        }
+        King king = (King) piece;
+        super.makeFieldsEqualTo(piece);
+        this.hasBeenMoved = king.getHasBeenMoved();
     }
 
     public boolean getHasBeenMoved() {
@@ -36,18 +47,9 @@ public class King extends Piece {
 
     @Override
     public Piece clone() {
-        King clone = new King(column, row, owner);
+        King clone = new King(column, row, owner, pieceCode);
         clone.setHasBeenMoved(hasBeenMoved);
         return clone;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!super.equals(obj)) {
-            return false;
-        }
-        King king = (King) obj;
-        return hasBeenMoved == king.getHasBeenMoved();
     }
 
 }

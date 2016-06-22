@@ -1,6 +1,5 @@
 package chess.logic.movementlogic.piecemovers;
 
-import chess.logic.movementlogic.piecemovers.QueenMover;
 import chess.logic.board.ChessBoard;
 import chess.logic.board.Player;
 import chess.logic.board.Square;
@@ -40,7 +39,7 @@ public class QueenMoverTest {
     @Before
     public void setUp() {
         init.initialize(board);
-        queen = new Queen(3, 5, Player.WHITE);
+        queen = new Queen(3, 5, Player.WHITE, "wq");
         putPieceOnBoard(board, queen);
     }
 
@@ -103,28 +102,28 @@ public class QueenMoverTest {
 
     @Test
     public void queenCannotOnTopOfOwnPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(3, 1, Player.WHITE, "wp");
         putPieceOnBoard(board, pawn);
         assertFalse(queenMover.possibleMoves(queen, board).contains(new Square(3, 1)));
     }
 
     @Test
     public void queenCanMoveOnTopOfEnemyPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(3, 1, Player.BLACK, "bp");
         putPieceOnBoard(board, pawn);
         assertTrue(queenMover.possibleMoves(queen, board).contains(new Square(3, 1)));
     }
 
     @Test
     public void queenCannotMovePastAPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.WHITE);
+        Pawn pawn = new Pawn(3, 1, Player.WHITE, "wp");
         putPieceOnBoard(board, pawn);
         assertFalse(queenMover.possibleMoves(queen, board).contains(new Square(3, 0)));
     }
 
     @Test
     public void queenCannotMovePastOpposingPiece() {
-        Pawn pawn = new Pawn(3, 1, Player.BLACK);
+        Pawn pawn = new Pawn(3, 1, Player.BLACK, "bp");
         putPieceOnBoard(board, pawn);
         assertFalse(queenMover.possibleMoves(queen, board).contains(new Square(3, 0)));
     }

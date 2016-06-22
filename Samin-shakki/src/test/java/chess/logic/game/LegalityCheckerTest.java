@@ -34,13 +34,13 @@ public class LegalityCheckerTest {
 
     @Test
     public void checkPlayerOwnsAPieceOnTargetSquareReturnsFalseIfTargetSquareContainsOpposingPiece() {
-        putPieceOnBoard(board, new Pawn(2, 2, Player.WHITE));
+        putPieceOnBoard(board, new Pawn(2, 2, Player.WHITE, "wp"));
         assertFalse(checker.checkPlayerOwnsPieceOnTargetSquare(Player.BLACK, 2, 2));
     }
 
     @Test
     public void checkPlayerOwnsAPieceOnTargetSquareReturnsTrueIfTargetSquareContainsOwnPiece() {
-        putPieceOnBoard(board, new Pawn(2, 2, Player.WHITE));
+        putPieceOnBoard(board, new Pawn(2, 2, Player.WHITE, "wp"));
         assertTrue(checker.checkPlayerOwnsPieceOnTargetSquare(Player.WHITE, 2, 2));
     }
 }

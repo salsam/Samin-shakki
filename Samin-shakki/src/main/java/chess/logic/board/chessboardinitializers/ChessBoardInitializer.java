@@ -43,10 +43,18 @@ public abstract class ChessBoardInitializer {
      * Removes target piece from its owner's owned pieces list.
      *
      * @param piece The piece you want to remove.
-     * @param chessBoard ChessBoardLogic where piece will be removed from
+     * @param chessBoard ChessBoard where piece will be removed from
      */
     public static void removePieceFromOwner(Piece piece, ChessBoard chessBoard) {
         chessBoard.getPieces(piece.getOwner()).remove(piece);
+    }
+
+    public static void setPieceAsTaken(Piece piece, ChessBoard chessBoard) {
+        for (Piece owned : chessBoard.getPieces(piece.getOwner())) {
+            if (owned.equals(piece)) {
+                owned.setTaken(true);
+            }
+        }
     }
 
     protected void clearBoard(ChessBoard board) {

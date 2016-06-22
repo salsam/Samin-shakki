@@ -37,8 +37,8 @@ public class PieceMoverTest {
     @Before
     public void setUp() {
         init.initialize(board);
-        piece = new Queen(3, 4, Player.WHITE);
-        pawn = new Pawn(3, 6, Player.BLACK);
+        piece = new Queen(3, 4, Player.WHITE, "wq");
+        pawn = new Pawn(3, 6, Player.BLACK, "bp");
         putPieceOnBoard(board, pawn);
         putPieceOnBoard(board, piece);
     }

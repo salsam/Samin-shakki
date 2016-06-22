@@ -18,7 +18,17 @@ public class QueenTest {
 
     @Before
     public void setUp() {
-        queen = new Queen(2, 3, Player.BLACK);
+        queen = new Queen(2, 3, Player.BLACK, "bq");
+    }
+
+    @Test
+    public void queensAreEqualIfSamePieceCode() {
+        assertTrue(queen.equals(new Queen(7, 6, Player.WHITE, "bq")));
+    }
+
+    @Test
+    public void queensAreNotEqualIfDifferentPieceCode() {
+        assertFalse(queen.equals(new Queen(2, 3, Player.BLACK, "bq1")));
     }
 
     @Test

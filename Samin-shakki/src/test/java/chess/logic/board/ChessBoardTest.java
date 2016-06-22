@@ -6,7 +6,6 @@ import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
 import chess.logic.pieces.King;
 import chess.logic.pieces.Queen;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.Assert;
@@ -154,7 +153,7 @@ public class ChessBoardTest {
     @Test
     public void whiteThreatenedSquaresWorksInMoreComplexSituation() {
         init.initialize(board);
-        putPieceOnBoard(board, new Queen(4, 4, Player.WHITE));
+        putPieceOnBoard(board, new Queen(4, 4, Player.WHITE, "wq1"));
         Queen q = (Queen) board.getSquare(4, 4).getPiece();
         board.updateThreatenedSquares(Player.WHITE);
         for (Square sq : board.getMovementLogic().threatenedSquares(q, board)) {

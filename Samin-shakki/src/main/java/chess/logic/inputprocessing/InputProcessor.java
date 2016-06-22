@@ -94,7 +94,7 @@ public class InputProcessor {
         possibilities = null;
 
         if (game.checkIfChecked(game.whoseTurn())) {
-            game.setChessBoard(backUp);
+            game.getChessBoard().makeFieldsEqualTo(backUp);
             return;
         }
 
@@ -108,7 +108,8 @@ public class InputProcessor {
         if (piece.getClass() == Pawn.class) {
             Pawn chosenPawn = (Pawn) piece;
             if (chosenPawn.opposingEnd() == target.getRow()) {
-                putPieceOnBoard(cbl, new Queen(chosenPawn.getColumn(), chosenPawn.getRow(), chosenPawn.getOwner()));
+                String queensPieceCode = chosenPawn.getOwner().toString().toLowerCase().charAt(0) + "q" + chosenPawn.getPieceCode().charAt(2);
+                putPieceOnBoard(cbl, new Queen(chosenPawn.getColumn(), chosenPawn.getRow(), chosenPawn.getOwner(), queensPieceCode));
                 ChessBoardInitializer.removePieceFromOwner(chosenPawn, cbl);
             }
         }

@@ -16,14 +16,17 @@ public class Bishop extends Piece {
      * @param column column this bishop will be placed on
      * @param row row this bishop will be placed on
      * @param owner owner of this bishop
+     * @param pieceCode pieceCode of this piece
      */
-    public Bishop(int column, int row, Player owner) {
-        super(column, row, owner);
+    public Bishop(int column, int row, Player owner, String pieceCode) {
+        super(column, row, owner, pieceCode);
     }
 
     @Override
     public Piece clone() {
-        return new Bishop(column, row, owner);
+        Bishop clone = new Bishop(column, row, owner, pieceCode);
+        clone.setTaken(taken);
+        return clone;
     }
 
 }

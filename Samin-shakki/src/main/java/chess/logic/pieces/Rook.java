@@ -20,10 +20,21 @@ public class Rook extends Piece {
      * @param column column of the square this rook will be placed on
      * @param row row of the square this rook will be placed on
      * @param player owner of this rook
+     * @param pieceCode pieceCode of this piece
      */
-    public Rook(int column, int row, Player player) {
-        super(column, row, player);
+    public Rook(int column, int row, Player player, String pieceCode) {
+        super(column, row, player, pieceCode);
         this.hasBeenMoved = false;
+    }
+
+    @Override
+    public void makeFieldsEqualTo(Piece piece) {
+        if (piece.getClass() != Rook.class) {
+            return;
+        }
+        Rook rook = (Rook) piece;
+        this.hasBeenMoved = rook.getHasBeenMoved();
+        super.makeFieldsEqualTo(piece);
     }
 
     public boolean getHasBeenMoved() {
@@ -36,18 +47,9 @@ public class Rook extends Piece {
 
     @Override
     public Piece clone() {
-        Rook clone = new Rook(column, row, owner);
+        Rook clone = new Rook(column, row, owner, pieceCode);
         clone.setHasBeenMoved(hasBeenMoved);
+        clone.setTaken(taken);
         return clone;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!super.equals(obj)) {
-            return false;
-        }
-        Rook rook = (Rook) obj;
-        return rook.getHasBeenMoved() == hasBeenMoved;
-    }
-
 }
