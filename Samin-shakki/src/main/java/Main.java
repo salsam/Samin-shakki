@@ -1,4 +1,6 @@
 
+
+
 import chess.gui.GraphicalUserInterface;
 import chess.logic.chessboardinitializers.StandardBoardInitializer;
 import chess.domain.GameSituation;
