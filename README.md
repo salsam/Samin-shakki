@@ -16,5 +16,8 @@ Aiheena tavallinen shakkipeli, jossa mahdollista kahden ihmispelaajan välinen p
 
 - [Javadoc](https://htmlpreview.github.io/?https://github.com/salsam/Samin-shakki/blob/master/dokumentaatio/site/apidocs/index.html)
 
+- [Käyttöohjeet](dokumentaatio/Käyttöohjeet.md) 
+
+
 
 
