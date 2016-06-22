@@ -21,8 +21,9 @@ public class ImageLoader {
      * returns null.
      */
     public static File getFile(String fileName) {
+        String path = "/" + fileName;
         ClassLoader classLoader = ImageLoader.class.getClass().getClassLoader();
-        File file = new File(classLoader.getSystemResource(fileName).getFile());
+        File file = new File(classLoader.getResource(path).getFile());
         return file;
     }
 
@@ -34,9 +35,10 @@ public class ImageLoader {
      * @return image that was found, if nothing found returns null.
      */
     public static BufferedImage getImage(String fileName) {
+        String path = "/" + fileName;
         BufferedImage img = null;
         try {
-            img = ImageIO.read(getFile(fileName));
+            img = ImageIO.read(ImageLoader.class.getClass().getResource(path));
         } catch (Exception e) {
         }
         return img;
