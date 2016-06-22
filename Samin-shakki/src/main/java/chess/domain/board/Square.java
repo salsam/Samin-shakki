@@ -10,8 +10,17 @@ import chess.domain.pieces.Piece;
  */
 public class Square {
 
+    /**
+     * Column of this square.
+     */
     private int column;
+    /**
+     * Row of this square.
+     */
     private int row;
+    /**
+     * Piece that is situated on this square, null if there's no piece.
+     */
     private Piece piece;
 
     /**

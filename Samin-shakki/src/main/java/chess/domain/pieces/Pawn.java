@@ -13,7 +13,13 @@ import chess.domain.board.Player;
  */
 public class Pawn extends Piece {
 
+    /**
+     * Boolean that tells if this pawn did move two squares last turn.
+     */
     private boolean movedTwoSquaresLastTurn;
+    /**
+     * Boolean which keeps track of whether or not this pawn has been moved.
+     */
     private boolean hasBeenMoved;
 
     /**
@@ -31,14 +37,14 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void makeFieldsEqualTo(Piece piece) {
+    public void makeDeeplyEqualTo(Piece piece) {
         if (piece.getClass() != Pawn.class) {
             return;
         }
         Pawn pawn = (Pawn) piece;
         this.hasBeenMoved = pawn.getHasBeenMoved();
         this.movedTwoSquaresLastTurn = pawn.getMovedTwoSquaresLastTurn();
-        super.makeFieldsEqualTo(piece);
+        super.makeDeeplyEqualTo(piece);
     }
 
     public boolean getHasBeenMoved() {

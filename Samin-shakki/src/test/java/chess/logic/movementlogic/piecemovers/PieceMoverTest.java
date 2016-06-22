@@ -2,9 +2,9 @@ package chess.logic.movementlogic.piecemovers;
 
 import chess.domain.board.ChessBoard;
 import chess.domain.board.Player;
-import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
-import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
+import chess.logic.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
 import chess.domain.pieces.Pawn;
 import chess.domain.pieces.Piece;

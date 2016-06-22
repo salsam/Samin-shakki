@@ -3,7 +3,7 @@ package chess.logic.movementlogic.piecemovers;
 import chess.domain.board.ChessBoard;
 import java.util.Set;
 import chess.domain.board.Square;
-import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.setPieceAsTaken;
+import static chess.logic.chessboardinitializers.ChessBoardInitializer.setPieceAsTaken;
 import chess.domain.pieces.Piece;
 import java.util.HashSet;
 

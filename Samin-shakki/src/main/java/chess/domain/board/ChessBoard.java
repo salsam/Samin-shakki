@@ -19,12 +19,33 @@ import java.util.Set;
  */
 public class ChessBoard {
 
+    /**
+     * Table containing all the squares on the game table
+     */
     private Square[][] table;
+    /**
+     * List of all pieces that white owns.
+     */
     private List<Piece> whitePieces;
+    /**
+     * List of all pieces that black owns.
+     */
     private List<Piece> blackPieces;
+    /**
+     * Set containing all squares that black threatens.
+     */
     private Set<Square> squaresThreatenedByBlack;
+    /**
+     * Set containing all squares that white threatens.
+     */
     private Set<Square> squaresThreatenedByWhite;
+    /**
+     * MovementLogic used to see which moves are legal on this ChessBoard.
+     */
     private MovementLogic movementLogic;
+    /**
+     * Map containing positions of both kings.
+     */
     private Map<Player, King> kings;
 
     /**
@@ -159,33 +180,6 @@ public class ChessBoard {
             return squaresThreatenedByWhite;
         } else {
             return squaresThreatenedByBlack;
-        }
-    }
-
-    public void makeFieldsEqualTo(ChessBoard chessboard) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                table[i][j].setPiece(null);
-            }
-            
-        }
-        for (Player player : Player.values()) {
-            getPieces(player).stream().forEach(playersPiece -> {
-                chessboard.getPieces(player).stream().forEach(piece -> {
-                    if (piece.equals(playersPiece)) {
-                        playersPiece.makeFieldsEqualTo(piece);
-                    }
-                });
-            });
-        }
-
-        for (Player player : Player.values()) {
-            getPieces(player).stream().forEach(piece -> {
-                Square location = table[piece.getColumn()][piece.getRow()];
-                if (!piece.isTaken()) {
-                    location.setPiece(piece);
-                }
-            });
         }
     }
 }

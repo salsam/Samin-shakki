@@ -1,4 +1,4 @@
-package chess.logic.board.chessboardinitializers;
+package chess.logic.chessboardinitializers;
 
 import chess.domain.board.ChessBoard;
 import chess.domain.board.Player;

@@ -12,6 +12,9 @@ import chess.domain.board.Player;
  */
 public class Rook extends Piece {
 
+    /**
+     * Boolean that keeps track of whether or not this rook has been moved.
+     */
     private boolean hasBeenMoved;
 
     /**
@@ -28,13 +31,13 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void makeFieldsEqualTo(Piece piece) {
+    public void makeDeeplyEqualTo(Piece piece) {
         if (piece.getClass() != Rook.class) {
             return;
         }
         Rook rook = (Rook) piece;
         this.hasBeenMoved = rook.getHasBeenMoved();
-        super.makeFieldsEqualTo(piece);
+        super.makeDeeplyEqualTo(piece);
     }
 
     public boolean getHasBeenMoved() {

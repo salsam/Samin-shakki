@@ -1,6 +1,6 @@
 
 import chess.gui.GraphicalUserInterface;
-import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
+import chess.logic.chessboardinitializers.StandardBoardInitializer;
 import chess.domain.GameSituation;
 import chess.logic.movementlogic.MovementLogic;
 import chess.logic.inputprocessing.InputProcessor;

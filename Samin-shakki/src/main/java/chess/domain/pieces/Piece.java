@@ -11,10 +11,25 @@ import chess.domain.board.Player;
  */
 public abstract class Piece {
 
+    /**
+     * Column of the square this piece is situated on.
+     */
     protected int column;
+    /**
+     * Row of the square this piece is situated on.
+     */
     protected int row;
+    /**
+     * Owner of this piece.
+     */
     protected Player owner;
+    /**
+     * Code used identify all pieces.
+     */
     protected String pieceCode;
+    /**
+     * Boolean that keeps track of whether or not this piece has been taken.
+     */
     protected boolean taken;
 
     /**
@@ -34,7 +49,13 @@ public abstract class Piece {
         this.taken = false;
     }
 
-    public void makeFieldsEqualTo(Piece piece) {
+    /**
+     * This method makes this piece object deeply equal to the one given as
+     * parameter. Thus making all fields equal.
+     *
+     * @param piece piece to be made equal to
+     */
+    public void makeDeeplyEqualTo(Piece piece) {
         this.column = piece.getColumn();
         this.row = piece.getRow();
         this.owner = piece.getOwner();

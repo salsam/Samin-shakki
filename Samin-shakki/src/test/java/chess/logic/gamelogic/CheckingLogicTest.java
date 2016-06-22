@@ -1,4 +1,4 @@
-package chess.logic.cllogic;
+package chess.logic.gamelogic;
 
 import chess.domain.GameSituation;
 import chess.domain.board.ChessBoard;
@@ -8,10 +8,10 @@ import chess.domain.pieces.King;
 import chess.domain.pieces.Pawn;
 import chess.domain.pieces.Queen;
 import chess.domain.pieces.Rook;
-import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
-import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
-import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
-import chess.logic.gamelogic.CheckingLogic;
+import chess.logic.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.chessboardinitializers.EmptyBoardInitializer;
+import chess.logic.chessboardinitializers.StandardBoardInitializer;
 import chess.logic.movementlogic.MovementLogic;
 import java.util.Arrays;
 import org.junit.Before;
@@ -24,16 +24,20 @@ import static org.junit.Assert.*;
  */
 public class CheckingLogicTest {
 
-    private CheckingLogic cl;
-    private ChessBoard board;
+    private static CheckingLogic cl;
+    private static GameSituation game;
+    private static EmptyBoardInitializer emptyinit;
 
     public CheckingLogicTest() {
+        emptyinit = new EmptyBoardInitializer();
+        game = new GameSituation(emptyinit, new MovementLogic());
+        cl = new CheckingLogic(game);
     }
 
     @Before
     public void setUp() {
-        board = new ChessBoard(new MovementLogic());
-        cl = new CheckingLogic(board);
+        game.reset();
+        putPieceOnBoard(game.getChessBoard(), new King(0, 0, Player.WHITE, "wk"));
     }
 
     @Test
@@ -43,7 +47,7 @@ public class CheckingLogicTest {
 
     @Test
     public void checkIfCheckedReturnsTrueIfKingIsChecked() {
-        putPieceOnBoard(board, new Queen(1, 1, Player.BLACK, "bq"));
+        putPieceOnBoard(game.getChessBoard(), new Queen(1, 1, Player.BLACK, "bq"));
         assertTrue(cl.checkIfChecked(Player.WHITE));
     }
 
@@ -54,87 +58,87 @@ public class CheckingLogicTest {
 
     @Test
     public void checkMateTrueIfKingCheckedAndCheckCannotBePrevented() {
-        putPieceOnBoard(board, new Queen(1, 1, Player.BLACK, "bq"));
-        putPieceOnBoard(board, new King(2, 2, Player.BLACK, "bk"));
+        putPieceOnBoard(game.getChessBoard(), new Queen(1, 1, Player.BLACK, "bq"));
+        putPieceOnBoard(game.getChessBoard(), new King(2, 2, Player.BLACK, "bk"));
         assertTrue(cl.checkMate(Player.WHITE));
     }
 
     @Test
     public void checkMateFalseIfKingCheckedButCheckingPieceCanBeTaken() {
-        putPieceOnBoard(board, new Queen(1, 1, Player.BLACK, "bq"));
+        putPieceOnBoard(game.getChessBoard(), new Queen(1, 1, Player.BLACK, "bq"));
         assertFalse(cl.checkMate(Player.WHITE));
     }
 
     @Test
     public void chessBoardIsNotAffectedByCheckingIfKingIsCheckMated() {
-        ChessBoard copy = ChessBoardCopier.copy(board);
-        putPieceOnBoard(board, new Queen(6, 6, Player.BLACK, "bq"));
-        putPieceOnBoard(board, new Rook(1, 6, Player.BLACK, "br1"));
-        putPieceOnBoard(board, new Rook(6, 1, Player.BLACK, "br2"));
-        putPieceOnBoard(board, new Rook(4, 1, Player.WHITE, "wr"));
+        ChessBoard copy = ChessBoardCopier.copy(game.getChessBoard());
+        putPieceOnBoard(game.getChessBoard(), new Queen(6, 6, Player.BLACK, "bq"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(1, 6, Player.BLACK, "br1"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(6, 1, Player.BLACK, "br2"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(4, 1, Player.WHITE, "wr"));
         cl.checkMate(Player.WHITE);
-        assertTrue(board.getTable() == board.getTable());
-        assertTrue(Arrays.deepEquals(copy.getTable(), board.getTable()));
+        assertTrue(game.getChessBoard().getTable() == game.getChessBoard().getTable());
+        assertTrue(Arrays.deepEquals(copy.getTable(), game.getChessBoard().getTable()));
     }
 
     @Test
     public void chessBoardIsNotAffectedByCheckingIfKingIsCheckMatedInComplexSituation() {
         ChessBoardInitializer stdinit = new StandardBoardInitializer();
-        stdinit.initialize(board);
-        MovementLogic mvl = board.getMovementLogic();
+        stdinit.initialize(game.getChessBoard());
+        MovementLogic mvl = game.getChessBoard().getMovementLogic();
 
-        mvl.move(board.getSquare(4, 1).getPiece(), board.getSquare(4, 2), board);
-        mvl.move(board.getSquare(5, 6).getPiece(), board.getSquare(5, 5), board);
-        mvl.move(board.getSquare(5, 0).getPiece(), board.getSquare(1, 4), board);
-        mvl.move(board.getSquare(3, 6).getPiece(), board.getSquare(3, 5), board);
-        mvl.move(board.getSquare(3, 0).getPiece(), board.getSquare(7, 4), board);
-        mvl.move(board.getSquare(5, 5).getPiece(), board.getSquare(5, 4), board);
-        mvl.move(board.getSquare(7, 4).getPiece(), board.getSquare(4, 7), board);
-        board.updateThreatenedSquares(Player.WHITE);
-        ChessBoard backUp = ChessBoardCopier.copy(board);
+        mvl.move(game.getChessBoard().getSquare(4, 1).getPiece(), game.getChessBoard().getSquare(4, 2), game.getChessBoard());
+        mvl.move(game.getChessBoard().getSquare(5, 6).getPiece(), game.getChessBoard().getSquare(5, 5), game.getChessBoard());
+        mvl.move(game.getChessBoard().getSquare(5, 0).getPiece(), game.getChessBoard().getSquare(1, 4), game.getChessBoard());
+        mvl.move(game.getChessBoard().getSquare(3, 6).getPiece(), game.getChessBoard().getSquare(3, 5), game.getChessBoard());
+        mvl.move(game.getChessBoard().getSquare(3, 0).getPiece(), game.getChessBoard().getSquare(7, 4), game.getChessBoard());
+        mvl.move(game.getChessBoard().getSquare(5, 5).getPiece(), game.getChessBoard().getSquare(5, 4), game.getChessBoard());
+        mvl.move(game.getChessBoard().getSquare(7, 4).getPiece(), game.getChessBoard().getSquare(4, 7), game.getChessBoard());
+        game.getChessBoard().updateThreatenedSquares(Player.WHITE);
+        ChessBoard backUp = ChessBoardCopier.copy(game.getChessBoard());
 
         assertTrue(cl.checkMate(Player.BLACK));
-        assertTrue(Arrays.deepEquals(backUp.getTable(), board.getTable()));
+        assertTrue(Arrays.deepEquals(backUp.getTable(), game.getChessBoard().getTable()));
     }
 
     @Test
     public void checkMateFalseIfCheckCanBeBlocked() {
-        putPieceOnBoard(board, new Queen(6, 6, Player.BLACK, "bq"));
-        putPieceOnBoard(board, new Rook(1, 6, Player.BLACK, "br1"));
-        putPieceOnBoard(board, new Rook(6, 1, Player.BLACK, "br2"));
-        putPieceOnBoard(board, new Rook(4, 1, Player.WHITE, "wr"));
+        putPieceOnBoard(game.getChessBoard(), new Queen(6, 6, Player.BLACK, "bq"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(1, 6, Player.BLACK, "br1"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(6, 1, Player.BLACK, "br2"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(4, 1, Player.WHITE, "wr"));
         assertFalse(cl.checkMate(Player.WHITE));
     }
 
     @Test
     public void checkMateFalseIfKingCanMoveToUnthreatenedSquare() {
-        putPieceOnBoard(board, new Pawn(1, 1, Player.BLACK, "bp1"));
-        putPieceOnBoard(board, new Pawn(2, 2, Player.BLACK, "bp2"));
+        putPieceOnBoard(game.getChessBoard(), new Pawn(1, 1, Player.BLACK, "bp1"));
+        putPieceOnBoard(game.getChessBoard(), new Pawn(2, 2, Player.BLACK, "bp2"));
         assertFalse(cl.checkMate(Player.WHITE));
     }
 
     @Test
     public void checkMateFalseInComplexSituationWhereKingThreatenedByProtectedPieceButCanBeAvoided() {
-        MovementLogic mvl = board.getMovementLogic();
-        King whiteKing = board.getKings().get(Player.WHITE);
-        Pawn whitePawn = (Pawn) board.getSquare(5, 1).getPiece();
-        Pawn blackPawn1 = (Pawn) board.getSquare(5, 6).getPiece();
-        Pawn blackPawn2 = (Pawn) board.getSquare(4, 6).getPiece();
+        MovementLogic mvl = game.getChessBoard().getMovementLogic();
+        King whiteKing = game.getChessBoard().getKings().get(Player.WHITE);
+        Pawn whitePawn = (Pawn) game.getChessBoard().getSquare(5, 1).getPiece();
+        Pawn blackPawn1 = (Pawn) game.getChessBoard().getSquare(5, 6).getPiece();
+        Pawn blackPawn2 = (Pawn) game.getChessBoard().getSquare(4, 6).getPiece();
 
-        mvl.move(whitePawn, board.getSquare(5, 2), board);
-        mvl.move(blackPawn1, board.getSquare(5, 4), board);
-        mvl.move(whiteKing, board.getSquare(5, 1), board);
-        mvl.move(blackPawn2, board.getSquare(4, 4), board);
-        mvl.move(whiteKing, board.getSquare(6, 2), board);
-        mvl.move(blackPawn1, board.getSquare(5, 3), board);
+        mvl.move(whitePawn, game.getChessBoard().getSquare(5, 2), game.getChessBoard());
+        mvl.move(blackPawn1, game.getChessBoard().getSquare(5, 4), game.getChessBoard());
+        mvl.move(whiteKing, game.getChessBoard().getSquare(5, 1), game.getChessBoard());
+        mvl.move(blackPawn2, game.getChessBoard().getSquare(4, 4), game.getChessBoard());
+        mvl.move(whiteKing, game.getChessBoard().getSquare(6, 2), game.getChessBoard());
+        mvl.move(blackPawn1, game.getChessBoard().getSquare(5, 3), game.getChessBoard());
         assertFalse(cl.checkMate(Player.WHITE));
     }
 
     @Test
     public void staleMateTrueIfKingNotCheckedAndThereIsNoLegalMoves() {
-        putPieceOnBoard(board, new Rook(1, 7, Player.BLACK, "br1"));
-        putPieceOnBoard(board, new Rook(7, 1, Player.BLACK, "br2"));
-        board.updateThreatenedSquares(Player.BLACK);
+        putPieceOnBoard(game.getChessBoard(), new Rook(1, 7, Player.BLACK, "br1"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(7, 1, Player.BLACK, "br2"));
+        game.getChessBoard().updateThreatenedSquares(Player.BLACK);
         assertTrue(cl.stalemate(Player.WHITE));
     }
 
@@ -145,10 +149,10 @@ public class CheckingLogicTest {
 
     @Test
     public void staleMateFalseIfThereIsSomeOtherPieceThatCanMoveLegally() {
-        putPieceOnBoard(board, new Rook(1, 7, Player.BLACK, "br1"));
-        putPieceOnBoard(board, new Rook(7, 1, Player.BLACK, "br2"));
-        putPieceOnBoard(board, new Pawn(4, 4, Player.WHITE, "wp"));
-        board.updateThreatenedSquares(Player.BLACK);
+        putPieceOnBoard(game.getChessBoard(), new Rook(1, 7, Player.BLACK, "br1"));
+        putPieceOnBoard(game.getChessBoard(), new Rook(7, 1, Player.BLACK, "br2"));
+        putPieceOnBoard(game.getChessBoard(), new Pawn(4, 4, Player.WHITE, "wp"));
+        game.getChessBoard().updateThreatenedSquares(Player.BLACK);
         assertFalse(cl.stalemate(Player.WHITE));
     }
 }

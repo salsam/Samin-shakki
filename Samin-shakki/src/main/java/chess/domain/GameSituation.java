@@ -2,7 +2,7 @@ package chess.domain;
 
 import chess.logic.movementlogic.MovementLogic;
 import chess.domain.board.ChessBoard;
-import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
+import chess.logic.chessboardinitializers.ChessBoardInitializer;
 import chess.domain.board.Player;
 import chess.domain.pieces.Pawn;
 import chess.logic.gamelogic.CheckingLogic;
@@ -18,11 +18,31 @@ import chess.logic.gamelogic.LegalityChecker;
  */
 public class GameSituation {
 
+    /**
+     * ChessBoard of this GameSituation.
+     */
     private ChessBoard board;
+    /**
+     * initializer that is used to initialize board when starting a new
+     * game.
+     */
     private ChessBoardInitializer init;
+    /**
+     * Turn is a number that is used to keep track of what turn number is now.
+     */
     private int turn;
+    /**
+     * legalityChecker is used to check if certain movements are legal on board.
+     */
     private LegalityChecker legalityChecker;
+    /**
+     * checkingLogic is CheckingLogic used to determine whether or not a player
+     * is checked.
+     */
     private CheckingLogic checkLogic;
+    /**
+     * continues tells if this game has ended or not.
+     */
     private boolean continues;
 
     /**
@@ -37,7 +57,7 @@ public class GameSituation {
         this.init.initialize(board);
         turn = 1;
         legalityChecker = new LegalityChecker(board);
-        checkLogic = new CheckingLogic(board);
+        checkLogic = new CheckingLogic(this);
         continues = true;
     }
 
@@ -87,7 +107,6 @@ public class GameSituation {
     public void setChessBoard(ChessBoard chessBoard) {
         this.board = chessBoard;
         this.legalityChecker.setBoard(chessBoard);
-        this.checkLogic.setBoard(board);
     }
 
     /**
@@ -100,20 +119,6 @@ public class GameSituation {
         board.updateThreatenedSquares(whoseTurn());
         turn++;
         makePawnsUnEnPassantable(whoseTurn());
-    }
-
-    /**
-     * Checks whether or not player is checkmated in this game.
-     *
-     * @param player player who is possibly checkmated.
-     * @return true if player is checkmated. Else false.
-     */
-    public boolean checkMate(Player player) {
-        if (checkLogic.checkMate(player)) {
-            continues = false;
-            return true;
-        }
-        return true;
     }
 
     /**

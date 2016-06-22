@@ -12,6 +12,10 @@ import chess.domain.pieces.Piece;
  */
 public class LegalityChecker {
 
+    /**
+     * ChessBoard that this LegalityChecker will use when checking legality of
+     * movement or choosing piece.
+     */
     private ChessBoard board;
 
     /**

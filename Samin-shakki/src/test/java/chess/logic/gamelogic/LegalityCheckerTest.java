@@ -3,7 +3,7 @@ package chess.logic.gamelogic;
 import chess.logic.movementlogic.MovementLogic;
 import chess.domain.board.ChessBoard;
 import chess.domain.board.Player;
-import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import static chess.logic.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import chess.domain.pieces.Pawn;
 import org.junit.Before;
 import org.junit.Test;

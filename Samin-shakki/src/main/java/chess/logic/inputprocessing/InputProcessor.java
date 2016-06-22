@@ -2,8 +2,8 @@ package chess.logic.inputprocessing;
 
 import chess.domain.board.ChessBoard;
 import chess.domain.board.ChessBoardCopier;
-import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
-import static chess.logic.board.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
+import chess.logic.chessboardinitializers.ChessBoardInitializer;
+import static chess.logic.chessboardinitializers.ChessBoardInitializer.putPieceOnBoard;
 import static chess.domain.board.Player.getOpponent;
 import chess.domain.board.Square;
 import chess.domain.GameSituation;
@@ -25,9 +25,21 @@ import javax.swing.JLabel;
  */
 public class InputProcessor {
 
+    /**
+     * JLabel that this InputProcessor will update with messages for players.
+     */
     private JLabel textArea;
+    /**
+     * Map containing all frames in the GUI so this class can open EndingScreen.
+     */
     private Map<String, JFrame> frames;
+    /**
+     * Piece that has been chosen for movement.
+     */
     private Piece chosen;
+    /**
+     * Squares that chosen piece can move to.
+     */
     private Set<Square> possibilities;
 
     /**
@@ -94,7 +106,7 @@ public class InputProcessor {
         possibilities = null;
 
         if (game.getCheckLogic().checkIfChecked(game.whoseTurn())) {
-            game.getChessBoard().makeFieldsEqualTo(backUp);
+            ChessBoardCopier.makeFirstChessBoardDeeplyEqualToSecond(game.getChessBoard(), backUp);
             return;
         }
 
@@ -120,7 +132,7 @@ public class InputProcessor {
         textArea.setText(game.whoseTurn() + "'s turn.");
         if (game.getCheckLogic().checkIfChecked(game.whoseTurn())) {
             textArea.setText(textArea.getText() + " Check!");
-            if (game.checkMate(game.whoseTurn())) {
+            if (game.getCheckLogic().checkMate(game.whoseTurn())) {
                 textArea.setText("Checkmate! " + getOpponent(game.whoseTurn()) + " won!");
                 frames.get("endingScreen").setVisible(true);
             }

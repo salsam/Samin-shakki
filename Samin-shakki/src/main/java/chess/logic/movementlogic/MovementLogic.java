@@ -28,12 +28,30 @@ import java.util.Set;
  * @author sami
  */
 public class MovementLogic {
-    
+
+    /**
+     * Object used to move Bishops on ChessBoard.
+     */
     private BishopMover bishopMover;
+    /**
+     * Object used to move Kings on ChessBoard.
+     */
     private KingMover kingMover;
+    /**
+     * Object used to move Knights on ChessBoard.
+     */
     private KnightMover knightMover;
+    /**
+     * Object used to move Pawns on ChessBoard.
+     */
     private PawnMover pawnMover;
+    /**
+     * Object used to move Queens on ChessBoard.
+     */
     private QueenMover queenMover;
+    /**
+     * Object used to move Rooks on ChessBoard.
+     */
     private RookMover rookMover;
 
     /**
@@ -109,6 +127,10 @@ public class MovementLogic {
      * @param board board on which movement happens
      */
     public void move(Piece piece, Square target, ChessBoard board) {
+        if (piece == null) {
+            return;
+        }
+
         if (piece.getClass() == Bishop.class) {
             bishopMover.move(piece, target, board);
         } else if (piece.getClass() == King.class) {
@@ -159,5 +181,5 @@ public class MovementLogic {
                 });
         return possibleMoves;
     }
-    
+
 }

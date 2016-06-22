@@ -1,5 +1,8 @@
-package chess.logic.board.chessboardinitializers;
+package chess.logic.chessboardinitializers;
 
+import chess.logic.chessboardinitializers.EmptyBoardInitializer;
+import chess.logic.chessboardinitializers.ChessBoardInitializer;
+import chess.logic.chessboardinitializers.StandardBoardInitializer;
 import chess.domain.board.ChessBoard;
 import chess.domain.board.Player;
 import chess.logic.movementlogic.MovementLogic;

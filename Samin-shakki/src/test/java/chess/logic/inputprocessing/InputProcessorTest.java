@@ -2,9 +2,9 @@ package chess.logic.inputprocessing;
 
 import chess.domain.board.Player;
 import chess.domain.board.Square;
-import chess.logic.board.chessboardinitializers.ChessBoardInitializer;
-import chess.logic.board.chessboardinitializers.EmptyBoardInitializer;
-import chess.logic.board.chessboardinitializers.StandardBoardInitializer;
+import chess.logic.chessboardinitializers.ChessBoardInitializer;
+import chess.logic.chessboardinitializers.EmptyBoardInitializer;
+import chess.logic.chessboardinitializers.StandardBoardInitializer;
 import chess.domain.GameSituation;
 import chess.logic.movementlogic.MovementLogic;
 import chess.domain.pieces.King;

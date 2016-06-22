@@ -12,6 +12,9 @@ import chess.domain.board.Player;
  */
 public class King extends Piece {
 
+    /**
+     * Boolean that keeps track of whether or not this king has been moved yet.
+     */
     private boolean hasBeenMoved;
 
     /**
@@ -28,12 +31,12 @@ public class King extends Piece {
     }
 
     @Override
-    public void makeFieldsEqualTo(Piece piece) {
+    public void makeDeeplyEqualTo(Piece piece) {
         if (piece.getClass() != King.class) {
             return;
         }
         King king = (King) piece;
-        super.makeFieldsEqualTo(piece);
+        super.makeDeeplyEqualTo(piece);
         this.hasBeenMoved = king.getHasBeenMoved();
     }
 
