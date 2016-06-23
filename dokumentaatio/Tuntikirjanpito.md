@@ -25,3 +25,7 @@ Päivät | Tunnit | Kuvaus
 14.06.2016 | 5h | Korjattu pelin logiikka jälleen toimimaan, siirretty luokan ChessBoardListener sisältämä syötteen käsittely omaan luokaan GUILogic. Lisätty javadocceja ja korjattu kaikki checkstyle-virheet.
 15.06.2016 | 4h | Lisätty testejä huonosti katetuille luokille, peli ei ota vastaan syötteitä pelin loputtua. Refaktoroitu guita vähentäen yhteyksiä. ChessBoardCopier luokka luotu vähentämään ChessBoardin vastuita.
 16.06.2016 | 7h | Päivitetty luokkakaavio, luotu kaksi sekvenssikaaviota (PS.websequencediagrams.com on huijaussivusto, joka pilaa tekemäsi kaaviot tallennusvaiheessa, jos et maksa premiumista).
+20.06.2016 | 4h | Yritetty korjata koodikatselmoinnissa ilmennyttä bugia, jossa monimutkaisessa tilanteessa kuninkaan shakkaaminen suojatulla nappulalla aiheutti matin.
+21.06.2016 | 6h | Jokaiselle nappulalle tunnistekoodi, nappuloiden tullessa syödyksi jäävät ne pelaajalle, mutta merkitäään syödyksi eikä vaikuta peliin. Korjattu katselmoinnissa ilmennyt bugi sekä refaktoroinnista seurannut bugi, jossa syödyt nappulat jäivät näkymättöminä laudalle.
+22.06.2016 | 8h | Jaettu Game-luokka kahteen osaan: GameSituation vastaa tietosisällöstä ja CheckingLogic shakkauslogiikasta. Siirretty entiteetit domainiin. Luotu Jar-tiedosto ja kokeiltu sen toimiminen. Päivitetty luokkakaavio ajan tasalle. Päivitetty Pit- ja Checkstyleraportti.
+23.06.2016 | 1h | Päivitetty sekvenssikaaviot ajan tasalle, päivitetty README, Javadoc ja tuntikirjanpito.
